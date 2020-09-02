@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    
+
+    <link rel="stylesheet" href="./src/css/reset.css">
+    <link rel="stylesheet" href="./src/css/main.css">
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/index.js" defer></script>
+
+    <title>Document</title>
+</head>
+
+<body>
+        <header>
+            Home
+        </header>
+        <main>
+            <div class="main-container">
+                <div class="side-nav-container">
+                    <div class="home">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                        <p>Home</p>
+                    </div>
+                    <div class="time-travel">
+                        <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24"><g><rect fill="none" height="24" width="24"/></g><g><g><g><path d="M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10s10-4.5,10-10S17.5,2,12,2z M16.2,16.2L11,13V7h1.5v5.2l4.5,2.7L16.2,16.2z"/></g></g></g></svg>
+                        <p>Search Timeline</p>
+                    </div>
+                    <div class="collections">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>
+                        <p>Collections</p>
+                    </div>
+                    <div class="about">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+                        <p>About</p>
+                    </div>
+                </div>
+
+                <div class="center-container">
+                    <div class="home-search-page">
+                        <h1 class="home-logo">explore</h1>
+                        <div class="main-search-input-div">
+                            <input type="search" class="main-search-input" placeholder="Search for anything on twitter" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" onkeydown = "if (event.keyCode == 13)
+                            document.querySelector('#main-search-button').click()">
+                            <span class="material-icons main-search-icon">search</span>
+                        </div>
+                        <button class="main-search-button" id="main-search-button">Search</button>
+                        <div class="search-choices">
+                            <div class="language-choices">
+                                <div class="english-div">
+                                    <input type="radio" class="language-choice" id="english" name="language" value="en" checked>
+                                    <label for="english">English</label>
+                                </div>
+                                <div class="french-div">
+                                    <input type="radio" class="language-choice" id="french" name="language" value="fr">
+                                    <label for="french">French</label>
+                                </div>
+                                <div class="german-div">
+                                    <input type="radio" class="language-choice" id="german" name="language" value="de">
+                                    <label for="german">German</label>
+                                </div>
+                                <div class="spanish-div">
+                                    <input type="radio" class="language-choice" id="spanish" name="language" value="es">
+                                    <label for="spanish">Spanish</label>
+                                </div>
+                                <div class="portuguese-div">
+                                    <input type="radio" class="language-choice" id="portuguese" name="language" value="pt">
+                                    <label for="portuguese">Portuguese</label>
+                                </div>
+                                <div class="chinese-div">
+                                    <input type="radio" class="language-choice" id="chinese" name="language" value="zh">
+                                    <label for="chinese">Chinese</label>
+                                </div>
+                            </div>
+                            <div class="tweet-type-choices">
+                                <div class="recent-div">
+                                    <input type="radio" class="tweet-type-choice" id="recent" name="tweet-type" value="en" checked>
+                                    <label for="recent">Recent tweets</label>
+                                </div>
+                                <div class="popular-div">
+                                    <input type="radio" class="tweet-type-choice" id="popular" name="tweet-type" value="popular">
+                                    <label for="popular">Top tweets</label>
+                                </div>
+                                <div class="mixed-div">
+                                    <input type="radio" class="tweet-type-choice" id="mixed" name="tweet-type" value="mixed">
+                                    <label for="mixed">I like it mixed up</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-search-page">
+
+                    </div>
+                    <div class="search-results">
+                        <div class="search-header">
+                            <p>Showing results for hello</p>
+                        </div>
+                        <div class="main-search-input-div">
+                            <input type="search" class="main-search-input results-search-input" placeholder="Search for anything on twitter" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" onkeydown = "if (event.keyCode == 13)
+                            document.querySelector('#main-search-button').click()">
+                            <span class="material-icons  main-search-icon">search</span>
+                        </div>
+                        <div class=tweet-results-div>
+                            <div class="tweet-result">
+                                <div class="tweet-user-image">
+                                    <img src="./assets/lightning-5511473_640.jpg" alt="">
+                                </div>
+                                <div class="tweet-body">
+                                    <div class="tweet-name-div">
+                                        <p class="tw-name-item tweet-name">Name</p>
+                                        <span class="verified material-icons tw-name-item">verified</span>
+                                        <p class="tw-name-item tweet-username">Username &middot; </p>
+                                        <p class="tw-name-item tweet-time">Time</p>
+                                    </div>
+                                    <p class="tweet-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis doloribus dolores nesciunt ex omnis, veritatis inventore harum atque repudiandae facere, laboriosam beatae earum nisi pariatur quia natus nemo corrupti fugiat.</p>
+                                    <div  class="tweet-image">
+                                        <img src="./assets/lightning-5511473_640.jpg" alt="Tweet Media">
+                                    </div>
+                                    <div>
+                                        <div class="tweet-footer">
+                                            <div class="tweet-metrics">
+                                                <p>Replies:</p>
+                                                <p>Retweets:</p>
+                                                <p>Likes:</p>
+                                            </div>
+                                            <div class="save-to-collection">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"/></svg>
+                                                <p>Save to collection</p>
+                                            </div>
+                                        </div>
+                                        <p class="replying-to">This tweet is a reply to:</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>         
+</body>
+
+</html>

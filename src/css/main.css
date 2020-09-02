@@ -1,0 +1,342 @@
+html {
+    font-family: 'Noto Sans', sans-serif;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+    
+*, *:before, *:after {
+    box-sizing: inherit;
+
+}
+
+:root {
+    --blue: #1DA1F2;
+    --bg: #15202B;
+    --blue-label: #1A91DA;
+    --blue-hover: #1B95E0;
+    --grey-font: #8899A6;
+    --grey-inputbg: #253341;
+    --grey-floating-panel: #192734;
+    --grey-floating-panel-hover: #202E3A;
+    --red: #D6235B;
+}
+
+body {
+    color: white;
+    margin: 0px;
+    padding: 0px;
+    font-size: 16px;
+    line-height: 1.5;
+    background-color: var(--bg);
+}
+
+input[type="search"] {
+    font-family: inherit;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: 0px;
+}
+
+button {
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+	justify-content: space-around;
+    cursor: pointer;
+	width: 150px;
+	height: 38px;
+	padding: 5px 10px;
+    border: 0;
+    border-radius: 100px;
+	background-color: var(--blue);
+	transition: 0.2s;
+	transition-timing-function: ease;
+	transition-delay: 0.05s;
+	opacity: 1;
+}
+
+header {
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-container {
+    display: flex;
+    min-height: 0px;
+    justify-content: center;
+}
+
+.side-nav-container {
+    border-radius: 15px;
+    background-color: var(--grey-floating-panel);
+    height: 100%;
+    width: 300px;
+    margin: 0px 20px 0px 50px;
+    font-weight: 700;
+}
+
+.side-nav-container > div {
+    display: flex;
+    cursor: pointer;
+    padding: 20px;
+    border-bottom: 1px solid var(--grey-inputbg);
+}
+
+.side-nav-container > div:last-child {
+    border-bottom: 0px;
+}
+
+.side-nav-container > div:hover {
+    background-color: var(--grey-floating-panel-hover);
+}
+
+.side-nav-container > div:first-child:hover {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background-color: var(--grey-floating-panel-hover);
+}
+
+.side-nav-container > div:last-child:hover {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color: var(--grey-floating-panel-hover);
+}
+
+.side-nav-container > div > svg {
+    margin-right: 15px;
+    fill: white;
+}
+
+.center-container {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: center;
+
+    height: Calc(100vh - 50px);
+    overflow: scroll;
+}
+
+.home-search-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.home-logo {
+    font-size: 5rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.main-search-input-div{
+    position: relative;
+    color: var(--grey-font);
+}
+
+.main-search-input {
+    font-size: inherit;
+    width: 700px;
+    max-width: 700px;
+    height: 55px;
+    color: white;
+    background-color: var(--grey-inputbg);
+    border: 1px solid var(--bg);
+    border-radius: 50px;
+    padding: 20px 20px 20px 60px;
+    margin-bottom: 30px;
+}
+
+.main-search-input:focus,  .main-search-input:active, .main-search-input:hover {
+    border: 1px solid var(--blue);
+    background-color: var(--bg);
+    box-shadow: rgba(4, 74, 111, 1) 0px 0px 30px -10px;
+}
+
+.main-search-input::placeholder {
+    color: var(--grey-font);
+}
+
+.main-search-icon {
+    position: absolute;
+    left: 25px;
+    bottom: 52%;
+}
+
+.main-search-button {
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 100px;
+}
+
+.main-search-button:hover {
+    background-color: var(--blue-hover);
+}
+
+.search-choices {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.language-choices, .tweet-type-choices {
+    display: flex;
+}
+
+.search-choices input[type="radio"] {
+    opacity: 0;
+    position: fixed;
+    width: 0;
+}
+
+.search-choices label {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--grey-font);
+    background-color: var(--bg);
+    width: 80px;
+    height: 30px;
+    font-size: 0.7rem;
+    border-bottom: 1px solid var(--bg);
+    transition: 0.2s;
+}
+
+.search-choices input[type="radio"]:checked + label {
+    color: white;
+    background-color: var(--grey-floating-panel-hover);
+    border-bottom: 1px solid var(--blue);
+}
+
+.search-choices input[type="radio"]:hover + label {
+    border-bottom: 1px solid var(--blue);
+}
+
+.search-choices input[type="radio"]:focus + label {
+    border-bottom: 1px solid var(--blue);
+}
+
+.tweet-type-choices label {
+    width: 100px;
+    margin-top: 30px;
+}
+
+
+
+.search-results {
+    width: 740px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-left: 1px solid var(--grey-inputbg);
+    border-right: 1px solid var(--grey-inputbg);
+}
+
+.search-header {
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 50px;
+}
+
+.tweet-result {
+    display: flex;
+    align-items: flex-start;
+    padding: 15px 15px;
+    border-top: 1px solid var(--grey-inputbg);
+    border-bottom: 1px solid var(--grey-inputbg);
+}
+
+.tweet-user-image img {
+    object-fit: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 200px;
+    margin-right: 10px;
+}
+
+.tweet-name-div {
+    display: flex;
+    align-items: center;
+}
+
+.tweet-body {
+    /* width: 70%; */
+}
+
+.tw-name-item {
+    margin-right: 5px;
+}
+
+.verified {
+    font-size: 15px;
+}
+
+.tweet-name {
+    font-weight: 700;
+}
+
+.tweet-username, .tweet-time {
+    color: var(--grey-font);
+}
+
+.tweet-text {
+    margin-bottom: 10px;
+}
+
+.tweet-image img {
+    width: 100%;
+    /* display: none; */
+    border-radius: 20px;
+    border: 1px solid var(--grey-floating-panel);
+}
+
+.tweet-footer {
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.tweet-metrics {
+    display: flex;
+    justify-content: space-between;
+    color: var(--grey-font);
+}
+
+.save-to-collection {
+    cursor: pointer;
+    color: var(--blue-label);
+    padding: 5px 10px;
+    background-color: var(--grey-floating-panel);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.save-to-collection:hover {
+    background-color: var(--grey-floating-panel-hover);
+}
+
+.save-to-collection svg {
+    fill: var(--blue-label);
+    margin-right: 10px;
+}
+
+.replying-to {
+    cursor: pointer;
+    color: var(--blue);
+}
+
+.replying-to:hover {
+    color: var(--blue-hover);
+}
+
+.hide {
+    display: none;
+}
