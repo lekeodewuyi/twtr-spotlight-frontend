@@ -78,34 +78,34 @@ header {
     font-weight: 700;
 }
 
-.side-nav-container > div {
+.side-nav-item {
     display: flex;
     cursor: pointer;
     padding: 20px;
     border-bottom: 1px solid var(--grey-inputbg);
 }
 
-.side-nav-container > div:last-child {
+.side-nav-item:last-child {
     border-bottom: 0px;
 }
 
-.side-nav-container > div:hover {
+.side-nav-item:hover {
     background-color: var(--grey-floating-panel-hover);
 }
 
-.side-nav-container > div:first-child:hover {
+.side-nav-item:first-child:hover {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     background-color: var(--grey-floating-panel-hover);
 }
 
-.side-nav-container > div:last-child:hover {
+.side-nav-item:last-child:hover {
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     background-color: var(--grey-floating-panel-hover);
 }
 
-.side-nav-container > div > svg {
+.side-nav-item > svg {
     margin-right: 15px;
     fill: white;
 }
@@ -144,6 +144,18 @@ header {
     border-bottom-right-radius: 15px;
 }
 
+.modal {
+    z-index: 200px;
+    position: absolute;
+    left: 0; 
+    right: 0; 
+    width: 500px;
+    height: 500px;
+    top: 0px;
+    bottom: 0;
+    margin: auto;
+}
+
 .user-auth-div {
     position: absolute;
     display: flex;
@@ -151,11 +163,12 @@ header {
     align-items: center;
     border-radius: 15px;
     background-color: var(--grey-inputbg);
-    width: 100%;
+    width:500px;
     transform: translate(-20px, -100px);
     padding: 50px 15px;
     cursor: default;
     box-shadow: rgba(4, 74, 111, 0.4) 0px 0px 20px -5px;
+    margin-left: 20px;
 }
 
 .login-div, .signup-div {
@@ -166,7 +179,7 @@ header {
 
 .auth-header {
     font-size: 1rem;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
 }
 
 .user-auth-div label {
@@ -174,19 +187,26 @@ header {
     font-size: 0.8rem;
     font-weight: 400;
     align-self: flex-start;
+    transform: translate(47px, -85px);
+    transition: .3s cubic-bezier(0, 1.8, 1, 1.8);
+}
+
+.user-auth-div input:focus + label {
+    transform: translate(63px, -65px);
+    color: var(--blue-label);
 }
 
 .user-auth-div input {
-    align-self: flex-start;
     padding: 10px 15px;
     color: white;
     font-size: 1rem;
-    height: 35px;
-    width: 100%;
-    border-radius: 5px;
+    height: 48px;
+    width: 80%;
     background-color: var(--grey-floating-panel);
     margin-top: 5px;
     margin-bottom: 15px;
+    transition: .4s cubic-bezier(0, 1.8, 1, 1.8);
+    border-bottom: 1.5px solid transparent;
 }
 
 .user-auth-div input:hover {
@@ -194,7 +214,9 @@ header {
     box-shadow: rgba(4, 74, 111, 1) 0px 0px 20px -5px;
 }
 .user-auth-div input:focus {
-    border: 1px solid var(--blue);
+    padding-bottom: 15px;
+    padding-top: 35px;
+    border-bottom: 1.5px solid var(--blue);
     background-color: var(--bg);
 }
 
