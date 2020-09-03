@@ -205,13 +205,6 @@ function login(){
             appendUserDetails(response.data.userDetails);
             userAuthDiv.classList.add("hide");
             loginDiv.classList.add("hide");
-
-            state.user.userAuthDiv.className = userAuthDiv.className;
-            state.user.loginDiv.className = loginDiv.className;
-            window.history.pushState(state, null, "");
-
-
-
         })
         .catch(function (error) {
             loader.classList.add("hide");
