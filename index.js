@@ -10,6 +10,8 @@ const greyFloatingPanel = "#192734";
 const greyFloatingPanelHover = "#202E3A";
 const red = "#D6235B";
 
+
+const loader = document.querySelector(".loader");
 //Auth containers
 const userProfilePanel = document.querySelector(".user-profile");
 const userProfileLabel = document.querySelector(".user-profile-label");
@@ -156,7 +158,16 @@ function openSignupPanel(){
 }
 
 
+function logout(){
+    localStorage.removeItem("FBIdToken");
+    localStorage.removeItem("currentUser");
+    window.location.href = "/";
+}
+
+
 function login(){
+
+    loginBtn.append(loader);
 
     const loginData = {
         email: loginEmail.value,
@@ -205,6 +216,9 @@ function login(){
         })
 }
 
+
+
+
 // Nav Event Listeners
 userProfilePanel.addEventListener("click", openUserPanel, false);
 closeBtn.forEach((btn) => {
@@ -214,12 +228,8 @@ signupHere.addEventListener("click", openSignupPanel, false);
 loginHere.addEventListener("click", openUserPanel, false);
 
 // Auth Event Listeners
-loginBtn.addEventListener("click", login, false)
-
-
-
-
-
+loginBtn.addEventListener("click", login, false);
+logoutBtn.addEventListener("click", logout, false);
 
 
 
