@@ -30,12 +30,13 @@ body {
     background-color: var(--bg);
 }
 
-input[type="search"] {
+input[type="search"], input[type="text"], input[type="password"] {
     font-family: inherit;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     outline: 0px;
+    border: 1px solid transparent;
 }
 
 button {
@@ -109,7 +110,157 @@ header {
     fill: white;
 }
 
+.about {
+    position: relative;
+}
+
+.about-text {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    background-color: var(--grey-inputbg);
+    width: 100%;
+    transform: translate(-20px, 150px);
+    padding: 50px 20px;
+    cursor: default;
+    box-shadow: rgba(4, 74, 111, 0.4) 0px 0px 20px -5px;
+}
+
+.about-header {
+    margin-bottom: 30px;
+}
+
+.about-body {
+    font-weight: 400;
+    font-size: 0.8rem;
+}
+
+.user-profile {
+    position: relative;
+    background-color: var(--grey-inputbg);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.user-auth-div {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    background-color: var(--grey-inputbg);
+    width: 100%;
+    transform: translate(-20px, -100px);
+    padding: 50px 15px;
+    cursor: default;
+    box-shadow: rgba(4, 74, 111, 0.4) 0px 0px 20px -5px;
+}
+
+.login-div, .signup-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.auth-header {
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.user-auth-div label {
+    color: var(--grey-font);
+    font-size: 0.8rem;
+    font-weight: 400;
+    align-self: flex-start;
+}
+
+.user-auth-div input {
+    align-self: flex-start;
+    padding: 10px 15px;
+    color: white;
+    font-size: 1rem;
+    height: 35px;
+    width: 100%;
+    border-radius: 5px;
+    background-color: var(--grey-floating-panel);
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.user-auth-div input:hover {
+    background-color: var(--bg);
+    box-shadow: rgba(4, 74, 111, 1) 0px 0px 20px -5px;
+}
+.user-auth-div input:focus {
+    border: 1px solid var(--blue);
+    background-color: var(--bg);
+}
+
+.user-auth-div button {
+    color: white;
+    font-size: 1rem;
+    margin-top: 15px;
+}
+
+.user-auth-div button:hover {
+    background-color: var(--blue-hover);
+}
+
+.action-here {
+    margin-top: 25px;
+    font-weight: 400;
+    font-size: 0.8rem;
+}
+
+.auth-link {
+    cursor: pointer;
+    color: var(--blue-label);
+}
+
+.auth-link:hover {
+    border-bottom: 1px solid var(--blue-hover);
+}
+
+.account-warning {
+    color: var(--red);
+    margin-top: 30px;
+    margin-bottom: -15px;
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: 400;
+}
+
+.logout-btn {
+    background-color: var(--red);
+}
+
+.user-auth-div .logout-btn:hover {
+    background-color: var(--red);
+    opacity: 0.8;
+}
+
+.close {
+    cursor: pointer;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    right: 0px;
+    top: 0px;
+    fill: var(--red);
+    margin: 10px;
+}
+
+.close:hover {
+    opacity: 0.7;
+}
+
+
+
+
 .center-container {
+    margin: 0px 20px;
     display: flex;
     flex-grow: 1;
     flex-direction: column;
@@ -229,7 +380,77 @@ header {
 
 
 
-.search-results {
+.timeline-search-page, .collections-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.timeline-header {
+    font-size: 5rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.timeline-header-slash {
+    color: var(--grey-font);
+}
+
+.timeline-subheader {
+    color: var(--blue);
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.timeline-search-input-div {
+    position: relative;
+    color: var(--grey-font);
+}
+
+.timeline-search-input {
+    font-size: inherit;
+    width: 700px;
+    max-width: 700px;
+    height: 55px;
+    color: white;
+    background-color: var(--grey-inputbg);
+    border: 1px solid var(--bg);
+    border-radius: 50px;
+    padding: 20px 20px 20px 60px;
+    margin-bottom: 30px;
+}
+
+.timeline-search-input:focus,  .timeline-search-input:active, .timeline-search-input:hover {
+    border: 1px solid var(--blue);
+    background-color: var(--bg);
+    box-shadow: rgba(4, 74, 111, 1) 0px 0px 30px -10px;
+}
+
+.timeline-search-input::placeholder {
+    color: var(--grey-font);
+}
+
+.timeline-search-icon {
+    position: absolute;
+    left: 25px;
+    bottom: 52%;
+}
+
+.timeline-search-button {
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 100px;
+}
+
+.timeline-search-button:hover {
+    background-color: var(--blue-hover);
+}
+
+
+
+.search-results, .collection-results {
     width: 740px;
     display: flex;
     flex-direction: column;
@@ -244,7 +465,7 @@ header {
     margin-bottom: 50px;
 }
 
-.tweet-result {
+.tweet-result, .collection-result-item {
     display: flex;
     align-items: flex-start;
     padding: 15px 15px;
@@ -252,7 +473,7 @@ header {
     border-bottom: 1px solid var(--grey-inputbg);
 }
 
-.tweet-user-image img {
+.tweet-user-image img, .collection-tweet-user-image img {
     object-fit: cover;
     width: 50px;
     height: 50px;
@@ -260,7 +481,7 @@ header {
     margin-right: 10px;
 }
 
-.tweet-name-div {
+.tweet-name-div, .collection-tweet-name-div{
     display: flex;
     align-items: center;
 }
@@ -269,47 +490,48 @@ header {
     /* width: 70%; */
 }
 
-.tw-name-item {
+.tw-name-item, .collection-tw-name-item {
     margin-right: 5px;
 }
 
-.verified {
+.verified, .collection-verified {
     font-size: 15px;
 }
 
-.tweet-name {
+.tweet-name, .collection-tweet-name {
     font-weight: 700;
 }
 
-.tweet-username, .tweet-time {
+.tweet-username, .tweet-time, .collection-tweet-username, .collection-tweet-time {
     color: var(--grey-font);
 }
 
-.tweet-text {
+.tweet-text, .collection-tweet-text {
     margin-bottom: 10px;
 }
 
-.tweet-image img {
+.tweet-image img, .collection-tweet-image img {
     width: 100%;
     /* display: none; */
     border-radius: 20px;
     border: 1px solid var(--grey-floating-panel);
 }
 
-.tweet-footer {
+.tweet-footer, .collection-tweet-footer {
     font-size: 0.9rem;
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
 }
 
-.tweet-metrics {
+.tweet-metrics, .collection-tweet-metrics {
     display: flex;
     justify-content: space-between;
     color: var(--grey-font);
 }
 
-.save-to-collection {
+.save-to-collection, .remove-from-collection {
+    position: relative;
     cursor: pointer;
     color: var(--blue-label);
     padding: 5px 10px;
@@ -319,13 +541,50 @@ header {
     align-items: center;
 }
 
-.save-to-collection:hover {
+.save-to-collection:hover, .remove-from-collection:hover {
     background-color: var(--grey-floating-panel-hover);
 }
 
-.save-to-collection svg {
+.save-to-collection svg, .remove-from-collection svg {
     fill: var(--blue-label);
     margin-right: 10px;
+}
+
+
+.save-to-collection-prompt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: default;
+    position: absolute;
+    color: white;
+    width: 120%;
+    height: 130px;
+    height: 150px;
+    overflow: auto;
+    background-color: var(--grey-floating-panel);
+    transform: translate(-43px, -97px);
+    border-radius: 10px;
+}
+
+.save-to-collection-prompt div:last-child {
+    border-bottom: 1px solid transparent;
+}
+
+.save-to-collection-item {
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    padding: 10px 10px;
+    border-bottom: 1px solid var(--grey-inputbg);
+}
+
+.save-to-collection-item:hover {
+    background-color: var(--grey-floating-panel-hover);
+}
+
+.save-to-collection-prompt svg {
+    fill: var(--red);
 }
 
 .replying-to {
@@ -336,6 +595,93 @@ header {
 .replying-to:hover {
     color: var(--blue-hover);
 }
+
+
+
+.collections-page {
+    display: flex;
+    flex-direction: column;
+}
+
+.collections-page-header {
+    font-weight: 700;
+    font-size: 2.5rem;
+    align-self: center;
+    margin-bottom: 50px;
+}
+
+.collection-count {
+    align-self: flex-start;
+}
+
+.collections-list {
+    align-self: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 30px 0px 50px 0px;
+}
+
+.collection-item {
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: var(--grey-floating-panel);
+    border-bottom: 1px solid transparent;
+    transition: 0.15s;
+    margin: 5px 5px 5px 0px;
+}
+
+.collection-item:hover {
+    background-color: var(--grey-floating-panel-hover);
+    border-bottom: 1px solid var(--blue);
+}
+
+.collection-item[data-selected="true"] {
+    border-bottom: 1px solid var(--blue);
+}
+
+.remove-from-collection {
+    color: var(--red);
+}
+
+.remove-from-collection svg {
+    fill: var(--red);
+}
+
+.remove-from-collection-prompt {
+    cursor: default;
+    text-align: center;
+    position: absolute;
+    color: white;
+    width: 150%;
+    background-color: var(--grey-floating-panel);
+    transform: translate(-105px, -80px);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.remove-prompt-buttons {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove-prompt-buttons button {
+    color: white;
+    font-size: 0.7rem;
+    height: 30px;
+    width: 100px;
+    margin: 10px 5px;
+}
+
+.remove-prompt-buttons button:hover {
+    opacity: 0.85;
+}
+
+.remove-prompt-delete {
+    background-color: var(--red);
+}
+
 
 .hide {
     display: none;
