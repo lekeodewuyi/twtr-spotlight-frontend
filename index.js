@@ -28,10 +28,15 @@ const loginBtn =  document.querySelector(".login-btn");
 const loginHere = document.querySelector(".login-here");
 
 const signupDiv = document.querySelector(".signup-div");
+const signupNameLabel = document.querySelector(".signup-name-label");
+const signupEmailLabel = document.querySelector(".signup-email-label");
+const signupPasswordLabel = document.querySelector(".signup-password-label");
+const signupConfirmPasswordLabel = document.querySelector(".signup-confirm-password-label");
 const signupName =  document.querySelector(".signup-name");
 const signupEmail =  document.querySelector(".signup-email");
 const signupPassword =  document.querySelector(".signup-password");
 const signupConfirmPassword =  document.querySelector(".signup-confirm-password");
+const signupErrors = document.querySelector(".signup-errors");
 const signupBtn =  document.querySelector(".signup-btn");
 const signupHere = document.querySelector(".signup-here")
 
@@ -96,12 +101,16 @@ function render(){
     if (token) {
         console.log("I got here")
         userAuthDiv.style.width = "300px";
+        loginDiv.classList.add("hide");
+        signupDiv.classList.add("hide");
+        logoutDiv.classList.remove("hide");
+    } else {
+        loginDiv.className = state.user.loginDiv;
+        signupDiv.className = state.user.signupDiv;
+        logoutDiv.className = state.user.logoutDiv;
     }
     userAuthDiv.style.width = state.user.userAuthDiv.width;
     userAuthDiv.className = state.user.userAuthDiv.className;
-    loginDiv.className = state.user.loginDiv;
-    signupDiv.className = state.user.signupDiv;
-    logoutDiv.className = state.user.logoutDiv;
 }
 
 // Initialize initial state on load
@@ -214,6 +223,83 @@ function login(){
 }
 
 
+function signup(){
+
+    signupBtn.append(loader);
+    loader.classList.remove("hide");
+
+    const signupData = {
+        name: signupName.value,
+        email: signupEmail.value,
+        password: signupPassword.value,
+        confirmPassword: signupConfirmPassword.value
+    }
+    
+    let {valid, errors} = validateSignupData(signupData);
+    
+    if (!valid) {
+        loader.classList.add("hide");
+        if (errors.name) {
+            signupNameLabel.innerHTML = errors.name
+            signupNameLabel.classList.add("error");
+        }
+        if (errors.email) {
+            signupEmailLabel.innerHTML = errors.email
+            signupEmailLabel.classList.add("error");
+        }
+        if (errors.password) {
+            signupPasswordLabel.innerHTML = errors.password;
+            signupPasswordLabel.classList.add("error");
+        }
+        if  (errors.confirmPassword) {
+            signupConfirmPasswordLabel.innerHTML = errors.confirmPassword;
+            signupConfirmPasswordLabel.classList.add("error");
+        }
+    }
+
+    else if (valid)
+    axios.post(
+        'http://localhost:5000/explorer-one-44263/us-central1/api/signup',
+        {
+            name: signupData.name,
+            email: signupData.email,
+            password: signupData.password,
+            confirmPassword: signupData.confirmPassword
+        }
+        )
+        .then(function (response) {
+            loader.classList.add("hide");
+            console.log(response.data);
+            setAuthorizationHeader(response.data.token);
+            updateCurrentUser(response.data.userDetails);
+            appendUserDetails(response.data.userDetails);
+            userAuthDiv.classList.add("hide");
+            signupDiv.classList.add("hide");
+
+        })
+        .catch(function (error) {
+            loader.classList.add("hide");
+            console.log(error.response.data);
+            if (error.response.data.password) {
+                signupErrors.innerHTML = error.response.data.password;
+            }
+
+            if (error.response.data.email) {
+                signupErrors.innerHTML = error.response.data.email;
+            }
+            else {
+                signupErrors.innerHTML = error.response.data.general;
+            }
+        })
+}
+
+
+
+
+
+
+
+
 
 
 // Nav Event Listeners
@@ -226,6 +312,7 @@ loginHere.addEventListener("click", openUserPanel, false);
 
 // Auth Event Listeners
 loginBtn.addEventListener("click", login, false);
+signupBtn.addEventListener("click", signup, false);
 logoutBtn.addEventListener("click", logout, false);
 
 
