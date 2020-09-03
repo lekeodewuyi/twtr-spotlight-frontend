@@ -706,6 +706,19 @@ header {
 }
 
 
+
+.auth-error {
+    font-weight: 400;
+    font-size: 0.9rem;
+    color: var(--red);
+    margin-top: -15px;
+    margin-bottom: 20px;
+}
+
+.color-blue {
+    color: var(--blue);
+}
+
 .hide {
     display: none;
 }
