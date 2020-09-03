@@ -168,6 +168,7 @@ function logout(){
 function login(){
 
     loginBtn.append(loader);
+    loader.classList.remove("hide");
 
     const loginData = {
         email: loginEmail.value,
@@ -177,6 +178,7 @@ function login(){
     let {valid, errors} = validateLoginData(loginData);
     
     if (!valid) {
+        loader.classList.add("hide");
         if (errors.email) {
             loginEmailLabel.innerHTML = errors.email
             loginEmailLabel.style.color = red;
@@ -196,6 +198,7 @@ function login(){
         }
         )
         .then(function (response) {
+            loader.classList.add("hide");
             console.log(response.data);
             setAuthorizationHeader(response.data.token);
             updateCurrentUser(response.data.userDetails);
@@ -211,6 +214,7 @@ function login(){
 
         })
         .catch(function (error) {
+            loader.classList.add("hide");
             console.log(error.response.data);
             loginErrors.innerHTML = error.response.data.error;
         })
