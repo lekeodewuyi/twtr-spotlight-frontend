@@ -487,7 +487,7 @@ function mainSearch(){
                 video.addEventListener("play", function(){
                     let nowPlaying = event.currentTarget;
                     allVideos.forEach((vid) => {
-                        if (vid.paused === false && vid !== nsowPlaying) {
+                        if (vid.paused === false && vid !== nowPlaying) {
                             vid.pause();
                         }
                     })
