@@ -482,6 +482,17 @@ function mainSearch(){
                 tweetResultsDiv.append(tweetResult)
             }
 
+            let allVideos = document.querySelectorAll("video");
+            allVideos.forEach((video) => {
+                video.addEventListener("play", function(){
+                    let nowPlaying = event.currentTarget;
+                    allVideos.forEach((vid) => {
+                        if (vid.paused === false && vid !== nsowPlaying) {
+                            vid.pause();
+                        }
+                    })
+                })
+            })
 
 
             state.result.searchResults = searchResults.className;
