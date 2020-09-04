@@ -334,6 +334,168 @@ function signup(){
 }
 
 
+
+function mainSearch(){
+    mainSearchButton.append(loader);
+    loader.classList.remove("hide");
+
+    let lang;
+    let tweetType;
+
+    for (let i = 0; i < languageChoice.length; i++) {
+        if (languageChoice[i].checked) {
+            lang = languageChoice[i].value
+            console.log(lang);
+        }
+    }
+
+    for (let i = 0; i < tweetTypeChoice.length; i++) {
+        if (tweetTypeChoice[i].checked) {
+            tweetType = tweetTypeChoice[i].value
+            console.log(tweetType);
+        }
+    }
+
+    let searchData = {
+        query: mainSearchInput.value,
+        result_type: tweetType,
+        language: lang
+    }
+
+    if (searchData.query.trim() === "") {
+        loader.classList.add("hide");
+        mainSearchError.innerHTML = "Please give me something to search for"
+        mainSearchError.classList.add("error");
+    }
+    else if (searchData.query.trim() !== "")
+    axios.post(
+        'http://localhost:5000/explorer-one-44263/us-central1/api/search',
+        {
+            query: searchData.query,
+            result_type: searchData.result_type,
+            language: searchData.language
+        }
+        )
+        .then(function (response) {
+            loader.classList.add("hide");
+            console.log(response.data.results);
+            let results = response.data.results;
+            homeSearchPage.classList.add("hide");
+
+            searchResults.classList.remove("hide")
+
+            searchResults.insertBefore(searchChoicesDiv, searchResults.firstChild);
+            searchResults.insertBefore(mainSearchInputDiv, searchResults.firstChild);
+
+
+            for ( let i = 0; i < results.length ; i++ ) {
+                let tweetResult = document.createElement("div");
+                tweetResult.classList.add("tweet-result");
+
+                let tweetUserImageDiv = document.createElement("div");
+                tweetUserImageDiv.classList.add("tweet-user-image");
+
+                let tweetUserImage = document.createElement("img");
+                tweetUserImage.src = results[i].user.profile_image_url
+                tweetUserImage.alt = "User Image"
+                tweetUserImageDiv.append(tweetUserImage);
+
+                let tweetBody = document.createElement("div");
+                tweetBody.classList.add("tweet-body");
+
+                let tweetNameDiv = document.createElement("div");
+                tweetNameDiv.classList.add("tweet-name-div");
+                let tweetName = document.createElement("p");
+                tweetName.classList.add("tweet-name", "tw-name-item");
+                tweetName.innerHTML = results[i].user.name;
+                let tweetVerified = document.createElement("span");
+                tweetVerified.classList.add("verified", "material-icons", "tw-name-item");
+                tweetVerified.innerHTML = "verified";
+                if (results[i].user.verified === false) {
+                    tweetVerified.classList.add("hide");
+                }
+                let tweetUserName = document.createElement("p");
+                tweetUserName.classList.add("tweet-username", "tw-name-item")
+                tweetUserName.innerHTML = `${results[i].user.screen_name} &middot; `;
+                let tweetTime = document.createElement("p");
+                tweetTime.classList.add("tweet-time", "tw-name-item");
+                tweetTime.innerHTML = dayjs(results[i].created_at).format('MMM DD YYYY - (h:mm a)');
+                tweetNameDiv.append(tweetName, tweetVerified, tweetUserName, tweetTime)
+
+
+                let tweetText = document.createElement("p");
+                tweetText.classList.add("tweet-text");
+                if (typeof results[i].retweeted_status === "object") {
+                    tweetText.innerHTML = results[i].retweeted_status.full_text;
+                } else {
+                    tweetText.innerHTML = results[i].full_text;
+                }
+
+
+                let tweetImageDiv = document.createElement("div");
+                tweetImageDiv.classList.add("tweet-image");
+                let tweetImage, tweetVideo, videoSource, videoError;
+                console.log("hey")
+
+
+                if (results[i].extended_entities !== undefined) {
+                    if (results[i].extended_entities.media !== undefined) {
+                        if ( results[i].extended_entities.media[0].type === "video") {
+                            
+                            tweetVideo = document.createElement("video");
+                            tweetVideo.controls = "controls";
+                            videoSource = document.createElement("source");
+                            
+                            let variants = results[i].extended_entities.media[0].video_info.variants;
+                            // videoSource.src = results[i].extended_entities.media[0].video_info.variants[0].url;
+                            // videoSource.type = results[i].extended_entities.media[0].video_info.variants[0].content_type
+
+                            for (let i = 0; i < variants.length; i++){
+                                if (variants[i].content_type === "video/mp4") {
+                                    videoSource.type = variants[i].content_type;
+                                    videoSource.src = variants[i].url;
+                                    break;
+                                }
+                            }
+                            
+                            tweetVideo.append(videoSource);
+                            videoError = document.createElement("p");
+                            videoError.innerHTML = "Sorry, your browser doesn't support embedded videos."
+                            tweetVideo.append("videoError");
+                            tweetImageDiv.append(tweetVideo);
+                        } else if (results[i].extended_entities.media[0].type === "photo") {
+                            tweetImage = document.createElement("img");
+                            tweetImage.src = results[i].extended_entities.media[0].media_url_https;
+                            tweetImage.alt = "Tweet Media"
+                            tweetImageDiv.append(tweetImage);
+                        }
+                    } 
+                }
+
+
+                
+
+
+                tweetBody.append(tweetNameDiv, tweetText, tweetImageDiv);
+                tweetResult.append(tweetUserImageDiv,tweetBody)
+
+                tweetResultsDiv.append(tweetResult)
+            }
+
+
+
+            state.result.searchResults = searchResults.className;
+            state.home.homeSearchPage = homeSearchPage.className;
+            window.history.pushState(state, null, "");
+
+
+        })
+        .catch(function (error) {
+            loader.classList.add("hide");
+            console.log(error.response.data);
+        })
+}
+
 // Nav Event Listeners
 userProfilePanel.addEventListener("click", openUserPanel, false);
 closeBtn.forEach((btn) => {
