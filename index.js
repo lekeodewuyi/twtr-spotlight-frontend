@@ -1,5 +1,6 @@
 import {validateLoginData, validateSignupData} from "./src/scripts/validators.js";
 
+dayjs().format();
 const blue = "#1DA1F2";
 const bg = "#15202B";
 const blueLabel = "#1A91DA";
@@ -12,6 +13,7 @@ const red = "#D6235B";
 
 
 const loader = document.querySelector(".loader");
+
 //Auth containers
 const userProfilePanel = document.querySelector(".user-profile");
 const userProfileLabel = document.querySelector(".user-profile-label");
@@ -45,6 +47,19 @@ const logoutBtn = document.querySelector(".logout-btn");
 const closeBtn = document.querySelectorAll(".close");
 
 
+const homeSearchPage = document.querySelector(".home-search-page");
+const mainSearchInput = document.querySelector(".main-search-input");
+const mainSearchError = document.querySelector(".main-search-error");
+const searchChoicesDiv = document.querySelector(".search-choices");
+const languageChoice = document.querySelectorAll(".language-choice");
+const tweetTypeChoice = document.querySelectorAll(".tweet-type-choice");
+const mainSearchButton = document.querySelector(".main-search-button");
+const mainSearchInputDiv = document.querySelector(".main-search-input-div");
+
+const searchResults = document.querySelector(".search-results");
+const tweetResultsDiv = document.querySelector(".tweet-results-div");
+
+
 const setAuthorizationHeader = (token) => {
     const FBIdToken = `Bearer ${token}`;
     localStorage.setItem('FBIdToken', FBIdToken);
@@ -72,8 +87,19 @@ let state = {
         loginDiv: loginDiv.className,
         signupDiv: signupDiv.className,
         logoutDiv: logoutDiv.className
+    },
+    home: {
+        homeSearchPage: homeSearchPage.className,
+        children: homeSearchPage.contains(mainSearchInput)
+    },
+    result: {
+        searchResults: searchResults.className,
+        tweets: ""
+
     }
 }
+
+console.log(state.home.children)
 
 // Render state function whenever popstate is fired
 function render(){
@@ -89,8 +115,7 @@ function render(){
 
             // TODO: Session expired modal to initiate logout
             // sessionExpiredModal.classList.remove("hide");
-        }
-        console.log("token has not expired")
+        } else console.log("token has not expired")
     }
 
     if (currentUser) {
@@ -111,6 +136,22 @@ function render(){
     }
     userAuthDiv.style.width = state.user.userAuthDiv.width;
     userAuthDiv.className = state.user.userAuthDiv.className;
+
+    homeSearchPage.className = state.home.homeSearchPage;
+    searchResults.className = state.result.searchResults;
+    // tweetResultsDiv.innerHTML = state.result.tweets;
+
+
+    if (!(homeSearchPage.classList.contains("hide"))) {
+        homeSearchPage.append(mainSearchButton);
+        homeSearchPage.insertBefore(mainSearchInputDiv, homeSearchPage.lastChild);
+        homeSearchPage.append(searchChoicesDiv)
+    }
+
+    if (!(searchResults.classList.contains("hide"))) {
+        searchResults.insertBefore(searchChoicesDiv, searchResults.firstChild);
+        searchResults.insertBefore(mainSearchInputDiv, searchResults.firstChild);
+    }
 }
 
 // Initialize initial state on load
@@ -275,7 +316,6 @@ function signup(){
             appendUserDetails(response.data.userDetails);
             userAuthDiv.classList.add("hide");
             signupDiv.classList.add("hide");
-
         })
         .catch(function (error) {
             loader.classList.add("hide");
@@ -294,14 +334,6 @@ function signup(){
 }
 
 
-
-
-
-
-
-
-
-
 // Nav Event Listeners
 userProfilePanel.addEventListener("click", openUserPanel, false);
 closeBtn.forEach((btn) => {
@@ -314,6 +346,16 @@ loginHere.addEventListener("click", openUserPanel, false);
 loginBtn.addEventListener("click", login, false);
 signupBtn.addEventListener("click", signup, false);
 logoutBtn.addEventListener("click", logout, false);
+
+
+// Data event listeners
+mainSearchButton.addEventListener("click", mainSearch, false);
+
+
+
+
+
+
 
 
 
