@@ -106,8 +106,7 @@ const appendUserDetails = (user) => {
         collectionCounter.innerHTML = `You haven't created any collections, click the create collection button to get started`
     }
 
-    let allCollectionItems = document.querySelectorAll(".collection-item");
-    allCollectionItems[0].setAttribute("data-selected", "true");
+    appendCollections()
 }
 
 // Initial State
@@ -133,9 +132,8 @@ let state = {
     }
 }
 
-console.log(state.home.children)
-
 // Render state function whenever popstate is fired
+let config;
 function render(){
     let token = localStorage.FBIdToken;
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -149,7 +147,11 @@ function render(){
 
             // TODO: Session expired modal to initiate logout
             // sessionExpiredModal.classList.remove("hide");
-        } else console.log("token has not expired")
+        } else {
+            config = {
+                headers: { Authorization: `${token}` }
+              };
+        }
     }
 
     if (currentUser) {
@@ -193,9 +195,9 @@ function render(){
 (function initialize() {
     window.history.replaceState(state, null, "");
     render(state);
-    render();
 })();
 
+console.log(config)
 
 function closeUserPanel(){
     event.preventDefault();
@@ -602,6 +604,25 @@ function retrieveCollectionTweets(){
 }
 
 
+
+
+
+function appendCollections(){
+    let allCollectionItems = document.querySelectorAll(".collection-item");
+    allCollectionItems[0].setAttribute("data-selected", "true");
+    
+    allCollectionItems.forEach((collection) => {
+        collection.addEventListener("click", function(){
+            allCollectionItems.forEach((otherCollections) => {
+                otherCollections.setAttribute("data-selected", "false")
+            })
+            collection.setAttribute("data-selected", "true");
+        }, false)
+        collection.addEventListener("click", retrieveCollectionTweets, false)
+    })
+}
+
+
 // Nav Event Listeners
 userProfilePanel.addEventListener("click", openUserPanel, false);
 closeBtn.forEach((btn) => {
@@ -618,17 +639,6 @@ logoutBtn.addEventListener("click", logout, false);
 
 // Data event listeners
 mainSearchButton.addEventListener("click", mainSearch, false);
-
-
-allCollectionItems.forEach((collection) => {
-    collection.addEventListener("click", function(){
-        allCollectionItems.forEach((otherCollections) => {
-            otherCollections.setAttribute("data-selected", "false")
-        })
-        collection.setAttribute("data-selected", "true");
-    }, false)
-    collection.addEventListener("click", retrieveCollectionTweets, false)
-})
 
 
 
