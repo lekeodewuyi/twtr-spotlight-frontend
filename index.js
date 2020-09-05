@@ -432,8 +432,6 @@ function appendTweets(results){
                     videoSource = document.createElement("source");
                     
                     let variants = results[i].extended_entities.media[0].video_info.variants;
-                    // videoSource.src = results[i].extended_entities.media[0].video_info.variants[0].url;
-                    // videoSource.type = results[i].extended_entities.media[0].video_info.variants[0].content_type
 
                     for (let i = 0; i < variants.length; i++){
                         if (variants[i].content_type === "video/mp4") {
@@ -600,7 +598,68 @@ function mainSearch(){
 
 
 function retrieveCollectionTweets(){
-    
+    let collection = event.currentTarget.innerText
+    axios.post(
+        'http://localhost:5000/explorer-one-44263/us-central1/api/collection',
+        {
+            collectionName: collection
+        },
+        config
+        )
+        .then(function (response) {
+            loader.classList.add("hide");
+            console.log(response.data.results);
+            let results = response.data.results;
+            homeSearchPage.classList.add("hide");
+
+            searchResults.classList.remove("hide")
+
+            // searchResults.insertBefore(searchChoicesDiv, searchResults.firstChild);
+            // searchResults.insertBefore(mainSearchInputDiv, searchResults.firstChild);
+
+            tweetResultsDiv.innerHTML = "";
+
+
+            appendTweets(results);
+
+            // TODO: add modal popup for clicked images
+
+            let allImages = document.querySelectorAll(".tweet-image img");
+
+            allImages.forEach((img) => {
+                img.addEventListener("click", function(){
+                    console.log(img)
+                    img.style.objectFit = "contain"
+                }, false)
+            })
+
+            let allVideos = document.querySelectorAll("video");
+            allVideos.forEach((video) => {
+                video.addEventListener("play", function(){
+                    let nowPlaying = event.currentTarget;
+                    allVideos.forEach((vid) => {
+                        if (vid.paused === false && vid !== nowPlaying) {
+                            vid.pause();
+                        }
+                    })
+                })
+            })
+
+            // TODO - Add function to pause video when it is out of view;
+
+
+            state.result.searchResults = searchResults.className;
+            state.result.tweets = tweetResultsDiv.innerHTML;
+            state.result.search = mainSearchInput.value;
+            state.home.homeSearchPage = homeSearchPage.className;
+            window.history.pushState(state, null, "");
+
+
+        })
+        .catch(function (error) {
+            loader.classList.add("hide");
+            console.log(error.response.data);
+        })
 }
 
 
@@ -608,17 +667,20 @@ function retrieveCollectionTweets(){
 
 
 function appendCollections(){
+
     let allCollectionItems = document.querySelectorAll(".collection-item");
     allCollectionItems[0].setAttribute("data-selected", "true");
     
     allCollectionItems.forEach((collection) => {
+
         collection.addEventListener("click", function(){
             allCollectionItems.forEach((otherCollections) => {
                 otherCollections.setAttribute("data-selected", "false")
             })
             collection.setAttribute("data-selected", "true");
         }, false)
-        collection.addEventListener("click", retrieveCollectionTweets, false)
+
+        collection.addEventListener("click", retrieveCollectionTweets, false);
     })
 }
 
