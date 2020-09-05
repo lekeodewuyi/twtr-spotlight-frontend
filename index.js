@@ -73,6 +73,15 @@ const collectionList = document.querySelector(".collections-list");
 const emptyCollection = document.querySelector(".empty-collection");
 
 
+//Save to collection
+const saveToCollectionModal = document.querySelector(".save-to-collection-prompt");
+const saveToCollectionItemDiv = document.querySelector(".save-to-collection-item-div");
+
+
+
+
+
+
 const setAuthorizationHeader = (token) => {
     const FBIdToken = `Bearer ${token}`;
     localStorage.setItem('FBIdToken', FBIdToken);
@@ -93,6 +102,7 @@ const appendUserDetails = (user) => {
     let userCollectionCount = user.collectionCount;
 
     collectionList.innerHTML = "";
+    saveToCollectionItemDiv.innerHTML = "";
     if (!(!Array.isArray(userCollections) || !userCollections.length)) {
         for (let i = 0; i < userCollections.length; i++) {
 
@@ -104,6 +114,13 @@ const appendUserDetails = (user) => {
             collectionItem.append(collectionItemParagraph);
 
             collectionList.append(collectionItem);
+
+
+            let saveToCollectionItem = document.createElement("p");
+            saveToCollectionItem.classList.add("save-to-collection-item");
+            saveToCollectionItem.innerHTML = userCollections[i];
+            saveToCollectionItemDiv.append(saveToCollectionItem)
+            saveToCollectionModal.append(saveToCollectionItemDiv);
         }
 
         if (userCollectionCount === 1) {
