@@ -153,7 +153,8 @@ let state = {
     result: {
         searchResults: searchResults.className,
         search: "",
-        tweets: ""
+        tweets: "",
+        tweetId: ""
 
     }
 }
@@ -224,6 +225,8 @@ function render(){
     tweetResultsDiv.innerHTML = state.result.tweets;
     mainSearchInput.value = state.result.search;
 
+    
+
 
     if (!(homeSearchPage.classList.contains("hide"))) {
         homeSearchPage.append(mainSearchButton);
@@ -235,6 +238,8 @@ function render(){
         searchResults.insertBefore(searchChoicesDiv, searchResults.firstChild);
         searchResults.insertBefore(mainSearchInputDiv, searchResults.firstChild);
     }
+
+    interactWithSearchResults();
 }
 
 // Initialize initial state on load
@@ -713,15 +718,72 @@ function interactWithSearchResults(){
         })
     })
 
-    let tweetSaveToCollectionBtn = document.querySelectorAll(".save-to-collection");
 
-    tweetSaveToCollectionBtn.forEach((tweet) => {
-        getTweetId(tweet);
+    let collectionItemToBeSavedTo = document.querySelectorAll(".save-to-collection-item");
+
+    let tweetBtn = document.querySelectorAll(".save-to-collection");
+    tweetBtn.forEach((tweet) => {
         tweet.addEventListener("click", function(){
-            console.log(tweet.tweetId)
+            saveToCollectionModal.classList.remove("hide");
+
+            let currentTweet = event.currentTarget;
+            getTweetId(currentTweet);
+            let tweetId = currentTweet.tweetId;
+            console.log(tweetId)
+
+            collectionItemToBeSavedTo.forEach((collection) => {
+                collection.setAttribute("data-tweetId", tweetId);
+            })
+
         }, false)
     })
 
+
+    // let collectionItemToBeSavedTo = document.querySelectorAll(".save-to-collection-item");
+    collectionItemToBeSavedTo.forEach((collection)=> {
+        console.log("hey");
+        collection.addEventListener("click", saveTweetToCollection, true);
+    })
+
+
+
+}
+
+function saveTweetToCollection(){
+    let currentTweet = event.currentTarget;
+    getTweetId(currentTweet);
+    let tweetId = currentTweet.tweetId;
+    let collectionName = event.currentTarget.innerText;
+    let collection = event.currentTarget;
+    collection.append(loader)
+    loader.classList.remove("hide");
+    console.log(collection)
+
+    axios.post(
+        `http://localhost:5000/explorer-one-44263/us-central1/api/addfavorite/${tweetId}`,
+        {
+            collectionName: collectionName
+        },
+        config
+        )
+        .then(function (response) {
+            //TODO success function
+            loader.classList.add("hide");
+            saveToCollectionModal.classList.add("hide");
+            console.log(response.data)
+            
+            updateCurrentUser(response.data.userDetails)
+            appendUserDetails(response.data.userDetails);
+
+            interactWithSearchResults();
+
+        })
+        .catch(function (error) {
+            loader.classList.add("hide");
+            console.log(error.response.data);
+
+        })
+    
 }
 
 function getTweetId(element){
