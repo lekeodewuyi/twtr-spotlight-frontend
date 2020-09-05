@@ -61,8 +61,16 @@ const tweetResultsDiv = document.querySelector(".tweet-results-div");
 
 const collectionPage = document.querySelector(".collections-page");
 const collectionPageHeader = document.querySelector(".collections-page-header");
-const collectionCounter = document.querySelector(".collection-count")
+const createCollectionCta = document.querySelector(".create-collection-cta");
+const createCollectionInputDiv = document.querySelector(".create-collection-input-div");
+const createCollectionInput = document.querySelector(".create-collection-input");
+const createCollectionBtn = document.querySelector("#create-collection-btn");
+const createCollectionInputClose = document.querySelector(".create-collection-close")
+const createCollectionError = document.querySelector(".create-collection-error");
+
+const collectionCounter = document.querySelector(".collection-count");
 const collectionList = document.querySelector(".collections-list");
+const emptyCollection = document.querySelector(".empty-collection");
 
 
 const setAuthorizationHeader = (token) => {
@@ -84,6 +92,7 @@ const appendUserDetails = (user) => {
     let userCollections = user.collections;
     let userCollectionCount = user.collectionCount;
 
+    collectionList.innerHTML = "";
     if (!(!Array.isArray(userCollections) || !userCollections.length)) {
         for (let i = 0; i < userCollections.length; i++) {
 
@@ -134,6 +143,26 @@ let state = {
 
 // Render state function whenever popstate is fired
 let config;
+function checkTokenStatus(){
+    let token = localStorage.FBIdToken;
+    if(token) {
+        const decodedToken = jwt_decode(token);
+        console.log(decodedToken.exp * 1000);
+        console.log(Date.now())
+        if(decodedToken.exp * 1000 < Date.now()){ //if TOKEN is expired
+            console.log("token has expired")
+
+            // TODO: Session expired modal to initiate logout
+            // sessionExpiredModal.classList.remove("hide");
+        } else {
+            config = {
+                headers: { Authorization: `${token}` }
+            };
+        }
+    }
+}
+
+
 function render(){
     let token = localStorage.FBIdToken;
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -598,6 +627,7 @@ function mainSearch(){
 
 
 function retrieveCollectionTweets(){
+    emptyCollection.innerHTML = "";
     let collection = event.currentTarget.innerText
     axios.post(
         'http://localhost:5000/explorer-one-44263/us-central1/api/collection',
@@ -619,8 +649,12 @@ function retrieveCollectionTweets(){
 
             tweetResultsDiv.innerHTML = "";
 
-
             appendTweets(results);
+
+        
+            if (tweetResultsDiv.innerHTML === "") {
+                emptyCollection.innerHTML = `<span class="color-blue">${collection}</span> currently has no saved tweets`
+            }
 
             // TODO: add modal popup for clicked images
 
@@ -664,7 +698,7 @@ function retrieveCollectionTweets(){
 
 
 
-
+console.log(config)
 
 function appendCollections(){
 
@@ -685,6 +719,56 @@ function appendCollections(){
 }
 
 
+function openCreateCollectionDiv(){
+    createCollectionCta.classList.add("hide");
+    createCollectionInputDiv.classList.remove("hide");
+}
+
+function closeCreateCollectionDiv(){
+    createCollectionError.innerHTML = "";
+    createCollectionCta.classList.remove("hide");
+    createCollectionInputDiv.classList.add("hide");
+}
+
+function createNewCollection(){
+    createCollectionBtn.append(loader);
+    loader.classList.remove("hide");
+    checkTokenStatus()
+    createCollectionBtn.append(loader);
+    if (createCollectionInput.value.trim() === "") {
+        loader.classList.add("hide");
+        createCollectionError.classList.remove("hide");
+        createCollectionError.innerHTML = "Please enter a name for your new collection";
+    }
+    else
+    axios.post(
+        'http://localhost:5000/explorer-one-44263/us-central1/api/collection/create',
+        {
+            collectionName: createCollectionInput.value
+        },
+        config
+        )
+        .then(function (response) {
+            createCollectionInput.value = ""
+            loader.classList.add("hide");
+            createCollectionCta.classList.remove("hide");
+            createCollectionInputDiv.classList.add("hide");
+            
+            updateCurrentUser(response.data.userDetails)
+            appendUserDetails(response.data.userDetails);
+
+            // TODO: add modal popup for clicked images
+
+        })
+        .catch(function (error) {
+            loader.classList.add("hide");
+            console.log(error.response.data);
+            createCollectionError.classList.remove("hide");
+            createCollectionError.innerHTML = error.response.data.error;
+
+        })
+}
+
 // Nav Event Listeners
 userProfilePanel.addEventListener("click", openUserPanel, false);
 closeBtn.forEach((btn) => {
@@ -701,6 +785,16 @@ logoutBtn.addEventListener("click", logout, false);
 
 // Data event listeners
 mainSearchButton.addEventListener("click", mainSearch, false);
+
+createCollectionCta.addEventListener("click", openCreateCollectionDiv, false);
+createCollectionInputClose.addEventListener("click", closeCreateCollectionDiv, false);
+createCollectionBtn.addEventListener("click", createNewCollection, false);
+createCollectionInput.addEventListener("keyup", function(){
+    if (event.keyCode !== 13) {
+        createCollectionError.innerHTML = "";
+    }
+}, false)
+
 
 
 

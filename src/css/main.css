@@ -433,6 +433,7 @@ header {
 }
 
 .collections-page {
+    height: auto;
     width: 740px;
     justify-content: flex-start;
 }
@@ -692,6 +693,7 @@ header {
 
 .collection-count {
     align-self: flex-start;
+    margin-bottom: 10px;
 }
 
 .create-collection-cta {
@@ -709,6 +711,7 @@ header {
     align-self: flex-start;
     display: flex;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 .create-collection-input {
@@ -734,6 +737,10 @@ header {
 .create-collection-close {
     position: relative;
     margin-left: 15px;
+}
+
+.create-collection-error {
+    align-self: flex-start;
 }
 
 
