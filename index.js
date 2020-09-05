@@ -514,6 +514,7 @@ function appendTweets(results){
         tweetMetrics.append(tweetRetweets, tweetLikes);
 
         let saveToCollection = document.createElement("div");
+        saveToCollection.setAttribute("data-tweetId", `${results[i].id_str}`);
         saveToCollection.classList.add("save-to-collection");
 
         let saveSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -711,6 +712,20 @@ function interactWithSearchResults(){
             })
         })
     })
+
+    let tweetSaveToCollectionBtn = document.querySelectorAll(".save-to-collection");
+
+    tweetSaveToCollectionBtn.forEach((tweet) => {
+        getTweetId(tweet);
+        tweet.addEventListener("click", function(){
+            console.log(tweet.tweetId)
+        }, false)
+    })
+
+}
+
+function getTweetId(element){
+    return element.tweetId = element.getAttribute("data-tweetId");
 }
 
 
