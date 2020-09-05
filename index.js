@@ -59,6 +59,11 @@ const mainSearchInputDiv = document.querySelector(".main-search-input-div");
 const searchResults = document.querySelector(".search-results");
 const tweetResultsDiv = document.querySelector(".tweet-results-div");
 
+const collectionPage = document.querySelector(".collections-page");
+const collectionPageHeader = document.querySelector(".collections-page-header");
+const collectionCounter = document.querySelector(".collection-count")
+const collectionList = document.querySelector(".collections-list");
+
 
 const setAuthorizationHeader = (token) => {
     const FBIdToken = `Bearer ${token}`;
@@ -75,6 +80,34 @@ const appendUserDetails = (user) => {
     let name = user.name;
     let firstName = name.replace(/ .*/,'');
     userProfileLabel.innerHTML = `Hello, <span class="color-blue">${firstName}</span>`;
+
+    let userCollections = user.collections;
+    let userCollectionCount = user.collectionCount;
+
+    if (!(!Array.isArray(userCollections) || !userCollections.length)) {
+        for (let i = 0; i < userCollections.length; i++) {
+
+            let collectionItemParagraph = document.createElement("p");
+            collectionItemParagraph.innerHTML = userCollections[i];
+
+            let collectionItem = document.createElement("div");
+            collectionItem.classList.add("collection-item");
+            collectionItem.append(collectionItemParagraph);
+
+            collectionList.append(collectionItem);
+        }
+
+        if (userCollectionCount === 1) {
+            collectionCounter.innerHTML = `You currently have ${userCollectionCount} collection`
+        } else if (userCollectionCount > 1) {
+            collectionCounter.innerHTML = `You currently have ${userCollectionCount} collections`
+        }
+    } else {
+        collectionCounter.innerHTML = `You haven't created any collections, click the create collection button to get started`
+    }
+
+    let allCollectionItems = document.querySelectorAll(".collection-item");
+    allCollectionItems[0].setAttribute("data-selected", "true");
 }
 
 // Initial State
@@ -160,6 +193,7 @@ function render(){
 (function initialize() {
     window.history.replaceState(state, null, "");
     render(state);
+    render();
 })();
 
 
