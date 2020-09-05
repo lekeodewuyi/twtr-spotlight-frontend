@@ -466,7 +466,6 @@ function appendTweets(results){
         let tweetImageDiv = document.createElement("div");
         tweetImageDiv.classList.add("tweet-image");
         let tweetImage, tweetVideo, videoSource, videoError;
-        console.log("hey")
 
 
         if (results[i].extended_entities !== undefined) {
@@ -529,7 +528,6 @@ function appendTweets(results){
         let replyingTo = document.createElement("p");
         replyingTo.classList.add("replying-to");
         replyingTo.innerHTML = `Replying to ${results[i].in_reply_to_screen_name}`
-        console.log("hey")
 
 
         tweetFooter.append(tweetMetrics, saveToCollection);
@@ -601,31 +599,7 @@ function mainSearch(){
 
 
             appendTweets(results);
-
-            // TODO: add modal popup for clicked images
-
-            let allImages = document.querySelectorAll(".tweet-image img");
-
-            allImages.forEach((img) => {
-                img.addEventListener("click", function(){
-                    console.log(img)
-                    img.style.objectFit = "contain"
-                }, false)
-            })
-
-            let allVideos = document.querySelectorAll("video");
-            allVideos.forEach((video) => {
-                video.addEventListener("play", function(){
-                    let nowPlaying = event.currentTarget;
-                    allVideos.forEach((vid) => {
-                        if (vid.paused === false && vid !== nowPlaying) {
-                            vid.pause();
-                        }
-                    })
-                })
-            })
-
-            // TODO - Add function to pause video when it is out of view;
+            interactWithSearchResults();
 
 
             state.result.searchResults = searchResults.className;
@@ -713,6 +687,31 @@ function retrieveCollectionTweets(){
         })
 }
 
+
+function interactWithSearchResults(){
+
+     // TODO: add modal popup for clicked images
+    let allImages = document.querySelectorAll(".tweet-image img");
+
+    allImages.forEach((img) => {
+        img.addEventListener("click", function(){
+            console.log(img)
+            img.style.objectFit = "contain"
+        }, false)
+    })
+
+    let allVideos = document.querySelectorAll("video");
+    allVideos.forEach((video) => {
+        video.addEventListener("play", function(){
+            let nowPlaying = event.currentTarget;
+            allVideos.forEach((vid) => {
+                if (vid.paused === false && vid !== nowPlaying) {
+                    vid.pause();
+                }
+            })
+        })
+    })
+}
 
 
 console.log(config)
@@ -811,7 +810,6 @@ createCollectionInput.addEventListener("keyup", function(){
         createCollectionError.innerHTML = "";
     }
 }, false)
-
 
 
 
