@@ -77,6 +77,9 @@ const emptyCollection = document.querySelector(".empty-collection");
 const saveToCollectionModal = document.querySelector(".save-to-collection-prompt");
 const saveToCollectionItemDiv = document.querySelector(".save-to-collection-item-div");
 
+//remove from collection
+const removeFromCollectionModal = document.querySelector(".remove-from-collection-prompt");
+
 
 
 
@@ -542,7 +545,7 @@ function appendTweets(results){
 
         let removeSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         removeSvg.setAttribute("viewBox", "0 0 24 24");
-        removeSvg.innerHTML = `<path d="M0 0h24v24H0z" fill="none"/><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"/>`
+        removeSvg.innerHTML = `<path d="M0 0h24v24H0V0z" fill="none"/><path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"/>`
 
         let removeSvgText = document.createElement("p");
         removeSvgText.innerHTML = "remove from collection"
@@ -645,7 +648,13 @@ function mainSearch(){
 
 function retrieveCollectionTweets(){
     emptyCollection.innerHTML = "";
-    let collection = event.currentTarget.innerText
+    let collectionName = event.currentTarget.innerText
+
+    axiosRetrieveTweets(collectionName)
+}
+
+
+function axiosRetrieveTweets(collection){
     axios.post(
         'http://localhost:5000/explorer-one-44263/us-central1/api/collection',
         {
@@ -673,6 +682,7 @@ function retrieveCollectionTweets(){
             
             removeTweet.forEach((btn) => {
                 btn.classList.remove("hide");
+                btn.setAttribute("data-collection-name", collection);
             })
 
         
@@ -680,37 +690,7 @@ function retrieveCollectionTweets(){
                 emptyCollection.innerHTML = `<span class="color-blue">${collection}</span> currently has no saved tweets`
             }
 
-            // TODO: add modal popup for clicked images
-
-            let allImages = document.querySelectorAll(".tweet-image img");
-
-            allImages.forEach((img) => {
-                img.addEventListener("click", function(){
-                    console.log(img)
-                    img.style.objectFit = "contain"
-                }, false)
-            })
-
-            let allVideos = document.querySelectorAll("video");
-            allVideos.forEach((video) => {
-                video.addEventListener("play", function(){
-                    let nowPlaying = event.currentTarget;
-                    allVideos.forEach((vid) => {
-                        if (vid.paused === false && vid !== nowPlaying) {
-                            vid.pause();
-                        }
-                    })
-                })
-            })
-
-            // TODO - Add function to pause video when it is out of view;
-
-
-            state.result.searchResults = searchResults.className;
-            state.result.tweets = tweetResultsDiv.innerHTML;
-            state.result.search = mainSearchInput.value;
-            state.home.homeSearchPage = homeSearchPage.className;
-            window.history.pushState(state, null, "");
+            interactWithSearchResults();
 
 
         })
@@ -745,6 +725,8 @@ function interactWithSearchResults(){
         })
     })
 
+    
+    // save tweet to colection
 
     let collectionItemToBeSavedTo = document.querySelectorAll(".save-to-collection-item");
     let tweetBtn = document.querySelectorAll(".save-to-collection");
@@ -766,13 +748,93 @@ function interactWithSearchResults(){
 
 
     collectionItemToBeSavedTo.forEach((collection)=> {
-        console.log("hey");
         collection.addEventListener("click", saveTweetToCollection, true);
     })
 
 
 
+    // delete tweet from collection
+    let deleteTweetBtn = document.querySelector(".remove-prompt-delete");
+    let removeFromCollectionBtn = document.querySelectorAll(".remove-from-collection");
+    removeFromCollectionBtn.forEach((btn) => {
+        btn.addEventListener("click", function(){
+            removeFromCollectionModal.classList.remove("hide");
+
+            let currentTweet = event.currentTarget;
+            getTweetId(currentTweet);
+            let tweetId = currentTweet.tweetId;
+
+            getCollectionName(currentTweet);
+            let collectionName = currentTweet.collectionName
+
+            console.log(tweetId);
+            console.log(collectionName);
+
+            deleteTweetBtn.setAttribute("data-tweetId", tweetId);
+            deleteTweetBtn.setAttribute("data-collection-name", collectionName);
+
+        }, false)
+    })
+
+
+    let closeRemoveFromCollectionModal = document.querySelectorAll(".remove-from-collection-close");
+    closeRemoveFromCollectionModal.forEach((close) => {
+        close.addEventListener("click", function(){
+            removeFromCollectionModal.classList.add("hide");
+        }, false)
+    })
+
+
+    deleteTweetBtn.addEventListener("click", deleteTweetFromCollection, false);
+
+
+
+
 }
+
+
+function deleteTweetFromCollection(){
+    let currentTweet = event.currentTarget;
+
+    currentTweet.append(loader)
+    loader.classList.remove("hide");
+
+    getTweetId(currentTweet);
+    let tweetId = currentTweet.tweetId;
+    getCollectionName(currentTweet);
+    let collectionName = currentTweet.collectionName;
+
+    console.log(tweetId, collectionName);
+
+
+    axios.post(
+        `http://localhost:5000/explorer-one-44263/us-central1/api/deletefavorite/${tweetId}`,
+        {
+            collectionName: collectionName
+        },
+        config
+        )
+        .then(function (response) {
+            //TODO success function and error functions
+            loader.classList.add("hide");
+            removeFromCollectionModal.classList.add("hide");
+            console.log(response.data)
+            
+            axiosRetrieveTweets(collectionName);
+
+            interactWithSearchResults();
+
+            currentTweet.removeAttribute("data-collection-name");
+            currentTweet.removeAttribute("data-tweetid");
+
+        })
+        .catch(function (error) {
+            loader.classList.add("hide");
+            console.log(error.response.data);
+
+        })
+}
+
 
 function saveTweetToCollection(){
     let currentTweet = event.currentTarget;
@@ -813,6 +875,10 @@ function saveTweetToCollection(){
 
 function getTweetId(element){
     return element.tweetId = element.getAttribute("data-tweetId");
+}
+
+function getCollectionName(element){
+    return element.collectionName = element.getAttribute("data-collection-name");
 }
 
 

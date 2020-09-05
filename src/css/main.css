@@ -166,7 +166,7 @@ header {
 }
 
 .modal {
-    z-index: 200px;
+    z-index: 20;
     position: absolute;
     left: 0; 
     right: 0; 
@@ -782,15 +782,18 @@ header {
 }
 
 .remove-from-collection-prompt {
-    cursor: default;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
     position: absolute;
     color: white;
-    width: 150%;
+    width: 350px;
+    height: 180px;
     background-color: var(--grey-floating-panel);
     transform: translate(-105px, -80px);
     border-radius: 10px;
-    padding: 10px;
+    padding: 0px 20px;;
 }
 
 .remove-prompt-buttons {
@@ -801,11 +804,8 @@ header {
 }
 
 .remove-prompt-buttons button {
-    color: white;
-    font-size: 0.7rem;
-    height: 30px;
-    width: 100px;
-    margin: 10px 5px;
+    font-size: 0.9rem;
+    margin: 0px 8px;
 }
 
 .remove-prompt-buttons button:hover {
