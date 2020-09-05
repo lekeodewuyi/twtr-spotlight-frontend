@@ -24,13 +24,42 @@
 
 <body>
     <span class="loader hide"></span>
+    <!-- Modals -->
+    <section>
+        <div class="save-to-collection-prompt modal hide">
+            <svg class="save-to-collection-close close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>
+            <p class="save-to-collection-header">Your collections</p>
+            <p class="save-to-collection-item"> Collection One</p>
+            <p class="save-to-collection-item">Collection Two</p>
+            <p class="save-to-collection-item">Collection Two</p>
+            <p class="save-to-collection-item">Collection Two</p>
+            <p class="save-to-collection-item">Collection Two</p>
+            <p class="save-to-collection-item">Collection Two</p>
+        </div>
+    </section>
+    <section>
+        <div class="remove-from-collection modal hide">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"/></svg>
+            <p>Delete from collection</p>
+            <div class="remove-from-collection-prompt">
+                Are you sure?
+                <div class="remove-prompt-buttons">
+                    <button class="remove-prompt-dont-delete">Don't delete</button>
+                    <button class="remove-prompt-delete">Delete, please</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
     <header>
         Home
     </header>
     <main>
         <div class="main-container">
             <div class="side-nav-container">
-                <div class="home side-nav-item">
+                <div class="home side-nav-item" data-selected="true">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
                     <p>Home</p>
                 </div>
@@ -93,7 +122,7 @@
             </div>
 
             <div class="center-container">
-                <div class="home-search-page">
+                <div class="home-search-page hide">
                     <h1 class="home-logo">explore</h1>
                     <div class="main-search-input-div">
                         <input type="search" class="main-search-input" placeholder="Search for anything on twitter" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" onkeydown = "if (event.keyCode == 13)
@@ -154,17 +183,7 @@
                     </div>
                     <button class="timeline-search-button" id="timeline-search-button">Search</button>
                 </div>
-                <div class="search-results">
-                    <div class="main-search-input-div hide">
-                        <input type="search" class="main-search-input results-search-input" placeholder="Search for anything on twitter" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" onkeydown = "if (event.keyCode == 13)
-                        document.querySelector('#main-search-button').click()">
-                        <span class="material-icons  main-search-icon">search</span>
-                    </div>
-                    <div class="timeline-search-input-div hide">
-                        <input type="search" class="timeline-search-input results-search-input" placeholder="Enter a username" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" onkeydown = "if (event.keyCode == 13)
-                        document.querySelector('#timeline-search-button').click()">
-                        <span class="material-icons timeline-search-icon">search</span>
-                    </div>
+                <div class="search-results hide">
                     <div class=tweet-results-div>
                         <div class="tweet-result">
                             <div class="tweet-user-image">
@@ -198,8 +217,7 @@
                                         <div class="save-to-collection">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"/></svg>
                                             <p>Save to collection</p>
-                                            <div class="save-to-collection-prompt">
-                                                <!-- <svg class="save-to-collection-close close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg> -->
+                                            <!-- <div class="save-to-collection-prompt">
                                                 <div class="save-to-collection-item">
                                                     Collection One
                                                 </div>
@@ -212,7 +230,7 @@
                                                 <div class="save-to-collection-item">
                                                     Collection Two
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                     <p class="replying-to">This tweet is a reply to:</p>
@@ -221,18 +239,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="collections-page hide">
+                <div class="collections-page">
                     <h1 class="collections-page-header">Your collections</h1>
                     <p class="collection-count">You currently have 5 collections</p>
                     <div class="collections-list">
                         <div class="collection-item" data-selected="true">
                             <p>Collection One</p>
                         </div>
-                        <div class="collection-item" data-selected="false">
+                        <div class="collection-item">
                             <p>Collection Two</p>
                         </div>
                     </div>
-                    <div class="collection-results">
+                    <div class="collection-results hide">
                         <div class="collection-result-item">
                             <div class="collection-tweet-user-image">
                                 <img src="./assets/lightning-5511473_640.jpg" alt="">
@@ -254,17 +272,6 @@
                                             <p>Replies:</p>
                                             <p>Retweets:</p>
                                             <p>Likes:</p>
-                                        </div>
-                                        <div class="remove-from-collection">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"/></svg>
-                                            <p>Delete from collection</p>
-                                            <div class="remove-from-collection-prompt">
-                                                Are you sure?
-                                                <div class="remove-prompt-buttons">
-                                                    <button class="remove-prompt-dont-delete">Don't delete</button>
-                                                    <button class="remove-prompt-delete">Delete, please</button>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                     <p class="replying-to">This tweet is a reply to:</p>
