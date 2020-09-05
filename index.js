@@ -596,6 +596,12 @@ function mainSearch(){
         })
 }
 
+
+function retrieveCollectionTweets(){
+    
+}
+
+
 // Nav Event Listeners
 userProfilePanel.addEventListener("click", openUserPanel, false);
 closeBtn.forEach((btn) => {
@@ -612,6 +618,17 @@ logoutBtn.addEventListener("click", logout, false);
 
 // Data event listeners
 mainSearchButton.addEventListener("click", mainSearch, false);
+
+
+allCollectionItems.forEach((collection) => {
+    collection.addEventListener("click", function(){
+        allCollectionItems.forEach((otherCollections) => {
+            otherCollections.setAttribute("data-selected", "false")
+        })
+        collection.setAttribute("data-selected", "true");
+    }, false)
+    collection.addEventListener("click", retrieveCollectionTweets, false)
+})
 
 
 
