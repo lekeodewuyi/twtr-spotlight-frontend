@@ -45,6 +45,58 @@ input[type="search"], input[type="text"], input[type="password"] {
     border: 1px solid transparent;
 }
 
+input[type="search"] {
+    transition: 0.2s;
+    font-size: inherit;
+    width: 700px;
+    width: var(--search-input-width);
+    max-width: 700px;
+    height: 55px;
+    color: white;
+    background-color: var(--grey-inputbg);
+    border: 1px solid var(--bg);
+    border-radius: 50px;
+    padding: 20px 20px 20px 60px;
+    margin-bottom: 30px;
+}
+
+input[type="search"]:not(:placeholder-shown) {
+    padding-right: 60px;
+    padding-left: 25px;
+}
+
+input[type="search"]:focus,  input[type="search"]:active, input[type="search"]:hover {
+    border: 1px solid var(--blue);
+    background-color: var(--bg);
+    box-shadow: rgba(4, 74, 111, 1) 0px 0px 30px -10px;
+}
+
+input[type="search"]::placeholder {
+    color: var(--grey-font);
+}
+
+.search-icon {
+    position: absolute;
+    pointer-events: none;
+    fill: var(--grey-font);
+    width: 60px;
+    left: 0px;
+
+    bottom: 52%;
+    padding: 0px 10px 0px 0px;
+    transform: translateX(0px);
+    -webkit-transform: translateX(0px);
+    transition: all 0.3s ease;
+    margin-left: 15px;
+}
+
+input[type="search"]:not(:placeholder-shown) + .search-icon {
+    cursor: pointer;
+    pointer-events: all;
+    fill: var(--blue);
+    margin-left: Calc(var(--search-input-width) - 55px);
+}
+
 button {
     font-family: inherit;
     font-size: 1rem;
@@ -301,8 +353,6 @@ header {
 }
 
 
-
-
 .center-container {
     width: 740px;
     margin: 0px 20px;
@@ -332,35 +382,6 @@ header {
 .main-search-input-div{
     position: relative;
     color: var(--grey-font);
-}
-
-.main-search-input {
-    font-size: inherit;
-    width: 700px;
-    max-width: 700px;
-    height: 55px;
-    color: white;
-    background-color: var(--grey-inputbg);
-    border: 1px solid var(--bg);
-    border-radius: 50px;
-    padding: 20px 20px 20px 60px;
-    margin-bottom: 30px;
-}
-
-.main-search-input:focus,  .main-search-input:active, .main-search-input:hover {
-    border: 1px solid var(--blue);
-    background-color: var(--bg);
-    box-shadow: rgba(4, 74, 111, 1) 0px 0px 30px -10px;
-}
-
-.main-search-input::placeholder {
-    color: var(--grey-font);
-}
-
-.main-search-icon {
-    position: absolute;
-    left: 25px;
-    bottom: 52%;
 }
 
 .main-search-button {
@@ -458,60 +479,6 @@ header {
 .timeline-search-input-div {
     position: relative;
     color: var(--grey-font);
-}
-
-input[type="search"] {
-    transition: 0.2s;
-    font-size: inherit;
-    width: 700px;
-    width: var(--search-input-width);
-    max-width: 700px;
-    height: 55px;
-    color: white;
-    background-color: var(--grey-inputbg);
-    border: 1px solid var(--bg);
-    border-radius: 50px;
-    padding: 20px 20px 20px 60px;
-    margin-bottom: 30px;
-}
-
-input[type="search"]:not(:placeholder-shown) {
-    padding-right: 60px;
-    padding-left: 25px;
-}
-
-input[type="search"]:focus,  input[type="search"]:active, input[type="search"]:hover {
-    border: 1px solid var(--blue);
-    background-color: var(--bg);
-    box-shadow: rgba(4, 74, 111, 1) 0px 0px 30px -10px;
-}
-
-input[type="search"]::placeholder {
-    color: var(--grey-font);
-}
-
-.search-icon {
-    position: absolute;
-    pointer-events: none;
-    fill: var(--grey-font);
-    width: 60px;
-    left: 15px;
-    left: 0px;
-
-    bottom: 52%;
-    padding: 0px 10px 0px 0px;
-    transform: translateX(0px);
-    -webkit-transform: translateX(0px);
-    transition: 0.2s;
-    margin-left: 15px;
-}
-
-input[type="search"]:not(:placeholder-shown) + .search-icon {
-    cursor: pointer;
-    pointer-events: all;
-    fill: var(--blue);
-    /* left: Calc(var(--search-input-width) - 55px); */
-    margin-left: Calc(var(--search-input-width) - 55px);
 }
 
 .timeline-search-button {

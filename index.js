@@ -242,7 +242,8 @@ function render(){
     if (!(homeSearchPage.classList.contains("hide"))) {
         homeSearchPage.append(mainSearchButton);
         homeSearchPage.insertBefore(mainSearchInputDiv, homeSearchPage.lastChild);
-        homeSearchPage.append(searchChoicesDiv)
+        homeSearchPage.insertBefore(mainSearchError, homeSearchPage.lastChild);
+        homeSearchPage.append(searchChoicesDiv);
     }
 
     if (!(searchResults.classList.contains("hide"))) {
