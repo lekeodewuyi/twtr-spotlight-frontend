@@ -20,6 +20,10 @@ const userProfileLabel = document.querySelector(".user-profile-label");
 
 const userAuthDiv = document.querySelector(".user-auth-div");
 
+const aboutModal = document.querySelector(".about-modal");
+const aboutModalClose = document.querySelector(".about-modal-closeab");
+
+
 const loginDiv = document.querySelector(".login-div");
 const loginEmail =  document.querySelector(".login-email");
 const loginEmailLabel = document.querySelector(".login-email-label");
@@ -105,6 +109,7 @@ sideNavItems.forEach((item) => {
 function handleSideNav(){
     console.log(event.currentTarget)
     sideNavItems.forEach((others) => {
+        userAuthDiv.classList.add("hide");
         others.setAttribute("data-selected", "false");
     })
     if (!(event.currentTarget.classList.contains("user-profile"))) {
@@ -123,6 +128,8 @@ function goHome(){
 
     collectionPage.classList.add("hide");
 
+    aboutModal.classList.add("hide");
+
     searchResults.classList.add("hide");
 }
 
@@ -135,6 +142,8 @@ function timeTravel(){
     appendElementsToHome();
 
     collectionPage.classList.add("hide");
+
+    aboutModal.classList.add("hide");
 
     searchResults.classList.add("hide");
 
@@ -150,16 +159,26 @@ function goToCollections(){
     timelineSearchPage.classList.add("hide");
     appendElementsToTimeline();
 
+    aboutModal.classList.add("hide");
+
     searchResults.classList.add("hide");
 
     checkTokenStatus();
     if (tokenStatus === "active") {
         let activeCollection = document.querySelector('.collection-item[data-selected="true"]')
         console.log(activeCollection)
-
+        if (activeCollection)
         axiosRetrieveTweets(activeCollection.innerText.trim())
     }
 
+}
+
+function getAbout(){
+    if (aboutModal.classList.contains("hide")){
+        aboutModal.classList.remove("hide");
+    } else {
+        aboutModal.classList.add("hide");
+    }
 }
 
 function appendElementsToHome(){
@@ -181,8 +200,7 @@ function appendElementsToTimeline(){
 homeItem.addEventListener("click", goHome, false);
 timelineItem.addEventListener("click", timeTravel, false);
 collectionItem.addEventListener("click", goToCollections, false);
-
-
+aboutItem.addEventListener("click", getAbout, false);
 
 
 
@@ -272,8 +290,9 @@ let state = {
 // Render state function whenever popstate is fired
 let tokenStatus;
 let config;
+let token;
 function checkTokenStatus(){
-    let token = localStorage.FBIdToken;
+    token = localStorage.FBIdToken;
     if(token) {
         const decodedToken = jwt_decode(token);
         console.log(decodedToken.exp * 1000);
@@ -366,6 +385,7 @@ console.log(config)
 
 function closeUserPanel(){
     event.preventDefault();
+    aboutModal.classList.add("hide");
     userAuthDiv.classList.add("hide");
     loginDiv.classList.add("hide");
     signupDiv.classList.add("hide");
@@ -380,13 +400,12 @@ function closeUserPanel(){
 function openUserPanel(){
     event.preventDefault();
     let token = localStorage.FBIdToken;
+    aboutModal.classList.add("hide");
     if(token){
         userAuthDiv.style.width = "300px";
         userAuthDiv.classList.remove("hide");
         logoutDiv.classList.remove("hide");
-        console.log("true")
     } else {
-        console.log("false")
         userAuthDiv.classList.remove("hide");
         loginDiv.classList.remove("hide");
         signupDiv.classList.add("hide");
@@ -1067,6 +1086,7 @@ function openCreateCollectionDiv(){
 }
 
 function closeCreateCollectionDiv(){
+    createCollectionInput.value = ""
     createCollectionError.innerHTML = "";
     createCollectionCta.classList.remove("hide");
     createCollectionInputDiv.classList.add("hide");
@@ -1077,12 +1097,22 @@ function createNewCollection(){
     loader.classList.remove("hide");
     checkTokenStatus()
     createCollectionBtn.append(loader);
+
+
+    if (token === null || token === undefined) {
+        loader.classList.add("hide");
+        createCollectionError.innerHTML = "You need to be logged in to use this feature. Please login or create an account to continue."
+        return;
+    }
+
+
     if (createCollectionInput.value.trim() === "") {
         loader.classList.add("hide");
         createCollectionError.classList.remove("hide");
         createCollectionError.innerHTML = "Please enter a name for your new collection";
+        return;
     }
-    else
+
     axios.post(
         'http://localhost:5000/explorer-one-44263/us-central1/api/collection/create',
         {
@@ -1106,7 +1136,8 @@ function createNewCollection(){
             loader.classList.add("hide");
             console.log(error.response.data);
             createCollectionError.classList.remove("hide");
-            createCollectionError.innerHTML = error.response.data.error;
+            if (error.response.data.error === "Unauthorized")
+            createCollectionError.innerHTML = "You need to be logged in to use this feature. Please login or create an account to continue."
 
         })
 }
@@ -1137,11 +1168,6 @@ createCollectionInput.addEventListener("keyup", function(){
         createCollectionError.innerHTML = "";
     }
 }, false)
-
-
-
-
-
 
 
 
