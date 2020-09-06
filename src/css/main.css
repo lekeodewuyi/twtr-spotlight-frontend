@@ -31,6 +31,18 @@ body {
     background-color: var(--bg);
 }
 
+a, a:visited {
+    color: var(--blue-label);
+    text-decoration: none;
+    transition: 0.2s;
+    border-bottom: 1px solid transparent;
+}
+
+a:hover {
+    color: var(--blue-hover);
+    border-bottom: 1px solid var(--blue-hover);
+}
+
 *[data-selected="true"] {
     color: var(--blue);
     border-bottom: 1px solid var(--blue);

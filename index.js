@@ -596,8 +596,10 @@ function appendTweets(results){
         tweetText.classList.add("tweet-text");
         if (typeof results[i].retweeted_status === "object") {
             tweetText.innerHTML = results[i].retweeted_status.full_text;
+            tweetText.innerHTML = urlify(tweetText.innerHTML)
         } else {
             tweetText.innerHTML = results[i].full_text;
+            tweetText.innerHTML = urlify(tweetText.innerHTML)
         }
 
 
@@ -1168,6 +1170,16 @@ createCollectionInput.addEventListener("keyup", function(){
         createCollectionError.innerHTML = "";
     }
 }, false)
+
+
+function urlify(text) {
+    let urlRegex = /(https?:\/\/[^\s]+)/g;
+    // return text.replace(urlRegex, function(url) {
+    //   return '<a href="' + url + '">' + url + '</a>';
+    // })
+    // or alternatively
+    return text.replace(urlRegex, '<a href="$1">$1</a>')
+  }
 
 
 
