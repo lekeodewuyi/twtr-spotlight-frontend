@@ -148,6 +148,7 @@ header {
     cursor: pointer;
     padding: 20px;
     border-bottom: 1px solid var(--grey-inputbg);
+    transition: 0.3s;
 }
 
 .side-nav-item[data-selected ="true"]{

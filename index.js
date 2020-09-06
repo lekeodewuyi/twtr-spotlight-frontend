@@ -90,6 +90,63 @@ const removeFromCollectionModal = document.querySelector(".remove-from-collectio
 
 
 
+// Side Nav Items
+const sideNavItems = document.querySelectorAll(".side-nav-item");
+const homeItem = document.querySelector(".home");
+const timelineItem = document.querySelector(".time-travel");
+const collectionItem = document.querySelector(".collection");
+const aboutItem = document.querySelector(".about");
+
+
+sideNavItems.forEach((item) => {
+    item.addEventListener("click", handleSideNav, false);
+})
+
+function handleSideNav(){
+    console.log(event.currentTarget)
+    sideNavItems.forEach((others) => {
+        others.setAttribute("data-selected", "false");
+    })
+    if (!(event.currentTarget.classList.contains("user-profile"))) {
+        event.currentTarget.setAttribute("data-selected", "true")
+    }
+}
+
+function goHome(){
+    window.location.href = "/";
+}
+
+function timeTravel(){
+    timelineSearchPage.classList.remove("hide");
+
+    homeSearchPage.classList.add("hide");
+    appendElementsToHome();
+
+    searchResults.classList.add("hide");
+    appendElementsToTimeline();
+
+}
+
+
+function appendElementsToHome(){
+    homeSearchPage.append(mainSearchButton);
+    homeSearchPage.insertBefore(mainSearchInputDiv, homeSearchPage.lastChild);
+    homeSearchPage.insertBefore(mainSearchError, homeSearchPage.lastChild);
+    homeSearchPage.append(searchChoicesDiv);
+}
+
+function appendElementsToTimeline(){
+    timelineSearchInput.value = "";
+    timelineSearchPage.append(timelineSearchButton);
+    timelineSearchPage.insertBefore(timelineSearchInputDiv, timelineSearchPage.lastChild);
+    timelineSearchPage.insertBefore(timelineSearchError, timelineSearchPage.lastChild);
+    // timelineSearchPage.append(searchChoicesDiv);
+}
+
+homeItem.addEventListener("click", goHome, false);
+timelineItem.addEventListener("click", timeTravel, false);
+
+
 
 
 
@@ -678,7 +735,7 @@ function timelineSearch(){
             loader.classList.add("hide");
             console.log(response.data.results);
             let results = response.data.results;
-            homeSearchPage.classList.add("hide");
+            timelineSearchPage.classList.add("hide");
 
             searchResults.classList.remove("hide")
 
