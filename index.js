@@ -94,7 +94,7 @@ const removeFromCollectionModal = document.querySelector(".remove-from-collectio
 const sideNavItems = document.querySelectorAll(".side-nav-item");
 const homeItem = document.querySelector(".home");
 const timelineItem = document.querySelector(".time-travel");
-const collectionItem = document.querySelector(".collection");
+const collectionItem = document.querySelector(".collections");
 const aboutItem = document.querySelector(".about");
 
 
@@ -113,20 +113,54 @@ function handleSideNav(){
 }
 
 function goHome(){
-    window.location.href = "/";
+    // window.location.href = "/";
+    homeSearchPage.classList.remove("hide");
+    appendElementsToHome();
+    mainSearchError.innerHTML = "";
+    
+    timelineSearchPage.classList.add("hide");
+    appendElementsToTimeline();
+
+    collectionPage.classList.add("hide");
+
+    searchResults.classList.add("hide");
 }
 
 function timeTravel(){
     timelineSearchPage.classList.remove("hide");
+    appendElementsToTimeline();
+    timelineSearchError.innerHTML = "";
 
     homeSearchPage.classList.add("hide");
     appendElementsToHome();
 
+    collectionPage.classList.add("hide");
+
     searchResults.classList.add("hide");
-    appendElementsToTimeline();
 
 }
 
+function goToCollections(){
+    emptyCollection.innerHTML = "";
+    collectionPage.classList.remove("hide");
+
+    homeSearchPage.classList.add("hide");
+    appendElementsToHome();
+
+    timelineSearchPage.classList.add("hide");
+    appendElementsToTimeline();
+
+    searchResults.classList.add("hide");
+
+    checkTokenStatus();
+    if (tokenStatus === "active") {
+        let activeCollection = document.querySelector('.collection-item[data-selected="true"]')
+        console.log(activeCollection)
+
+        axiosRetrieveTweets(activeCollection.innerText.trim())
+    }
+
+}
 
 function appendElementsToHome(){
     homeSearchPage.append(mainSearchButton);
@@ -143,8 +177,10 @@ function appendElementsToTimeline(){
     // timelineSearchPage.append(searchChoicesDiv);
 }
 
+
 homeItem.addEventListener("click", goHome, false);
 timelineItem.addEventListener("click", timeTravel, false);
+collectionItem.addEventListener("click", goToCollections, false);
 
 
 
@@ -191,13 +227,19 @@ const appendUserDetails = (user) => {
             saveToCollectionModal.append(saveToCollectionItemDiv);
         }
 
+
+        let allCollectionItems = document.querySelectorAll(".collection-item");
+        allCollectionItems[0].setAttribute("data-selected", "true");
+        console.log(allCollectionItems[0])
+
+
         if (userCollectionCount === 1) {
             collectionCounter.innerHTML = `You currently have ${userCollectionCount} collection`
         } else if (userCollectionCount > 1) {
             collectionCounter.innerHTML = `You currently have ${userCollectionCount} collections`
         }
     } else {
-        collectionCounter.innerHTML = `You haven't created any collections, click the create collection button to get started`
+        collectionCounter.innerHTML = `You haven't created any collections, click the create a new collection button to get started`
     }
 
     appendCollections()
@@ -228,6 +270,7 @@ let state = {
 }
 
 // Render state function whenever popstate is fired
+let tokenStatus;
 let config;
 function checkTokenStatus(){
     let token = localStorage.FBIdToken;
@@ -237,10 +280,12 @@ function checkTokenStatus(){
         console.log(Date.now())
         if(decodedToken.exp * 1000 < Date.now()){ //if TOKEN is expired
             console.log("token has expired")
+            tokenStatus = "expired";
 
             // TODO: Session expired modal to initiate logout
             // sessionExpiredModal.classList.remove("hide");
         } else {
+            tokenStatus = "active"
             config = {
                 headers: { Authorization: `${token}` }
             };
@@ -996,7 +1041,11 @@ console.log(config)
 function appendCollections(){
 
     let allCollectionItems = document.querySelectorAll(".collection-item");
-    allCollectionItems[0].setAttribute("data-selected", "true");
+
+    // check to see if collection list is populated
+    if (!(!Array.isArray(allCollectionItems) || !allCollectionItems.length)) {
+        allCollectionItems[0].setAttribute("data-selected", "true");
+    }
     
     allCollectionItems.forEach((collection) => {
 
