@@ -48,16 +48,24 @@ const closeBtn = document.querySelectorAll(".close");
 
 
 const homeSearchPage = document.querySelector(".home-search-page");
+const mainSearchInputDiv = document.querySelector(".main-search-input-div");
 const mainSearchInput = document.querySelector(".main-search-input");
 const mainSearchError = document.querySelector(".main-search-error");
 const searchChoicesDiv = document.querySelector(".search-choices");
 const languageChoice = document.querySelectorAll(".language-choice");
 const tweetTypeChoice = document.querySelectorAll(".tweet-type-choice");
 const mainSearchButton = document.querySelector(".main-search-button");
-const mainSearchInputDiv = document.querySelector(".main-search-input-div");
 
 const searchResults = document.querySelector(".search-results");
 const tweetResultsDiv = document.querySelector(".tweet-results-div");
+
+
+const timelineSearchPage = document.querySelector(".timeline-search-page");
+const timelineSearchInputDiv = document.querySelector(".timeline-search-input-div");
+const timelineSearchInput = document.querySelector(".timeline-search-input");
+const timelineSearchError = document.querySelector(".timeline-search-error");
+const timelineSearchButton = document.querySelector(".timeline-search-button");
+
 
 const collectionPage = document.querySelector(".collections-page");
 const collectionPageHeader = document.querySelector(".collections-page-header");
@@ -646,19 +654,62 @@ function mainSearch(){
 }
 
 
+
+function timelineSearch(){
+    timelineSearchButton.append(loader);
+    loader.classList.remove("hide");
+
+    let userName = timelineSearchInput.value;
+
+    if (userName.trim() === "") {
+        loader.classList.add("hide");
+        timelineSearchError.innerHTML = "Please enter a twitter user name"
+        timelineSearchError.classList.add("error");
+    }
+    else if (userName.trim() !== "")
+    axios.post(
+        'http://localhost:5000/explorer-one-44263/us-central1/api/timetravel',
+        {
+            screen_name: userName
+        }
+        )
+        .then(function (response) {
+            loader.classList.add("hide");
+            console.log(response.data.results);
+            let results = response.data.results;
+            homeSearchPage.classList.add("hide");
+
+            searchResults.classList.remove("hide")
+
+            searchResults.insertBefore(timelineSearchInputDiv, searchResults.firstChild);
+
+            tweetResultsDiv.innerHTML = "";
+
+            appendTweets(results);
+            interactWithSearchResults();
+
+        })
+        .catch(function (error) {
+            loader.classList.add("hide");
+            console.log(error.response.data);
+        })
+}
+
+
 function retrieveCollectionTweets(){
     emptyCollection.innerHTML = "";
-    let collectionName = event.currentTarget.innerText
+    let collectionName = event.currentTarget.innerText.trim();
 
     axiosRetrieveTweets(collectionName)
 }
 
 
 function axiosRetrieveTweets(collection){
+    console.log(collection)
     axios.post(
         'http://localhost:5000/explorer-one-44263/us-central1/api/collection',
         {
-            collectionName: collection
+            collectionName: (collection)
         },
         config
         )
@@ -840,7 +891,7 @@ function saveTweetToCollection(){
     let currentTweet = event.currentTarget;
     getTweetId(currentTweet);
     let tweetId = currentTweet.tweetId;
-    let collectionName = event.currentTarget.innerText;
+    let collectionName = event.currentTarget.innerText.trim();
     let collection = event.currentTarget;
     collection.append(loader)
     loader.classList.remove("hide");
@@ -969,6 +1020,7 @@ logoutBtn.addEventListener("click", logout, false);
 
 // Data event listeners
 mainSearchButton.addEventListener("click", mainSearch, false);
+timelineSearchButton.addEventListener("click", timelineSearch, false);
 
 createCollectionCta.addEventListener("click", openCreateCollectionDiv, false);
 createCollectionInputClose.addEventListener("click", closeCreateCollectionDiv, false);
