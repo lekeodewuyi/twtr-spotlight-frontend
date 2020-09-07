@@ -658,6 +658,10 @@ function appendTweets(results){
             } 
         }
 
+        function appendCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
         let tweetFooterDiv = document.createElement("div");
 
         let tweetFooter = document.createElement("div");
@@ -667,8 +671,11 @@ function appendTweets(results){
         tweetMetrics.classList.add("tweet-metrics");
         let tweetRetweets = document.createElement("p");
         tweetRetweets.innerHTML = `${results[i].retweet_count} retweets `;
+        tweetRetweets.innerHTML = appendCommas(tweetRetweets.innerHTML);
+
         let tweetLikes = document.createElement("p");
         tweetLikes.innerHTML = `${results[i].retweet_count} likes `;
+        tweetLikes.innerHTML = appendCommas(tweetLikes.innerHTML);
         tweetMetrics.append(tweetRetweets, tweetLikes);
 
 
