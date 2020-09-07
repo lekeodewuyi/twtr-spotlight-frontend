@@ -32,6 +32,7 @@ body {
 }
 
 a, a:visited {
+    cursor: pointer;
     color: var(--blue-label);
     text-decoration: none;
     transition: 0.2s;

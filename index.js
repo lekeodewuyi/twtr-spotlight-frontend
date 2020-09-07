@@ -14,6 +14,7 @@ const red = "#D6235B";
 
 const loader = document.querySelector(".loader");
 const screenFade = document.querySelector(".screen-fade");
+const modals = document.querySelectorAll(".modal");
 
 //Auth containers
 const userProfilePanel = document.querySelector(".user-profile");
@@ -399,6 +400,7 @@ function closeUserPanel(){
     userAuthDiv.classList.add("hide");
     loginDiv.classList.add("hide");
     signupDiv.classList.add("hide");
+    screenFade.classList.add("hide");
 
     state.user.userAuthDiv.className = userAuthDiv.className;
     state.user.loginDiv = loginDiv.className;
@@ -411,6 +413,7 @@ function openUserPanel(){
     event.preventDefault();
     let token = localStorage.FBIdToken;
     aboutModal.classList.add("hide");
+    screenFade.classList.remove("hide");
     if(token){
         userAuthDiv.style.width = "300px";
         userAuthDiv.style.position = "relative";
@@ -483,6 +486,7 @@ function login(){
         )
         .then(function (response) {
             loader.classList.add("hide");
+            screenFade.classList.add("hide");
             console.log(response.data);
             setAuthorizationHeader(response.data.token);
             updateCurrentUser(response.data.userDetails);
@@ -546,6 +550,7 @@ function signup(){
         )
         .then(function (response) {
             loader.classList.add("hide");
+            screenFade.classList.add("hide");
             console.log(response.data);
             setAuthorizationHeader(response.data.token);
             updateCurrentUser(response.data.userDetails);
@@ -690,14 +695,26 @@ function appendTweets(results){
         saveToCollection.classList.add("save-to-collection");
 
         let saveSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        saveSvg.classList.add("save-to-svg");
         saveSvg.setAttribute("viewBox", "0 0 24 24");
         saveSvg.innerHTML = `<path d="M0 0h24v24H0z" fill="none"></path><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"></path>`
 
         let saveSvgText = document.createElement("p");
+        saveSvgText.classList.add("save-to-text");
         saveSvgText.innerHTML = "Save to collection"
 
         saveToCollection.append(saveSvg, saveSvgText);
 
+        let currentUser = localStorage.currentUser;
+        if (currentUser !== undefined) {
+            let userFavorites = (JSON.parse(currentUser)).favorites
+            if (userFavorites.includes(results[i].id_str)) {
+                saveSvg.style.fill = "green";
+                saveSvg.innerHTML = `<path d="M0 0h24v24H0z" fill="none"/><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/>`
+                saveSvgText.style.color = "green";
+                saveSvgText.innerHTML = "Saved to your collections";
+            }
+        }
 
 
 
@@ -843,7 +860,7 @@ function timelineSearch(){
            // TODO: HANDLE PROTECTED USER ERROR AND 
             console.log(results)
             if (!Array.isArray(results) || !results.length) {
-                tweetResultsDiv.innerHTML = `There are currently no tweets from <span class= color-blue>${userName}</span>`
+                tweetResultsDiv.innerHTML = `There are no results for <span class= color-blue>${userName}</span>. Maybe try the search on the <span class="home-link color-blue">homepage</span>`
             } else
             appendTweets(results);
             interactWithSearchResults();
@@ -857,10 +874,12 @@ function timelineSearch(){
 
             if (Object.keys(errorCode.err).length === 0 && errorCode.err.constructor === Object) {
                 timelineSearchError.innerHTML = `<span class= color-blue>${userName}'s</span> tweets are protected. The account cound be private or suspended.`
+                tweetResultsDiv.innerHTML = `<span class= color-blue>${userName}'s</span> tweets are protected. The account cound be private or suspended.`
             }
             console.log(typeof (errorCode.err[0].code))
             if(errorCode.err[0].code === 34) {
                 timelineSearchError.innerHTML = `Seems like there is no user with this user name, please check and try again.`
+                tweetResultsDiv.innerHTML = `Seems like there is no user with this user name, please check and try again.`
             }
         })
 }
@@ -1024,6 +1043,13 @@ function interactWithSearchResults(){
         })
     })
 
+    let homeLink = document.querySelectorAll(".home-link");
+    homeLink.forEach((btn) => {
+        btn.addEventListener("click", function(){
+            homeItem.click();
+        }, false)
+    })
+
 }
 
 
@@ -1093,7 +1119,17 @@ function saveTweetToCollection(){
             saveToCollectionModal.classList.add("hide");
             screenFade.classList.add("hide");
             console.log(response.data)
-            
+
+            let SaveToColBtns = document.querySelectorAll(".save-to-collection");
+            SaveToColBtns.forEach((btn) => {
+                if(btn.getAttribute("data-tweetId") === tweetId) {
+                    btn.style.color = "green";
+                    btn.childNodes[0].style.fill = "green";
+                    btn.childNodes[0].innerHTML = `<path d="M0 0h24v24H0z" fill="none"/><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/>`;
+                    btn.childNodes[1].innerText = `Saved to ${collectionName}`
+                }
+            })
+
             updateCurrentUser(response.data.userDetails)
             appendUserDetails(response.data.userDetails);
 
@@ -1248,6 +1284,13 @@ screenFade.addEventListener("click", function(){
         saveToCollectionModal.classList.add("hide")
         screenFade.classList.add("hide");
     }
+    modals.forEach((modal) => {
+        if(!(modal.classList.contains("hide"))){
+            modal.classList.add("hide")
+            screenFade.classList.add("hide");
+        }
+    })
+
 }, false)
 closeSaveToCollectionModal.addEventListener("click", function(){
     saveToCollectionModal.classList.add("hide")
