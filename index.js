@@ -16,6 +16,10 @@ const loader = document.querySelector(".loader");
 const screenFade = document.querySelector(".screen-fade");
 const modals = document.querySelectorAll(".modal");
 
+const mediaModal = document.querySelector(".media-modal");
+const media = document.querySelector(".media");
+const closeMediaModa = document.querySelector(".media-modal-close");
+
 const headerText = document.querySelector(".header-text");
 
 //Auth containers
@@ -967,12 +971,16 @@ function axiosRetrieveTweets(collection){
 function interactWithSearchResults(){
 
      // TODO: add modal popup for clicked images
+    
     let allImages = document.querySelectorAll(".tweet-image img");
 
     allImages.forEach((img) => {
         img.addEventListener("click", function(){
             console.log(img)
-            img.style.objectFit = "contain"
+            // img.style.objectFit = "contain"
+            mediaModal.classList.remove("hide");
+            screenFade.classList.remove("hide");
+            media.innerHTML = img.outerHTML;
         }, false)
     })
 
@@ -1318,6 +1326,11 @@ screenFade.addEventListener("click", function(){
 closeSaveToCollectionModal.addEventListener("click", function(){
     saveToCollectionModal.classList.add("hide")
         screenFade.classList.add("hide");
+}, false)
+
+closeMediaModa.addEventListener("click", function(){
+    mediaModal.classList.add("hide")
+    screenFade.classList.add("hide");
 }, false)
 
 

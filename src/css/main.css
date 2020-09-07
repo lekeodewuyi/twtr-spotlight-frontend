@@ -150,18 +150,28 @@ button:hover, button:active {
     position: absolute;
     left: 0; 
     right: 0; 
-    width: 500px;
-    height: 500px;
+    /* width: 500px;
+    height: 500px; */
     top: 0px;
     bottom: 0;
     margin: auto;
     box-shadow: rgba(4, 74, 111, 0.8) 0px 0px 20px -5px;
 }
 
+.media-modal {
+    padding-top: 100px;
+    overflow: auto;
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    box-shadow: rgba(4, 74, 111, 0) 0px 0px 20px -5px;
+}
+
 .screen-fade {
     position: absolute;
     z-index: 18;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     background-color: var(--bg);
     opacity: 0.9;
