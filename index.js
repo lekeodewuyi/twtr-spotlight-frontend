@@ -1287,6 +1287,9 @@ logoutBtn.addEventListener("click", logout, false);
 
 // Data event listeners
 mainSearchButton.addEventListener("click", mainSearch, false);
+mainSearchInput.addEventListener("keydown", function(){
+    mainSearchError.innerHTML = "";
+}, false)
 timelineSearchButton.addEventListener("click", timelineSearch, false);
 timelineSearchInput.addEventListener("keydown", function(){
     timelineSearchError.innerHTML = "";
