@@ -298,7 +298,7 @@ header {
 }
 
 .user-auth-div-modal {
-    position: flex;
+    display: flex;
     justify-content: center;
     left: 0;
     right: 0px;

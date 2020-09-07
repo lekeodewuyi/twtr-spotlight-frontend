@@ -704,9 +704,11 @@ function appendTweets(results){
 
 
 
-        let replyingTo = document.createElement("p");
-        replyingTo.classList.add("replying-to");
-        replyingTo.innerHTML = `Replying to ${results[i].in_reply_to_screen_name}`
+        // TODO: create modal for tweet being replied to
+        // let replyingTo = document.createElement("p");
+        // replyingTo.classList.add("replying-to");
+        // replyingTo.innerHTML = `Replying to ${results[i].in_reply_to_screen_name}`;
+        // replyingTo.setAttribute("data-tweetid", `${results[i].id_str}`);
 
 
         tweetFooter.append(tweetMetrics, saveToCollection, removeFromCollection);
