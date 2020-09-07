@@ -208,7 +208,7 @@ header {
     height: 100%;
     width: 300px;
     min-width: 300px;
-    margin: 0px 20px 0px 50px;
+    margin: 50px 20px 0px 50px;
     font-weight: 700;
 }
 
@@ -542,6 +542,7 @@ header {
 }
 
 .timeline-search-page, .collections-page {
+    margin-top: 50px;
     /* display: flex; */
     flex-direction: column;
     align-items: center;
@@ -559,6 +560,7 @@ header {
 }
 
 .collections-page {
+    flex-direction: column;
     height: auto;
     width: 740px;
     justify-content: flex-start;
@@ -776,13 +778,6 @@ header {
 
 .replying-to:hover {
     color: var(--blue-hover);
-}
-
-
-
-.collections-page {
-    /* display: flex; */
-    flex-direction: column;
 }
 
 .collections-page-header {
