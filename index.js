@@ -348,6 +348,8 @@ function render(){
     if (token) {
         console.log("I got here")
         userAuthDiv.style.width = "300px";
+        userAuthDiv.style.position = "relative";
+        userAuthDiv.style.height = "100%"
         loginDiv.classList.add("hide");
         signupDiv.classList.add("hide");
         logoutDiv.classList.remove("hide");
@@ -356,6 +358,7 @@ function render(){
         signupDiv.className = state.user.signupDiv;
         logoutDiv.className = state.user.logoutDiv;
     }
+
     userAuthDiv.style.width = state.user.userAuthDiv.width;
     userAuthDiv.className = state.user.userAuthDiv.className;
 
@@ -410,6 +413,8 @@ function openUserPanel(){
     aboutModal.classList.add("hide");
     if(token){
         userAuthDiv.style.width = "300px";
+        userAuthDiv.style.position = "relative";
+        userAuthDiv.style.height = "100%"
         userAuthDiv.classList.remove("hide");
         logoutDiv.classList.remove("hide");
     } else {
