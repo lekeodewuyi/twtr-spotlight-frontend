@@ -720,9 +720,9 @@ function appendTweets(results){
 
         tweetFooter.append(tweetMetrics, saveToCollection, removeFromCollection);
         tweetFooterDiv.append(tweetFooter);
-        if (results[i].in_reply_to_status_id_str !== null) {
-            tweetFooterDiv.append(replyingTo);
-        }
+        // if (results[i].in_reply_to_status_id_str !== null) {
+        //     tweetFooterDiv.append(replyingTo);
+        // }
         tweetBody.append(tweetNameDiv, tweetText, tweetImageDiv, tweetFooterDiv);
         tweetResult.append(tweetUserImageDiv,tweetBody)
 
