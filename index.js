@@ -91,6 +91,8 @@ const emptyCollection = document.querySelector(".empty-collection");
 
 //Save to collection
 const saveToCollectionModal = document.querySelector(".save-to-collection-prompt");
+const closeSaveToCollectionModal = document.querySelector(".save-to-collection-close");
+
 const saveToCollectionItemDiv = document.querySelector(".save-to-collection-item-div");
 
 //remove from collection
@@ -939,6 +941,7 @@ function interactWithSearchResults(){
     tweetBtn.forEach((tweet) => {
         tweet.addEventListener("click", function(){
             saveToCollectionModal.classList.remove("hide");
+            screenFade.classList.remove("hide");
 
             let currentTweet = event.currentTarget;
             getTweetId(currentTweet);
@@ -1075,6 +1078,7 @@ function saveTweetToCollection(){
             //TODO success function
             loader.classList.add("hide");
             saveToCollectionModal.classList.add("hide");
+            screenFade.classList.add("hide");
             console.log(response.data)
             
             updateCurrentUser(response.data.userDetails)
@@ -1218,11 +1222,23 @@ createCollectionInput.addEventListener("keyup", function(){
 }, false)
 
 
+
+
+
+// Close modals
 closeSessionExpiredModal.addEventListener("click", logout, false);
 screenFade.addEventListener("click", function(){
     if (!(sessionExpiredModal.classList.contains("hide"))) {
         logout();
     }
+    if (!(saveToCollectionModal.classList.contains("hide"))) {
+        saveToCollectionModal.classList.add("hide")
+        screenFade.classList.add("hide");
+    }
+}, false)
+closeSaveToCollectionModal.addEventListener("click", function(){
+    saveToCollectionModal.classList.add("hide")
+        screenFade.classList.add("hide");
 }, false)
 
 
