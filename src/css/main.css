@@ -448,7 +448,7 @@ header {
     flex-direction: column;
     align-items: center;
 
-    /* height: Calc(100vh - 50px); */
+    height: Calc(100vh - 50px);
     overflow: scroll;
 }
 
@@ -486,7 +486,7 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 65px;
 }
 
 .language-choices, .tweet-type-choices {
@@ -533,7 +533,7 @@ header {
 }
 
 .timeline-search-page, .collections-page {
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -772,7 +772,7 @@ header {
 
 
 .collections-page {
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
 }
 
