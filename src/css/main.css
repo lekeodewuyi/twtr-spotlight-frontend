@@ -287,14 +287,26 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     border-radius: 15px;
     background-color: var(--grey-inputbg);
-    width:500px;
-    transform: translate(-20px, -100px);
+    background-color: var(--bg);
+    width:650px;
+    height: 700px;
+    /* transform: translate(-20px, -100px); */
     padding: 50px 15px;
     cursor: default;
     box-shadow: rgba(4, 74, 111, 0.4) 0px 0px 20px -5px;
-    margin-left: 20px;
+    /* margin-left: 20px; */
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    margin: auto;
+}
+
+.user-auth-div input::placeholder {
+    font-size: 0.9rem;
 }
 
 .user-auth-div-modal {
@@ -305,10 +317,10 @@ header {
     bottom: 0px;
     top: 0px;
     width: 600px;
-    height: 550px;height: 700px;
+    height: 550px;
+    height: 700px;
 
     margin: auto;
-
     box-shadow: rgba(4, 74, 111, 0.8) 0px 0px 20px -5px;
 
 }
@@ -325,17 +337,21 @@ header {
 }
 
 .user-auth-div label {
+    pointer-events: none;
     color: var(--grey-font);
     font-size: 0.8rem;
     font-weight: 400;
     align-self: flex-start;
-    transform: translate(47px, -85px);
+    transform: translate(77px, -85px);
     transition: .3s cubic-bezier(0, 1.8, 1, 1.8);
+    opacity: 0;
 }
 
-.user-auth-div input:focus + label {
-    transform: translate(63px, -65px);
+
+.user-auth-div input:not(:placeholder-shown) + label {
     color: var(--blue-label);
+    transform: translate(76px, -65px);
+    opacity: 1;
 }
 
 .user-auth-div input {
@@ -351,13 +367,14 @@ header {
     border-bottom: 1.5px solid transparent;
 }
 
-.user-auth-div input:hover {
+.user-auth-div input:hover, .user-auth-div input:focus {
     background-color: var(--bg);
     box-shadow: rgba(4, 74, 111, 1) 0px 0px 20px -5px;
 }
-.user-auth-div input:focus {
+
+.user-auth-div input:not(:placeholder-shown) {
     padding-bottom: 15px;
-    padding-top: 35px;
+    padding-top: 40px;
     border-bottom: 1.5px solid var(--blue);
     background-color: var(--bg);
 }
@@ -437,8 +454,9 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: Calc(100vh - 300px);
+    /* justify-content: center; */
+    /* height: Calc(100vh - 300px); */
+    margin-top: 200px;
 }
 
 .home-logo {
@@ -512,14 +530,21 @@ header {
     margin-top: 30px;
 }
 
-
-
 .timeline-search-page, .collections-page {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
+}
+
+.timeline-search-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    /* height: 100vh; */
+    margin-top: 200px;
 }
 
 .collections-page {
