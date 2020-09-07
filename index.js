@@ -110,23 +110,41 @@ const timelineItem = document.querySelector(".time-travel");
 const collectionItem = document.querySelector(".collections");
 const aboutItem = document.querySelector(".about");
 
+const spotlightNav = document.querySelector(".spotlight-container");
+const homeSpotlight = document.querySelector(".home-page-spotlight");
+const timelineSpotlight = document.querySelector(".timeline-page-spotlight");
+const collectionSpotlight = document.querySelector(".collections-page-spotlight");
+const aboutSpotlight = document.querySelector(".about-page-spotlight");
+
+
 
 sideNavItems.forEach((item) => {
     item.addEventListener("click", handleSideNav, false);
 })
 
 function handleSideNav(){
-    console.log(event.currentTarget)
+    let currentTab = event.currentTarget;
+    console.log(currentTab)
     sideNavItems.forEach((others) => {
         userAuthDiv.classList.add("hide");
         others.setAttribute("data-selected", "false");
     })
-    if (!(event.currentTarget.classList.contains("user-profile"))) {
-        event.currentTarget.setAttribute("data-selected", "true")
-        if (!(event.currentTarget.classList.contains("about"))) {
-            headerText.innerHTML = event.currentTarget.innerText;
+    if (!(currentTab.classList.contains("user-profile"))) {
+        currentTab.setAttribute("data-selected", "true")
+        if (!(currentTab.classList.contains("about"))) {
+            headerText.innerHTML = currentTab.innerText;
         }
     }
+
+    if (currentTab === homeItem) {
+        spotlightNav.innerHTML = homeSpotlight.innerHTML;
+    } else if (currentTab === timelineItem) {
+        spotlightNav.innerHTML = timelineSpotlight.innerHTML;
+    } else if (currentTab === collectionItem) {
+        spotlightNav.innerHTML = collectionSpotlight.innerHTML;
+    } else {
+        spotlightNav.innerHTML = aboutSpotlight.innerHTML;
+    } 
 }
 
 function goHome(){
