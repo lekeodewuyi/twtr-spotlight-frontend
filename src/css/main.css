@@ -473,7 +473,7 @@ header {
 .main-search-button {
     color: white;
     font-size: 1rem;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
 
 .main-search-button:hover {
@@ -577,7 +577,7 @@ header {
 .timeline-search-button {
     color: white;
     font-size: 1rem;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
 
 .timeline-search-button:hover {
