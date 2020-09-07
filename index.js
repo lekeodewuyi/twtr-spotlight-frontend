@@ -199,7 +199,6 @@ function appendElementsToTimeline(){
     timelineSearchPage.append(timelineSearchButton);
     timelineSearchPage.insertBefore(timelineSearchInputDiv, timelineSearchPage.lastChild);
     timelineSearchPage.insertBefore(timelineSearchError, timelineSearchPage.lastChild);
-    // timelineSearchPage.append(searchChoicesDiv);
 }
 
 

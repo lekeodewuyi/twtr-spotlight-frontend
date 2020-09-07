@@ -466,7 +466,7 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    margin-bottom: 65px;
 }
 
 .language-choices, .tweet-type-choices {
