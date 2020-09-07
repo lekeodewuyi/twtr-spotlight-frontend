@@ -505,7 +505,7 @@ function login(){
 
     else if (valid)
     axios.post(
-        'http://localhost:5000/explorer-one-44263/us-central1/api/login',
+        'https://us-central1-explorer-one-44263.cloudfunctions.net/api/login',
         {
             "email": loginData.email,
             "password": loginData.password,
@@ -567,7 +567,7 @@ function signup(){
 
     else if (valid)
     axios.post(
-        'http://localhost:5000/explorer-one-44263/us-central1/api/signup',
+        'https://us-central1-explorer-one-44263.cloudfunctions.net/api/signup',
         {
             name: signupData.name,
             email: signupData.email,
@@ -814,7 +814,7 @@ function mainSearch(){
     }
     else if (searchData.query.trim() !== "")
     axios.post(
-        'http://localhost:5000/explorer-one-44263/us-central1/api/search',
+        'https://us-central1-explorer-one-44263.cloudfunctions.net/api/search',
         {
             query: searchData.query,
             result_type: searchData.result_type,
@@ -868,7 +868,7 @@ function timelineSearch(){
     }
     else if (userName.trim() !== "")
     axios.post(
-        'http://localhost:5000/explorer-one-44263/us-central1/api/timetravel',
+        'https://us-central1-explorer-one-44263.cloudfunctions.net/api/timetravel',
         {
             screen_name: userName
         }
@@ -923,7 +923,7 @@ function retrieveCollectionTweets(){
 function axiosRetrieveTweets(collection){
     console.log(collection)
     axios.post(
-        'http://localhost:5000/explorer-one-44263/us-central1/api/collection',
+        'https://us-central1-explorer-one-44263.cloudfunctions.net/api/collection',
         {
             collectionName: (collection)
         },
@@ -1099,7 +1099,7 @@ function deleteTweetFromCollection(){
 
 
     axios.post(
-        `http://localhost:5000/explorer-one-44263/us-central1/api/deletefavorite/${tweetId}`,
+        `https://us-central1-explorer-one-44263.cloudfunctions.net/api/deletefavorite/${tweetId}`,
         {
             collectionName: collectionName
         },
@@ -1138,7 +1138,7 @@ function saveTweetToCollection(){
     console.log(collection)
 
     axios.post(
-        `http://localhost:5000/explorer-one-44263/us-central1/api/addfavorite/${tweetId}`,
+        `https://us-central1-explorer-one-44263.cloudfunctions.net/api/addfavorite/${tweetId}`,
         {
             collectionName: collectionName
         },
@@ -1243,7 +1243,7 @@ function createNewCollection(){
     }
 
     axios.post(
-        'http://localhost:5000/explorer-one-44263/us-central1/api/collection/create',
+        'https://us-central1-explorer-one-44263.cloudfunctions.net/api/collection/create',
         {
             collectionName: createCollectionInput.value
         },
