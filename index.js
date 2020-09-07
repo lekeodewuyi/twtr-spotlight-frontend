@@ -1266,7 +1266,7 @@ function urlify(text) {
     //   return '<a href="' + url + '">' + url + '</a>';
     // })
     // or alternatively
-    return text.replace(urlRegex, '<a href="$1">$1</a>')
+    return text.replace(urlRegex, '<a target="_blank" href="$1">$1</a>')
   }
 
 
