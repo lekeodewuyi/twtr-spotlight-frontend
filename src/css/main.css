@@ -38,8 +38,18 @@ a, a:visited {
     border-bottom: 1px solid transparent;
 }
 
-a:hover {
+a:hover, a:active {
     color: var(--blue-hover);
+    border-bottom: 1px solid var(--blue-hover);
+}
+
+.mention {
+    cursor: pointer;
+    color: var(--blue-label);
+    border-bottom: 1px solid transparent;
+}
+
+.mention:hover, .mention:active {
     border-bottom: 1px solid var(--blue-hover);
 }
 
@@ -145,6 +155,28 @@ button:hover, button:active {
     bottom: 0;
     margin: auto;
     box-shadow: rgba(4, 74, 111, 0.8) 0px 0px 20px -5px;
+}
+
+.screen-fade {
+    position: absolute;
+    z-index: 18;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg);
+    opacity: 0.9;
+}
+
+.session-over-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+    width: 500px;
+    padding: 15px;
+    border-radius: 15px;
+    background-color: var(--grey-floating-panel-hover);
+
 }
 
 header {
