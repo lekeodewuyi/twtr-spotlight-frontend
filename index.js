@@ -13,6 +13,7 @@ const red = "#D6235B";
 
 
 const loader = document.querySelector(".loader");
+const screenFade = document.querySelector(".screen-fade");
 
 //Auth containers
 const userProfilePanel = document.querySelector(".user-profile");
@@ -21,7 +22,10 @@ const userProfileLabel = document.querySelector(".user-profile-label");
 const userAuthDiv = document.querySelector(".user-auth-div");
 
 const aboutModal = document.querySelector(".about-modal");
-const aboutModalClose = document.querySelector(".about-modal-closeab");
+const aboutModalClose = document.querySelector(".about-modal-close");
+
+const sessionExpiredModal = document.querySelector(".session-over-modal");
+const closeSessionExpiredModal = document.querySelector(".session-over-modal-close");
 
 
 const loginDiv = document.querySelector(".login-div");
@@ -302,7 +306,8 @@ function checkTokenStatus(){
             tokenStatus = "expired";
 
             // TODO: Session expired modal to initiate logout
-            // sessionExpiredModal.classList.remove("hide");
+            sessionExpiredModal.classList.remove("hide");
+            screenFade.classList.remove("hide");
         } else {
             tokenStatus = "active"
             config = {
@@ -325,7 +330,8 @@ function render(){
             console.log("token has expired")
 
             // TODO: Session expired modal to initiate logout
-            // sessionExpiredModal.classList.remove("hide");
+            sessionExpiredModal.classList.remove("hide");
+            screenFade.classList.remove("hide");
         } else {
             config = {
                 headers: { Authorization: `${token}` }
@@ -477,6 +483,8 @@ function login(){
             appendUserDetails(response.data.userDetails);
             userAuthDiv.classList.add("hide");
             loginDiv.classList.add("hide");
+
+            interactWithSearchResults();
         })
         .catch(function (error) {
             loader.classList.add("hide");
@@ -538,6 +546,13 @@ function signup(){
             appendUserDetails(response.data.userDetails);
             userAuthDiv.classList.add("hide");
             signupDiv.classList.add("hide");
+
+            signupName.value = "";
+            signupEmail.value = "";
+            signupPassword.value = "";
+            signupConfirmPassword.value = "";
+
+            interactWithSearchResults();
         })
         .catch(function (error) {
             loader.classList.add("hide");
@@ -584,11 +599,11 @@ function appendTweets(results){
             tweetVerified.classList.add("hide");
         }
         let tweetUserName = document.createElement("p");
-        tweetUserName.classList.add("tweet-username", "tw-name-item")
-        tweetUserName.innerHTML = `${results[i].user.screen_name} &middot; `;
+        tweetUserName.classList.add("tweet-username", "tw-name-item", "mention")
+        tweetUserName.innerHTML = `${results[i].user.screen_name}`;
         let tweetTime = document.createElement("p");
         tweetTime.classList.add("tweet-time", "tw-name-item");
-        tweetTime.innerHTML = dayjs(results[i].created_at).format('MMM DD YYYY - (h:mm a)');
+        tweetTime.innerHTML = ` &middot; ${dayjs(results[i].created_at).format('MMM DD YYYY - (h:mm a)')}`;
         tweetNameDiv.append(tweetName, tweetVerified, tweetUserName, tweetTime)
 
 
@@ -597,9 +612,11 @@ function appendTweets(results){
         if (typeof results[i].retweeted_status === "object") {
             tweetText.innerHTML = results[i].retweeted_status.full_text;
             tweetText.innerHTML = urlify(tweetText.innerHTML)
+            tweetText.innerHTML = atlify(tweetText.innerHTML)
         } else {
             tweetText.innerHTML = results[i].full_text;
             tweetText.innerHTML = urlify(tweetText.innerHTML)
+            tweetText.innerHTML = atlify(tweetText.innerHTML)
         }
 
 
@@ -804,18 +821,32 @@ function timelineSearch(){
             timelineSearchPage.classList.add("hide");
 
             searchResults.classList.remove("hide")
-
             searchResults.insertBefore(timelineSearchInputDiv, searchResults.firstChild);
 
             tweetResultsDiv.innerHTML = "";
 
+           // TODO: HANDLE PROTECTED USER ERROR AND 
+            console.log(results)
+            if (!Array.isArray(results) || !results.length) {
+                tweetResultsDiv.innerHTML = `There are currently no tweets from <span class= color-blue>${userName}</span>`
+            } else
             appendTweets(results);
             interactWithSearchResults();
 
         })
         .catch(function (error) {
+            timelineSearchError.classList.add("error");
             loader.classList.add("hide");
             console.log(error.response.data);
+            let errorCode = error.response.data;
+
+            if (Object.keys(errorCode.err).length === 0 && errorCode.err.constructor === Object) {
+                timelineSearchError.innerHTML = `<span class= color-blue>${userName}'s</span> tweets are protected. The account cound be private or suspended.`
+            }
+            console.log(typeof (errorCode.err[0].code))
+            if(errorCode.err[0].code === 34) {
+                timelineSearchError.innerHTML = `Seems like there is no user with this user name, please check and try again.`
+            }
         })
 }
 
@@ -963,7 +994,19 @@ function interactWithSearchResults(){
     deleteTweetBtn.addEventListener("click", deleteTweetFromCollection, false);
 
 
+    let mentions = document.querySelectorAll(".mention");
 
+    mentions.forEach((mention) => {
+        mention.addEventListener("click", function(){
+            // timelineSearchPage.innerHTML = searchResults.innerHTML; 
+            timelineSearchPage.classList.add("hide")
+            timelineItem.click();
+            timelineSearchInput.value = mention.innerHTML;
+            timelineSearchButton.click();
+            setTimeout(timelineSearchPage.classList.remove("hide"), 50000)
+            console.log(mention.innerHTML)
+        })
+    })
 
 }
 
@@ -1161,6 +1204,9 @@ logoutBtn.addEventListener("click", logout, false);
 // Data event listeners
 mainSearchButton.addEventListener("click", mainSearch, false);
 timelineSearchButton.addEventListener("click", timelineSearch, false);
+timelineSearchInput.addEventListener("keydown", function(){
+    timelineSearchError.innerHTML = "";
+}, false)
 
 createCollectionCta.addEventListener("click", openCreateCollectionDiv, false);
 createCollectionInputClose.addEventListener("click", closeCreateCollectionDiv, false);
@@ -1170,6 +1216,24 @@ createCollectionInput.addEventListener("keyup", function(){
         createCollectionError.innerHTML = "";
     }
 }, false)
+
+
+closeSessionExpiredModal.addEventListener("click", logout, false);
+screenFade.addEventListener("click", function(){
+    if (!(sessionExpiredModal.classList.contains("hide"))) {
+        logout();
+    }
+}, false)
+
+
+
+window.onpopstate = function (event) {
+    if (event.state) { state = event.state; }
+    render(state);
+};
+
+
+
 
 
 function urlify(text) {
@@ -1182,8 +1246,32 @@ function urlify(text) {
   }
 
 
+let headerText = document.querySelector(".header-text");
 
-window.onpopstate = function (event) {
-    if (event.state) { state = event.state; }
-    render(state);
-  };
+function atlify(text) {
+    let atRegex = /(@[^\s]+)/g;
+    return text.replace(atRegex, '<span class="mention">$1</span>')
+}
+
+let normal = "@elonmusk is the new @international forever"
+normal = atlify(normal);
+headerText.innerHTML = normal;
+
+// searchResults.innerHTML = atlify(searchResults.innerHTML);
+
+
+
+
+// let mentions = document.querySelectorAll(".mention");
+
+// mentions.forEach((mention) => {
+//     mention.addEventListener("click", function(){
+//         // timelineSearchPage.innerHTML = searchResults.innerHTML; 
+//         timelineSearchPage.classList.add("hide")
+//         timelineItem.click();
+//         timelineSearchInput.value = mention.innerHTML;
+//         timelineSearchButton.click();
+//         setTimeout(timelineSearchPage.classList.remove("hide"), 50000)
+//         console.log(mention.innerHTML)
+//     })
+// })
