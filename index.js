@@ -16,6 +16,8 @@ const loader = document.querySelector(".loader");
 const screenFade = document.querySelector(".screen-fade");
 const modals = document.querySelectorAll(".modal");
 
+const headerText = document.querySelector(".header-text");
+
 //Auth containers
 const userProfilePanel = document.querySelector(".user-profile");
 const userProfileLabel = document.querySelector(".user-profile-label");
@@ -121,6 +123,9 @@ function handleSideNav(){
     })
     if (!(event.currentTarget.classList.contains("user-profile"))) {
         event.currentTarget.setAttribute("data-selected", "true")
+        if (!(event.currentTarget.classList.contains("about"))) {
+            headerText.innerHTML = event.currentTarget.innerText;
+        }
     }
 }
 
@@ -1318,16 +1323,12 @@ function urlify(text) {
   }
 
 
-let headerText = document.querySelector(".header-text");
+
 
 function atlify(text) {
     let atRegex = /(@[^\s]+)/g;
     return text.replace(atRegex, '<span class="mention">$1</span>')
 }
-
-let normal = "@elonmusk is the new @international forever"
-normal = atlify(normal);
-headerText.innerHTML = normal;
 
 // searchResults.innerHTML = atlify(searchResults.innerHTML);
 

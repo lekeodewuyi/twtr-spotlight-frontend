@@ -184,6 +184,14 @@ header {
     height: 50px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--grey-inputbg);
+}
+
+.header-text {
+    font-weight: 700;
+    transform: translateX(-140px);
 }
 
 .main-container {
