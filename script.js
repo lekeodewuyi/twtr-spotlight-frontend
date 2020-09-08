@@ -268,6 +268,9 @@ let state = {
     },
     screenFade: {
         class: screenFade.className
+    },
+    media: {
+        class: mediaModal.className
     }
 
 }
@@ -340,6 +343,9 @@ function render(){
     tweetResultsDiv.innerHTML = state.search.tweetsDiv;
     mainSearchInput.value = state.search.keyword.home;
     timelineSearchInput.value = state.search.keyword.timeline;
+
+
+    mediaModal.className = state.media.class;
 
 
 
@@ -1167,7 +1173,12 @@ function interactWithSearchResults(){
             // img.style.objectFit = "contain"
             mediaModal.classList.remove("hide");
             screenFade.classList.remove("hide");
-            media.innerHTML = img.outerHTML;
+            // media.innerHTML = img.outerHTML;
+            console.log(img.src);
+            mediaModal.style.backgroundImage = `url(${img.src})`;
+
+            state.media.class = mediaModal.className;
+            window.history.pushState(state, null, "");
         }, false)
     })
 
