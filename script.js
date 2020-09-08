@@ -259,6 +259,9 @@ let state = {
     },
     tweets: {
 
+    },
+    screenFade: {
+        class: screenFade.className
     }
 
 }
@@ -308,6 +311,8 @@ function render(){
         signupDiv.className = state.user.signupDiv.class;
         logoutDiv.className = state.user.logoutDiv.class;
     }
+
+    screenFade.className = state.screenFade.class;
 
     userAuthDiv.className = state.user.authDiv.class;
 
@@ -384,6 +389,7 @@ function handleSideNav(){
 
     state.header = headerText.innerHTML;
     state.page = current_page;
+    state.screenFade.class = screenFade.className;
 
     state.user.authDiv.class = userAuthDiv.className;
     state.user.loginDiv.class = loginDiv.className;
@@ -511,6 +517,7 @@ function closeUserPanel(){
         collectionItem.setAttribute("data-selected", "true")
     }
 
+    state.screenFade.class = screenFade.className;
     state.user.authDiv.class = userAuthDiv.className;
     state.user.loginDiv.class = loginDiv.className;
     window.history.pushState(state, null, "");
@@ -609,7 +616,7 @@ function login(){
             interactWithSearchResults();
 
 
-
+            state.screenFade.class = screenFade.className;
             state.user.authDiv.class = userAuthDiv.className;
             state.user.loginDiv.class = loginDiv.className;
             window.history.pushState(state, null, "");
@@ -684,7 +691,7 @@ function signup(){
             interactWithSearchResults();
 
 
-
+            state.screenFade.class = screenFade.className;
             state.user.authDiv.class = userAuthDiv.className;
             state.user.signupDiv.class = signupDiv.className;
             window.history.pushState(state, null, "");
@@ -1257,6 +1264,11 @@ function saveTweetToCollection(){
 
             interactWithSearchResults();
 
+
+
+        state.screenFade.class = screenFade.className;
+        window.history.pushState(state, null, "");
+
         })
         .catch(function (error) {
             loader.classList.add("hide");
@@ -1397,8 +1409,6 @@ createCollectionInput.addEventListener("keyup", function(){
 
 
 
-
-
 // Close modals
 closeSessionExpiredModal.addEventListener("click", logout, false);
 screenFade.addEventListener("click", function(){
@@ -1431,11 +1441,13 @@ screenFade.addEventListener("click", function(){
 closeSaveToCollectionModal.addEventListener("click", function(){
     saveToCollectionModal.classList.add("hide")
         screenFade.classList.add("hide");
+
 }, false)
 
 closeMediaModa.addEventListener("click", function(){
     mediaModal.classList.add("hide")
     screenFade.classList.add("hide");
+
 }, false)
 
 aboutModalClose.addEventListener("click", function(){
@@ -1456,6 +1468,7 @@ aboutModalClose.addEventListener("click", function(){
         console.log("collection")
         collectionItem.setAttribute("data-selected", "true")
     }
+
 }, false)
 
 
