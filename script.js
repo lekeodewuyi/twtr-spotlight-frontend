@@ -1469,7 +1469,9 @@ aboutModalClose.addEventListener("click", function(){
         collectionItem.setAttribute("data-selected", "true")
     }
 
-}, false)
+    state.about.class = aboutModal.className;
+
+}, true)
 
 
 
