@@ -220,6 +220,7 @@ const appendUserDetails = (user) => {
 // Initial State
 let state = {
     page: "",
+    header: "Home",
     home: {
         class: homeSearchPage.className
     },
@@ -309,6 +310,7 @@ function render(){
     aboutModal.className = state.about.class;
 
     spotlightNav.innerHTML = state.spotlight.innertext;
+    headerText.innerHTML = state.header
     console.log(current_page)
 
 
@@ -345,19 +347,24 @@ function handleSideNav(){
     if (currentTab === homeItem) {
         goHome();
         spotlightNav.innerHTML = homeSpotlight.innerHTML;
+        headerText.innerHTML = homeItem.innerText;
     } else if (currentTab === timelineItem) {
         timeTravel();
         spotlightNav.innerHTML = timelineSpotlight.innerHTML;
+        headerText.innerHTML = timelineItem.innerText;
     } else if (currentTab === collectionItem) {
         goToCollections();
         spotlightNav.innerHTML = collectionSpotlight.innerHTML;
+        headerText.innerHTML = collectionItem.innerText;
     } else if (currentTab === aboutItem) {
         spotlightNav.innerHTML = aboutSpotlight.innerHTML;
         getAbout();
+        // headerText.innerHTML =aboutItem.innerText;
     } else if (currentTab === userProfilePanel) {
         openUserPanel();
     }
 
+    state.header = headerText.innerHTML;
 
     state.user.authDiv.class = userAuthDiv.className;
     state.user.loginDiv.class = loginDiv.className;
