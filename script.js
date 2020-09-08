@@ -500,6 +500,17 @@ function closeUserPanel(){
     signupDiv.classList.add("hide");
     screenFade.classList.add("hide");
 
+    if (current_page === "home") {
+        console.log("home")
+        homeItem.setAttribute("data-selected", "true")
+    } else if (current_page === "timeline") {
+        console.log("timeline")
+        timelineItem.setAttribute("data-selected", "true")
+    } else if (current_page === "collections") {
+        console.log("collection")
+        collectionItem.setAttribute("data-selected", "true")
+    }
+
     state.user.authDiv.class = userAuthDiv.className;
     state.user.loginDiv.class = loginDiv.className;
     window.history.pushState(state, null, "");
@@ -1405,8 +1416,6 @@ screenFade.addEventListener("click", function(){
         }
     })
 
-    console.log(current_page)
-
     if (current_page === "home") {
         console.log("home")
         homeItem.setAttribute("data-selected", true)
@@ -1430,6 +1439,8 @@ closeMediaModa.addEventListener("click", function(){
 }, false)
 
 aboutModalClose.addEventListener("click", function(){
+    console.log("yayayayayayay");
+    console.log(current_page)
 
     aboutModal.classList.add("hide")
     screenFade.classList.add("hide");
@@ -1441,7 +1452,7 @@ aboutModalClose.addEventListener("click", function(){
     } else if (current_page === "timeline") {
         console.log("timeline")
         timelineItem.setAttribute("data-selected", "true")
-    } else if (current_page === "collection") {
+    } else if (current_page === "collections") {
         console.log("collection")
         collectionItem.setAttribute("data-selected", "true")
     }
