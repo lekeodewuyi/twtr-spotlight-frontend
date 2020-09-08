@@ -62,7 +62,7 @@ const signupHere = document.querySelector(".signup-here")
 
 const logoutDiv = document.querySelector(".logout-div");
 const logoutBtn = document.querySelector(".logout-btn");
-const closeBtn = document.querySelectorAll(".close");
+const closeBtn = document.querySelectorAll(".auth-close");
 
 
 const homeSearchPage = document.querySelector(".home-search-page");
@@ -266,6 +266,9 @@ let state = {
         }
 
     },
+    savetocol: {
+        class: saveToCollectionModal.className
+    },
     screenFade: {
         class: screenFade.className
     },
@@ -348,6 +351,8 @@ function render(){
 
     mediaModal.className = state.media.class;
     mediaModal.style.backgroundImage = state.media.bg_img;
+
+    saveToCollectionModal.className = state.savetocol.class;
 
 
 
@@ -1221,6 +1226,8 @@ function interactWithSearchResults(){
                 collection.setAttribute("data-tweetId", tweetId);
             })
 
+            state.savetocol.class = saveToCollectionModal.className;
+            window.history.pushState(state, null, "");
         }, false)
     })
 
@@ -1372,7 +1379,7 @@ function saveTweetToCollection(){
             interactWithSearchResults();
 
 
-
+        state.savetocol.class = saveToCollectionModal.className;
         state.screenFade.class = screenFade.className;
         window.history.pushState(state, null, "");
 
@@ -1544,13 +1551,17 @@ screenFade.addEventListener("click", function(){
     }
     
     // state.media.bg_img = `url(${img.src})`;
-    // state.screenFade.class = screenFade.className;
+    state.screenFade.class = screenFade.className;
     // state.media.class = mediaModal.className;
     window.history.back();
 }, false)
 closeSaveToCollectionModal.addEventListener("click", function(){
     saveToCollectionModal.classList.add("hide")
         screenFade.classList.add("hide");
+
+        state.savetocol.class = saveToCollectionModal.className;
+        window.back();
+        // window.history.pushState(state, null, "");
 
 }, false)
 
