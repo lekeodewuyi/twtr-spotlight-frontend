@@ -257,7 +257,13 @@ let state = {
     spotlight: {
         innertext: homeSpotlight.innerHTML
     },
-    tweets: {
+    search: {
+        searchPage: searchResults.className,
+        tweetsDiv: "",
+        keyword: {
+            home: "",
+            timeline: ""
+        }
 
     },
     screenFade: {
@@ -328,6 +334,12 @@ function render(){
     timelineItem.setAttribute("data-selected", `${state.sidenav.timeline}`);
     collectionItem.setAttribute("data-selected", `${state.sidenav.collection}`);
     aboutItem.setAttribute("data-selected", `${state.sidenav.about}`);
+
+
+    searchResults.className = state.search.searchPage;
+    tweetResultsDiv.innerHTML = state.search.tweetsDiv;
+    mainSearchInput.value = state.search.keyword.home;
+    timelineSearchInput.value = state.search.keyword.timeline;
 
 
     console.log(current_page)
@@ -407,6 +419,8 @@ function handleSideNav(){
     state.sidenav.timeline = timelineItem.getAttribute("data-selected");
     state.sidenav.collection = collectionItem.getAttribute("data-selected");
     state.sidenav.about = aboutItem.getAttribute("data-selected");
+
+    state.search.searchPage = searchResults.className;
 
     window.history.pushState(state, null, "");
 }
@@ -934,6 +948,8 @@ function mainSearch(){
 
             searchResults.classList.remove("hide")
 
+
+            state.search.searchPage = searchResults.className;
             searchResults.insertBefore(searchChoicesDiv, searchResults.firstChild);
             searchResults.insertBefore(mainSearchInputDiv, searchResults.firstChild);
 
@@ -989,6 +1005,11 @@ function timelineSearch(){
             } else
             appendTweets(results);
             interactWithSearchResults();
+
+
+
+            state.search.searchPage = searchResults.className;
+            window.history.pushState(state, null, "");
 
         })
         .catch(function (error) {
@@ -1056,6 +1077,10 @@ function axiosRetrieveTweets(collection){
             }
 
             interactWithSearchResults();
+
+
+            // state.search.searchPage = searchResults.className;
+            // window.history.pushState(state, null, "");
 
 
         })
