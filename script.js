@@ -21,7 +21,7 @@ const modals = document.querySelectorAll(".modal");
 
 const mediaModal = document.querySelector(".media-modal");
 const media = document.querySelector(".media");
-const closeMediaModa = document.querySelector(".media-modal-close");
+const closeMediaModal = document.querySelector(".media-modal-close");
 
 const headerText = document.querySelector(".header-text");
 
@@ -270,7 +270,8 @@ let state = {
         class: screenFade.className
     },
     media: {
-        class: mediaModal.className
+        class: mediaModal.className,
+        bg_img: ""
     }
 
 }
@@ -346,6 +347,7 @@ function render(){
 
 
     mediaModal.className = state.media.class;
+    mediaModal.style.backgroundImage = state.media.bg_img;
 
 
 
@@ -1177,6 +1179,7 @@ function interactWithSearchResults(){
             console.log(img.src);
             mediaModal.style.backgroundImage = `url(${img.src})`;
 
+            state.media.bg_img = `url(${img.src})`;
             state.screenFade.class = screenFade.className;
             state.media.class = mediaModal.className;
             window.history.pushState(state, null, "");
@@ -1536,9 +1539,10 @@ screenFade.addEventListener("click", function(){
         collectionItem.setAttribute("data-selected", true)
     }
     
-    state.screenFade.class = screenFade.className;
-    state.media.class = mediaModal.className;
-    window.history.pushState(state, null, "");
+    // state.media.bg_img = `url(${img.src})`;
+    // state.screenFade.class = screenFade.className;
+    // state.media.class = mediaModal.className;
+    window.history.back();
 }, false)
 closeSaveToCollectionModal.addEventListener("click", function(){
     saveToCollectionModal.classList.add("hide")
@@ -1546,13 +1550,14 @@ closeSaveToCollectionModal.addEventListener("click", function(){
 
 }, false)
 
-closeMediaModa.addEventListener("click", function(){
+closeMediaModal.addEventListener("click", function(){
+    console.log("hey")
+    // event.stopPropagation();
     mediaModal.classList.add("hide")
     screenFade.classList.add("hide");
 
-    state.screenFade.class = screenFade.className;
-    state.media.class = mediaModal.className;
-}, true)
+    window.history.back();
+}, false)
 
 aboutModalClose.addEventListener("click", function(){
     console.log("yayayayayayay");
