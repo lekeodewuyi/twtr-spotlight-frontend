@@ -219,7 +219,7 @@ const appendUserDetails = (user) => {
 
 // Initial State
 let state = {
-    page: "",
+    page: "home",
     header: "Home",
     home: {
         class: homeSearchPage.className
