@@ -1011,7 +1011,7 @@ function timelineSearch(){
             interactWithSearchResults();
 
 
-
+            state.timeline.class = timelineSearchPage.className;
             state.search.searchPage = searchResults.className;
             window.history.pushState(state, null, "");
 
@@ -1196,7 +1196,6 @@ function interactWithSearchResults(){
             timelineItem.click();
             timelineSearchInput.value = mention.innerHTML;
             timelineSearchButton.click();
-            setTimeout(timelineSearchPage.classList.remove("hide"), 50000)
             console.log(mention.innerHTML)
         })
     })
