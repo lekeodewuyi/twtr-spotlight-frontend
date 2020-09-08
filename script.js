@@ -958,6 +958,8 @@ function mainSearch(){
             interactWithSearchResults();
 
 
+            state.search.keyword.home = mainSearchInput.value;
+            state.search.tweetsDiv = tweetResultsDiv.innerHTML;
             state.home.class = homeSearchPage.className;
             state.search.searchPage = searchResults.className;
             window.history.pushState(state, null, "");
@@ -1011,6 +1013,8 @@ function timelineSearch(){
             interactWithSearchResults();
 
 
+            state.search.keyword.timeline = timelineSearchInput.value;
+            state.search.tweetsDiv = tweetResultsDiv.innerHTML;
             state.timeline.class = timelineSearchPage.className;
             state.search.searchPage = searchResults.className;
             window.history.pushState(state, null, "");
@@ -1025,11 +1029,25 @@ function timelineSearch(){
             if (Object.keys(errorCode.err).length === 0 && errorCode.err.constructor === Object) {
                 timelineSearchError.innerHTML = `<span class= color-blue>${userName}'s</span> tweets are protected. The account cound be private or suspended.`
                 tweetResultsDiv.innerHTML = `<span class= color-blue>${userName}'s</span> tweets are protected. The account cound be private or suspended.`
+
+
+                state.search.keyword.timeline = timelineSearchInput.value;
+                state.search.tweetsDiv = tweetResultsDiv.innerHTML;
+                state.timeline.class = timelineSearchPage.className;
+                state.search.searchPage = searchResults.className;
+                window.history.pushState(state, null, "");
             }
             console.log(typeof (errorCode.err[0].code))
             if(errorCode.err[0].code === 34) {
                 timelineSearchError.innerHTML = `Seems like there is no user with this user name, please check and try again.`
                 tweetResultsDiv.innerHTML = `Seems like there is no user with this user name, please check and try again.`
+
+
+                state.search.keyword.timeline = timelineSearchInput.value;
+                state.search.tweetsDiv = tweetResultsDiv.innerHTML;
+                state.timeline.class = timelineSearchPage.className;
+                state.search.searchPage = searchResults.className;
+                window.history.pushState(state, null, "");
             }
         })
 }
@@ -1082,6 +1100,8 @@ function axiosRetrieveTweets(collection){
 
             interactWithSearchResults();
 
+
+            // window.history.pushState(state, null, "");
             // state.home.class = homeSearchPage.className;
             // state.search.searchPage = searchResults.className;
             // window.history.pushState(state, null, "");
@@ -1398,7 +1418,6 @@ function createNewCollection(){
             createCollectionError.classList.remove("hide");
             if (error.response.data.error === "Unauthorized")
             createCollectionError.innerHTML = "You need to be logged in to use this feature. Please login or create an account to continue."
-
         })
 }
 
