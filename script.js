@@ -125,15 +125,54 @@ const aboutSpotlight = document.querySelector(".about-page-spotlight");
 
 
 
+
+// Initial State
+let state = {
+    page: "",
+    home: {
+        class: homeSearchPage.className
+    },
+    timeline: {
+        class: timelineSearchPage.className
+    },
+    collection: {
+        class: collectionPage.className
+    },
+    about: {
+    },
+    user: {
+        authDiv: {
+            class: userAuthDiv.className,
+            width: userAuthDiv.style.width
+        },
+        loginDiv: {
+            class: loginDiv.className
+        },
+        signupDiv: {
+            class: signupDiv.className
+        },
+        logoutDiv: {
+            class: logoutDiv.className
+        }
+    },
+    tweets: {
+
+    }
+
+}
+
+
+
+
 sideNavItems.forEach((item) => {
     item.addEventListener("click", handleSideNav, false);
 })
 
 function handleSideNav(){
     let currentTab = event.currentTarget;
-    console.log(currentTab)
+
     sideNavItems.forEach((others) => {
-        userAuthDiv.classList.add("hide");
+        // userAuthDiv.classList.add("hide");
         others.setAttribute("data-selected", "false");
     })
     if (!(currentTab.classList.contains("user-profile"))) {
@@ -144,28 +183,32 @@ function handleSideNav(){
     }
 
     if (currentTab === homeItem) {
+        goHome();
         spotlightNav.innerHTML = homeSpotlight.innerHTML;
     } else if (currentTab === timelineItem) {
+        timeTravel();
         spotlightNav.innerHTML = timelineSpotlight.innerHTML;
     } else if (currentTab === collectionItem) {
-        spotlightNav.innerHTML = collectionSpotlight.innerHTML;
-    } else {
-        spotlightNav.innerHTML = aboutSpotlight.innerHTML;
-    } 
-
-    if (currentTab === homeItem) {
-        goHome();
-    } else if (currentTab === timelineItem) {
-        timeTravel();
-    } else if (currentTab === collectionItem) {
         goToCollections();
+        spotlightNav.innerHTML = collectionSpotlight.innerHTML;
     } else if (currentTab === aboutItem) {
+        spotlightNav.innerHTML = aboutSpotlight.innerHTML;
         getAbout();
+    } else if (currentTab === userProfilePanel) {
+        openUserPanel();
     }
 
+
+
+    state.user.authDiv.class = userAuthDiv.className;
+    state.user.loginDiv.class = loginDiv.className;
+    state.user.signupDiv.class = signupDiv.className;
+    state.user.logoutDiv.class = logoutDiv.className;
+    window.history.pushState(state, null, "");
 }
 
 function goHome(){
+    current_page = "home"
     // window.location.href = "/";
     homeSearchPage.classList.remove("hide");
     appendElementsToHome();
@@ -183,6 +226,7 @@ function goHome(){
 }
 
 function timeTravel(){
+    current_page = "timeline"
     timelineSearchPage.classList.remove("hide");
     appendElementsToTimeline();
     timelineSearchError.innerHTML = "";
@@ -199,6 +243,7 @@ function timeTravel(){
 }
 
 function goToCollections(){
+    current_page = "collection"
     emptyCollection.innerHTML = "";
     collectionPage.classList.remove("hide");
 
@@ -222,11 +267,7 @@ function goToCollections(){
 }   
 
 function getAbout(){
-    if (aboutModal.classList.contains("hide")){
-        aboutModal.classList.remove("hide");
-    } else {
-        aboutModal.classList.add("hide");
-    }
+    aboutModal.classList.remove("hide");
 }
 
 function appendElementsToHome(){
@@ -244,7 +285,7 @@ function appendElementsToTimeline(){
 }
 
 
-homeItem.addEventListener("click", goHome, false);
+// homeItem.addEventListener("click", goHome, false);
 timelineItem.addEventListener("click", timeTravel, false);
 collectionItem.addEventListener("click", goToCollections, false);
 aboutItem.addEventListener("click", getAbout, false);
@@ -310,11 +351,6 @@ const appendUserDetails = (user) => {
     appendCollections()
 }
 
-// Initial State
-let state = {
-    page: ""
-}
-
 
 let tokenStatus;
 let config;
@@ -367,11 +403,29 @@ function render(){
         appendUserDetails(currentUser);
     }
 
+
+
     // set states
+    if(token){
+        console.log("I got here")
+        userAuthDiv.style.width = "300px";
+        userAuthDiv.style.position = "relative";
+        userAuthDiv.style.height = "100%"
+        loginDiv.classList.add("hide");
+        signupDiv.classList.add("hide");
+        logoutDiv.classList.remove("hide");
+    } else {
+        userAuthDiv.style.width = state.user.authDiv.width;
+        loginDiv.className = state.user.loginDiv.class;
+        signupDiv.className = state.user.signupDiv.class;
+        logoutDiv.className = state.user.logoutDiv.class;
+    }
 
+    userAuthDiv.className = state.user.authDiv.class;
 
-
-
+    homeSearchPage.className = state.home.class;
+    timelineSearchPage.className = state.timeline.class;
+    collectionPage.className = state.collection;
 
 
     interactWithSearchResults();
@@ -393,6 +447,9 @@ function closeUserPanel(){
     signupDiv.classList.add("hide");
     screenFade.classList.add("hide");
 
+    state.user.authDiv.class = userAuthDiv.className;
+    state.user.loginDiv.class = loginDiv.className;
+    window.history.pushState(state, null, "");
 }
 
 function openUserPanel(){
@@ -412,11 +469,27 @@ function openUserPanel(){
         signupDiv.classList.add("hide");
         logoutDiv.classList.add("hide");
     }
+
+    // history state defined in nav handler
+}
+
+function loginHereFunc() {
+    openUserPanel();
+
+    state.user.authDiv.class = userAuthDiv.className;
+    state.user.loginDiv.class = loginDiv.className;
+    state.user.signupDiv.class = signupDiv.className;
+    state.user.logoutDiv.class = logoutDiv.className;
+    window.history.pushState(state, null, "");
 }
 
 function openSignupPanel(){
     loginDiv.classList.add("hide");
     signupDiv.classList.remove("hide");
+
+    state.user.loginDiv.class = loginDiv.className;
+    state.user.signupDiv.class = signupDiv.className;
+    window.history.pushState(state, null, "");
 }
 
 
@@ -470,6 +543,12 @@ function login(){
             loginDiv.classList.add("hide");
 
             interactWithSearchResults();
+
+
+
+            state.user.authDiv.class = userAuthDiv.className;
+            state.user.loginDiv.class = loginDiv.className;
+            window.history.pushState(state, null, "");
         })
         .catch(function (error) {
             loader.classList.add("hide");
@@ -539,6 +618,12 @@ function signup(){
             signupConfirmPassword.value = "";
 
             interactWithSearchResults();
+
+
+
+            state.user.authDiv.class = userAuthDiv.className;
+            state.user.signupDiv.class = signupDiv.className;
+            window.history.pushState(state, null, "");
         })
         .catch(function (error) {
             loader.classList.add("hide");
@@ -1219,7 +1304,7 @@ closeBtn.forEach((btn) => {
     btn.addEventListener("click", closeUserPanel, false);
 })
 signupHere.addEventListener("click", openSignupPanel, false);
-loginHere.addEventListener("click", openUserPanel, false);
+loginHere.addEventListener("click", loginHereFunc, false);
 
 // Auth Event Listeners
 loginBtn.addEventListener("click", login, false);
@@ -1267,6 +1352,19 @@ screenFade.addEventListener("click", function(){
         }
     })
 
+    console.log(current_page)
+
+    if (current_page === "home") {
+        console.log("home")
+        homeItem.setAttribute("data-selected", true)
+    } else if (current_page === "timeline") {
+        console.log("timeline")
+        timelineItem.setAttribute("data-selected", true)
+    } else if (current_page === "collection") {
+        console.log("collection")
+        collectionItem.setAttribute("data-selected", true)
+    }
+
 }, false)
 closeSaveToCollectionModal.addEventListener("click", function(){
     saveToCollectionModal.classList.add("hide")
@@ -1276,6 +1374,24 @@ closeSaveToCollectionModal.addEventListener("click", function(){
 closeMediaModa.addEventListener("click", function(){
     mediaModal.classList.add("hide")
     screenFade.classList.add("hide");
+}, false)
+
+aboutModalClose.addEventListener("click", function(){
+
+    aboutModal.classList.add("hide")
+    screenFade.classList.add("hide");
+    aboutItem.setAttribute("data-selected", "false")
+
+    if (current_page === "home") {
+        console.log("home")
+        homeItem.setAttribute("data-selected", "true")
+    } else if (current_page === "timeline") {
+        console.log("timeline")
+        timelineItem.setAttribute("data-selected", "true")
+    } else if (current_page === "collection") {
+        console.log("collection")
+        collectionItem.setAttribute("data-selected", "true")
+    }
 }, false)
 
 
