@@ -948,8 +948,6 @@ function mainSearch(){
 
             searchResults.classList.remove("hide")
 
-
-            state.search.searchPage = searchResults.className;
             searchResults.insertBefore(searchChoicesDiv, searchResults.firstChild);
             searchResults.insertBefore(mainSearchInputDiv, searchResults.firstChild);
 
@@ -958,6 +956,12 @@ function mainSearch(){
 
             appendTweets(results);
             interactWithSearchResults();
+
+
+            state.home.class = homeSearchPage.className;
+            state.search.searchPage = searchResults.className;
+            window.history.pushState(state, null, "");
+
 
         })
         .catch(function (error) {
@@ -1078,7 +1082,7 @@ function axiosRetrieveTweets(collection){
 
             interactWithSearchResults();
 
-
+            // state.home.class = homeSearchPage.className;
             // state.search.searchPage = searchResults.className;
             // window.history.pushState(state, null, "");
 
