@@ -1177,6 +1177,7 @@ function interactWithSearchResults(){
             console.log(img.src);
             mediaModal.style.backgroundImage = `url(${img.src})`;
 
+            state.screenFade.class = screenFade.className;
             state.media.class = mediaModal.className;
             window.history.pushState(state, null, "");
         }, false)
@@ -1534,7 +1535,10 @@ screenFade.addEventListener("click", function(){
         console.log("collection")
         collectionItem.setAttribute("data-selected", true)
     }
-
+    
+    state.screenFade.class = screenFade.className;
+    state.media.class = mediaModal.className;
+    window.history.pushState(state, null, "");
 }, false)
 closeSaveToCollectionModal.addEventListener("click", function(){
     saveToCollectionModal.classList.add("hide")
@@ -1546,7 +1550,9 @@ closeMediaModa.addEventListener("click", function(){
     mediaModal.classList.add("hide")
     screenFade.classList.add("hide");
 
-}, false)
+    state.screenFade.class = screenFade.className;
+    state.media.class = mediaModal.className;
+}, true)
 
 aboutModalClose.addEventListener("click", function(){
     console.log("yayayayayayay");
