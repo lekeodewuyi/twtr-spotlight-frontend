@@ -579,10 +579,14 @@ function closeUserPanel(){
         collectionItem.setAttribute("data-selected", "true")
     }
 
-    state.screenFade.class = screenFade.className;
-    state.user.authDiv.class = userAuthDiv.className;
-    state.user.loginDiv.class = loginDiv.className;
-    window.history.pushState(state, null, "");
+    if (userAuthDiv.classList.contains("hide")) {
+        state.screenFade.class = screenFade.className;
+        state.user.authDiv.class = userAuthDiv.className;
+        state.user.loginDiv.class = loginDiv.className;
+        window.history.pushState(state, null, "");
+    } else {
+        window.history.back();
+    }
 }
 
 function openUserPanel(){
@@ -1552,7 +1556,6 @@ closeSaveToCollectionModal.addEventListener("click", function(){
 
 closeMediaModal.addEventListener("click", function(){
     console.log("hey")
-    // event.stopPropagation();
     mediaModal.classList.add("hide")
     screenFade.classList.add("hide");
 
@@ -1560,6 +1563,7 @@ closeMediaModal.addEventListener("click", function(){
 }, false)
 
 aboutModalClose.addEventListener("click", function(){
+    event.stopPropagation();
     console.log("yayayayayayay");
     console.log(current_page)
 
@@ -1579,8 +1583,7 @@ aboutModalClose.addEventListener("click", function(){
     }
 
     state.about.class = aboutModal.className;
-
-}, true)
+}, false)
 
 
 
