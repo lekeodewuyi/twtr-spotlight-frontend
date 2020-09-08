@@ -12,6 +12,9 @@ const greyFloatingPanelHover = "#202E3A";
 const red = "#D6235B";
 
 
+let current_page;
+const body = document.querySelector("body");
+const root = document.querySelector(".root");
 const loader = document.querySelector(".loader");
 const screenFade = document.querySelector(".screen-fade");
 const modals = document.querySelectorAll(".modal");
@@ -149,6 +152,26 @@ function handleSideNav(){
     } else {
         spotlightNav.innerHTML = aboutSpotlight.innerHTML;
     } 
+
+    state.spotlight.text = spotlightNav.innerHTML;
+
+    if (currentTab === homeItem) {
+        goHome();
+    } else if (currentTab === timelineItem) {
+        timeTravel();
+    } else if (currentTab === collectionItem) {
+        goToCollections();
+    } else if (currentTab === aboutItem) {
+        getAbout();
+    }
+
+
+    state.header.headerText = headerText.innerHTML;
+    state.sidenav.home = homeItem.getAttribute("data-selected");
+    state.sidenav.timeline = timelineItem.getAttribute("data-selected");
+    state.sidenav.about = aboutItem.getAttribute("data-selected");
+    state.sidenav.collections = collectionItem.getAttribute("data-selected");
+    window.history.pushState(state, null, "");
 }
 
 function goHome(){
@@ -165,6 +188,11 @@ function goHome(){
     aboutModal.classList.add("hide");
 
     searchResults.classList.add("hide");
+
+    state.home.homeSearchPage = homeSearchPage.className;
+    state.timeline.timelineSearchPage = timelineSearchPage.className;
+    state.collection.class = collectionPage.className;
+    // window.history.pushState(state, null, "");
 }
 
 function timeTravel(){
@@ -181,6 +209,10 @@ function timeTravel(){
 
     searchResults.classList.add("hide");
 
+    state.home.homeSearchPage = homeSearchPage.className;
+    state.timeline.timelineSearchPage = timelineSearchPage.className;
+    state.collection.class = collectionPage.className;
+    // window.history.pushState(state, null, "");
 }
 
 function goToCollections(){
@@ -205,7 +237,11 @@ function goToCollections(){
         axiosRetrieveTweets(activeCollection.innerText.trim())
     }
 
-}
+    state.home.homeSearchPage = homeSearchPage.className;
+    state.timeline.timelineSearchPage = timelineSearchPage.className;
+    state.collection.class = collectionPage.className;
+    // window.history.pushState(state, null, "");
+}   
 
 function getAbout(){
     if (aboutModal.classList.contains("hide")){
@@ -298,6 +334,7 @@ const appendUserDetails = (user) => {
 
 // Initial State
 let state = {
+    page: "",
     user: {
         userAuthDiv: {
             className: userAuthDiv.className,
@@ -308,15 +345,34 @@ let state = {
         logoutDiv: logoutDiv.className
     },
     home: {
-        homeSearchPage: homeSearchPage.className,
-        children: homeSearchPage.contains(mainSearchInput)
+        homeSearchPage: homeSearchPage.className
+    },
+    timeline: {
+        keyword: "",
+        timelineSearchPage: timelineSearchPage.className
+    },
+    collection: {
+        class: collectionPage.className
     },
     result: {
         searchResults: searchResults.className,
         search: "",
         tweets: "",
         tweetId: ""
-
+    },
+    sidenav: {
+        home: homeItem.getAttribute("data-selected"),
+        timeline: timelineItem.getAttribute("data-selected"),
+        collections: collectionItem.getAttribute("data-selected"),
+        about: aboutItem.getAttribute("data-selected")
+    },
+    header: {
+        headerText: headerText.innerHTML
+    },
+    spotlight: {
+        text: homeSpotlight.innerHTML
+    }, 
+    all: {
     }
 }
 
@@ -391,9 +447,26 @@ function render(){
     userAuthDiv.className = state.user.userAuthDiv.className;
 
     homeSearchPage.className = state.home.homeSearchPage;
+    timelineSearchPage.className = state.timeline.timelineSearchPage;
+    collectionPage.className = state.collection.class;
+
     searchResults.className = state.result.searchResults;
     tweetResultsDiv.innerHTML = state.result.tweets;
     mainSearchInput.value = state.result.search;
+    timelineSearchInput.value = state.timeline.keyword;
+
+
+    homeItem.setAttribute("data-selected", `${state.sidenav.home}`);
+    timelineItem.setAttribute("data-selected", `${state.sidenav.timeline}`);
+    collectionItem.setAttribute("data-selected", `${state.sidenav.collections}`);
+    aboutItem.setAttribute("data-selected", `${state.sidenav.about}`);
+    console.log("home", homeItem['data-selected'])
+    console.log("timeline", timelineItem['data-selected'])
+    headerText.innerHTML = state.header.headerText;
+    spotlightNav.innerHTML = state.spotlight.text;
+
+    current_page = state.page;
+    console.log(current_page)
 
     
 
@@ -406,10 +479,19 @@ function render(){
     }
 
     if (!(searchResults.classList.contains("hide"))) {
-        searchResults.insertBefore(searchChoicesDiv, searchResults.firstChild);
-        searchResults.insertBefore(mainSearchInputDiv, searchResults.firstChild);
+        if (current_page === "home") {
+            searchResults.insertBefore(searchChoicesDiv, searchResults.firstChild);
+            searchResults.insertBefore(mainSearchInputDiv, searchResults.firstChild);
+        } else if (current_page === "timeline" ) {
+            searchResults.insertBefore(timelineSearchInputDiv, searchResults.firstChild);
+        }
     }
 
+    if (!(timelineSearchPage.classList.contains("hide"))) {
+        timelineSearchPage.append(timelineSearchButton);
+        timelineSearchPage.insertBefore(timelineSearchInputDiv, timelineSearchPage.lastChild);
+        timelineSearchPage.insertBefore(timelineSearchError, timelineSearchPage.lastChild);    
+    }
     interactWithSearchResults();
 }
 
@@ -781,6 +863,7 @@ function appendTweets(results){
 
 
 function mainSearch(){
+    current_page = "home"
     mainSearchButton.append(loader);
     loader.classList.remove("hide");
 
@@ -838,7 +921,7 @@ function mainSearch(){
             appendTweets(results);
             interactWithSearchResults();
 
-
+            state.page = current_page;
             state.result.searchResults = searchResults.className;
             state.result.tweets = tweetResultsDiv.innerHTML;
             state.result.search = mainSearchInput.value;
@@ -856,6 +939,7 @@ function mainSearch(){
 
 
 function timelineSearch(){
+    current_page = "timeline";
     timelineSearchButton.append(loader);
     loader.classList.remove("hide");
 
@@ -892,6 +976,13 @@ function timelineSearch(){
             appendTweets(results);
             interactWithSearchResults();
 
+            state.page = current_page;
+            state.result.searchResults = searchResults.className;
+            state.result.tweets = tweetResultsDiv.innerHTML;
+            state.timeline.keyword = timelineSearchInput.value;
+            state.timeline.timelineSearchPage = timelineSearchPage.className;
+            window.history.pushState(state, null, "");
+
         })
         .catch(function (error) {
             timelineSearchError.classList.add("error");
@@ -908,6 +999,15 @@ function timelineSearch(){
                 timelineSearchError.innerHTML = `Seems like there is no user with this user name, please check and try again.`
                 tweetResultsDiv.innerHTML = `Seems like there is no user with this user name, please check and try again.`
             }
+
+
+
+            state.page = current_page;
+            state.result.searchResults = searchResults.className;
+            state.result.tweets = tweetResultsDiv.innerHTML;
+            state.timeline.keyword = timelineSearchInput.value;
+            state.timeline.timelineSearchPage = timelineSearchPage.className;
+            window.history.pushState(state, null, "");
         })
 }
 
