@@ -285,6 +285,7 @@ function render(){
     }
 
 
+    current_page = state.page;
 
     // set states
     if(token){
@@ -365,6 +366,7 @@ function handleSideNav(){
     }
 
     state.header = headerText.innerHTML;
+    state.page = current_page;
 
     state.user.authDiv.class = userAuthDiv.className;
     state.user.loginDiv.class = loginDiv.className;
@@ -416,7 +418,7 @@ function timeTravel(){
 }
 
 function goToCollections(){
-    current_page = "collection"
+    current_page = "collections"
     emptyCollection.innerHTML = "";
     collectionPage.classList.remove("hide");
 
@@ -440,7 +442,6 @@ function goToCollections(){
 }   
 
 function getAbout(){
-    current_page = "about";
     aboutModal.classList.remove("hide");
 }
 
