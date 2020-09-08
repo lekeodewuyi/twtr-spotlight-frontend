@@ -248,6 +248,12 @@ let state = {
             class: logoutDiv.className
         }
     },
+    sidenav: {
+        home: homeItem.getAttribute("data-selected"),
+        timeline: timelineItem.getAttribute("data-selected"),
+        collection: collectionItem.getAttribute("data-selected"),
+        about: aboutItem.getAttribute("data-selected")
+    },
     spotlight: {
         innertext: homeSpotlight.innerHTML
     },
@@ -312,6 +318,13 @@ function render(){
 
     spotlightNav.innerHTML = state.spotlight.innertext;
     headerText.innerHTML = state.header
+
+    homeItem.setAttribute("data-selected", `${state.sidenav.home}`);
+    timelineItem.setAttribute("data-selected", `${state.sidenav.timeline}`);
+    collectionItem.setAttribute("data-selected", `${state.sidenav.collection}`);
+    aboutItem.setAttribute("data-selected", `${state.sidenav.about}`);
+
+
     console.log(current_page)
 
 
@@ -349,18 +362,22 @@ function handleSideNav(){
         goHome();
         spotlightNav.innerHTML = homeSpotlight.innerHTML;
         headerText.innerHTML = homeItem.innerText;
+        homeItem.setAttribute("data-selected", `true`);
     } else if (currentTab === timelineItem) {
         timeTravel();
         spotlightNav.innerHTML = timelineSpotlight.innerHTML;
         headerText.innerHTML = timelineItem.innerText;
+        timelineItem.setAttribute("data-selected", `true`);
     } else if (currentTab === collectionItem) {
         goToCollections();
         spotlightNav.innerHTML = collectionSpotlight.innerHTML;
         headerText.innerHTML = collectionItem.innerText;
+        collectionItem.setAttribute("data-selected", `true`);
     } else if (currentTab === aboutItem) {
         spotlightNav.innerHTML = aboutSpotlight.innerHTML;
         getAbout();
         // headerText.innerHTML =aboutItem.innerText;
+        aboutItem.setAttribute("data-selected", `true`);
     } else if (currentTab === userProfilePanel) {
         openUserPanel();
     }
@@ -379,6 +396,12 @@ function handleSideNav(){
     state.about.class = aboutModal.className;
 
     state.spotlight.innertext = spotlightNav.innerHTML;
+
+    state.sidenav.home = homeItem.getAttribute("data-selected");
+    state.sidenav.timeline = timelineItem.getAttribute("data-selected");
+    state.sidenav.collection = collectionItem.getAttribute("data-selected");
+    state.sidenav.about = aboutItem.getAttribute("data-selected");
+
     window.history.pushState(state, null, "");
 }
 
