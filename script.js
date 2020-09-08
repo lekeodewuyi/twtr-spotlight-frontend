@@ -342,6 +342,43 @@ function render(){
     timelineSearchInput.value = state.search.keyword.timeline;
 
 
+
+
+    if (!(homeSearchPage.classList.contains("hide"))) {
+        homeSearchPage.append(mainSearchButton);
+        homeSearchPage.insertBefore(mainSearchInputDiv, homeSearchPage.lastChild);
+        homeSearchPage.insertBefore(mainSearchError, homeSearchPage.lastChild);
+        homeSearchPage.append(searchChoicesDiv);
+    }
+
+    if (!(timelineSearchPage.classList.contains("hide"))) {
+        timelineSearchPage.append(timelineSearchButton);
+        timelineSearchPage.insertBefore(timelineSearchInputDiv, timelineSearchPage.lastChild);
+        timelineSearchPage.insertBefore(timelineSearchError, timelineSearchPage.lastChild);    
+    }
+
+    if (!(searchResults.classList.contains("hide"))) {
+        if (current_page === "home") {
+            searchResults.insertBefore(searchChoicesDiv, searchResults.firstChild);
+            searchResults.insertBefore(mainSearchInputDiv, searchResults.firstChild);
+
+
+
+            timelineSearchPage.append(timelineSearchButton);
+            timelineSearchPage.insertBefore(timelineSearchInputDiv, timelineSearchPage.lastChild);
+            timelineSearchPage.insertBefore(timelineSearchError, timelineSearchPage.lastChild); 
+        } else if (current_page === "timeline" ) {
+            searchResults.insertBefore(timelineSearchInputDiv, searchResults.firstChild);
+
+
+
+            homeSearchPage.append(mainSearchButton);
+            homeSearchPage.insertBefore(mainSearchInputDiv, homeSearchPage.lastChild);
+            homeSearchPage.insertBefore(mainSearchError, homeSearchPage.lastChild);
+            homeSearchPage.append(searchChoicesDiv);
+        }
+    }
+
     console.log(current_page)
 
 
@@ -489,6 +526,8 @@ function getAbout(){
 }
 
 function appendElementsToHome(){
+    mainSearchInput.value = "";
+    mainSearchError.innerHTML = "";
     homeSearchPage.append(mainSearchButton);
     homeSearchPage.insertBefore(mainSearchInputDiv, homeSearchPage.lastChild);
     homeSearchPage.insertBefore(mainSearchError, homeSearchPage.lastChild);
@@ -497,6 +536,7 @@ function appendElementsToHome(){
 
 function appendElementsToTimeline(){
     timelineSearchInput.value = "";
+    timelineSearchError.innerHTML = "";
     timelineSearchPage.append(timelineSearchButton);
     timelineSearchPage.insertBefore(timelineSearchInputDiv, timelineSearchPage.lastChild);
     timelineSearchPage.insertBefore(timelineSearchError, timelineSearchPage.lastChild);
