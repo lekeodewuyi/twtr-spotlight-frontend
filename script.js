@@ -325,6 +325,15 @@ function render(){
         logoutDiv.className = state.user.logoutDiv.class;
     }
 
+
+    checkTokenStatus();
+    if (tokenStatus === "active" && current_page === "collections") {
+        let activeCollection = document.querySelector('.collection-item[data-selected="true"]')
+        console.log(activeCollection)
+        if (activeCollection)
+        axiosRetrieveTweets(activeCollection.innerText.trim())
+    }
+
     screenFade.className = state.screenFade.class;
 
     userAuthDiv.className = state.user.authDiv.class;
