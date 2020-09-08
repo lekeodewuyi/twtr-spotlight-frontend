@@ -126,6 +126,97 @@ const aboutSpotlight = document.querySelector(".about-page-spotlight");
 
 
 
+
+
+
+
+let tokenStatus;
+let config;
+let token;
+function checkTokenStatus(){
+    token = localStorage.FBIdToken;
+    if(token) {
+        const decodedToken = jwt_decode(token);
+        console.log(decodedToken.exp * 1000);
+        console.log(Date.now())
+        if(decodedToken.exp * 1000 < Date.now()){ //if TOKEN is expired
+            console.log("token has expired")
+            tokenStatus = "expired";
+
+            // TODO: Session expired modal to initiate logout
+            sessionExpiredModal.classList.remove("hide");
+            screenFade.classList.remove("hide");
+        } else {
+            tokenStatus = "active"
+            config = {
+                headers: { Authorization: `${token}` }
+            };
+        }
+    }
+}
+
+
+const setAuthorizationHeader = (token) => {
+    const FBIdToken = `Bearer ${token}`;
+    localStorage.setItem('FBIdToken', FBIdToken);
+    axios.defaults.headers.common['Authorization'] = FBIdToken;
+}
+
+const updateCurrentUser = (userDetails) => {
+    let currentUser = userDetails;
+    return localStorage.setItem('currentUser', JSON.stringify(currentUser))
+}
+
+const appendUserDetails = (user) => {
+    let name = user.name;
+    let firstName = name.replace(/ .*/,'');
+    userProfileLabel.innerHTML = `Hello, <span class="color-blue">${firstName}</span>`;
+
+    let userCollections = user.collections;
+    let userCollectionCount = user.collectionCount;
+
+    collectionList.innerHTML = "";
+    saveToCollectionItemDiv.innerHTML = "";
+    if (!(!Array.isArray(userCollections) || !userCollections.length)) {
+        for (let i = 0; i < userCollections.length; i++) {
+
+            let collectionItemParagraph = document.createElement("p");
+            collectionItemParagraph.innerHTML = userCollections[i];
+
+            let collectionItem = document.createElement("div");
+            collectionItem.classList.add("collection-item");
+            collectionItem.append(collectionItemParagraph);
+
+            collectionList.append(collectionItem);
+
+
+            let saveToCollectionItem = document.createElement("p");
+            saveToCollectionItem.classList.add("save-to-collection-item");
+            saveToCollectionItem.innerHTML = userCollections[i];
+            saveToCollectionItemDiv.append(saveToCollectionItem)
+            saveToCollectionModal.append(saveToCollectionItemDiv);
+        }
+
+
+        let allCollectionItems = document.querySelectorAll(".collection-item");
+        allCollectionItems[0].setAttribute("data-selected", "true");
+        console.log(allCollectionItems[0])
+
+
+        if (userCollectionCount === 1) {
+            collectionCounter.innerHTML = `You currently have ${userCollectionCount} collection`
+        } else if (userCollectionCount > 1) {
+            collectionCounter.innerHTML = `You currently have ${userCollectionCount} collections`
+        }
+    } else {
+        collectionCounter.innerHTML = `You haven't created any collections, click the create a new collection button to get started`
+    }
+
+    appendCollections()
+}
+
+
+
 // Initial State
 let state = {
     page: "",
@@ -139,6 +230,7 @@ let state = {
         class: collectionPage.className
     },
     about: {
+        class: aboutModal.className
     },
     user: {
         authDiv: {
@@ -155,11 +247,79 @@ let state = {
             class: logoutDiv.className
         }
     },
+    spotlight: {
+        innertext: homeSpotlight.innerHTML
+    },
     tweets: {
 
     }
 
 }
+
+
+// Render state function whenever popstate is fired
+function render(){
+    let token = localStorage.FBIdToken;
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    // set app data
+    if(token) {
+        const decodedToken = jwt_decode(token);
+        console.log(decodedToken.exp * 1000);
+        console.log(Date.now())
+        if(decodedToken.exp * 1000 < Date.now()){ //if TOKEN is expired
+            console.log("token has expired")
+
+            // TODO: Session expired modal to initiate logout
+            sessionExpiredModal.classList.remove("hide");
+            screenFade.classList.remove("hide");
+        } else {
+            config = {
+                headers: { Authorization: `${token}` }
+              };
+        }
+    }
+
+    if (currentUser) {
+        appendUserDetails(currentUser);
+    }
+
+
+
+    // set states
+    if(token){
+        console.log("I got here")
+        userAuthDiv.style.width = "300px";
+        userAuthDiv.style.position = "relative";
+        userAuthDiv.style.height = "100%"
+        loginDiv.classList.add("hide");
+        signupDiv.classList.add("hide");
+        logoutDiv.classList.remove("hide");
+    } else {
+        userAuthDiv.style.width = state.user.authDiv.width;
+        loginDiv.className = state.user.loginDiv.class;
+        signupDiv.className = state.user.signupDiv.class;
+        logoutDiv.className = state.user.logoutDiv.class;
+    }
+
+    userAuthDiv.className = state.user.authDiv.class;
+
+    homeSearchPage.className = state.home.class;
+    timelineSearchPage.className = state.timeline.class;
+    collectionPage.className = state.collection.class;
+    aboutModal.className = state.about.class;
+
+    spotlightNav.innerHTML = state.spotlight.innertext;
+    console.log(current_page)
+
+
+    interactWithSearchResults();
+}
+
+// Initialize initial state on load
+(function initialize() {
+    window.history.replaceState(state, null, "");
+    render(state);
+})();
 
 
 
@@ -199,11 +359,17 @@ function handleSideNav(){
     }
 
 
-
     state.user.authDiv.class = userAuthDiv.className;
     state.user.loginDiv.class = loginDiv.className;
     state.user.signupDiv.class = signupDiv.className;
     state.user.logoutDiv.class = logoutDiv.className;
+
+    state.home.class = homeSearchPage.className;
+    state.timeline.class = timelineSearchPage.className;
+    state.collection.class = collectionPage.className;
+    state.about.class = aboutModal.className;
+
+    state.spotlight.innertext = spotlightNav.innerHTML;
     window.history.pushState(state, null, "");
 }
 
@@ -267,6 +433,7 @@ function goToCollections(){
 }   
 
 function getAbout(){
+    current_page = "about";
     aboutModal.classList.remove("hide");
 }
 
@@ -291,151 +458,6 @@ collectionItem.addEventListener("click", goToCollections, false);
 aboutItem.addEventListener("click", getAbout, false);
 
 
-
-const setAuthorizationHeader = (token) => {
-    const FBIdToken = `Bearer ${token}`;
-    localStorage.setItem('FBIdToken', FBIdToken);
-    axios.defaults.headers.common['Authorization'] = FBIdToken;
-}
-
-const updateCurrentUser = (userDetails) => {
-    let currentUser = userDetails;
-    return localStorage.setItem('currentUser', JSON.stringify(currentUser))
-}
-
-const appendUserDetails = (user) => {
-    let name = user.name;
-    let firstName = name.replace(/ .*/,'');
-    userProfileLabel.innerHTML = `Hello, <span class="color-blue">${firstName}</span>`;
-
-    let userCollections = user.collections;
-    let userCollectionCount = user.collectionCount;
-
-    collectionList.innerHTML = "";
-    saveToCollectionItemDiv.innerHTML = "";
-    if (!(!Array.isArray(userCollections) || !userCollections.length)) {
-        for (let i = 0; i < userCollections.length; i++) {
-
-            let collectionItemParagraph = document.createElement("p");
-            collectionItemParagraph.innerHTML = userCollections[i];
-
-            let collectionItem = document.createElement("div");
-            collectionItem.classList.add("collection-item");
-            collectionItem.append(collectionItemParagraph);
-
-            collectionList.append(collectionItem);
-
-
-            let saveToCollectionItem = document.createElement("p");
-            saveToCollectionItem.classList.add("save-to-collection-item");
-            saveToCollectionItem.innerHTML = userCollections[i];
-            saveToCollectionItemDiv.append(saveToCollectionItem)
-            saveToCollectionModal.append(saveToCollectionItemDiv);
-        }
-
-
-        let allCollectionItems = document.querySelectorAll(".collection-item");
-        allCollectionItems[0].setAttribute("data-selected", "true");
-        console.log(allCollectionItems[0])
-
-
-        if (userCollectionCount === 1) {
-            collectionCounter.innerHTML = `You currently have ${userCollectionCount} collection`
-        } else if (userCollectionCount > 1) {
-            collectionCounter.innerHTML = `You currently have ${userCollectionCount} collections`
-        }
-    } else {
-        collectionCounter.innerHTML = `You haven't created any collections, click the create a new collection button to get started`
-    }
-
-    appendCollections()
-}
-
-
-let tokenStatus;
-let config;
-let token;
-function checkTokenStatus(){
-    token = localStorage.FBIdToken;
-    if(token) {
-        const decodedToken = jwt_decode(token);
-        console.log(decodedToken.exp * 1000);
-        console.log(Date.now())
-        if(decodedToken.exp * 1000 < Date.now()){ //if TOKEN is expired
-            console.log("token has expired")
-            tokenStatus = "expired";
-
-            // TODO: Session expired modal to initiate logout
-            sessionExpiredModal.classList.remove("hide");
-            screenFade.classList.remove("hide");
-        } else {
-            tokenStatus = "active"
-            config = {
-                headers: { Authorization: `${token}` }
-            };
-        }
-    }
-}
-
-// Render state function whenever popstate is fired
-function render(){
-    let token = localStorage.FBIdToken;
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    // set app data
-    if(token) {
-        const decodedToken = jwt_decode(token);
-        console.log(decodedToken.exp * 1000);
-        console.log(Date.now())
-        if(decodedToken.exp * 1000 < Date.now()){ //if TOKEN is expired
-            console.log("token has expired")
-
-            // TODO: Session expired modal to initiate logout
-            sessionExpiredModal.classList.remove("hide");
-            screenFade.classList.remove("hide");
-        } else {
-            config = {
-                headers: { Authorization: `${token}` }
-              };
-        }
-    }
-
-    if (currentUser) {
-        appendUserDetails(currentUser);
-    }
-
-
-
-    // set states
-    if(token){
-        console.log("I got here")
-        userAuthDiv.style.width = "300px";
-        userAuthDiv.style.position = "relative";
-        userAuthDiv.style.height = "100%"
-        loginDiv.classList.add("hide");
-        signupDiv.classList.add("hide");
-        logoutDiv.classList.remove("hide");
-    } else {
-        userAuthDiv.style.width = state.user.authDiv.width;
-        loginDiv.className = state.user.loginDiv.class;
-        signupDiv.className = state.user.signupDiv.class;
-        logoutDiv.className = state.user.logoutDiv.class;
-    }
-
-    userAuthDiv.className = state.user.authDiv.class;
-
-    homeSearchPage.className = state.home.class;
-    timelineSearchPage.className = state.timeline.class;
-    collectionPage.className = state.collection;
-
-
-    interactWithSearchResults();
-}
-
-// Initialize initial state on load
-(function initialize() {
-    window.history.replaceState(state, null, "");
-    render(state);
-})();
 
 console.log(config)
 
