@@ -1048,6 +1048,18 @@ footer .big-footer {
         min-width: 250px;
     }
 
+    input[type="search"] {
+        width: 600px;
+    }
+
+    input[type="search"]:not(:placeholder-shown) + .search-icon {
+        margin-left: Calc(600px - 55px);
+    }
+
+    .home-logo, .timeline-header {
+        font-size: 4rem;
+    }
+
     .center-container,
     .search-results,
     .collections-page {
@@ -1091,6 +1103,18 @@ footer .big-footer {
         max-width: 100px;
     }
 
+    input[type="search"] {
+        width: 450px;
+    }
+
+    input[type="search"]:not(:placeholder-shown) + .search-icon {
+        margin-left: Calc(450px - 55px);
+    }
+
+    .home-logo, .timeline-header {
+        font-size: 3rem;
+    }
+
     .center-container,
     .search-results,
     .collections-page {
@@ -1119,6 +1143,15 @@ footer .big-footer {
         width: 100px;
         min-width: 100px;
         max-width: 100px;
+    }
+
+    .user-auth-div {
+        position: fixed;
+        width: 90vw;
+        height: 80vh;
+        height: 83vh;
+        top: 0px;
+        overflow-y: scroll;
     }
 
     .center-container,
@@ -1150,7 +1183,7 @@ footer .big-footer {
         transform: translateX(0);
         margin-left: 15px;
     }
-    
+
     .side-nav-container {
         z-index: 50;
         position: fixed;
