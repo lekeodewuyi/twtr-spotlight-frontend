@@ -1317,7 +1317,7 @@ footer .big-footer {
     .collections-page {
         width: 350px;
         width: 100vw;
-        height: Calc(100vh - 50px);
+        height: Calc(100vh - 200px);
     }
 
     .tweet-result:last-child {
