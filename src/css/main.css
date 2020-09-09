@@ -1124,6 +1124,78 @@ footer .big-footer {
 }
 
 
+@media (max-width: 600px) {
+    .side-nav-container {
+        z-index: 50;
+        position: fixed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        bottom: 0px;
+
+        width: 100vw;
+        min-width: 100vw;   
+        height: 70px;
+
+        border-radius: 0px;
+        font-weight: 700;
+
+        background-color: var(--bg);
+        background-color: blue;
+
+        border-radius: 15px;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        background-color: var(--grey-floating-panel);
+    }
+
+    .side-nav-item {
+        border-radius: 0px !important;
+        height: 100%;
+        /* padding: 0px; */
+    }
+
+    .side-nav-item[data-selected ="true"]{
+        color: var(--blue);
+        border-bottom: 2px solid var(--blue);
+    }
+
+    .side-nav-item > svg {
+        margin-right: 0px;
+        fill: white;
+    }
+
+    .side-nav-para {
+        display: none;
+    }
+
+    .user-profile {
+        background-color: unset;
+    }
+
+    .center-container,
+    .search-results,
+    .collections-page {
+        width: 450px;
+    }
+    
+    .tweet-image video, .collection-tweet-image video,
+    .tweet-image img, .collection-tweet-image img,
+    .tweet-footer {
+        width: 350px;
+    }
+
+    .tweet-name-div, .tweet-text {
+        font-size: 0.9rem;
+        flex-wrap: nowrap;
+    }
+    .tweet-footer {
+        font-size: 0.8rem;
+    }
+}
+
+
 
 
 .loader {
