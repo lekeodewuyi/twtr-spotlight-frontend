@@ -29,6 +29,7 @@ body {
     font-size: 16px;
     line-height: 1.5;
     background-color: var(--bg);
+    scroll-behavior: smooth;
 }
 
 a, a:visited {
@@ -159,6 +160,7 @@ button:hover, button:active {
 }
 
 .media-modal {
+    /* position: relative; */
     display: flex;
     justify-content: center;
     align-self: center;
@@ -167,7 +169,7 @@ button:hover, button:active {
     overflow: auto;
     margin: auto;
     display: block;
-    width: 80%;
+    /* width: 80%; */
     max-width: 700px;
     /* max-width: 70vw; */
     max-height: 80vh;
@@ -179,6 +181,17 @@ button:hover, button:active {
     background-size: contain;
     background-repeat:no-repeat;
     background-position: center;
+}
+
+.media-modal-close {
+    cursor: pointer;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    right: 0px;
+    top: 0px;
+    fill: var(--red);
+    margin: 10px;
 }
 
 .screen-fade {
@@ -1319,15 +1332,12 @@ footer .big-footer {
         width: 350px;
         width: 90vw;
     }
-
-
-
-
     
     .tweet-image video, .collection-tweet-image video,
     .tweet-image img, .collection-tweet-image img {
         width: 290px;
-        height: 160px;
+        width: 80vw;
+        height: 260px;
         border-radius: 12px;
     }
 
@@ -1340,6 +1350,16 @@ footer .big-footer {
     .tweet-footer {
         font-size: 0.6rem;
         width: 290px;
+        width: 80vw;
+    }
+}
+
+
+@media (max-width: 400px) {
+
+    .tweet-image video, .collection-tweet-image video,
+    .tweet-image img, .collection-tweet-image img {
+        height: 160px;
     }
 }
 
