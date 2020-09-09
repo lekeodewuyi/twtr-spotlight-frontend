@@ -134,7 +134,7 @@ authInputs.forEach((input) => {
         input.classList.remove("error");
 
         authInputLabels.forEach((label) => {
-            label.classList.remove("error");
+            label.classList.remove("color-red");
             if (label === loginEmailLabel) {
                 label.innerHTML = "Email:"
             } else if(label === loginPasswordLabel) {
@@ -694,13 +694,13 @@ function login(){
         loader.classList.add("hide");
         if (errors.email) {
             loginEmailLabel.innerHTML = errors.email
-            loginEmailLabel.classList.add("error");
+            loginEmailLabel.classList.add("color-red");
             loginEmail.placeholder = errors.email;
             loginEmail.classList.add("error");
         }
         if (errors.password) {
             loginPasswordLabel.innerHTML = errors.password
-            loginPasswordLabel.classList.add("error");
+            loginPasswordLabel.classList.add("color-red");
             loginPassword.placeholder = errors.password;
             loginPassword.classList.add("error");
         }
@@ -758,25 +758,25 @@ function signup(){
         loader.classList.add("hide");
         if (errors.name) {
             signupNameLabel.innerHTML = errors.name
-            signupNameLabel.classList.add("error");
+            signupNameLabel.classList.add("color-red");
             signupName.placeholder = errors.name;
             signupName.classList.add("error");
         }
         if (errors.email) {
             signupEmailLabel.innerHTML = errors.email
-            signupEmailLabel.classList.add("error");
+            signupEmailLabel.classList.add("color-red");
             signupEmail.placeholder = errors.email;
             signupEmail.classList.add("error");
         }
         if (errors.password) {
             signupPasswordLabel.innerHTML = errors.password;
-            signupPasswordLabel.classList.add("error");
+            signupPasswordLabel.classList.add("color-red");
             signupPassword.placeholder = errors.password;
             signupPassword.classList.add("error");
         }
         if  (errors.confirmPassword) {
             signupConfirmPasswordLabel.innerHTML = errors.confirmPassword;
-            signupConfirmPasswordLabel.classList.add("error");
+            signupConfirmPasswordLabel.classList.add("color-red");
             signupConfirmPassword.placeholder = errors.confirmPassword;
             signupConfirmPassword.classList.add("error");
         }
