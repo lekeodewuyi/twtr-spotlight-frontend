@@ -28,6 +28,7 @@ const headerText = document.querySelector(".header-text");
 //Auth containers
 const userProfilePanel = document.querySelector(".user-profile");
 const userProfileLabel = document.querySelector(".user-profile-label");
+let userIcon = document.querySelector(".user-icon");
 
 const userAuthDiv = document.querySelector(".user-auth-div");
 
@@ -170,6 +171,7 @@ const updateCurrentUser = (userDetails) => {
 const appendUserDetails = (user) => {
     let name = user.name;
     let firstName = name.replace(/ .*/,'');
+    userIcon.style.fill = blue;
     userProfileLabel.innerHTML = `Hello, <span class="color-blue">${firstName}</span>`;
 
     let userCollections = user.collections;
@@ -825,7 +827,8 @@ function appendTweets(results){
         tweetUserName.innerHTML = `${results[i].user.screen_name}`;
         let tweetTime = document.createElement("p");
         tweetTime.classList.add("tweet-time", "tw-name-item");
-        tweetTime.innerHTML = ` &middot; ${dayjs(results[i].created_at).format('MMM DD YYYY - (h:mm a)')}`;
+        // tweetTime.innerHTML = ` &middot; ${dayjs(results[i].created_at).format('MMM DD YYYY - (h:mm a)')}`;
+        tweetTime.innerHTML = ` &middot; ${dayjs(results[i].created_at).format('MMM DD YY')}`;
         tweetNameDiv.append(tweetName, tweetVerified, tweetUserName, tweetTime)
 
 
