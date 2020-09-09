@@ -893,14 +893,24 @@ function appendTweets(results){
 
         let tweetMetrics = document.createElement("div");
         tweetMetrics.classList.add("tweet-metrics");
-        let tweetRetweets = document.createElement("p");
-        tweetRetweets.innerHTML = `${results[i].retweet_count} retweets `;
-        tweetRetweets.innerHTML = appendCommas(tweetRetweets.innerHTML);
 
+        let tweetRetweetIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        tweetRetweetIcon.classList.add("tweet-icon");
+        tweetRetweetIcon.innerHTML = `<path xmlns="http://www.w3.org/2000/svg" d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/>`;
+        tweetRetweetIcon.setAttribute("viewBox", "0 0 24 24");
+        let tweetRetweets = document.createElement("p");
+        tweetRetweets.innerHTML = `${results[i].retweet_count} `;
+        tweetRetweets.innerHTML = appendCommas(tweetRetweets.innerHTML);
+        
+
+        let tweetLikesIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        tweetLikesIcon.classList.add("tweet-icon");
+        tweetLikesIcon.innerHTML = `<path d="M0 0h24v24H0z" fill="none"/><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>`;
+        tweetLikesIcon.setAttribute("viewBox", "0 0 24 24");
         let tweetLikes = document.createElement("p");
-        tweetLikes.innerHTML = `${results[i].retweet_count} likes `;
+        tweetLikes.innerHTML = `${results[i].retweet_count} `;
         tweetLikes.innerHTML = appendCommas(tweetLikes.innerHTML);
-        tweetMetrics.append(tweetRetweets, tweetLikes);
+        tweetMetrics.append(tweetRetweetIcon, tweetRetweets, tweetLikesIcon, tweetLikes);
 
 
 
