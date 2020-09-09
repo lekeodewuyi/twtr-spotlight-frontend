@@ -35,6 +35,9 @@ const userAuthDiv = document.querySelector(".user-auth-div");
 const aboutModal = document.querySelector(".about-modal");
 const aboutModalClose = document.querySelector(".about-modal-close");
 
+const authInputs = document.querySelectorAll(".auth-input");
+const authInputLabels = document.querySelectorAll(".auth-input-label");
+
 const sessionExpiredModal = document.querySelector(".session-over-modal");
 const closeSessionExpiredModal = document.querySelector(".session-over-modal-close");
 
@@ -126,7 +129,29 @@ const aboutSpotlight = document.querySelector(".about-page-spotlight");
 
 
 
+authInputs.forEach((input) => {
+    input.addEventListener("keydown", function(){
+        input.classList.remove("error");
 
+        authInputLabels.forEach((label) => {
+            label.classList.remove("error");
+            if (label === loginEmailLabel) {
+                label.innerHTML = "Email:"
+            } else if(label === loginPasswordLabel) {
+                label.innerHTML = "Password:"
+            } else if(label === signupNameLabel) {
+                label.innerHTML = "Name:"
+            } else if(label === signupEmailLabel) {
+                label.innerHTML = "Email:"
+            } else if(label === signupPasswordLabel) {
+                label.innerHTML = "Password:"
+            } else if(label === signupConfirmPasswordLabel) {
+                label.innerHTML = "Confirm assword:"
+            }
+        });
+
+    }, false);
+})
 
 
 
@@ -669,11 +694,15 @@ function login(){
         loader.classList.add("hide");
         if (errors.email) {
             loginEmailLabel.innerHTML = errors.email
-            loginEmailLabel.style.color = red;
+            loginEmailLabel.classList.add("error");
+            loginEmail.placeholder = errors.email;
+            loginEmail.classList.add("error");
         }
         if (errors.password) {
             loginPasswordLabel.innerHTML = errors.password
-            loginPasswordLabel.style.color = red;
+            loginPasswordLabel.classList.add("error");
+            loginPassword.placeholder = errors.password;
+            loginPassword.classList.add("error");
         }
     }
 
@@ -730,18 +759,26 @@ function signup(){
         if (errors.name) {
             signupNameLabel.innerHTML = errors.name
             signupNameLabel.classList.add("error");
+            signupName.placeholder = errors.name;
+            signupName.classList.add("error");
         }
         if (errors.email) {
             signupEmailLabel.innerHTML = errors.email
             signupEmailLabel.classList.add("error");
+            signupEmail.placeholder = errors.email;
+            signupEmail.classList.add("error");
         }
         if (errors.password) {
             signupPasswordLabel.innerHTML = errors.password;
             signupPasswordLabel.classList.add("error");
+            signupPassword.placeholder = errors.password;
+            signupPassword.classList.add("error");
         }
         if  (errors.confirmPassword) {
             signupConfirmPasswordLabel.innerHTML = errors.confirmPassword;
             signupConfirmPasswordLabel.classList.add("error");
+            signupConfirmPassword.placeholder = errors.confirmPassword;
+            signupConfirmPassword.classList.add("error");
         }
     }
 
