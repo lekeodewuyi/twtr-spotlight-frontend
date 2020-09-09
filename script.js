@@ -696,13 +696,13 @@ function login(){
             loginEmailLabel.innerHTML = errors.email
             loginEmailLabel.classList.add("color-red");
             loginEmail.placeholder = errors.email;
-            loginEmail.classList.add("error");
+            loginEmail.classList.add("auth-error");
         }
         if (errors.password) {
             loginPasswordLabel.innerHTML = errors.password
             loginPasswordLabel.classList.add("color-red");
             loginPassword.placeholder = errors.password;
-            loginPassword.classList.add("error");
+            loginPassword.classList.add("auth-error");
         }
     }
 
@@ -760,25 +760,25 @@ function signup(){
             signupNameLabel.innerHTML = errors.name
             signupNameLabel.classList.add("color-red");
             signupName.placeholder = errors.name;
-            signupName.classList.add("error");
+            signupName.classList.add("auth-error");
         }
         if (errors.email) {
             signupEmailLabel.innerHTML = errors.email
             signupEmailLabel.classList.add("color-red");
             signupEmail.placeholder = errors.email;
-            signupEmail.classList.add("error");
+            signupEmail.classList.add("auth-error");
         }
         if (errors.password) {
             signupPasswordLabel.innerHTML = errors.password;
             signupPasswordLabel.classList.add("color-red");
             signupPassword.placeholder = errors.password;
-            signupPassword.classList.add("error");
+            signupPassword.classList.add("auth-error");
         }
         if  (errors.confirmPassword) {
             signupConfirmPasswordLabel.innerHTML = errors.confirmPassword;
             signupConfirmPasswordLabel.classList.add("color-red");
             signupConfirmPassword.placeholder = errors.confirmPassword;
-            signupConfirmPassword.classList.add("error");
+            signupConfirmPassword.classList.add("auth-error");
         }
     }
 
