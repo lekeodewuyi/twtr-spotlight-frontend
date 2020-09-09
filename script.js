@@ -129,6 +129,8 @@ const aboutSpotlight = document.querySelector(".about-page-spotlight");
 
 
 
+let vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+
 authInputs.forEach((input) => {
     input.addEventListener("keydown", function(){
         input.classList.remove("error");
@@ -345,6 +347,10 @@ function render(){
         loginDiv.classList.add("hide");
         signupDiv.classList.add("hide");
         logoutDiv.classList.remove("hide");
+        if (vw < 600) {
+            userAuthDiv.style.position = "";
+            userAuthDiv.style.height = "50vh"
+        }
     } else {
         userAuthDiv.style.width = state.user.authDiv.width;
         loginDiv.className = state.user.loginDiv.class;
@@ -641,6 +647,10 @@ function openUserPanel(){
         userAuthDiv.style.height = "100%"
         userAuthDiv.classList.remove("hide");
         logoutDiv.classList.remove("hide");
+        if (vw < 600) {
+            userAuthDiv.style.position = "";
+            userAuthDiv.style.height = "50vh"
+        }
     } else {
         userAuthDiv.classList.remove("hide");
         loginDiv.classList.remove("hide");
