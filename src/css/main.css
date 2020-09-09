@@ -1144,6 +1144,13 @@ footer .big-footer {
 
 
 @media (max-width: 600px) {
+
+    .header-text {
+        align-self: flex-start;
+        transform: translateX(0);
+        margin-left: 15px;
+    }
+    
     .side-nav-container {
         z-index: 50;
         position: fixed;
@@ -1356,7 +1363,6 @@ footer .big-footer {
 
 
 @media (max-width: 400px) {
-
     .tweet-image video, .collection-tweet-image video,
     .tweet-image img, .collection-tweet-image img {
         height: 160px;

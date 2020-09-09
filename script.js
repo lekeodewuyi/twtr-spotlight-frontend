@@ -249,7 +249,7 @@ const appendUserDetails = (user) => {
 // Initial State
 let state = {
     page: "home",
-    header: "Home",
+    header: `twtr  &middot; spotlight`,
     home: {
         class: homeSearchPage.className
     },
@@ -472,20 +472,24 @@ function handleSideNav(){
         }
     }
 
+
     if (currentTab === homeItem) {
         goHome();
         spotlightNav.innerHTML = homeSpotlight.innerHTML;
         headerText.innerHTML = homeItem.innerText;
+        headerText.innerHTML = "Home";
         homeItem.setAttribute("data-selected", `true`);
     } else if (currentTab === timelineItem) {
         timeTravel();
         spotlightNav.innerHTML = timelineSpotlight.innerHTML;
         headerText.innerHTML = timelineItem.innerText;
+        headerText.innerHTML = `Search Timeline`;
         timelineItem.setAttribute("data-selected", `true`);
     } else if (currentTab === collectionItem) {
         goToCollections();
         spotlightNav.innerHTML = collectionSpotlight.innerHTML;
         headerText.innerHTML = collectionItem.innerText;
+        headerText.innerHTML = `Your collections`;
         collectionItem.setAttribute("data-selected", `true`);
     } else if (currentTab === aboutItem) {
         spotlightNav.innerHTML = aboutSpotlight.innerHTML;
@@ -495,6 +499,19 @@ function handleSideNav(){
     } else if (currentTab === userProfilePanel) {
         openUserPanel();
     }
+
+
+    if (vw < 950) {
+        console.log("heyyyy")
+        if (currentTab === homeItem) {
+            headerText.innerHTML = `Home <span class="small color-blue"> / search for anything on twitter<span>`;
+        } else if (currentTab === timelineItem) {
+            headerText.innerHTML = `Search Timeline <span class="small color-blue"> / get tweets from a user's timeline<span>`;
+        } else if (currentTab === collectionItem) {
+            headerText.innerHTML = `Your collections  <span class="small color-blue"> / view all your saved tweets.<span>`;
+        } 
+    }
+
 
     state.header = headerText.innerHTML;
     state.page = current_page;
