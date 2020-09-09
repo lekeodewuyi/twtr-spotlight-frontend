@@ -1400,6 +1400,10 @@ footer .big-footer {
     .tweet-image img, .collection-tweet-image img {
         height: 160px;
     }
+
+    .save-to-collection-prompt {
+        width: 80vw;
+    }
 }
 
 
