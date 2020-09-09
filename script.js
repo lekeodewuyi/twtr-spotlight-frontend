@@ -298,6 +298,9 @@ let state = {
     savetocol: {
         class: saveToCollectionModal.className
     },
+    removefromcol: {
+        class: removeFromCollectionModal.className
+    },
     screenFade: {
         class: screenFade.className
     },
@@ -313,6 +316,7 @@ let state = {
 function render(){
     let token = localStorage.FBIdToken;
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
     // set app data
     if(token) {
         const decodedToken = jwt_decode(token);
@@ -395,6 +399,7 @@ function render(){
     mediaModal.style.backgroundImage = state.media.bg_img;
 
     saveToCollectionModal.className = state.savetocol.class;
+    removeFromCollectionModal.className = state.removefromcol.class;
 
 
 
@@ -1180,6 +1185,8 @@ function timelineSearch(){
 
 
 function retrieveCollectionTweets(){
+    console.log("heyyyyy")
+
     emptyCollection.innerHTML = "";
     let collectionName = event.currentTarget.innerText.trim();
 
@@ -1218,10 +1225,12 @@ function axiosRetrieveTweets(collection){
                 btn.classList.remove("hide");
                 btn.setAttribute("data-collection-name", collection);
             })
+            searchResults.scrollIntoView();
 
         
             if (tweetResultsDiv.innerHTML === "") {
-                emptyCollection.innerHTML = `<span class="color-blue">${collection}</span> currently has no saved tweets`
+                emptyCollection.innerHTML = `<span class="color-blue">${collection}</span> currently has no saved tweets`;
+                emptyCollection.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
             }
 
             interactWithSearchResults();
@@ -1327,6 +1336,9 @@ function interactWithSearchResults(){
             deleteTweetBtn.setAttribute("data-tweetId", tweetId);
             deleteTweetBtn.setAttribute("data-collection-name", collectionName);
 
+            state.savetocol.class = saveToCollectionModal.className;
+            history.pushState(state, null, "");
+
         }, false)
     })
 
@@ -1335,6 +1347,9 @@ function interactWithSearchResults(){
     closeRemoveFromCollectionModal.forEach((close) => {
         close.addEventListener("click", function(){
             removeFromCollectionModal.classList.add("hide");
+
+            state.savetocol.class = saveToCollectionModal.className;
+            window.back();
         }, false)
     })
 

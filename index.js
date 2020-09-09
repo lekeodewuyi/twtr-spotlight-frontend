@@ -724,6 +724,7 @@ function appendTweets(results){
         let tweetTime = document.createElement("p");
         tweetTime.classList.add("tweet-time", "tw-name-item");
         tweetTime.innerHTML = ` &middot; ${dayjs(results[i].created_at).format('MMM DD YYYY - (h:mm a)')}`;
+
         tweetNameDiv.append(tweetName, tweetVerified, tweetUserName, tweetTime)
 
 

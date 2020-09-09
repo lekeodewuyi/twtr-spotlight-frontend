@@ -878,6 +878,11 @@ header {
     color: var(--grey-font);
 }
 
+.create-col-btn-and-cancel {
+    display: flex;
+    align-items: center;
+}
+
 .create-collection-close {
     position: relative;
     margin-left: 15px;
@@ -1183,7 +1188,7 @@ footer .big-footer {
         position: fixed;
         width: 90vw;
         height: 80vh;
-        height: 90vh;
+        height: 83vh;
         top: 0px;
         overflow-y: scroll;
     }
@@ -1247,12 +1252,11 @@ footer .big-footer {
 
     .center-container {
         margin: 0px;
-        /* height: 80vh; */
         height: Calc(100vh - 50px);
     }
 
     .home-search-page, .timeline-search-page {
-        padding-top: 50px;
+        padding-top: 50px;   
     }
 
     .center-container,
@@ -1260,12 +1264,63 @@ footer .big-footer {
     .collections-page {
         width: 350px;
         width: 100vw;
-        height: Calc(100vh - 50px);   
+        height: Calc(100vh - 50px);
     }
+
+    .tweet-result:last-child {
+        margin-bottom: 100px;
+    }
+
+    .collections-page {
+        /* display: flex; */
+        flex-direction: column;
+        width: 95vw;
+        height: auto;
+    }
+
+    .create-collection-input-div {
+        width: 100vw;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .create-collection-input {
+        margin-bottom: 20px;
+        width: 95vw;
+    }
+
+    .create-collection-close {
+        margin-left: 40px;
+    }
+
+    .create-collection-error {
+        text-align: center;
+    }
+
+    .collections-list {
+        margin: 0px;
+    }
+
+    .empty-collection {
+        margin-top: 30px;
+        padding-bottom: 200px;
+    }
+
+    .remove-from-collection-prompt {
+        width: 350px;
+        height: 180px;
+        background-color: var(--grey-floating-panel);
+        transform: translate(0px, 0px);
+    }
+
+
+
+
     
     .tweet-image video, .collection-tweet-image video,
     .tweet-image img, .collection-tweet-image img {
-        width: 280px;
+        width: 290px;
         height: 160px;
         border-radius: 12px;
     }
@@ -1278,13 +1333,9 @@ footer .big-footer {
     }
     .tweet-footer {
         font-size: 0.6rem;
-        width: 280px;
+        width: 290px;
     }
 }
-
-/* .user-auth-div input {
-    background-color: white !important;
-} */
 
 
 

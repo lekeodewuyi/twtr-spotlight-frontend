@@ -76,37 +76,39 @@
             <div class="side-nav-container">
                 <div class="home side-nav-item" data-selected="true">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-                    <p>Home</p>
+                    <p class="side-nav-para">Home</p>
                 </div>
                 <div class="time-travel side-nav-item">
                     <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24"><g><rect fill="none" height="24" width="24"/></g><g><g><g><path d="M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10s10-4.5,10-10S17.5,2,12,2z M16.2,16.2L11,13V7h1.5v5.2l4.5,2.7L16.2,16.2z"/></g></g></g></svg>
-                    <p>Search Timeline</p>
+                    <p class="side-nav-para">Search Timeline</p>
                 </div>
                 <div class="collections side-nav-item">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>
-                    <p>Your collections</p>
+                    <p class="side-nav-para">Your collections</p>
                 </div>
                 <div class="about side-nav-item">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
-                    <p>About</p>
+                    <p class="side-nav-para">About</p>
                 </div>
-                <div class="about-modal modal hide">
-                    <svg class="about-modal-close close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>
-                    <!-- <p class="about-header">About </p> -->
-                    <p class ="about-text">twtr  &middot; spotlight is an app that simplifies searching for tweets on Twitter. You can also use the timeline search to get tweets from a specific user.<br><br>You can save tweets to collections to view later.</p>
+                <div class="about-modal-bg">
+                    <div class="about-modal modal hide">
+                        <svg class="about-modal-close close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>
+                        <!-- <p class="about-header">About </p> -->
+                        <p class ="about-text">twtr  &middot; spotlight is an app that simplifies searching for tweets on Twitter. You can also use the timeline search to get tweets from a specific user.<br><br>You can save tweets to collections to view later.</p>
+                    </div>
                 </div>
                 <div class="user-profile side-nav-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
-                    <p class="user-profile-label">Log in</p>
+                    <svg class="user-icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                    <p class="user-profile-label  side-nav-para">Log in</p>
                 </div>
                 <div class="user-auth-div modal hide">
                     <div class="login-div hide">
                         <svg class="login-div-close close auth-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>
                         <p class="auth-header">Sign in to your account</p>                          
-                        <input type="text" name="login-email" class="login-email" placeholder="Email">
-                        <label class="login-email-label" for="login-email">Email:</label>                           
-                        <input type="password" class="login-password" name="login-password" placeholder="Password">
-                        <label class="login-password-label" for="login-password">Password:</label>
+                        <input type="text" name="login-email" class="login-email auth-input" placeholder="Email">
+                        <label class="login-email-label auth-input-label" for="login-email">Email:</label>                           
+                        <input type="password" class="login-password auth-input" name="login-password" placeholder="Password">
+                        <label class="login-password-label auth-input-label" for="login-password">Password:</label>
                         <p class="login-errors auth-error"></p>
                         <button class="login-btn">Log in</button>
                         <p class="action-here">Don't have an account? <span class="signup-here auth-link">Sign up here</span>.</p>
@@ -115,14 +117,14 @@
                     <div class="signup-div hide">
                         <svg class="signup-div-close close auth-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>
                         <p class="auth-header">Create a new account</p>              
-                        <input type="text" name="signup-name" class="signup-name" placeholder="Name">
-                        <label class="signup-name-label" for="signup-name">Name:</label>            
-                        <input type="text" name="signup-email" class="signup-email" placeholder="Email">
-                        <label class="signup-email-label" for="signup-email">Email:</label>            
-                        <input type="password" class="signup-password" name="signup-password" placeholder="Password">
-                        <label class="signup-password-label" for="signup-password">Password:</label>                
-                        <input type="password" class="signup-confirm-password" name="signup-confirm-password" placeholder="Confirm password">
-                        <label class="signup-confirm-password-label" for="signup-confirm-password">Confirm password:</label>
+                        <input type="text" name="signup-name" class="signup-name auth-input" placeholder="Name">
+                        <label class="signup-name-label auth-input-label" for="signup-name">Name:</label>            
+                        <input type="text" name="signup-email" class="signup-email auth-input" placeholder="Email">
+                        <label class="signup-email-label auth-input-label" for="signup-email">Email:</label>            
+                        <input type="password" class="signup-password auth-input" name="signup-password" placeholder="Password">
+                        <label class="signup-password-label auth-input-label" for="signup-password">Password:</label>                
+                        <input type="password" class="signup-confirm-password auth-input" name="signup-confirm-password" placeholder="Confirm password">
+                        <label class="signup-confirm-password-label auth-input-label" for="signup-confirm-password">Confirm password:</label>
                         <p class="signup-errors auth-error"></p>
                         <button class="signup-btn">Sign up</button>
                         <p class="action-here">Already have an account? <span class="login-here auth-link">Log in here</span>.</p>
@@ -139,8 +141,10 @@
                 <div class="home-search-page">
                     <h1 class="home-logo">twtr &middot; spotlight</h1>
                     <div class="main-search-input-div">
+                        <form action="."></form>
                         <input type="search" class="main-search-input" placeholder="Search for anything on twitter" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" onkeydown = "if (event.keyCode == 13)
                         document.querySelector('#main-search-button').click()">
+                        </form>
                         <svg onclick = "document.querySelector('.main-search-button').click()" class="main-search-icon search-icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
                         <!-- <span class="material-icons main-search-icon">search</span> -->
                     </div>
@@ -164,7 +168,7 @@
                                 <input type="radio" class="language-choice" id="spanish" name="language" value="es">
                                 <label for="spanish">Spanish</label>
                             </div>
-                            <div class="portuguese-div">
+                            <div class="portuguese-div" id="portuguese-div">
                                 <input type="radio" class="language-choice" id="portuguese" name="language" value="pt">
                                 <label for="portuguese">Portuguese</label>
                             </div>
@@ -192,7 +196,7 @@
                 <div class="timeline-search-page hide">
                     <h1 class="timeline-header">spotlight <span class="timeline-subheader"> <span class="timeline-header-slash"> / </span> user timelines</span></h1>
                     <div class="timeline-search-input-div">
-                        <input type="search" class="timeline-search-input results-search-input" placeholder="Enter a username" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" onkeydown = "if (event.keyCode == 13)
+                        <input type="search" class="timeline-search-input results-search-input" placeholder="Enter a username" autocomplete="off" autocomplete="nope" autocorrect="off" autocapitalize="none" spellcheck="false" onkeydown = "if (event.keyCode == 13)
                         document.querySelector('#timeline-search-button').click()">
                         <svg onclick = "document.querySelector('.timeline-search-button').click()" class="timeline-search-icon search-icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
                         <!-- <span class="material-icons timeline-search-icon">search</span> -->
@@ -211,8 +215,10 @@
                         <input class="create-collection-input" type="text" placeholder="Enter your collection name" onkeydown = "if (event.keyCode == 13)
                         document.querySelector('#create-collection-btn').click()">
 
-                        <button class="create-collection-btn" id="create-collection-btn">Create</button>
-                        <svg class="create-collection-close close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>
+                        <div class="create-col-btn-and-cancel">
+                            <button class="create-collection-btn" id="create-collection-btn">Create</button>
+                            <svg class="create-collection-close close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>
+                        </div>
                     </div>
                     <p class="create-collection-error error"></p>
                     <div class="collections-list">
@@ -325,7 +331,7 @@
             </div>
         </div>
     </main>
-    <footer>
+    <footer class="hide">
         <p class="big-footer">
             <span>Made with &hearts; by <a target="_blank" href="lekeodewuyi.com" class="web-link">Leke Odewuyi &copy; 2020</a>  ::  </span><span>Send feedback and suggestions to <a href="mailto:hello@lekeodewuyi.com">hello@lekeodewuyi.com</a></span>
         </p>
