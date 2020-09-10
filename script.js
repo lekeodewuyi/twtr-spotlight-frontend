@@ -928,6 +928,12 @@ function appendTweets(results){
                     tweetVideo = document.createElement("video");
                     tweetVideo.controls = "controls";
                     videoSource = document.createElement("source");
+
+                    // if (results[i].extended_entities.media[0].type === "animated_gif") {
+                    //     tweetVideo.setAttribute("playsinline", true);
+                    //     tweetVideo.setAttribute("autoplay", true);
+                    //     tweetVideo.setAttribute("loop", true)
+                    // }
                     
                     let variants = results[i].extended_entities.media[0].video_info.variants;
 

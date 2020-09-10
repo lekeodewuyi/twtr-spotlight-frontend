@@ -508,6 +508,7 @@ header {
     transition: 0.25s;
     margin-right: 50px;
     margin-left: 20px;
+    min-height: 0px;
 }
 
 .home-search-page {
