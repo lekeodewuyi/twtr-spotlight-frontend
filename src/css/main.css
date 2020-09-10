@@ -204,6 +204,7 @@ button:hover, button:active {
 }
 
 .session-over-modal {
+    z-index: 50;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -857,6 +858,29 @@ header {
     margin-bottom: 10px;
 }
 
+.create-collection-from-modal {
+    font-size: 0.9rem;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-collection-from-modal input{
+    font-size: 1rem;
+    color: white;
+    background-color: var(--bg);
+    width: 85%;
+    height: 40px;
+    margin: 20px 0px;
+    padding: 0px 10px;
+    border: 1px solid transparent;
+}
+
+.create-col-from-modal-error {
+    font-size: 0.3rem;
+}
+
 .create-collection-cta {
     color: var(--blue);
     border-radius: 0;
@@ -1322,7 +1346,7 @@ footer .big-footer {
     .collections-page {
         width: 350px;
         width: 100vw;
-        height: Calc(100vh - 200px);
+        /* height: Calc(100vh - 200px); */
     }
 
     .tweet-result:last-child {

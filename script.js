@@ -100,6 +100,11 @@ const createCollectionBtn = document.querySelector("#create-collection-btn");
 const createCollectionInputClose = document.querySelector(".create-collection-close")
 const createCollectionError = document.querySelector(".create-collection-error");
 
+const createCollectionFromModal = document.querySelector(".create-collection-from-modal");
+const createCollectionFromModalInput = document.querySelector(".create-col-from-modal-input");
+const createCollectionFromModalBtn = document.querySelector(".create-col-from-modal-btn");
+const createCollectionFromModalError = document.querySelector(".create-col-from-modal-error");
+
 const collectionCounter = document.querySelector(".collection-count");
 const collectionList = document.querySelector(".collections-list");
 const emptyCollection = document.querySelector(".empty-collection");
@@ -137,6 +142,15 @@ loginFromModal.forEach((btn) => {
         setTimeout(function(){userProfilePanel.click()}, 300)
     }, false)
 })
+
+createCollectionFromModalBtn.addEventListener("click", function(){
+    createCollectionInput.value = createCollectionFromModalInput.value;
+    createCollectionBtn.click();
+    loader.classList.remove("hide");
+    createCollectionFromModalBtn.append(loader);
+
+    // setTimeout(function(){createCollectionFromModalBtn.append(loader)}, 4)
+}, addEventListener);
 
 
 let vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
@@ -216,6 +230,7 @@ const appendUserDetails = (user) => {
 
     collectionList.innerHTML = "";
     saveToCollectionItemDiv.innerHTML = "";
+    createCollectionFromModal.classList.add("hide");
     if (!(!Array.isArray(userCollections) || !userCollections.length)) {
         for (let i = 0; i < userCollections.length; i++) {
 
@@ -249,6 +264,7 @@ const appendUserDetails = (user) => {
         }
     } else {
         collectionCounter.innerHTML = `You haven't created any collections, click the create a new collection button to get started`
+        createCollectionFromModal.classList.remove("hide");
     }
 
     appendCollections()
@@ -1287,7 +1303,7 @@ function axiosRetrieveTweets(collection){
         })
 }
 
-
+let currentTweetId;
 function interactWithSearchResults(){
 
      // TODO: add modal popup for clicked images
@@ -1337,6 +1353,8 @@ function interactWithSearchResults(){
             getTweetId(currentTweet);
             let tweetId = currentTweet.tweetId;
             console.log(tweetId)
+            currentTweetId = tweetId;
+            console.log("currentTweetId", currentTweetId);
 
             collectionItemToBeSavedTo.forEach((collection) => {
                 collection.setAttribute("data-tweetId", tweetId);
@@ -1462,9 +1480,12 @@ function deleteTweetFromCollection(){
 
 
 function saveTweetToCollection(){
-    let currentTweet = event.currentTarget;
-    getTweetId(currentTweet);
-    let tweetId = currentTweet.tweetId;
+    // interactWithSearchResults();
+    // console.log("currentTweetId", currentTweetId);
+    // let currentTweet = event.currentTarget;
+    // getTweetId(currentTweet);
+    // let tweetId = currentTweet.tweetId;
+    let tweetId = currentTweetId;
     let collectionName = event.currentTarget.innerText.trim();
     let collection = event.currentTarget;
     collection.append(loader)
@@ -1556,6 +1577,7 @@ function openCreateCollectionDiv(){
 function closeCreateCollectionDiv(){
     createCollectionInput.value = ""
     createCollectionError.innerHTML = "";
+    createCollectionFromModalError.innerHTML = "";
     createCollectionCta.classList.remove("hide");
     createCollectionInputDiv.classList.add("hide");
 }
@@ -1575,9 +1597,10 @@ function createNewCollection(){
 
 
     if (createCollectionInput.value.trim() === "") {
-        loader.classList.add("hide");
         createCollectionError.classList.remove("hide");
         createCollectionError.innerHTML = "Please enter a name for your new collection";
+        createCollectionFromModalError.innerHTML = "Please enter a name for your new collection";
+        loader.classList.add("hide");
         return;
     }
 
@@ -1589,13 +1612,19 @@ function createNewCollection(){
         config
         )
         .then(function (response) {
-            createCollectionInput.value = ""
+            createCollectionInput.value = "";
+            createCollectionFromModalInput.value = "";
             loader.classList.add("hide");
             createCollectionCta.classList.remove("hide");
             createCollectionInputDiv.classList.add("hide");
+
+            createCollectionFromModal.classList.add("hide");
             
             updateCurrentUser(response.data.userDetails)
             appendUserDetails(response.data.userDetails);
+
+
+            interactWithSearchResults();
 
             // TODO: add modal popup for clicked images
 
@@ -1604,6 +1633,10 @@ function createNewCollection(){
             loader.classList.add("hide");
             console.log(error.response.data);
             createCollectionError.classList.remove("hide");
+            createCollectionFromModalError.classList.remove("hide");
+
+            createCollectionError.innerHTML = error.response.data.error;
+            createCollectionFromModalError.innerHTML = error.response.data.error;
             if (error.response.data.error === "Unauthorized")
             createCollectionError.innerHTML = "You need to be logged in to use this feature. Please login or create an account to continue."
         })
@@ -1639,6 +1672,12 @@ createCollectionBtn.addEventListener("click", createNewCollection, false);
 createCollectionInput.addEventListener("keyup", function(){
     if (event.keyCode !== 13) {
         createCollectionError.innerHTML = "";
+    }
+}, false)
+
+createCollectionFromModalInput.addEventListener("keyup", function(){
+    if (event.keyCode !== 13) {
+        createCollectionFromModalError.innerHTML = "";
     }
 }, false)
 
@@ -1681,8 +1720,12 @@ closeSaveToCollectionModal.addEventListener("click", function(){
     saveToCollectionModal.classList.add("hide")
         screenFade.classList.add("hide");
 
+        createCollectionFromModalError.innerHTML = "";
+        createCollectionFromModalInput.value = "";
+        createCollectionError.innerHTML = "";
+
         state.savetocol.class = saveToCollectionModal.className;
-        window.back();
+        window.history.back();
         // window.history.pushState(state, null, "");
 
 }, false)
