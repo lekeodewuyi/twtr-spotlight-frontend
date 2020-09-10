@@ -649,9 +649,9 @@ function appendElementsToTimeline(){
 
 
 // homeItem.addEventListener("click", goHome, false);
-timelineItem.addEventListener("click", timeTravel, false);
-collectionItem.addEventListener("click", goToCollections, false);
-aboutItem.addEventListener("click", getAbout, false);
+// timelineItem.addEventListener("click", timeTravel, false);
+// collectionItem.addEventListener("click", goToCollections, false);
+// aboutItem.addEventListener("click", getAbout, false);
 
 
 
