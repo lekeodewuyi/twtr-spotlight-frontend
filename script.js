@@ -38,6 +38,9 @@ const aboutModalClose = document.querySelector(".about-modal-close");
 const authInputs = document.querySelectorAll(".auth-input");
 const authInputLabels = document.querySelectorAll(".auth-input-label");
 
+const nextInputs = document.querySelectorAll(".next-input");
+const goInputs = document.querySelectorAll(".go-input");
+
 const sessionExpiredModal = document.querySelector(".session-over-modal");
 const closeSessionExpiredModal = document.querySelector(".session-over-modal-close");
 
@@ -133,6 +136,30 @@ const homeSpotlight = document.querySelector(".home-page-spotlight");
 const timelineSpotlight = document.querySelector(".timeline-page-spotlight");
 const collectionSpotlight = document.querySelector(".collections-page-spotlight");
 const aboutSpotlight = document.querySelector(".about-page-spotlight");
+
+
+nextInputs.forEach((input) => {
+    input.addEventListener("keydown", function(event){
+        if (event.keyCode === 13 && event.target.nodeName === 'INPUT') {
+            let form = event.target.form;
+            let index = Array.prototype.indexOf.call(form, event.target);
+            form.elements[index + 1].focus();
+            event.preventDefault();
+          }
+    }, false)
+})
+
+goInputs.forEach((input) => {
+    input.addEventListener("keydown", function(event){
+        if (event.keyCode === 13 && event.target.nodeName === 'INPUT') {
+            let form = event.target.form;
+            let index = Array.prototype.indexOf.call(form, event.target);
+            form.elements[index + 1].click();
+            // event.preventDefault();
+          }
+    }, false)
+})
+
 
 
 loginFromModal.forEach((btn) => {

@@ -110,34 +110,38 @@
                     <p class="user-profile-label  side-nav-para">Log in</p>
                 </div>
                 <div class="user-auth-div modal hide">
-                    <div class="login-div hide">
-                        <svg class="login-div-close close auth-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>
-                        <p class="auth-header">Sign in to your account</p>                          
-                        <input type="text" name="login-email" class="login-email auth-input" placeholder="Email">
-                        <label class="login-email-label auth-input-label" for="login-email">Email:</label>                           
-                        <input type="password" class="login-password auth-input" name="login-password" placeholder="Password">
-                        <label class="login-password-label auth-input-label" for="login-password">Password:</label>
-                        <p class="login-errors auth-error"></p>
-                        <button class="login-btn">Log in</button>
-                        <p class="action-here">Don't have an account? <span class="signup-here auth-link">Sign up here</span>.</p>
-                        <p class="account-warning">This does not refer to your twitter account details. This is an account to allow you use extra features of the twtr  &middot; spotlight app.</p>
-                    </div>
-                    <div class="signup-div hide">
-                        <svg class="signup-div-close close auth-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>
-                        <p class="auth-header">Create a new account</p>              
-                        <input type="text" name="signup-name" class="signup-name auth-input" placeholder="Name">
-                        <label class="signup-name-label auth-input-label" for="signup-name">Name:</label>            
-                        <input type="text" name="signup-email" class="signup-email auth-input" placeholder="Email">
-                        <label class="signup-email-label auth-input-label" for="signup-email">Email:</label>            
-                        <input type="password" class="signup-password auth-input" name="signup-password" placeholder="Password">
-                        <label class="signup-password-label auth-input-label" for="signup-password">Password:</label>                
-                        <input type="password" class="signup-confirm-password auth-input" name="signup-confirm-password" placeholder="Confirm password">
-                        <label class="signup-confirm-password-label auth-input-label" for="signup-confirm-password">Confirm password:</label>
-                        <p class="signup-errors auth-error"></p>
-                        <button class="signup-btn">Sign up</button>
-                        <p class="action-here">Already have an account? <span class="login-here auth-link">Log in here</span>.</p>
-                        <p class="account-warning">This does not refer to your twitter account details. This is an account to allow you use extra features of the twtr  &middot; spotlight app.</p>
-                    </div>
+                    <form action="javascript:void(0);">
+                        <div class="login-div hide">
+                            <svg class="login-div-close close auth-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>
+                            <p class="auth-header">Sign in to your account</p>                          
+                            <input type="text" name="login-email" class="login-email auth-input next-input" placeholder="Email" id="login-email">
+                            <label class="login-email-label auth-input-label" for="login-email">Email:</label>                           
+                            <input type="password" class="login-password auth-input go-input" name="login-password" placeholder="Password" id="login-password">
+                            <label class="login-password-label auth-input-label" for="login-password">Password:</label>
+                            <p class="login-errors auth-error"></p>
+                            <button class="login-btn">Log in</button>
+                            <p class="action-here">Don't have an account? <span class="signup-here auth-link">Sign up here</span>.</p>
+                            <p class="account-warning">This does not refer to your twitter account details. This is an account to allow you use extra features of the twtr  &middot; spotlight app.</p>
+                        </div>
+                    </form>
+                    <form action="javascript:void(0);">
+                        <div class="signup-div hide">
+                            <svg class="signup-div-close close auth-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>
+                            <p class="auth-header">Create a new account</p>              
+                            <input type="text" name="signup-name" class="signup-name auth-input next-input" placeholder="Name" id="signup-name">
+                            <label class="signup-name-label auth-input-label" for="signup-name">Name:</label>            
+                            <input type="text" name="signup-email" class="signup-email auth-input next-input" placeholder="Email" id="signup-email">
+                            <label class="signup-email-label auth-input-label" for="signup-email">Email:</label>            
+                            <input type="password" class="signup-password auth-input next-input" name="signup-password" placeholder="Password" id="signup-password">
+                            <label class="signup-password-label auth-input-label" for="signup-password">Password:</label>                
+                            <input type="password" class="signup-confirm-password auth-input go-input" name="signup-confirm-password" placeholder="Confirm password" id="signup-confirm-password">
+                            <label class="signup-confirm-password-label auth-input-label" for="signup-confirm-password" >Confirm password:</label>
+                            <p class="signup-errors auth-error"></p>
+                            <button class="signup-btn">Sign up</button>
+                            <p class="action-here">Already have an account? <span class="login-here auth-link">Log in here</span>.</p>
+                            <p class="account-warning">This does not refer to your twitter account details. This is an account to allow you use extra features of the twtr  &middot; spotlight app.</p>
+                        </div>
+                    </form>
                     <div class="logout-div hide">
                         <svg class="logout-div-close close auth-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>
                         <button class="logout-btn">Log out</button>
@@ -150,7 +154,7 @@
                     <h1 class="home-logo">twtr &middot; spotlight</h1>
                     <div class="main-search-input-div">
                         <form action="."></form>
-                        <input type="search" class="main-search-input" placeholder="Search for anything on twitter" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" onkeydown = "if (event.keyCode == 13)
+                        <input type="search" class="main-search-input" enterkeyhint="search" placeholder="Search for anything on twitter" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" onkeydown = "if (event.keyCode == 13)
                         document.querySelector('#main-search-button').click()">
                         </form>
                         <svg onclick = "document.querySelector('.main-search-button').click()" class="main-search-icon search-icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
@@ -204,7 +208,7 @@
                 <div class="timeline-search-page hide">
                     <h1 class="timeline-header">spotlight <span class="timeline-subheader"> <span class="timeline-header-slash"> / </span> user timelines</span></h1>
                     <div class="timeline-search-input-div">
-                        <input type="search" class="timeline-search-input results-search-input" placeholder="Enter a username" autocomplete="off" autocomplete="nope" autocorrect="off" autocapitalize="none" spellcheck="false" onkeydown = "if (event.keyCode == 13)
+                        <input type="search" enterkeyhint="search" class="timeline-search-input results-search-input" placeholder="Enter a username" autocomplete="off" autocomplete="nope" autocorrect="off" autocapitalize="none" spellcheck="false" onkeydown = "if (event.keyCode == 13)
                         document.querySelector('#timeline-search-button').click()">
                         <svg onclick = "document.querySelector('.timeline-search-button').click()" class="timeline-search-icon search-icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
                         <!-- <span class="material-icons timeline-search-icon">search</span> -->
