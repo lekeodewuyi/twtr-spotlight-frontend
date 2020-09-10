@@ -51,6 +51,8 @@ const loginErrors = document.querySelector(".login-errors");
 const loginBtn =  document.querySelector(".login-btn");
 const loginHere = document.querySelector(".login-here");
 
+const loginFromModal = document.querySelectorAll(".login-from-modal");
+
 const signupDiv = document.querySelector(".signup-div");
 const signupNameLabel = document.querySelector(".signup-name-label");
 const signupEmailLabel = document.querySelector(".signup-email-label");
@@ -127,6 +129,14 @@ const timelineSpotlight = document.querySelector(".timeline-page-spotlight");
 const collectionSpotlight = document.querySelector(".collections-page-spotlight");
 const aboutSpotlight = document.querySelector(".about-page-spotlight");
 
+
+loginFromModal.forEach((btn) => {
+    btn.addEventListener("click", function(){
+        window.history.back();
+        // userProfilePanel.click()
+        setTimeout(function(){userProfilePanel.click()}, 300)
+    }, false)
+})
 
 
 let vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);

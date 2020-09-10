@@ -385,6 +385,10 @@ header {
     align-items: center;
 }
 
+.login-from-modal {
+    cursor: pointer;
+}
+
 .auth-header {
     font-size: 1rem;
     margin-bottom: 50px;
