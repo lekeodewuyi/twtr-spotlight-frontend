@@ -105,7 +105,7 @@ const createCollectionError = document.querySelector(".create-collection-error")
 
 const createCollectionFromModal = document.querySelector(".create-collection-from-modal");
 const createCollectionFromModalInput = document.querySelector(".create-col-from-modal-input");
-const createCollectionFromModalBtn = document.querySelector(".create-col-from-modal-btn");
+const createCollectionFromModalBtn = document.querySelectorAll(".create-col-from-modal-btn");
 const createCollectionFromModalError = document.querySelector(".create-col-from-modal-error");
 
 const collectionCounter = document.querySelector(".collection-count");
@@ -170,14 +170,16 @@ loginFromModal.forEach((btn) => {
     }, false)
 })
 
-createCollectionFromModalBtn.addEventListener("click", function(){
-    createCollectionInput.value = createCollectionFromModalInput.value;
-    createCollectionBtn.click();
-    loader.classList.remove("hide");
-    createCollectionFromModalBtn.append(loader);
-
-    // setTimeout(function(){createCollectionFromModalBtn.append(loader)}, 4)
-}, addEventListener);
+createCollectionFromModalBtn.forEach((btn) => {
+    btn.addEventListener("click", function(){
+        createCollectionInput.value = createCollectionFromModalInput.value;
+        createCollectionBtn.click();
+        loader.classList.remove("hide");
+        createCollectionFromModal.append(loader);
+    
+        // setTimeout(function(){createCollectionFromModalBtn.append(loader)}, 4)
+    }, addEventListener);
+})
 
 
 let vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
@@ -252,12 +254,12 @@ const appendUserDetails = (user) => {
     userIcon.style.fill = blue;
     userProfileLabel.innerHTML = `Hello, <span class="color-blue">${firstName}</span>`;
 
-    let userCollections = user.collections;
+    let userCollections = user.collections.reverse();
     let userCollectionCount = user.collectionCount;
 
     collectionList.innerHTML = "";
     saveToCollectionItemDiv.innerHTML = "";
-    createCollectionFromModal.classList.add("hide");
+    createCollectionFromModal.classList.remove("hide");
     if (!(!Array.isArray(userCollections) || !userCollections.length)) {
         for (let i = 0; i < userCollections.length; i++) {
 
@@ -291,7 +293,7 @@ const appendUserDetails = (user) => {
         }
     } else {
         collectionCounter.innerHTML = `You haven't created any collections, click the create a new collection button to get started`
-        createCollectionFromModal.classList.remove("hide");
+        // createCollectionFromModal.classList.remove("hide");
     }
 
     appendCollections()
@@ -1645,7 +1647,7 @@ function createNewCollection(){
             createCollectionCta.classList.remove("hide");
             createCollectionInputDiv.classList.add("hide");
 
-            createCollectionFromModal.classList.add("hide");
+            // createCollectionFromModal.classList.add("hide");
             
             updateCurrentUser(response.data.userDetails)
             appendUserDetails(response.data.userDetails);

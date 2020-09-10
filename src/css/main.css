@@ -6,6 +6,7 @@ html {
     
 *, *:before, *:after {
     box-sizing: inherit;
+    transition: .2s;
 }
 
 :root {
@@ -192,6 +193,7 @@ button:hover, button:active {
     top: 0px;
     fill: var(--red);
     margin: 10px;
+    background-color: var(--bg);
 }
 
 .screen-fade {
@@ -491,6 +493,8 @@ header {
     top: 0px;
     fill: var(--red);
     margin: 10px;
+    background-color: var(--bg);
+    border-radius: 100%;
 }
 
 .close:hover {
@@ -825,7 +829,7 @@ header {
 }
 
 .save-to-collection-item:last-child {
-    border-bottom: 1px solid transparent;
+    border-bottom: 1px solid var(--grey-floating-panel);
 }
 
 .save-to-collection-item:hover, .save-to-collection-item:active {
@@ -859,25 +863,39 @@ header {
 }
 
 .create-collection-from-modal {
+    position: relative;
     font-size: 0.9rem;
-    margin-top: 30px;
-    display: flex;
+    margin-top: 10px;
+    /* display: flex; */
     flex-direction: column;
     align-items: center;
 }
 
 .create-collection-from-modal input{
+    display: flex;
     font-size: 1rem;
     color: white;
     background-color: var(--bg);
     width: 85%;
     height: 40px;
-    margin: 20px 0px;
-    padding: 0px 10px;
+    margin-left: 25px;
+    padding: 0px 10px !important;
     border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.create-col-from-modal-btn{
+    cursor: pointer;
+    position: absolute;
+    fill: var(--blue) !important;
+    width: 39.9px;
+    height: 39.9px;
+    transform: translate(Calc(85% + 250px), -40px);
 }
 
 .create-col-from-modal-error {
+    margin-top: 10px !important;
     font-size: 0.3rem;
 }
 
@@ -1432,6 +1450,12 @@ footer .big-footer {
 
     .save-to-collection-prompt {
         width: 80vw;
+        width: 300px;
+    }
+
+    .create-col-from-modal-btn {
+        transform: translate(Calc(300px - 192px), 10px);
+        transform: translate(Calc(300px - 62px), -40px);
     }
 }
 
