@@ -174,8 +174,8 @@ createCollectionFromModalBtn.forEach((btn) => {
     btn.addEventListener("click", function(){
         createCollectionInput.value = createCollectionFromModalInput.value;
         createCollectionBtn.click();
-        loader.classList.remove("hide");
-        createCollectionFromModal.append(loader);
+        // loader.classList.remove("hide");
+        // createCollectionFromModal.append(loader);
     
         // setTimeout(function(){createCollectionFromModalBtn.append(loader)}, 4)
     }, addEventListener);
@@ -1111,8 +1111,14 @@ function appendTweets(results){
 
 function mainSearch(){
     current_page = "home"
-    mainSearchButton.append(loader);
+    tweetResultsDiv.innerHTML = "";
     loader.classList.remove("hide");
+
+    if (homeSearchPage.classList.contains("hide")) {
+        searchResults.append(loader);
+    } else {
+        mainSearchButton.append(loader);
+    }
 
     let lang;
     let tweetType;
@@ -1165,6 +1171,9 @@ function mainSearch(){
             tweetResultsDiv.innerHTML = "";
 
 
+            if (!Array.isArray(results) || !results.length) {
+                tweetResultsDiv.innerHTML = `There are no results for <span class= color-blue>${searchData.query}</span>. Maybe try another keyword or choose a different language or tweet type`
+            } else
             appendTweets(results);
             interactWithSearchResults();
 
@@ -1187,8 +1196,14 @@ function mainSearch(){
 
 function timelineSearch(){
     current_page = "timeline";
-    timelineSearchButton.append(loader);
     loader.classList.remove("hide");
+    tweetResultsDiv.innerHTML = "";
+
+    if (timelineSearchPage.classList.contains("hide")) {
+        searchResults.append(loader);
+    } else {
+        timelineSearchButton.append(loader);
+    }
 
     let userName = timelineSearchInput.value;
 
@@ -1612,10 +1627,15 @@ function closeCreateCollectionDiv(){
 }
 
 function createNewCollection(){
-    createCollectionBtn.append(loader);
+    // createCollectionBtn.append(loader);
     loader.classList.remove("hide");
     checkTokenStatus()
-    createCollectionBtn.append(loader);
+
+    if (collectionPage.classList.contains("hide")) {
+        createCollectionFromModal.append(loader);
+    } else {
+        createCollectionBtn.append(loader);
+    }
 
 
     if (token === null || token === undefined) {

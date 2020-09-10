@@ -895,6 +895,7 @@ header {
 }
 
 .create-col-from-modal-error {
+    text-align: center;
     margin-top: 10px !important;
     font-size: 0.3rem;
 }
@@ -1378,11 +1379,16 @@ footer .big-footer {
         height: auto;
     }
 
+    .create-collection-cta {
+        margin-bottom: 50px;
+    }
+
     .create-collection-input-div {
         width: 100vw;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        margin-bottom: 50px;
     }
 
     .create-collection-input {
