@@ -1,5 +1,3 @@
-// export {errors as default};
-
 
 // declare empty field; to later disallow white spaces in entries
 function isEmpty(string) {

@@ -1,4 +1,4 @@
-import {validateLoginData, validateSignupData} from "./src/scripts/validators.js";
+import {validateLoginData, validateSignupData} from './validators.js';
 
 dayjs().format();
 const blue = "#1DA1F2";
