@@ -1955,18 +1955,18 @@ function handleTouchMove(evt) {
         }                       
     } else {
         if ( yDiff > 0 ) {
-            // if (!(mediaModal.classList.contains("hide"))) {
-            //     history.back();
-            //     state.screenFade.class = screenFade.className;
-            //     state.media.class = mediaModal.className;
-            // }
+            if (!(mediaModal.classList.contains("hide"))) {
+                history.back();
+                state.screenFade.class = screenFade.className;
+                state.media.class = mediaModal.className;
+            }
             /* up swipe */ 
         } else { 
-            // if (!(mediaModal.classList.contains("hide"))) {
-            //     history.back();
-            //     state.screenFade.class = screenFade.className;
-            //     state.media.class = mediaModal.className;
-            // }
+            if (!(mediaModal.classList.contains("hide"))) {
+                history.back();
+                state.screenFade.class = screenFade.className;
+                state.media.class = mediaModal.className;
+            }
             /* down swipe */
         }                                                                 
     }
