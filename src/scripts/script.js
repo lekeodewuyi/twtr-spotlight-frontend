@@ -1042,7 +1042,10 @@ function appendTweets(results){
                     tweetImage = document.createElement("img");
                     tweetImage.src = results[i].extended_entities.media[0].media_url_https;
                     tweetImage.alt = "Tweet Media"
-                    tweetImageDiv.append(tweetImage);
+                    img.decode().then(()=> {
+                        tweetImageDiv.append(tweetImage);
+                    })
+                    // tweetImageDiv.append(tweetImage);
                 }
             } 
         }

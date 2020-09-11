@@ -35,6 +35,7 @@
     "babel-core": "^6.26.3",
     "babel-loader": "^8.1.0",
     "babel-preset-env": "^1.7.0",
+    "browser-image-compression": "^1.0.12",
     "css-loader": "^4.3.0",
     "dayjs": "^1.8.35",
     "extract-text-webpack-plugin": "^3.0.2",
