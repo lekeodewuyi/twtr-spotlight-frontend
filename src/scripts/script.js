@@ -1,6 +1,11 @@
 import {validateLoginData, validateSignupData} from './validators.js';
+import  jwt_decode  from 'jwt-decode';
+const axios = require('axios');
+const dayjs = require('dayjs');
+import relativeTime from 'dayjs/plugin/relativeTime';
 
-dayjs().format();
+dayjs.extend(relativeTime)
+// dayjs().format();
 const blue = "#1DA1F2";
 const bg = "#15202B";
 const blueLabel = "#1A91DA";
@@ -940,7 +945,13 @@ function appendTweets(results){
         tweetNameDiv.classList.add("tweet-name-div");
         let tweetName = document.createElement("p");
         tweetName.classList.add("tweet-name", "tw-name-item");
+        tweetName.setAttribute("data-username",`${results[i].user.screen_name}`)
         tweetName.innerHTML = results[i].user.name;
+
+        console.log((`${tweetName.innerHTML}`).length)
+        if ((`${tweetName.innerHTML}`).length > 20) {
+            tweetName.innerHTML = text_truncate(`${tweetName.innerHTML}`, 20)
+        }
         let tweetVerified = document.createElement("span");
         tweetVerified.classList.add("verified", "material-icons", "tw-name-item");
         tweetVerified.innerHTML = "verified";
@@ -952,9 +963,11 @@ function appendTweets(results){
         tweetUserName.innerHTML = `${results[i].user.screen_name}`;
         let tweetTime = document.createElement("p");
         tweetTime.classList.add("tweet-time", "tw-name-item");
-        // tweetTime.innerHTML = ` &middot; ${dayjs(results[i].created_at).format('MMM DD YYYY - (h:mm a)')}`;
-        tweetTime.innerHTML = ` &middot; ${dayjs(results[i].created_at).format('MMM DD YY')}`;
+        tweetTime.innerHTML = ` &middot; ${dayjs(results[i].created_at).fromNow()}`;
         tweetNameDiv.append(tweetName, tweetVerified, tweetUserName, tweetTime)
+
+        console.log("length:", (`${tweetName.innerText} + ${tweetUserName.innerText}`).length)
+
 
 
         let tweetText = document.createElement("p");
@@ -1476,6 +1489,7 @@ function interactWithSearchResults(){
         }, false)
     })
 
+
 }
 
 
@@ -1838,6 +1852,22 @@ function atlify(text) {
     let atRegex = /(@[^\s]+)/g;
     return text.replace(atRegex, '<span class="mention">$1</span>')
 }
+
+function text_truncate (str, length, ending) {
+    if (length == null) {
+    length = 100;
+    }
+    if (ending == null) {
+    ending = '...';
+    }
+    if (str.length > length) {
+    return str.substring(0, length - ending.length) + ending;
+    } else {
+    return str;
+    }
+};
+
+
 
 // searchResults.innerHTML = atlify(searchResults.innerHTML);
 
