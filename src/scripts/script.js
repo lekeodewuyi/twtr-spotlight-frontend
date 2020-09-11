@@ -935,12 +935,8 @@ function appendTweets(results){
         let tweetUserImageDiv = document.createElement("div");
         tweetUserImageDiv.classList.add("tweet-user-image");
 
-        // let tweetUserImage = document.createElement("img");
-        // tweetUserImage.src = results[i].user.profile_image_url
-        // tweetUserImage.alt = "User Image"
-        // tweetUserImageDiv.append(tweetUserImage);
-
         let tweetUserImage = new Image();
+        tweetUserImage.decoding = "sync"
         tweetUserImage.src = results[i].user.profile_image_url
         tweetUserImage.alt = "User Image"
         tweetUserImageDiv.appendChild(tweetUserImage);
@@ -1042,7 +1038,7 @@ function appendTweets(results){
                     tweetImage = document.createElement("img");
                     tweetImage.src = results[i].extended_entities.media[0].media_url_https;
                     tweetImage.alt = "Tweet Media"
-                    
+
                     tweetImageDiv.append(tweetImage);
                 }
             } 
