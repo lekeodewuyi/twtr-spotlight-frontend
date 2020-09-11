@@ -936,9 +936,10 @@ function appendTweets(results){
         tweetUserImageDiv.classList.add("tweet-user-image");
 
         let tweetUserImage = new Image();
-        tweetUserImage.decoding = "sync"
         tweetUserImage.src = results[i].user.profile_image_url
         tweetUserImage.alt = "User Image"
+        tweetUserImage.decoding = "sync"
+        tweetUserImage.loading = "lazy"
         tweetUserImageDiv.appendChild(tweetUserImage);
 
         let tweetBody = document.createElement("div");
