@@ -1,1 +1,4299 @@
-!function(e){var n={};function t(r){if(n[r])return n[r].exports;var o=n[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,t),o.l=!0,o.exports}t.m=e,t.c=n,t.d=function(e,n,r){t.o(e,n)||Object.defineProperty(e,n,{enumerable:!0,get:r})},t.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},t.t=function(e,n){if(1&n&&(e=t(e)),8&n)return e;if(4&n&&"object"==typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(t.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:e}),2&n&&"string"!=typeof e)for(var o in e)t.d(r,o,function(n){return e[n]}.bind(null,o));return r},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},t.p="",t(t.s=35)}([function(e,n,t){"use strict";var r=t(2),o=Object.prototype.toString;function i(e){return"[object Array]"===o.call(e)}function a(e){return void 0===e}function s(e){return null!==e&&"object"==typeof e}function c(e){if("[object Object]"!==o.call(e))return!1;var n=Object.getPrototypeOf(e);return null===n||n===Object.prototype}function l(e){return"[object Function]"===o.call(e)}function d(e,n){if(null!=e)if("object"!=typeof e&&(e=[e]),i(e))for(var t=0,r=e.length;t<r;t++)n.call(null,e[t],t,e);else for(var o in e)Object.prototype.hasOwnProperty.call(e,o)&&n.call(null,e[o],o,e)}e.exports={isArray:i,isArrayBuffer:function(e){return"[object ArrayBuffer]"===o.call(e)},isBuffer:function(e){return null!==e&&!a(e)&&null!==e.constructor&&!a(e.constructor)&&"function"==typeof e.constructor.isBuffer&&e.constructor.isBuffer(e)},isFormData:function(e){return"undefined"!=typeof FormData&&e instanceof FormData},isArrayBufferView:function(e){return"undefined"!=typeof ArrayBuffer&&ArrayBuffer.isView?ArrayBuffer.isView(e):e&&e.buffer&&e.buffer instanceof ArrayBuffer},isString:function(e){return"string"==typeof e},isNumber:function(e){return"number"==typeof e},isObject:s,isPlainObject:c,isUndefined:a,isDate:function(e){return"[object Date]"===o.call(e)},isFile:function(e){return"[object File]"===o.call(e)},isBlob:function(e){return"[object Blob]"===o.call(e)},isFunction:l,isStream:function(e){return s(e)&&l(e.pipe)},isURLSearchParams:function(e){return"undefined"!=typeof URLSearchParams&&e instanceof URLSearchParams},isStandardBrowserEnv:function(){return("undefined"==typeof navigator||"ReactNative"!==navigator.product&&"NativeScript"!==navigator.product&&"NS"!==navigator.product)&&"undefined"!=typeof window&&"undefined"!=typeof document},forEach:d,merge:function e(){var n={};function t(t,r){c(n[r])&&c(t)?n[r]=e(n[r],t):c(t)?n[r]=e({},t):i(t)?n[r]=t.slice():n[r]=t}for(var r=0,o=arguments.length;r<o;r++)d(arguments[r],t);return n},extend:function(e,n,t){return d(n,(function(n,o){e[o]=t&&"function"==typeof n?r(n,t):n})),e},trim:function(e){return e.replace(/^\s*/,"").replace(/\s*$/,"")},stripBOM:function(e){return 65279===e.charCodeAt(0)&&(e=e.slice(1)),e}}},function(e,n,t){"use strict";e.exports=function(e){var n=[];return n.toString=function(){return this.map((function(n){var t=function(e,n){var t=e[1]||"",r=e[3];if(!r)return t;if(n&&"function"==typeof btoa){var o=function(e){var n=btoa(unescape(encodeURIComponent(JSON.stringify(e)))),t="sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(n);return"/*# ".concat(t," */")}(r),i=r.sources.map((function(e){return"/*# sourceURL=".concat(r.sourceRoot||"").concat(e," */")}));return[t].concat(i).concat([o]).join("\n")}return[t].join("\n")}(n,e);return n[2]?"@media ".concat(n[2]," {").concat(t,"}"):t})).join("")},n.i=function(e,t,r){"string"==typeof e&&(e=[[null,e,""]]);var o={};if(r)for(var i=0;i<this.length;i++){var a=this[i][0];null!=a&&(o[a]=!0)}for(var s=0;s<e.length;s++){var c=[].concat(e[s]);r&&o[c[0]]||(t&&(c[2]?c[2]="".concat(t," and ").concat(c[2]):c[2]=t),n.push(c))}},n}},function(e,n,t){"use strict";e.exports=function(e,n){return function(){for(var t=new Array(arguments.length),r=0;r<t.length;r++)t[r]=arguments[r];return e.apply(n,t)}}},function(e,n,t){"use strict";var r=t(0);function o(e){return encodeURIComponent(e).replace(/%3A/gi,":").replace(/%24/g,"$").replace(/%2C/gi,",").replace(/%20/g,"+").replace(/%5B/gi,"[").replace(/%5D/gi,"]")}e.exports=function(e,n,t){if(!n)return e;var i,a,s=t?t(n):r.isURLSearchParams(n)?n.toString():(i=[],r.forEach(n,(function(e,n){null!=e&&(r.isArray(e)?n+="[]":e=[e],r.forEach(e,(function(e){r.isDate(e)?e=e.toISOString():r.isObject(e)&&(e=JSON.stringify(e)),i.push(o(n)+"="+o(e))})))})),i.join("&"));return s&&(-1!==(a=e.indexOf("#"))&&(e=e.slice(0,a)),e+=(-1===e.indexOf("?")?"?":"&")+s),e}},function(e,n,t){"use strict";e.exports=function(e){return!(!e||!e.__CANCEL__)}},function(e,n,t){"use strict";(function(n){var r=t(0),o=t(19),i={"Content-Type":"application/x-www-form-urlencoded"};function a(e,n){!r.isUndefined(e)&&r.isUndefined(e["Content-Type"])&&(e["Content-Type"]=n)}var s,c={adapter:(("undefined"!=typeof XMLHttpRequest||void 0!==n&&"[object process]"===Object.prototype.toString.call(n))&&(s=t(6)),s),transformRequest:[function(e,n){return o(n,"Accept"),o(n,"Content-Type"),r.isFormData(e)||r.isArrayBuffer(e)||r.isBuffer(e)||r.isStream(e)||r.isFile(e)||r.isBlob(e)?e:r.isArrayBufferView(e)?e.buffer:r.isURLSearchParams(e)?(a(n,"application/x-www-form-urlencoded;charset=utf-8"),e.toString()):r.isObject(e)?(a(n,"application/json;charset=utf-8"),JSON.stringify(e)):e}],transformResponse:[function(e){if("string"==typeof e)try{e=JSON.parse(e)}catch(e){}return e}],timeout:0,xsrfCookieName:"XSRF-TOKEN",xsrfHeaderName:"X-XSRF-TOKEN",maxContentLength:-1,maxBodyLength:-1,validateStatus:function(e){return 200<=e&&e<300},headers:{common:{Accept:"application/json, text/plain, */*"}}};r.forEach(["delete","get","head"],(function(e){c.headers[e]={}})),r.forEach(["post","put","patch"],(function(e){c.headers[e]=r.merge(i)})),e.exports=c}).call(this,t(18))},function(e,n,t){"use strict";var r=t(0),o=t(20),i=t(22),a=t(3),s=t(23),c=t(26),l=t(27),d=t(7);e.exports=function(e){return new Promise((function(n,t){var u=e.data,p=e.headers;r.isFormData(u)&&delete p["Content-Type"],(r.isBlob(u)||r.isFile(u))&&u.type&&delete p["Content-Type"];var m,h,f=new XMLHttpRequest;e.auth&&(m=e.auth.username||"",h=unescape(encodeURIComponent(e.auth.password))||"",p.Authorization="Basic "+btoa(m+":"+h));var g,v=s(e.baseURL,e.url);if(f.open(e.method.toUpperCase(),a(v,e.params,e.paramsSerializer),!0),f.timeout=e.timeout,f.onreadystatechange=function(){var r,i;f&&4===f.readyState&&(0!==f.status||f.responseURL&&0===f.responseURL.indexOf("file:"))&&(r="getAllResponseHeaders"in f?c(f.getAllResponseHeaders()):null,i={data:e.responseType&&"text"!==e.responseType?f.response:f.responseText,status:f.status,statusText:f.statusText,headers:r,config:e,request:f},o(n,t,i),f=null)},f.onabort=function(){f&&(t(d("Request aborted",e,"ECONNABORTED",f)),f=null)},f.onerror=function(){t(d("Network Error",e,null,f)),f=null},f.ontimeout=function(){var n="timeout of "+e.timeout+"ms exceeded";e.timeoutErrorMessage&&(n=e.timeoutErrorMessage),t(d(n,e,"ECONNABORTED",f)),f=null},!r.isStandardBrowserEnv()||(g=(e.withCredentials||l(v))&&e.xsrfCookieName?i.read(e.xsrfCookieName):void 0)&&(p[e.xsrfHeaderName]=g),"setRequestHeader"in f&&r.forEach(p,(function(e,n){void 0===u&&"content-type"===n.toLowerCase()?delete p[n]:f.setRequestHeader(n,e)})),r.isUndefined(e.withCredentials)||(f.withCredentials=!!e.withCredentials),e.responseType)try{f.responseType=e.responseType}catch(m){if("json"!==e.responseType)throw m}"function"==typeof e.onDownloadProgress&&f.addEventListener("progress",e.onDownloadProgress),"function"==typeof e.onUploadProgress&&f.upload&&f.upload.addEventListener("progress",e.onUploadProgress),e.cancelToken&&e.cancelToken.promise.then((function(e){f&&(f.abort(),t(e),f=null)})),u=u||null,f.send(u)}))}},function(e,n,t){"use strict";var r=t(21);e.exports=function(e,n,t,o,i){var a=new Error(e);return r(a,n,t,o,i)}},function(e,n,t){"use strict";var r=t(0);e.exports=function(e,n){n=n||{};var t={},o=["url","method","data"],i=["headers","auth","proxy","params"],a=["baseURL","transformRequest","transformResponse","paramsSerializer","timeout","timeoutMessage","withCredentials","adapter","responseType","xsrfCookieName","xsrfHeaderName","onUploadProgress","onDownloadProgress","decompress","maxContentLength","maxBodyLength","maxRedirects","transport","httpAgent","httpsAgent","cancelToken","socketPath","responseEncoding"],s=["validateStatus"];function c(e,n){return r.isPlainObject(e)&&r.isPlainObject(n)?r.merge(e,n):r.isPlainObject(n)?r.merge({},n):r.isArray(n)?n.slice():n}function l(o){r.isUndefined(n[o])?r.isUndefined(e[o])||(t[o]=c(void 0,e[o])):t[o]=c(e[o],n[o])}r.forEach(o,(function(e){r.isUndefined(n[e])||(t[e]=c(void 0,n[e]))})),r.forEach(i,l),r.forEach(a,(function(o){r.isUndefined(n[o])?r.isUndefined(e[o])||(t[o]=c(void 0,e[o])):t[o]=c(void 0,n[o])})),r.forEach(s,(function(r){r in n?t[r]=c(e[r],n[r]):r in e&&(t[r]=c(void 0,e[r]))}));var d=o.concat(i).concat(a).concat(s),u=Object.keys(e).concat(Object.keys(n)).filter((function(e){return-1===d.indexOf(e)}));return r.forEach(u,l),t}},function(e,n,t){"use strict";function r(e){this.message=e}r.prototype.toString=function(){return"Cancel"+(this.message?": "+this.message:"")},r.prototype.__CANCEL__=!0,e.exports=r},function(e,n,t){"use strict";var r,o,i=(o={},function(e){if(void 0===o[e]){var n=document.querySelector(e);if(window.HTMLIFrameElement&&n instanceof window.HTMLIFrameElement)try{n=n.contentDocument.head}catch(e){n=null}o[e]=n}return o[e]}),a=[];function s(e){for(var n=-1,t=0;t<a.length;t++)if(a[t].identifier===e){n=t;break}return n}function c(e,n){for(var t={},r=[],o=0;o<e.length;o++){var i=e[o],c=n.base?i[0]+n.base:i[0],d=t[c]||0,u="".concat(c," ").concat(d);t[c]=d+1;var f=s(u),g={css:i[1],media:i[2],sourceMap:i[3]};-1!==f?(a[f].references++,a[f].updater(g)):a.push({identifier:u,updater:function(e,n){var t,r,o,i;return o=n.singleton?(i=h++,t=m=m||l(n),r=p.bind(null,t,i,!1),p.bind(null,t,i,!0)):(t=l(n),r=function(e,n,t){var r=t.css,o=t.media,i=t.sourceMap;if(o?e.setAttribute("media",o):e.removeAttribute("media"),i&&btoa&&(r+="\n/*# sourceMappingURL=data:application/json;base64,".concat(btoa(unescape(encodeURIComponent(JSON.stringify(i))))," */")),e.styleSheet)e.styleSheet.cssText=r;else{for(;e.firstChild;)e.removeChild(e.firstChild);e.appendChild(document.createTextNode(r))}}.bind(null,t,n),function(){!function(e){null!==e.parentNode&&e.parentNode.removeChild(e)}(t)}),r(e),function(n){if(n){if(n.css===e.css&&n.media===e.media&&n.sourceMap===e.sourceMap)return;r(e=n)}else o()}}(g,n),references:1}),r.push(u)}return r}function l(e){var n,r=document.createElement("style"),o=e.attributes||{};if(void 0!==o.nonce||(n=t.nc)&&(o.nonce=n),Object.keys(o).forEach((function(e){r.setAttribute(e,o[e])})),"function"==typeof e.insert)e.insert(r);else{var a=i(e.insert||"head");if(!a)throw new Error("Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid.");a.appendChild(r)}return r}var d,u=(d=[],function(e,n){return d[e]=n,d.filter(Boolean).join("\n")});function p(e,n,t,r){var o,i,a=t?"":r.media?"@media ".concat(r.media," {").concat(r.css,"}"):r.css;e.styleSheet?e.styleSheet.cssText=u(n,a):(o=document.createTextNode(a),(i=e.childNodes)[n]&&e.removeChild(i[n]),i.length?e.insertBefore(o,i[n]):e.appendChild(o))}var m=null,h=0;e.exports=function(e,n){(n=n||{}).singleton||"boolean"==typeof n.singleton||(n.singleton=(void 0===r&&(r=Boolean(window&&document&&document.all&&!window.atob)),r));var t=c(e=e||[],n);return function(e){if(e=e||[],"[object Array]"===Object.prototype.toString.call(e)){for(var r=0;r<t.length;r++){var o=s(t[r]);a[o].references--}for(var i=c(e,n),l=0;l<t.length;l++){var d=s(t[l]);0===a[d].references&&(a[d].updater(),a.splice(d,1))}t=i}}}},function(e,n,t){e.exports=function(){"use strict";return function(e,n,t){e=e||{};var r=n.prototype,o={future:"in %s",past:"%s ago",s:"a few seconds",m:"a minute",mm:"%d minutes",h:"an hour",hh:"%d hours",d:"a day",dd:"%d days",M:"a month",MM:"%d months",y:"a year",yy:"%d years"};t.en.relativeTime=o;var i=function(n,r,i,a){for(var s,c,l,d=i.$locale().relativeTime||o,u=e.thresholds||[{l:"s",r:44,d:"second"},{l:"m",r:89},{l:"mm",r:44,d:"minute"},{l:"h",r:89},{l:"hh",r:21,d:"hour"},{l:"d",r:35},{l:"dd",r:25,d:"day"},{l:"M",r:45},{l:"MM",r:10,d:"month"},{l:"y",r:17},{l:"yy",d:"year"}],p=u.length,m=0;m<p;m+=1){var h=u[m];h.d&&(s=a?t(n).diff(i,h.d,!0):i.diff(n,h.d,!0));var f=(e.rounding||Math.round)(Math.abs(s));if(l=s>0,f<=h.r||!h.r){f<=1&&m>0&&(h=u[m-1]);var g=d[h.l];c="string"==typeof g?g.replace("%d",f):g(f,r,h.l,l);break}}return r?c:(l?d.future:d.past).replace("%s",c)};r.to=function(e,n){return i(e,n,this,!0)},r.from=function(e,n){return i(e,n,this)};var a=function(e){return e.$u?t.utc():t()};r.toNow=function(e){return this.to(a(this),e)},r.fromNow=function(e){return this.from(a(this),e)}}}()},function(e,n,t){e.exports=t(13)},function(e,n,t){"use strict";var r=t(0),o=t(2),i=t(14),a=t(8);function s(e){var n=new i(e),t=o(i.prototype.request,n);return r.extend(t,i.prototype,n),r.extend(t,n),t}var c=s(t(5));c.Axios=i,c.create=function(e){return s(a(c.defaults,e))},c.Cancel=t(9),c.CancelToken=t(28),c.isCancel=t(4),c.all=function(e){return Promise.all(e)},c.spread=t(29),e.exports=c,e.exports.default=c},function(e,n,t){"use strict";var r=t(0),o=t(3),i=t(15),a=t(16),s=t(8);function c(e){this.defaults=e,this.interceptors={request:new i,response:new i}}c.prototype.request=function(e,n){"string"==typeof e?(e=n||{}).url=arguments[0]:e=e||{},(e=s(this.defaults,e)).method?e.method=e.method.toLowerCase():this.defaults.method?e.method=this.defaults.method.toLowerCase():e.method="get";var t=[a,void 0],r=Promise.resolve(e);for(this.interceptors.request.forEach((function(e){t.unshift(e.fulfilled,e.rejected)})),this.interceptors.response.forEach((function(e){t.push(e.fulfilled,e.rejected)}));t.length;)r=r.then(t.shift(),t.shift());return r},c.prototype.getUri=function(e){return e=s(this.defaults,e),o(e.url,e.params,e.paramsSerializer).replace(/^\?/,"")},r.forEach(["delete","get","head","options"],(function(e){c.prototype[e]=function(n,t){return this.request(s(t||{},{method:e,url:n}))}})),r.forEach(["post","put","patch"],(function(e){c.prototype[e]=function(n,t,r){return this.request(s(r||{},{method:e,url:n,data:t}))}})),e.exports=c},function(e,n,t){"use strict";var r=t(0);function o(){this.handlers=[]}o.prototype.use=function(e,n){return this.handlers.push({fulfilled:e,rejected:n}),this.handlers.length-1},o.prototype.eject=function(e){this.handlers[e]&&(this.handlers[e]=null)},o.prototype.forEach=function(e){r.forEach(this.handlers,(function(n){null!==n&&e(n)}))},e.exports=o},function(e,n,t){"use strict";var r=t(0),o=t(17),i=t(4),a=t(5);function s(e){e.cancelToken&&e.cancelToken.throwIfRequested()}e.exports=function(e){return s(e),e.headers=e.headers||{},e.data=o(e.data,e.headers,e.transformRequest),e.headers=r.merge(e.headers.common||{},e.headers[e.method]||{},e.headers),r.forEach(["delete","get","head","post","put","patch","common"],(function(n){delete e.headers[n]})),(e.adapter||a.adapter)(e).then((function(n){return s(e),n.data=o(n.data,n.headers,e.transformResponse),n}),(function(n){return i(n)||(s(e),n&&n.response&&(n.response.data=o(n.response.data,n.response.headers,e.transformResponse))),Promise.reject(n)}))}},function(e,n,t){"use strict";var r=t(0);e.exports=function(e,n,t){return r.forEach(t,(function(t){e=t(e,n)})),e}},function(e,n){var t,r,o=e.exports={};function i(){throw new Error("setTimeout has not been defined")}function a(){throw new Error("clearTimeout has not been defined")}function s(e){if(t===setTimeout)return setTimeout(e,0);if((t===i||!t)&&setTimeout)return t=setTimeout,setTimeout(e,0);try{return t(e,0)}catch(n){try{return t.call(null,e,0)}catch(n){return t.call(this,e,0)}}}!function(){try{t="function"==typeof setTimeout?setTimeout:i}catch(e){t=i}try{r="function"==typeof clearTimeout?clearTimeout:a}catch(e){r=a}}();var c,l=[],d=!1,u=-1;function p(){d&&c&&(d=!1,c.length?l=c.concat(l):u=-1,l.length&&m())}function m(){if(!d){var e=s(p);d=!0;for(var n=l.length;n;){for(c=l,l=[];++u<n;)c&&c[u].run();u=-1,n=l.length}c=null,d=!1,function(e){if(r===clearTimeout)return clearTimeout(e);if((r===a||!r)&&clearTimeout)return r=clearTimeout,clearTimeout(e);try{r(e)}catch(n){try{return r.call(null,e)}catch(n){return r.call(this,e)}}}(e)}}function h(e,n){this.fun=e,this.array=n}function f(){}o.nextTick=function(e){var n=new Array(arguments.length-1);if(1<arguments.length)for(var t=1;t<arguments.length;t++)n[t-1]=arguments[t];l.push(new h(e,n)),1!==l.length||d||s(m)},h.prototype.run=function(){this.fun.apply(null,this.array)},o.title="browser",o.browser=!0,o.env={},o.argv=[],o.version="",o.versions={},o.on=f,o.addListener=f,o.once=f,o.off=f,o.removeListener=f,o.removeAllListeners=f,o.emit=f,o.prependListener=f,o.prependOnceListener=f,o.listeners=function(e){return[]},o.binding=function(e){throw new Error("process.binding is not supported")},o.cwd=function(){return"/"},o.chdir=function(e){throw new Error("process.chdir is not supported")},o.umask=function(){return 0}},function(e,n,t){"use strict";var r=t(0);e.exports=function(e,n){r.forEach(e,(function(t,r){r!==n&&r.toUpperCase()===n.toUpperCase()&&(e[n]=t,delete e[r])}))}},function(e,n,t){"use strict";var r=t(7);e.exports=function(e,n,t){var o=t.config.validateStatus;t.status&&o&&!o(t.status)?n(r("Request failed with status code "+t.status,t.config,null,t.request,t)):e(t)}},function(e,n,t){"use strict";e.exports=function(e,n,t,r,o){return e.config=n,t&&(e.code=t),e.request=r,e.response=o,e.isAxiosError=!0,e.toJSON=function(){return{message:this.message,name:this.name,description:this.description,number:this.number,fileName:this.fileName,lineNumber:this.lineNumber,columnNumber:this.columnNumber,stack:this.stack,config:this.config,code:this.code}},e}},function(e,n,t){"use strict";var r=t(0);e.exports=r.isStandardBrowserEnv()?{write:function(e,n,t,o,i,a){var s=[];s.push(e+"="+encodeURIComponent(n)),r.isNumber(t)&&s.push("expires="+new Date(t).toGMTString()),r.isString(o)&&s.push("path="+o),r.isString(i)&&s.push("domain="+i),!0===a&&s.push("secure"),document.cookie=s.join("; ")},read:function(e){var n=document.cookie.match(new RegExp("(^|;\\s*)("+e+")=([^;]*)"));return n?decodeURIComponent(n[3]):null},remove:function(e){this.write(e,"",Date.now()-864e5)}}:{write:function(){},read:function(){return null},remove:function(){}}},function(e,n,t){"use strict";var r=t(24),o=t(25);e.exports=function(e,n){return e&&!r(n)?o(e,n):n}},function(e,n,t){"use strict";e.exports=function(e){return/^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(e)}},function(e,n,t){"use strict";e.exports=function(e,n){return n?e.replace(/\/+$/,"")+"/"+n.replace(/^\/+/,""):e}},function(e,n,t){"use strict";var r=t(0),o=["age","authorization","content-length","content-type","etag","expires","from","host","if-modified-since","if-unmodified-since","last-modified","location","max-forwards","proxy-authorization","referer","retry-after","user-agent"];e.exports=function(e){var n,t,i,a={};return e&&r.forEach(e.split("\n"),(function(e){if(i=e.indexOf(":"),n=r.trim(e.substr(0,i)).toLowerCase(),t=r.trim(e.substr(i+1)),n){if(a[n]&&0<=o.indexOf(n))return;a[n]="set-cookie"===n?(a[n]?a[n]:[]).concat([t]):a[n]?a[n]+", "+t:t}})),a}},function(e,n,t){"use strict";var r,o,i,a=t(0);function s(e){var n=e;return o&&(i.setAttribute("href",n),n=i.href),i.setAttribute("href",n),{href:i.href,protocol:i.protocol?i.protocol.replace(/:$/,""):"",host:i.host,search:i.search?i.search.replace(/^\?/,""):"",hash:i.hash?i.hash.replace(/^#/,""):"",hostname:i.hostname,port:i.port,pathname:"/"===i.pathname.charAt(0)?i.pathname:"/"+i.pathname}}e.exports=a.isStandardBrowserEnv()?(o=/(msie|trident)/i.test(navigator.userAgent),i=document.createElement("a"),r=s(window.location.href),function(e){var n=a.isString(e)?s(e):e;return n.protocol===r.protocol&&n.host===r.host}):function(){return!0}},function(e,n,t){"use strict";var r=t(9);function o(e){if("function"!=typeof e)throw new TypeError("executor must be a function.");var n;this.promise=new Promise((function(e){n=e}));var t=this;e((function(e){t.reason||(t.reason=new r(e),n(t.reason))}))}o.prototype.throwIfRequested=function(){if(this.reason)throw this.reason},o.source=function(){var e;return{token:new o((function(n){e=n})),cancel:e}},e.exports=o},function(e,n,t){"use strict";e.exports=function(e){return function(n){return e.apply(null,n)}}},function(e,n,t){e.exports=function(){"use strict";var e="millisecond",n="second",t="minute",r="hour",o="day",i="week",a="month",s="quarter",c="year",l="date",d=/^(\d{4})[-/]?(\d{1,2})?[-/]?(\d{0,2})[^0-9]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?.?(\d+)?$/,u=/\[([^\]]+)]|Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g,p=function(e,n,t){var r=String(e);return!r||r.length>=n?e:""+Array(n+1-r.length).join(t)+e},m={s:p,z:function(e){var n=-e.utcOffset(),t=Math.abs(n),r=Math.floor(t/60),o=t%60;return(n<=0?"+":"-")+p(r,2,"0")+":"+p(o,2,"0")},m:function e(n,t){if(n.date()<t.date())return-e(t,n);var r=12*(t.year()-n.year())+(t.month()-n.month()),o=n.clone().add(r,a),i=t-o<0,s=n.clone().add(r+(i?-1:1),a);return+(-(r+(t-o)/(i?o-s:s-o))||0)},a:function(e){return e<0?Math.ceil(e)||0:Math.floor(e)},p:function(d){return{M:a,y:c,w:i,d:o,D:l,h:r,m:t,s:n,ms:e,Q:s}[d]||String(d||"").toLowerCase().replace(/s$/,"")},u:function(e){return void 0===e}},h={name:"en",weekdays:"Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"),months:"January_February_March_April_May_June_July_August_September_October_November_December".split("_")},f="en",g={};g[f]=h;var v=function(e){return e instanceof w},x=function(e,n,t){var r;if(!e)return f;if("string"==typeof e)g[e]&&(r=e),n&&(g[e]=n,r=e);else{var o=e.name;g[o]=e,r=o}return!t&&r&&(f=r),r||!t&&f},b=function(e,n){if(v(e))return e.clone();var t="object"==typeof n?n:{};return t.date=e,t.args=arguments,new w(t)},y=m;y.l=x,y.i=v,y.w=function(e,n){return b(e,{locale:n.$L,utc:n.$u,$offset:n.$offset})};var w=function(){function p(e){this.$L=this.$L||x(e.locale,null,!0),this.parse(e)}var m=p.prototype;return m.parse=function(e){this.$d=function(e){var n=e.date,t=e.utc;if(null===n)return new Date(NaN);if(y.u(n))return new Date;if(n instanceof Date)return new Date(n);if("string"==typeof n&&!/Z$/i.test(n)){var r=n.match(d);if(r){var o=r[2]-1||0,i=(r[7]||"0").substring(0,3);return t?new Date(Date.UTC(r[1],o,r[3]||1,r[4]||0,r[5]||0,r[6]||0,i)):new Date(r[1],o,r[3]||1,r[4]||0,r[5]||0,r[6]||0,i)}}return new Date(n)}(e),this.init()},m.init=function(){var e=this.$d;this.$y=e.getFullYear(),this.$M=e.getMonth(),this.$D=e.getDate(),this.$W=e.getDay(),this.$H=e.getHours(),this.$m=e.getMinutes(),this.$s=e.getSeconds(),this.$ms=e.getMilliseconds()},m.$utils=function(){return y},m.isValid=function(){return!("Invalid Date"===this.$d.toString())},m.isSame=function(e,n){var t=b(e);return this.startOf(n)<=t&&t<=this.endOf(n)},m.isAfter=function(e,n){return b(e)<this.startOf(n)},m.isBefore=function(e,n){return this.endOf(n)<b(e)},m.$g=function(e,n,t){return y.u(e)?this[n]:this.set(t,e)},m.unix=function(){return Math.floor(this.valueOf()/1e3)},m.valueOf=function(){return this.$d.getTime()},m.startOf=function(e,s){var d=this,u=!!y.u(s)||s,p=y.p(e),m=function(e,n){var t=y.w(d.$u?Date.UTC(d.$y,n,e):new Date(d.$y,n,e),d);return u?t:t.endOf(o)},h=function(e,n){return y.w(d.toDate()[e].apply(d.toDate("s"),(u?[0,0,0,0]:[23,59,59,999]).slice(n)),d)},f=this.$W,g=this.$M,v=this.$D,x="set"+(this.$u?"UTC":"");switch(p){case c:return u?m(1,0):m(31,11);case a:return u?m(1,g):m(0,g+1);case i:var b=this.$locale().weekStart||0,w=(f<b?f+7:f)-b;return m(u?v-w:v+(6-w),g);case o:case l:return h(x+"Hours",0);case r:return h(x+"Minutes",1);case t:return h(x+"Seconds",2);case n:return h(x+"Milliseconds",3);default:return this.clone()}},m.endOf=function(e){return this.startOf(e,!1)},m.$set=function(i,s){var d,u=y.p(i),p="set"+(this.$u?"UTC":""),m=(d={},d[o]=p+"Date",d[l]=p+"Date",d[a]=p+"Month",d[c]=p+"FullYear",d[r]=p+"Hours",d[t]=p+"Minutes",d[n]=p+"Seconds",d[e]=p+"Milliseconds",d)[u],h=u===o?this.$D+(s-this.$W):s;if(u===a||u===c){var f=this.clone().set(l,1);f.$d[m](h),f.init(),this.$d=f.set(l,Math.min(this.$D,f.daysInMonth())).$d}else m&&this.$d[m](h);return this.init(),this},m.set=function(e,n){return this.clone().$set(e,n)},m.get=function(e){return this[y.p(e)]()},m.add=function(e,s){var l,d=this;e=Number(e);var u=y.p(s),p=function(n){var t=b(d);return y.w(t.date(t.date()+Math.round(n*e)),d)};if(u===a)return this.set(a,this.$M+e);if(u===c)return this.set(c,this.$y+e);if(u===o)return p(1);if(u===i)return p(7);var m=(l={},l[t]=6e4,l[r]=36e5,l[n]=1e3,l)[u]||1,h=this.$d.getTime()+e*m;return y.w(h,this)},m.subtract=function(e,n){return this.add(-1*e,n)},m.format=function(e){var n=this;if(!this.isValid())return"Invalid Date";var t=e||"YYYY-MM-DDTHH:mm:ssZ",r=y.z(this),o=this.$locale(),i=this.$H,a=this.$m,s=this.$M,c=o.weekdays,l=o.months,d=function(e,r,o,i){return e&&(e[r]||e(n,t))||o[r].substr(0,i)},p=function(e){return y.s(i%12||12,e,"0")},m=o.meridiem||function(e,n,t){var r=e<12?"AM":"PM";return t?r.toLowerCase():r},h={YY:String(this.$y).slice(-2),YYYY:this.$y,M:s+1,MM:y.s(s+1,2,"0"),MMM:d(o.monthsShort,s,l,3),MMMM:d(l,s),D:this.$D,DD:y.s(this.$D,2,"0"),d:String(this.$W),dd:d(o.weekdaysMin,this.$W,c,2),ddd:d(o.weekdaysShort,this.$W,c,3),dddd:c[this.$W],H:String(i),HH:y.s(i,2,"0"),h:p(1),hh:p(2),a:m(i,a,!0),A:m(i,a,!1),m:String(a),mm:y.s(a,2,"0"),s:String(this.$s),ss:y.s(this.$s,2,"0"),SSS:y.s(this.$ms,3,"0"),Z:r};return t.replace(u,(function(e,n){return n||h[e]||r.replace(":","")}))},m.utcOffset=function(){return 15*-Math.round(this.$d.getTimezoneOffset()/15)},m.diff=function(e,l,d){var u,p=y.p(l),m=b(e),h=6e4*(m.utcOffset()-this.utcOffset()),f=this-m,g=y.m(this,m);return g=(u={},u[c]=g/12,u[a]=g,u[s]=g/3,u[i]=(f-h)/6048e5,u[o]=(f-h)/864e5,u[r]=f/36e5,u[t]=f/6e4,u[n]=f/1e3,u)[p]||f,d?g:y.a(g)},m.daysInMonth=function(){return this.endOf(a).$D},m.$locale=function(){return g[this.$L]},m.locale=function(e,n){if(!e)return this.$L;var t=this.clone(),r=x(e,n,!0);return r&&(t.$L=r),t},m.clone=function(){return y.w(this.$d,this)},m.toDate=function(){return new Date(this.valueOf())},m.toJSON=function(){return this.isValid()?this.toISOString():null},m.toISOString=function(){return this.$d.toISOString()},m.toString=function(){return this.$d.toUTCString()},p}(),L=w.prototype;return b.prototype=L,[["$ms",e],["$s",n],["$m",t],["$H",r],["$W",o],["$M",a],["$y",c],["$D",l]].forEach((function(e){L[e[1]]=function(n){return this.$g(n,e[0],e[1])}})),b.extend=function(e,n){return e(n,w,b),b},b.locale=x,b.isDayjs=v,b.unix=function(e){return b(1e3*e)},b.en=g[f],b.Ls=g,b}()},function(e,n,t){var r=t(10),o=t(32);"string"==typeof(o=o.__esModule?o.default:o)&&(o=[[e.i,o,""]]);r(o,{insert:"head",singleton:!1}),e.exports=o.locals||{}},function(e,n,t){"use strict";t.r(n);var r=t(1),o=t.n(r)()(!1);o.push([e.i,"html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed, \nfigure, figcaption, footer, header, hgroup, \nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\tfont-size: 100%;\n\tfont: inherit;\n\tvertical-align: baseline;\n}\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure, \nfooter, header, hgroup, menu, nav, section {\n\tdisplay: block;\n}\nbody {\n\tline-height: 1;\n}\nol, ul {\n\tlist-style: none;\n}\nblockquote, q {\n\tquotes: none;\n}\nblockquote:before, blockquote:after,\nq:before, q:after {\n\tcontent: '';\n\tcontent: none;\n}\ntable {\n\tborder-collapse: collapse;\n\tborder-spacing: 0;\n}",""]),n.default=o},function(e,n,t){var r=t(10),o=t(34);"string"==typeof(o=o.__esModule?o.default:o)&&(o=[[e.i,o,""]]);r(o,{insert:"head",singleton:!1}),e.exports=o.locals||{}},function(e,n,t){"use strict";t.r(n);var r=t(1),o=t.n(r)()(!1);o.push([e.i,'html {\n    font-family: \'Noto Sans\', sans-serif;\n    box-sizing: border-box;\n    scroll-behavior: smooth;\n}\n    \n*, *:before, *:after {\n    box-sizing: inherit;\n    transition: .2s;\n}\n\n:root {\n    --blue: #1DA1F2;\n    --bg: #15202B;\n    --blue-label: #1A91DA;\n    --blue-hover: #1B95E0;\n    --grey-font: #8899A6;\n    --grey-inputbg: #253341;\n    --grey-floating-panel: #192734;\n    --grey-floating-panel-hover: #202E3A;\n    --red: #D6235B;\n    --search-input-width: 700px;\n}\n\nbody {\n    -ms-touch-action: manipulation;\n        touch-action: manipulation;\n    color: white;\n    margin: 0px;\n    padding: 0px;\n    font-size: 16px;\n    line-height: 1.5;\n    background-color: var(--bg);\n    scroll-behavior: smooth;\n}\n\na, a:visited {\n    cursor: pointer;\n    color: var(--blue-label);\n    text-decoration: none;\n    transition: 0.2s;\n    border-bottom: 1px solid transparent;\n}\n\na:hover, a:active {\n    color: var(--blue-hover);\n    border-bottom: 1px solid var(--blue-hover);\n}\n\n.mention {\n    cursor: pointer;\n    color: var(--blue-label);\n    border-bottom: 1px solid transparent;\n}\n\n.mention:hover, .mention:active {\n    border-bottom: 1px solid var(--blue-hover);\n}\n\n*[data-selected="true"] {\n    color: var(--blue);\n    border-bottom: 1px solid var(--blue);\n}\n\ninput[type="search"], input[type="text"], input[type="password"] {\n    font-family: inherit;\n    -webkit-appearance: none;\n    -moz-appearance: none;\n    appearance: none;\n    outline: 0px;\n    border: 1px solid transparent;\n}\n\ninput[type="search"] {\n    transition: 0.2s;\n    font-size: inherit;\n    width: 700px;\n    width: var(--search-input-width);\n    max-width: 700px;\n    height: 55px;\n    color: white;\n    background-color: var(--grey-inputbg);\n    border: 1px solid var(--bg);\n    border-radius: 50px;\n    padding: 20px 20px 20px 60px;\n    margin-bottom: 30px;\n}\n\ninput[type="search"]:not(:-ms-input-placeholder) {\n    padding-right: 60px;\n    padding-left: 25px;\n}\n\ninput[type="search"]:not(:placeholder-shown) {\n    padding-right: 60px;\n    padding-left: 25px;\n}\n\ninput[type="search"]:focus,  input[type="search"]:active, input[type="search"]:hover {\n    border: 1px solid var(--blue);\n    background-color: var(--bg);\n    box-shadow: rgba(4, 74, 111, 1) 0px 0px 30px -10px;\n}\n\ninput[type="search"]:-ms-input-placeholder {\n    color: var(--grey-font);\n}\n\ninput[type="search"]::placeholder {\n    color: var(--grey-font);\n}\n\n.search-icon {\n    position: absolute;\n    pointer-events: none;\n    fill: var(--grey-font);\n    width: 60px;\n    left: 0px;\n\n    bottom: 52%;\n    padding: 0px 10px 0px 0px;\n    transform: translateX(0px);\n    -webkit-transform: translateX(0px);\n    transition: all 0.3s ease;\n    margin-left: 15px;\n}\n\ninput[type="search"]:not(:-ms-input-placeholder) + .search-icon {\n    cursor: pointer;\n    pointer-events: all;\n    fill: var(--blue);\n    margin-left: Calc(var(--search-input-width) - 55px);\n}\n\ninput[type="search"]:not(:placeholder-shown) + .search-icon {\n    cursor: pointer;\n    pointer-events: all;\n    fill: var(--blue);\n    margin-left: Calc(var(--search-input-width) - 55px);\n}\n\nbutton {\n    font-family: inherit;\n    font-size: 1rem;\n    color: white;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-align: center;\n        align-items: center;\n\t-ms-flex-pack: distribute;\n\t    justify-content: space-around;\n    cursor: pointer;\n\twidth: 150px;\n\theight: 38px;\n\tpadding: 5px 10px;\n    border: 0;\n    border-radius: 100px;\n\tbackground-color: var(--blue);\n\ttransition: 0.2s;\n\ttransition-timing-function: ease;\n\ttransition-delay: 0.05s;\n\topacity: 1;\n}\n\nbutton:hover, button:active {\n    opacity: 0.8;\n}\n\n\n.modal {\n    z-index: 20;\n    position: absolute;\n    left: 0; \n    right: 0; \n    /* width: 500px;\n    height: 500px; */\n    top: 0px;\n    bottom: 0px;\n    margin: auto;\n    box-shadow: rgba(4, 74, 111, 0.8) 0px 0px 20px -5px;\n}\n\n.media-modal {\n    /* position: relative; */\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: center;\n        justify-content: center;\n    -ms-flex-item-align: center;\n        align-self: center;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    padding-top: 100px;\n    overflow: auto;\n    margin: auto;\n    display: block;\n    /* width: 80%; */\n    max-width: 700px;\n    /* max-width: 70vw; */\n    max-height: 80vh;\n    object-fit: contain;\n    box-shadow: rgba(4, 74, 111, 0) 0px 0px 20px -5px;\n\n    /* background-image: url("https://pbs.twimg.com/media/EhYqtxMXsAEIwLz?format=jpg&name=large"); */\n\n    background-size: contain;\n    background-repeat:no-repeat;\n    background-position: center;\n}\n\n.media-modal-close {\n    cursor: pointer;\n    position: absolute;\n    width: 40px;\n    height: 40px;\n    right: 0px;\n    top: 0px;\n    fill: var(--red);\n    margin: 10px;\n    background-color: var(--bg);\n}\n\n.screen-fade {\n    position: absolute;\n    z-index: 18;\n    width: 100%;\n    height: 100vh;\n    background-color: var(--bg);\n    opacity: 0.9;\n}\n\n.session-over-modal {\n    z-index: 50;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    -ms-flex-align: center;\n        align-items: center;\n    -ms-flex-pack: center;\n        justify-content: center;\n    height: 150px;\n    width: 500px;\n    padding: 15px;\n    border-radius: 15px;\n    background-color: var(--grey-floating-panel-hover);\n\n}\n\nheader {\n    height: 50px;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    -ms-flex-align: center;\n        align-items: center;\n    -ms-flex-pack: center;\n        justify-content: center;\n    border-bottom: 1px solid var(--grey-inputbg);\n}\n\n.header-text {\n    font-weight: 700;\n    transform: translateX(-140px);\n}\n\n.main-container {\n    display: -ms-flexbox;\n    display: flex;\n    min-height: 0px;\n    -ms-flex-pack: center;\n        justify-content: center;\n    -ms-flex-pack: distribute;\n        justify-content: space-around;\n    width: 100vw;\n    /* max-width: 1500px; */\n}\n\n.side-nav-container {\n    border-radius: 15px;\n    background-color: var(--grey-floating-panel);\n    height: 100%;\n    width: 350px;\n    min-width: 300px;\n    margin: 50px 20px 0px 50px;\n    font-weight: 700;\n}\n\n.side-nav-item {\n    display: -ms-flexbox;\n    display: flex;\n    cursor: pointer;\n    padding: 20px;\n    border-bottom: 1px solid var(--grey-inputbg);\n    transition: 0.3s;\n}\n\n.side-nav-item[data-selected ="true"]{\n    color: var(--blue);\n    border-bottom: 1px solid var(--blue);\n}\n\n.side-nav-item:last-child {\n    border-bottom: 0px;\n}\n\n.side-nav-item:hover {\n    background-color: var(--grey-floating-panel-hover);\n}\n\n.side-nav-item:first-child:hover {\n    border-top-left-radius: 15px;\n    border-top-right-radius: 15px;\n    background-color: var(--grey-floating-panel-hover);\n}\n\n.side-nav-item:last-child:hover {\n    border-bottom-left-radius: 15px;\n    border-bottom-right-radius: 15px;\n    background-color: var(--grey-floating-panel-hover);\n}\n\n.side-nav-item > svg {\n    margin-right: 15px;\n    fill: white;\n}\n\n.side-nav-item[data-selected="true"] > svg {\n    fill: var(--blue);\n}\n\n.about {\n    position: relative;\n}\n\n.about-modal {\n    /* text-align: center; */\n    position: relative;\n    width: 300px;\n    height: 300px;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    -ms-flex-align: center;\n        align-items: center;\n    -ms-flex-pack: center;\n        justify-content: center;\n    background-color: var(--grey-inputbg);\n    background-color: var(--bg);\n    padding: 50px 20px;\n    cursor: default;\n    box-shadow: rgba(4, 74, 111, 0.8) 0px 0px 20px -5px;\n    border: 1px solid var(--blue);\n}\n\n.about-header {\n    font-weight: 700;\n    font-size: 1.5rem;\n    margin-bottom: 30px;\n}\n\n.about-text {\n    font-weight: 400;\n    font-size: 0.9rem;\n}\n\n.user-profile {\n    position: relative;\n    background-color: var(--grey-inputbg);\n    border-bottom-left-radius: 15px;\n    border-bottom-right-radius: 15px;\n}\n\n.user-auth-div {\n    z-index: 20;\n    position: absolute;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    -ms-flex-align: center;\n        align-items: center;\n    -ms-flex-pack: center;\n        justify-content: center;\n    border-radius: 15px;\n    background-color: var(--grey-inputbg);\n    background-color: var(--bg);\n    width:650px;\n    height: 700px;\n    /* transform: translate(-20px, -100px); */\n    padding: 50px 15px;\n    cursor: default;\n    box-shadow: rgba(4, 74, 111, 0.4) 0px 0px 20px -5px;\n    /* margin-left: 20px; */\n    top: 0px;\n    right: 0px;\n    bottom: 0px;\n    left: 0px;\n    margin: auto;\n}\n\n.user-auth-div input:-ms-input-placeholder {\n    font-size: 0.9rem;\n}\n\n.user-auth-div input::placeholder {\n    font-size: 0.9rem;\n}\n\n.user-auth-div input.auth-error:-ms-input-placeholder {\n    color: var(--red);\n    opacity: 1;\n}\n\n.user-auth-div input.auth-error::placeholder {\n    color: var(--red);\n    opacity: 1;\n}\n\n\n.user-auth-div-modal {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: center;\n        justify-content: center;\n    left: 0;\n    right: 0px;\n    bottom: 0px;\n    top: 0px;\n    width: 600px;\n    height: 550px;\n    height: 700px;\n\n    margin: auto;\n    box-shadow: rgba(4, 74, 111, 0.8) 0px 0px 20px -5px;\n\n}\n\n.login-div, .signup-div, .forgot-password-div {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    -ms-flex-align: center;\n        align-items: center;\n}\n\n.forgot-password-div {\n    position: absolute;\n    top: 0px;\n    bottom: 0px;\n    width: 320px;\n    height: 350px;\n    left: 0px;\n    right: 0px;\n    margin: auto;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: center;\n        justify-content: center;\n    -ms-flex-align: center;\n        align-items: center;\n    background-color: var(--bg);\n    border: 1px solid white;\n    border-radius: 15px;\n}\n\n.forgot-password-message {\n    font-weight: 400;\n    font-size: 0.8rem;\n    margin-top: 15px;\n}\n\n.login-from-modal {\n    cursor: pointer;\n}\n\n.auth-header {\n    font-size: 1rem;\n    margin-bottom: 50px;\n}\n\n.user-auth-div label {\n    pointer-events: none;\n    color: var(--grey-font);\n    font-size: 0.8rem;\n    font-weight: 400;\n    -ms-flex-item-align: start;\n        align-self: flex-start;\n    transform: translate(77px, -85px);\n    transition: .3s cubic-bezier(0, 1.8, 1, 1.8);\n    opacity: 0;\n}\n\n\n.user-auth-div input:not(:-ms-input-placeholder) + label {\n    color: var(--blue-label);\n    transform: translate(76px, -65px);\n    opacity: 1;\n}\n\n\n.user-auth-div input:not(:placeholder-shown) + label {\n    color: var(--blue-label);\n    transform: translate(76px, -65px);\n    opacity: 1;\n}\n\n.user-auth-div input {\n    padding: 10px 15px;\n    color: white;\n    font-size: 1rem;\n    height: 48px;\n    width: 80%;\n    background-color: var(--grey-floating-panel);\n    margin-top: 5px;\n    margin-bottom: 15px;\n    transition: .4s cubic-bezier(0, 1.8, 1, 1.8);\n    border-bottom: 1.5px solid transparent;\n}\n\n.user-auth-div input:hover, .user-auth-div input:focus {\n    background-color: var(--bg);\n    box-shadow: rgba(4, 74, 111, 1) 0px 0px 20px -5px;\n    border-bottom: 1.5px solid var(--blue);\n}\n\n.user-auth-div input:not(:-ms-input-placeholder) {\n    padding-bottom: 15px;\n    padding-top: 40px;\n    border-bottom: 1.5px solid var(--blue);\n    background-color: var(--bg);\n}\n\n.user-auth-div input:not(:placeholder-shown) {\n    padding-bottom: 15px;\n    padding-top: 40px;\n    border-bottom: 1.5px solid var(--blue);\n    background-color: var(--bg);\n}\n\n.user-auth-div button {\n    color: white;\n    font-size: 1rem;\n    margin-top: 15px;\n}\n\n.user-auth-div button:hover {\n    background-color: var(--blue-hover);\n}\n\n.action-here {\n    margin-top: 25px;\n    font-weight: 400;\n    font-size: 0.8rem;\n}\n\n.auth-link {\n    cursor: pointer;\n    color: var(--blue-label);\n}\n\n.auth-link:hover {\n    border-bottom: 1px solid var(--blue-hover);\n}\n\n.account-warning {\n    color: var(--red);\n    margin-top: 30px;\n    margin-bottom: -15px;\n    text-align: center;\n    font-size: 0.7rem;\n    font-weight: 400;\n}\n\n.logout-btn {\n    background-color: var(--red);\n}\n\n.user-auth-div .logout-btn:hover {\n    background-color: var(--red);\n    opacity: 0.8;\n}\n\n.close {\n    cursor: pointer;\n    position: absolute;\n    width: 30px;\n    height: 30px;\n    right: 0px;\n    top: 0px;\n    fill: var(--red);\n    margin: 10px;\n    background-color: var(--bg);\n    border-radius: 100%;\n}\n\n.close:hover {\n    opacity: 0.7;\n}\n\n/* edit */\n.center-container {\n    width: 740px;\n    margin: 0px 20px;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-positive: 1;\n        flex-grow: 1;\n    -ms-flex-negative: 0;\n        flex-shrink: 0;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    -ms-flex-align: center;\n        align-items: center;\n\n    height: Calc(100vh - 50px);\n    overflow-y: scroll;\n    overflow-x: hidden;\n    transition: 0.25s;\n    margin-right: 50px;\n    margin-left: 20px;\n    min-height: 0px;\n}\n\n.home-search-page {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    -ms-flex-align: center;\n        align-items: center;\n    /* justify-content: center; */\n    /* height: Calc(100vh - 300px); */\n    padding-top: 200px;\n    height: Calc(100vh - 50px);\n}\n\n.home-logo {\n    font-size: 5rem;\n    font-weight: 700;\n    margin-bottom: 30px;\n}\n\n.main-search-input-div{\n    position: relative;\n    color: var(--grey-font);\n}\n\n.main-search-button {\n    color: white;\n    font-size: 1rem;\n    margin-bottom: 50px;\n}\n\n.main-search-button:hover {\n    background-color: var(--blue-hover);\n}\n\n.search-choices {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    -ms-flex-align: center;\n        align-items: center;\n    margin-bottom: 65px;\n}\n\n.language-choices, .tweet-type-choices {\n    display: -ms-flexbox;\n    display: flex;\n}\n\n.search-choices input[type="radio"] {\n    opacity: 0;\n    position: fixed;\n    width: 0;\n}\n\n.search-choices label {\n    cursor: pointer;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: center;\n        justify-content: center;\n    -ms-flex-align: center;\n        align-items: center;\n    color: var(--grey-font);\n    background-color: var(--bg);\n    width: 80px;\n    height: 30px;\n    font-size: 0.7rem;\n    border-bottom: 1px solid var(--bg);\n    transition: 0.2s;\n}\n\n.search-choices input[type="radio"]:checked + label {\n    color: white;\n    background-color: var(--grey-floating-panel-hover);\n    border-bottom: 1px solid var(--blue);\n}\n\n.search-choices input[type="radio"]:hover + label {\n    border-bottom: 1px solid var(--blue);\n}\n\n.search-choices input[type="radio"]:focus + label {\n    border-bottom: 1px solid var(--blue);\n}\n\n.tweet-type-choices label {\n    width: 100px;\n    margin-top: 30px;\n}\n\n.timeline-search-page, .collections-page {\n    padding-top: 50px;\n    /* display: flex; */\n    -ms-flex-direction: column;\n        flex-direction: column;\n    -ms-flex-align: center;\n        align-items: center;\n    -ms-flex-pack: center;\n        justify-content: center;\n    /* height: Calc(100vh - 50px); */\n}\n\n.timeline-search-page {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    -ms-flex-align: center;\n        align-items: center;\n    -ms-flex-pack: start;\n        justify-content: flex-start;\n    /* height: 100vh; */\n    padding-top: 200px;\n}\n\n.collections-page {\n    -ms-flex-direction: column;\n        flex-direction: column;\n    height: auto;\n    width: 740px;\n    -ms-flex-pack: start;\n        justify-content: flex-start;\n}\n\n.timeline-header {\n    font-size: 5rem;\n    font-weight: 700;\n    margin-bottom: 30px;\n}\n\n.timeline-header-slash {\n    color: var(--grey-font);\n}\n\n.timeline-subheader {\n    color: var(--blue);\n    font-size: 1.5rem;\n    font-weight: 400;\n}\n\n.timeline-search-input-div {\n    position: relative;\n    color: var(--grey-font);\n}\n\n.timeline-search-button {\n    color: white;\n    font-size: 1rem;\n    margin-bottom: 50px;\n}\n\n.timeline-search-button:hover {\n    background-color: var(--blue-hover);\n}\n\n\n.search-results, .collection-results {\n    padding-top: 50px;\n    width: 740px;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    -ms-flex-align: center;\n        align-items: center;\n    border-left: 1px solid var(--grey-inputbg);\n    border-right: 1px solid var(--grey-inputbg);\n}\n\n.search-header {\n    font-weight: 700;\n    font-size: 2rem;\n    margin-bottom: 50px;\n}\n\n.tweet-result, .collection-result-item {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-align: start;\n        align-items: flex-start;\n    padding: 15px 15px;\n    border-top: 1px solid var(--grey-inputbg);\n    border-bottom: 1px solid var(--grey-inputbg);\n}\n\n.tweet-user-image img, .collection-tweet-user-image img {\n    object-fit: cover;\n    width: 50px;\n    height: 50px;\n    border-radius: 200px;\n    margin-right: 10px;\n}\n\n.tweet-name-div, .collection-tweet-name-div{\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-align: center;\n        align-items: center;\n}\n\n.tweet-body {\n    /* width: 70%; */\n}\n\n.tw-name-item, .collection-tw-name-item {\n    margin-right: 5px;\n}\n\n.verified, .collection-verified {\n    font-size: 15px;\n}\n\n.tweet-name, .collection-tweet-name {\n    font-weight: 700;\n}\n\n.tweet-name {\n    cursor: pointer;\n    border-bottom: 1px solid transparent;\n}\n\n.tweet-name:hover, .tweet-name:active {\n    border-bottom: 1px solid var(--blue-hover);\n}\n\n.tweet-username, .tweet-time, .collection-tweet-username, .collection-tweet-time {\n    color: var(--grey-font);\n}\n\n.tweet-time {\n    /* display: none; */\n    text-align: right;\n}\n\n.tweet-text, .collection-tweet-text {\n    margin-bottom: 10px;\n}\n\n.tweet-image img, .collection-tweet-image img {\n    width: 100%;\n    width: 648px;\n    height: 400px;\n    object-fit: cover;\n    border-radius: 20px;\n    border: 1px solid var(--grey-floating-panel);\n}\n\n.tweet-image video, .collection-tweet-image video {\n    width: 100%;\n    width: 648px;\n    height: 400px;\n    object-fit: cover;\n    border-radius: 20px;\n    border: 1px solid var(--grey-floating-panel);\n}\n\n.tweet-footer {\n    width: 648px;\n    -ms-flex-align: center;\n        align-items: center;\n}\n\n.tweet-footer, .collection-tweet-footer {\n    font-size: 0.9rem;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: justify;\n        justify-content: space-between;\n    margin-top: 10px;\n}\n\n.tweet-metrics, .collection-tweet-metrics {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: justify;\n        justify-content: space-between;\n    -ms-flex-align: center;\n        align-items: center;\n    color: var(--grey-font);\n}\n\n.tweet-metrics p {\n    margin-right: 15px;\n}\n\n.tweet-icon {\n    fill: var(--blue-label);\n    margin-right: 3px;\n    width: 18px;\n    height: 18px;\n}\n\n.save-to-collection, .remove-from-collection {\n    position: relative;\n    cursor: pointer;\n    color: var(--blue-label);\n    padding: 5px 10px;\n    background-color: var(--grey-floating-panel);\n    border-radius: 5px;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-align: center;\n        align-items: center;\n}\n\n.save-to-collection:hover, .remove-from-collection:hover {\n    background-color: var(--grey-floating-panel-hover);\n}\n\n.save-to-collection svg, .remove-from-collection svg {\n    fill: var(--blue-label);\n    margin-right: 10px;\n    width: 18px;\n    height: 18px;\n}\n\n\n.save-to-collection-prompt {\n    position: absolute;\n    z-index: 20;\n    width: 350px;\n    height: 400px;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    overflow: auto;\n    background-color: var(--grey-inputbg);\n    border-radius: 15px;\n    box-shadow: rgba(4, 74, 111, 0.7) 0px 0px 20px -5px;\n    border: 1px solid var(--grey-font);\n}\n\n.save-to-collection-header {\n    background-color: var(--grey-floating-panel);\n    width: 350px;\n    width: 100%;\n    color: white;\n    font-weight: 700;\n    font-size: 1.5rem;\n    padding: 30px 0px 30px 40px;\n}\n\n.collection-login-prompt {\n    text-align: center;\n    margin-top: 20px;\n}\n\n.save-to-collection-item {\n    cursor: pointer;\n    display: -ms-flexbox;\n    display: flex;\n    width: 100%;\n    /* height: 100px; */\n    padding: 20px 0px 20px 40px;\n    border-bottom: 1px solid var(--grey-floating-panel);\n}\n\n.save-to-collection-item:last-child {\n    border-bottom: 1px solid var(--grey-floating-panel);\n}\n\n.save-to-collection-item:hover, .save-to-collection-item:active {\n    color: var(--blue-label);\n    background-color: var(--grey-floating-panel-hover);\n}\n\n.save-to-collection-prompt svg {\n    fill: var(--red);\n}\n\n.replying-to {\n    cursor: pointer;\n    color: var(--blue);\n}\n\n.replying-to:hover {\n    color: var(--blue-hover);\n}\n\n.collections-page-header {\n    font-weight: 700;\n    font-size: 2.5rem;\n    -ms-flex-item-align: center;\n        align-self: center;\n    margin-bottom: 50px;\n}\n\n.collection-count {\n    -ms-flex-item-align: start;\n        align-self: flex-start;\n    margin-bottom: 10px;\n}\n\n.create-collection-from-modal {\n    position: relative;\n    font-size: 0.9rem;\n    margin-top: 10px;\n    /* display: flex; */\n    -ms-flex-direction: column;\n        flex-direction: column;\n    -ms-flex-align: center;\n        align-items: center;\n}\n\n.create-collection-from-modal input{\n    display: -ms-flexbox;\n    display: flex;\n    font-size: 1rem;\n    color: white;\n    background-color: var(--bg);\n    width: 85%;\n    height: 40px;\n    margin-left: 25px;\n    padding: 0px 10px !important;\n    border: 1px solid transparent;\n    border-radius: 4px;\n    padding: 5px;\n}\n\n.create-col-from-modal-btn{\n    cursor: pointer;\n    position: absolute;\n    fill: var(--blue) !important;\n    width: 39.9px;\n    height: 39.9px;\n    transform: translate(Calc(85% + 250px), -40px);\n}\n\n.create-col-from-modal-error {\n    text-align: center;\n    margin-top: 10px !important;\n    font-size: 0.3rem;\n}\n\n.create-collection-cta {\n    color: var(--blue);\n    border-radius: 0;\n    background-color: var(--grey-floating-panel-hover);\n    fill: var(--blue);\n    width: 250px;\n    /* flex: 160px; */\n    margin-top: 20px;\n    margin-bottom: 20px;\n    -ms-flex-item-align: start;\n        align-self: flex-start;\n}\n\n.create-collection-input-div {\n    -ms-flex-item-align: start;\n        align-self: flex-start;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-align: center;\n        align-items: center;\n    margin-bottom: 20px;\n}\n\n.create-collection-input {\n    padding: 7px 20px;\n    font-size: 1rem;\n    color: white;\n    width: 400px;\n    border-radius: 30px;\n    margin-right: 20px;\n    background-color: var(--grey-inputbg);\n}\n\n.create-collection-input:focus,  .create-collection-input:active, .create-collection-input:hover {\n    border: 1px solid var(--blue);\n    background-color: var(--bg);\n    box-shadow: rgba(4, 74, 111, 1) 0px 0px 30px -10px;\n}\n\n.create-collection-input:-ms-input-placeholder {\n    color: var(--grey-font);\n}\n\n.create-collection-input::placeholder {\n    color: var(--grey-font);\n}\n\n.create-col-btn-and-cancel {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-align: center;\n        align-items: center;\n}\n\n.create-collection-close {\n    position: relative;\n    margin-left: 15px;\n}\n\n.create-collection-error {\n    -ms-flex-item-align: start;\n        align-self: flex-start;\n}\n\n\n.collections-list {\n    -ms-flex-item-align: start;\n        align-self: flex-start;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    margin: 30px 0px 50px 0px;\n}\n\n.collection-item {\n    min-width: 150px;\n    height: 40px;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-align: center;\n        align-items: center;\n    cursor: pointer;\n    padding: 10px 20px;\n    background-color: var(--grey-floating-panel);\n    border-bottom: 1px solid transparent;\n    transition: 0.15s;\n    margin: 5px 5px 5px 0px;\n}\n\n.collection-item:hover {\n    background-color: var(--grey-floating-panel-hover);\n    border-bottom: 1px solid var(--blue);\n}\n\n.collection-item[data-selected="true"] {\n    color: var(--blue);\n    border-bottom: 1px solid var(--blue);\n}\n\n.remove-from-collection {\n    color: var(--red);\n}\n\n.remove-from-collection svg {\n    fill: var(--red);\n}\n\n.remove-from-collection-prompt {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    -ms-flex-pack: space-evenly;\n        justify-content: space-evenly;\n    -ms-flex-align: center;\n        align-items: center;\n    position: absolute;\n    color: white;\n    width: 350px;\n    height: 180px;\n    background-color: var(--grey-floating-panel);\n    transform: translate(-105px, -80px);\n    border-radius: 10px;\n    padding: 0px 20px;;\n}\n\n.remove-prompt-buttons {\n    margin-top: 10px;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-align: center;\n        align-items: center;\n    -ms-flex-pack: center;\n        justify-content: center;\n}\n\n.remove-prompt-buttons button {\n    font-size: 0.9rem;\n    margin: 0px 8px;\n}\n\n.remove-prompt-buttons button:hover {\n    opacity: 0.85;\n}\n\n.remove-prompt-delete {\n    background-color: var(--red);\n}\n\n\n\n.spotlight-container {\n    font-size: 0.9rem;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: center;\n        justify-content: center;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    margin: 50px 50px 0px 20px;\n    border-radius: 15px;\n    background-color: var(--grey-floating-panel);\n    height: 100%;\n    height: 350px;\n    width: 350px;\n    min-width: 300px;\n\n    padding: 20px;\n}\n\n.spotlight-header {\n    font-weight: 700;\n    display: -ms-flexbox;\n    display: flex;\n}\n\n.light-bulb {\n    fill: var(--blue);\n}\n\n.spotlight-body {\n    margin-top: 30px;\n    font-size: 0.8rem;\n}\n\n\nfooter {\n    padding-top: 10px;\n    color: #969696;\n    text-align: center;\n    /* text-align: right; */\n    position: fixed;\n    font-size: 0.7rem;\n    bottom: 0px;\n    padding-bottom: 0px;\n    /* padding-right: 10px; */\n    width: 100vw;\n    background-color: var(--bg);\n}\n\nfooter .big-footer {\n   margin: 0;\n   padding: 0;\n   white-space: pre;\n}\n\n.made-by-mobile {\n    display: none;\n}\n\n\n@media (max-width: 1440px) {\n\t.spotlight-container {\n        display: none;\n    }\n}\n\n@media (max-width: 1250px) {\n    .side-nav-container {\n        min-width: 250px;\n    }\n\n    input[type="search"] {\n        width: 600px;\n    }\n\n    input[type="search"]:not(:-ms-input-placeholder) + .search-icon {\n        margin-left: Calc(600px - 55px);\n    }\n\n    input[type="search"]:not(:placeholder-shown) + .search-icon {\n        margin-left: Calc(600px - 55px);\n    }\n\n    .home-logo, .timeline-header {\n        font-size: 4rem;\n    }\n\n    .center-container,\n    .search-results,\n    .collections-page {\n        width: 650px;\n    }\n    \n    .tweet-image video, .collection-tweet-image video,\n    .tweet-image img, .collection-tweet-image img,\n    .tweet-footer {\n        width: 100%;\n        width: 550px;\n    }\n}\n\n@media (max-width: 950px) {\n    .side-nav-container {\n        min-width: 100px;\n    }\n    .side-nav-para {\n        display: none;\n    }\n\n    .center-container,\n    .search-results,\n    .collections-page {\n        width: 650px;\n    }\n    \n    .tweet-image video, .collection-tweet-image video,\n    .tweet-image img, .collection-tweet-image img,\n    .tweet-footer {\n        width: 100%;\n        width: 550px;\n    }\n}\n\n@media (max-width: 800px) {\n    .side-nav-container {\n        width: 100px;\n        min-width: 100px;\n        max-width: 100px;\n    }\n\n    input[type="search"] {\n        width: 450px;\n    }\n\n    input[type="search"]:not(:-ms-input-placeholder) + .search-icon {\n        margin-left: Calc(450px - 55px);\n    }\n\n    input[type="search"]:not(:placeholder-shown) + .search-icon {\n        margin-left: Calc(450px - 55px);\n    }\n\n    .home-logo, .timeline-header {\n        font-size: 3rem;\n    }\n\n    .center-container,\n    .search-results,\n    .collections-page {\n        width: 550px;\n    }\n    \n    .tweet-image video, .collection-tweet-image video,\n    .tweet-image img, .collection-tweet-image img,\n    .tweet-footer {\n        width: 450px;\n    }\n\n    .tweet-name, .tweet-username {\n        -ms-flex-negative: 0;\n            flex-shrink: 0;\n    }\n\n    .tweet-time {\n        -ms-flex-negative: 0;\n            flex-shrink: 0;\n    }\n\n}\n\n\n@media (max-width: 700px) {\n    .side-nav-container {\n        width: 100px;\n        min-width: 100px;\n        max-width: 100px;\n    }\n\n    .user-auth-div {\n        position: fixed;\n        width: 90vw;\n        height: 80vh;\n        height: 83vh;\n        top: 0px;\n        overflow-y: scroll;\n    }\n\n    .center-container,\n    .search-results,\n    .collections-page {\n        width: 450px;\n    }\n    \n    .tweet-image video, .collection-tweet-image video,\n    .tweet-image img, .collection-tweet-image img,\n    .tweet-footer {\n        width: 350px;\n    }\n\n    .tweet-name-div, .tweet-text {\n        font-size: 0.9rem;\n        -ms-flex-wrap: nowrap;\n            flex-wrap: nowrap;\n    }\n    .tweet-footer {\n        font-size: 0.8rem;\n    }\n}\n\n\n@media (max-width: 600px) {\n\n    .header-text {\n        -ms-flex-item-align: start;\n            align-self: flex-start;\n        transform: translateX(0);\n        margin-left: 15px;\n    }\n\n    .side-nav-container {\n        z-index: 50;\n        position: fixed;\n        display: -ms-flexbox;\n        display: flex;\n        -ms-flex-align: center;\n            align-items: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n        margin: auto;\n        bottom: 0px;\n\n        width: 100vw;\n        min-width: 100vw;   \n        height: 70px;\n\n        border-radius: 0px;\n        font-weight: 700;\n\n        background-color: var(--bg);\n        background-color: blue;\n\n        border-radius: 15px;\n        border-bottom-left-radius: 0px;\n        border-bottom-right-radius: 0px;\n        background-color: var(--grey-floating-panel);\n    }\n\n    .side-nav-item {\n        border-radius: 0px !important;\n        height: 100%;\n        /* padding: 0px; */\n    }\n\n    .side-nav-item[data-selected ="true"]{\n        color: var(--blue);\n        border-bottom: 2px solid var(--blue);\n    }\n\n    .side-nav-item > svg {\n        margin-right: 0px;\n        fill: white;\n    }\n\n    .user-profile {\n        background-color: unset;\n    }\n\n    .about-modal {\n        position: fixed;\n        /* position: absolute; */\n        padding: 20px;\n    }\n\n    /* TODO: STYLE .about-modal-bg BG */\n\n    .user-auth-div {\n        position: fixed;\n        width: 90vw;\n        height: 80vh;\n        height: 83vh;\n        top: 0px;\n        overflow-y: scroll;\n    }\n\n    .auth-header {\n        margin-bottom: 30px;\n        margin-top: -85px;\n    }\n\n    .user-auth-div input {\n        border-radius: 0px;\n        margin-bottom: 0px;\n        margin-top: 0px;\n        width: 90%;\n    }\n\n    .user-auth-div label {\n        transform: translate(33px, -70px);\n    }\n    \n    \n    .user-auth-div input:not(:-ms-input-placeholder) + label {\n        transform: translate(33px, -50px);\n    }\n    \n    \n    .user-auth-div input:not(:placeholder-shown) + label {\n        transform: translate(33px, -50px);\n    }\n\n    .account-warning {\n        margin-top: 20px;\n        margin-bottom: -85px;\n        font-size: 0.6rem;\n    }\n\n    .home-logo, .timeline-header {\n        font-size: 2rem;\n    }\n\n    .timeline-subheader {\n        font-size: 1rem;\n    }\n\n    input[type="search"] {\n        width: 90vw;\n        height: 48px;\n    }\n\n    input[type="search"]:not(:-ms-input-placeholder) + .search-icon {\n        cursor: pointer;\n        pointer-events: all;\n        fill: var(--blue);\n        margin-left: Calc(90vw - 55px);\n    }\n\n    input[type="search"]:not(:placeholder-shown) + .search-icon {\n        cursor: pointer;\n        pointer-events: all;\n        fill: var(--blue);\n        margin-left: Calc(90vw - 55px);\n    }\n\n    .language-choices label {\n        width: 70px;\n        font-size: 0.8rem;\n    }\n\n    .portuguese-div {\n        display: none !important;\n    }\n\n\n    .center-container {\n        margin: 0px;\n        height: Calc(100vh - 50px);\n    }\n\n    .home-search-page, .timeline-search-page {\n        padding-top: 50px;   \n    }\n\n    .center-container,\n    .search-results,\n    .collections-page {\n        width: 350px;\n        width: 100vw;\n        /* height: Calc(100vh - 200px); */\n    }\n\n    .tweet-result:last-child {\n        margin-bottom: 100px;\n    }\n\n    .collections-page {\n        /* display: flex; */\n        -ms-flex-direction: column;\n            flex-direction: column;\n        width: 95vw;\n        height: auto;\n    }\n\n    .create-collection-cta {\n        margin-bottom: 50px;\n    }\n\n    .create-collection-input-div {\n        width: 100vw;\n        -ms-flex-direction: column;\n            flex-direction: column;\n        -ms-flex-align: center;\n            align-items: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n        margin-bottom: 50px;\n    }\n\n    .create-collection-input {\n        margin-bottom: 20px;\n        width: 95vw;\n    }\n\n    .create-collection-close {\n        margin-left: 40px;\n    }\n\n    .create-collection-error {\n        text-align: center;\n    }\n\n    .collections-list {\n        margin: 0px;\n    }\n\n    .empty-collection {\n        margin-top: 30px;\n        padding-bottom: 200px;\n    }\n\n    .remove-from-collection-prompt {\n        width: 350px;\n        height: 180px;\n        background-color: var(--grey-floating-panel);\n        transform: translate(0px, 0px);\n    }\n\n\n    .session-over-modal {\n        width: 350px;\n        width: 90vw;\n    }\n    \n    .tweet-image video, .collection-tweet-image video,\n    .tweet-image img, .collection-tweet-image img {\n        width: 290px;\n        width: 80vw;\n        height: 260px;\n        border-radius: 12px;\n    }\n\n\n\n    .tweet-name-div, .tweet-text {\n        font-size: 0.9rem;\n        -ms-flex-wrap: nowrap;\n            flex-wrap: nowrap;\n    }\n    .tweet-footer {\n        font-size: 0.7rem;\n        width: 290px;\n        width: 80vw;\n    }\n\n\n    .about-modal {\n        text-align: center;\n        height: 400px;\n    }\n\n\n    .made-by-mobile {\n        font-weight: 400;\n        margin-top: 50px;\n        margin-bottom: 0px;\n        display: block;\n        font-size: 0.8rem;\n    }\n\n    .made-by-mobile p {\n        text-align: center;\n        margin: 0px;\n        /* margin-bottom: 10px; */\n    }\n\n    .made-by-mobile .made-by {\n        margin-bottom: 5px;\n    }\n\n    .big-footer {\n        display: none;\n    }\n}\n\n\n@media (max-width: 400px) {\n    .tweet-image video, .collection-tweet-image video,\n    .tweet-image img, .collection-tweet-image img {\n        height: 160px;\n    }\n\n    .save-to-collection-prompt {\n        width: 80vw;\n        width: 300px;\n    }\n\n    .create-col-from-modal-btn {\n        transform: translate(Calc(300px - 192px), 10px);\n        transform: translate(Calc(300px - 62px), -40px);\n    }\n\n    .about-modal {\n        text-align: center;\n    }\n}\n\n\n\n\n.loader {\n    margin-left: 5px;\n    display: inline-block;\n    border: 3px solid white;\n    border-top: 2px solid transparent;\n    border-radius: 100px;\n    width: 25px;\n    height: 25px;\n animation: spin 2s linear infinite;\n}\n  \n@keyframes spin {\n\t0% { transform: rotate(0deg); }\n\t100% { transform: rotate(360deg); }\n}\n\n\n.small {\n    font-size: 0.6rem;\n}\n\n.error {\n    color: var(--red) !important;\n    font-weight: 400;\n    font-size: 0.9rem;\n    margin-top: -15px;\n    margin-bottom: 20px;\n}\n\n.auth-error {\n    font-weight: 400;\n    font-size: 0.9rem;\n    color: var(--red);\n    margin-top: -15px;\n    margin-bottom: 20px;\n}\n\n.color-blue {\n    color: var(--blue);\n}\n\n.color-red {\n    color: var(--red) !important;\n}\n\n.hide {\n    display: none;\n}',""]),n.default=o},function(e,n,t){"use strict";function r(e){return""===e.trim()}function o(e){return!!e.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)}function i(e){this.message=e}t.r(n),(i.prototype=new Error).name="InvalidCharacterError";var a="undefined"!=typeof window&&window.atob&&window.atob.bind(window)||function(e){var n=String(e).replace(/=+$/,"");if(n.length%4==1)throw new i("'atob' failed: The string to be decoded is not correctly encoded.");for(var t,r,o=0,a=0,s="";r=n.charAt(a++);~r&&(t=o%4?64*t+r:r,o++%4)&&(s+=String.fromCharCode(255&t>>(-2*o&6))))r="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=".indexOf(r);return s};function s(e){this.message=e}(s.prototype=new Error).name="InvalidTokenError";var c=function(e,n){if("string"!=typeof e)throw new s("Invalid token specified");var t=!0===(n=n||{}).header?0:1;try{return JSON.parse(function(e){var n=e.replace(/-/g,"+").replace(/_/g,"/");switch(n.length%4){case 0:break;case 2:n+="==";break;case 3:n+="=";break;default:throw"Illegal base64url string!"}try{return decodeURIComponent(a(n).replace(/(.)/g,(function(e,n){var t=n.charCodeAt(0).toString(16).toUpperCase();return t.length<2&&(t="0"+t),"%"+t})))}catch(e){return a(n)}}(e.split(".")[t]))}catch(e){throw new s("Invalid token specified: "+e.message)}},l=t(11),d=t.n(l);function u(e){return(u="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}t(31),t(33);var p=t(12),m=t(30);m.extend(d.a),document.querySelector("body"),document.querySelector(".root");var h,f=document.querySelector(".loader"),g=document.querySelector(".screen-fade"),v=document.querySelectorAll(".modal"),x=document.querySelector(".media-modal"),b=(document.querySelector(".media"),document.querySelector(".media-modal-close")),y=document.querySelector(".header-text"),w=document.querySelector(".user-profile"),L=document.querySelector(".user-profile-label"),S=document.querySelector(".user-icon"),T=document.querySelector(".user-auth-div"),k=document.querySelector(".about-modal"),M=document.querySelector(".about-modal-close"),E=document.querySelectorAll(".auth-input"),H=document.querySelectorAll(".auth-input-label"),q=document.querySelectorAll(".next-input"),A=document.querySelectorAll(".go-input"),N=document.querySelector(".session-over-modal"),C=document.querySelector(".session-over-modal-close"),D=document.querySelector(".login-div"),z=document.querySelector(".login-email"),j=document.querySelector(".login-email-label"),$=document.querySelector(".login-password"),O=document.querySelector(".login-password-label"),_=document.querySelector(".login-errors"),B=document.querySelector(".login-btn"),P=document.querySelector(".login-here"),I=document.querySelectorAll(".login-from-modal"),U=document.querySelector(".signup-div"),R=document.querySelector(".signup-name-label"),F=document.querySelector(".signup-email-label"),Y=document.querySelector(".signup-password-label"),V=document.querySelector(".signup-confirm-password-label"),J=document.querySelector(".signup-name"),X=document.querySelector(".signup-email"),W=document.querySelector(".signup-password"),Z=document.querySelector(".signup-confirm-password"),G=document.querySelector(".signup-errors"),K=document.querySelector(".signup-btn"),Q=document.querySelector(".signup-here"),ee=document.querySelector(".logout-div"),ne=document.querySelector(".logout-btn"),te=document.querySelectorAll(".auth-close"),re=document.querySelector(".home-search-page"),oe=document.querySelector(".main-search-input-div"),ie=document.querySelector(".main-search-input"),ae=document.querySelector(".main-search-error"),se=document.querySelector(".search-choices"),ce=document.querySelectorAll(".language-choice"),le=document.querySelectorAll(".tweet-type-choice"),de=document.querySelector(".main-search-button"),ue=document.querySelector(".search-results"),pe=document.querySelector(".tweet-results-div"),me=document.querySelector(".timeline-search-page"),he=document.querySelector(".timeline-search-input-div"),fe=document.querySelector(".timeline-search-input"),ge=document.querySelector(".timeline-search-error"),ve=document.querySelector(".timeline-search-button"),xe=document.querySelector(".collections-page"),be=(document.querySelector(".collections-page-header"),document.querySelector(".create-collection-cta")),ye=document.querySelector(".create-collection-input-div"),we=document.querySelector(".create-collection-input"),Le=document.querySelector("#create-collection-btn"),Se=document.querySelector(".create-collection-close"),Te=document.querySelector(".create-collection-error"),ke=document.querySelector(".create-collection-from-modal"),Me=document.querySelector(".create-col-from-modal-input"),Ee=document.querySelectorAll(".create-col-from-modal-btn"),He=document.querySelector(".create-col-from-modal-error"),qe=document.querySelector(".collection-count"),Ae=document.querySelector(".collections-list"),Ne=document.querySelector(".empty-collection"),Ce=document.querySelector(".save-to-collection-prompt"),De=document.querySelector(".save-to-collection-close"),ze=document.querySelector(".save-to-collection-item-div"),je=document.querySelector(".remove-from-collection-prompt"),$e=document.querySelectorAll(".side-nav-item"),Oe=document.querySelector(".home"),_e=document.querySelector(".time-travel"),Be=document.querySelector(".collections"),Pe=document.querySelector(".about"),Ie=document.querySelector(".spotlight-container"),Ue=document.querySelector(".home-page-spotlight"),Re=document.querySelector(".timeline-page-spotlight"),Fe=document.querySelector(".collections-page-spotlight"),Ye=document.querySelector(".about-page-spotlight");q.forEach((function(e){e.addEventListener("keydown",(function(e){var n,t;13===e.keyCode&&"INPUT"===e.target.nodeName&&(n=e.target.form,t=Array.prototype.indexOf.call(n,e.target),n.elements[t+1].focus(),e.preventDefault())}),!1)})),A.forEach((function(e){e.addEventListener("keydown",(function(e){var n,t;13===e.keyCode&&"INPUT"===e.target.nodeName&&(n=e.target.form,t=Array.prototype.indexOf.call(n,e.target),n.elements[t+1].click())}),!1)})),I.forEach((function(e){e.addEventListener("click",(function(){window.history.back(),setTimeout((function(){w.click()}),300)}),!1)})),Ee.forEach((function(e){e.addEventListener("click",(function(){we.value=Me.value,Le.click()}),addEventListener)}));var Ve,Je,Xe,We=Math.max(document.documentElement.clientWidth||0,window.innerWidth||0);function Ze(){var e;(Xe=localStorage.FBIdToken)&&((e=c(Xe)).exp,Date.now(),1e3*e.exp<Date.now()?(Ve="expired",N.classList.remove("hide"),g.classList.remove("hide")):(Ve="active",Je={headers:{Authorization:"".concat(Xe)}}))}function Ge(e){var n="Bearer ".concat(e);localStorage.setItem("FBIdToken",n),p.defaults.headers.common.Authorization=n}E.forEach((function(e){e.addEventListener("keydown",(function(){e.classList.remove("error"),H.forEach((function(e){e.classList.remove("color-red"),e===j?e.innerHTML="Email:":e===O?e.innerHTML="Password:":e===R?e.innerHTML="Name:":e===F?e.innerHTML="Email:":e===Y?e.innerHTML="Password:":e===V&&(e.innerHTML="Confirm password:")}))}),!1)}));var Ke,Qe=function(e){return localStorage.setItem("currentUser",JSON.stringify(e))},en=function(e){var n=e.name.replace(/ .*/,"");S.style.fill="#1DA1F2",L.innerHTML='Hello, <span class="color-blue">'.concat(n,"</span>");var t=e.collections.reverse(),r=e.collectionCount;if(Ae.innerHTML="",ze.innerHTML="",ke.classList.remove("hide"),Array.isArray(t)&&t.length){for(var o=0;o<t.length;o++){var i=document.createElement("p");i.innerHTML=t[o];var a=document.createElement("div");a.classList.add("collection-item"),a.append(i),Ae.append(a);var s=document.createElement("p");s.classList.add("save-to-collection-item"),s.innerHTML=t[o],ze.append(s),Ce.append(ze)}var c=document.querySelectorAll(".collection-item");c[0].setAttribute("data-selected","true"),c[0],1===r?qe.innerHTML="You currently have ".concat(r," collection"):1<r&&(qe.innerHTML="You currently have ".concat(r," collections"))}else qe.innerHTML="You haven't created any collections, click the create a new collection button to get started";!function(){var e=document.querySelectorAll(".collection-item");Array.isArray(e)&&e.length&&e[0].setAttribute("data-selected","true"),e.forEach((function(n){n.addEventListener("click",(function(){f.classList.remove("hide"),n.append(f),e.forEach((function(e){e.setAttribute("data-selected","false")})),n.setAttribute("data-selected","true")}),!1),n.addEventListener("click",un,!1)}))}()},nn={page:"home",header:"twtr  &middot; spotlight",home:{class:re.className},timeline:{class:me.className},collection:{class:xe.className},about:{class:k.className},user:{authDiv:{class:T.className,width:T.style.width},loginDiv:{class:D.className},signupDiv:{class:U.className},logoutDiv:{class:ee.className}},sidenav:{home:Oe.getAttribute("data-selected"),timeline:_e.getAttribute("data-selected"),collection:Be.getAttribute("data-selected"),about:Pe.getAttribute("data-selected")},spotlight:{innertext:Ue.innerHTML},search:{searchPage:ue.className,tweetsDiv:"",keyword:{home:"",timeline:""}},savetocol:{class:Ce.className},removefromcol:{class:je.className},screenFade:{class:g.className},media:{class:x.className,bg_img:""}};function tn(){var e,n,t=localStorage.FBIdToken,r=JSON.parse(localStorage.getItem("currentUser"));t&&((e=c(t)).exp,Date.now(),1e3*e.exp<Date.now()?(N.classList.remove("hide"),g.classList.remove("hide")):Je={headers:{Authorization:"".concat(t)}}),r&&en(r),h=nn.page,t?(T.style.width="300px",T.style.position="relative",T.style.height="100%",D.classList.add("hide"),U.classList.add("hide"),ee.classList.remove("hide"),We<600&&(T.style.position="",T.style.height="50vh")):(T.style.width=nn.user.authDiv.width,D.className=nn.user.loginDiv.class,U.className=nn.user.signupDiv.class,ee.className=nn.user.logoutDiv.class),Ze(),"active"!==Ve||"collections"!==h||(n=document.querySelector('.collection-item[data-selected="true"]'))&&pn(n.innerText.trim()),g.className=nn.screenFade.class,T.className=nn.user.authDiv.class,re.className=nn.home.class,me.className=nn.timeline.class,xe.className=nn.collection.class,k.className=nn.about.class,Ie.innerHTML=nn.spotlight.innertext,y.innerHTML=nn.header,Oe.setAttribute("data-selected","".concat(nn.sidenav.home)),_e.setAttribute("data-selected","".concat(nn.sidenav.timeline)),Be.setAttribute("data-selected","".concat(nn.sidenav.collection)),Pe.setAttribute("data-selected","".concat(nn.sidenav.about)),ue.className=nn.search.searchPage,pe.innerHTML=nn.search.tweetsDiv,ie.value=nn.search.keyword.home,fe.value=nn.search.keyword.timeline,x.className=nn.media.class,x.style.backgroundImage=nn.media.bg_img,Ce.className=nn.savetocol.class,je.className=nn.removefromcol.class,re.classList.contains("hide")||(re.append(de),re.insertBefore(oe,re.lastChild),re.insertBefore(ae,re.lastChild),re.append(se)),me.classList.contains("hide")||(me.append(ve),me.insertBefore(he,me.lastChild),me.insertBefore(ge,me.lastChild)),ue.classList.contains("hide")||("home"===h?(ue.insertBefore(se,ue.firstChild),ue.insertBefore(oe,ue.firstChild),me.append(ve),me.insertBefore(he,me.lastChild),me.insertBefore(ge,me.lastChild)):"timeline"===h&&(ue.insertBefore(he,ue.firstChild),re.append(de),re.insertBefore(oe,re.lastChild),re.insertBefore(ae,re.lastChild),re.append(se))),mn()}function rn(){var e=event.currentTarget;$e.forEach((function(e){e.setAttribute("data-selected","false")})),e.classList.contains("user-profile")||(e.setAttribute("data-selected","true"),e.classList.contains("about")||(y.innerHTML=e.innerText)),e===Oe?(h="home",re.classList.remove("hide"),on(),ae.innerHTML="",me.classList.add("hide"),an(),xe.classList.add("hide"),k.classList.add("hide"),ue.classList.add("hide"),Ie.innerHTML=Ue.innerHTML,y.innerHTML=Oe.innerText,y.innerHTML="Home",Oe.setAttribute("data-selected","true")):e===_e?(h="timeline",me.classList.remove("hide"),an(),ge.innerHTML="",re.classList.add("hide"),on(),xe.classList.add("hide"),k.classList.add("hide"),ue.classList.add("hide"),Ie.innerHTML=Re.innerHTML,y.innerHTML=_e.innerText,y.innerHTML="Search Timeline",_e.setAttribute("data-selected","true")):e===Be?(function(){var e;h="collections",Ne.classList.add("hide"),Ne.innerHTML="",xe.classList.remove("hide"),re.classList.add("hide"),on(),me.classList.add("hide"),an(),k.classList.add("hide"),ue.classList.add("hide"),Ze(),"active"===Ve&&(e=document.querySelector('.collection-item[data-selected="true"]'))&&pn(e.innerText.trim())}(),Ie.innerHTML=Fe.innerHTML,y.innerHTML=Be.innerText,y.innerHTML="Your collections",Be.setAttribute("data-selected","true")):e===Pe?(Ie.innerHTML=Ye.innerHTML,k.classList.remove("hide"),Pe.setAttribute("data-selected","true")):e===w&&cn(),We<950&&(e===Oe?y.innerHTML='Home <span class="small color-blue"> / search for anything on twitter<span>':e===_e?y.innerHTML='Search Timeline <span class="small color-blue"> / get tweets from a user\'s timeline<span>':e===Be&&(y.innerHTML='Your collections  <span class="small color-blue"> / view all your saved tweets.<span>')),nn.header=y.innerHTML,nn.page=h,nn.screenFade.class=g.className,nn.user.authDiv.class=T.className,nn.user.loginDiv.class=D.className,nn.user.signupDiv.class=U.className,nn.user.logoutDiv.class=ee.className,nn.home.class=re.className,nn.timeline.class=me.className,nn.collection.class=xe.className,nn.about.class=k.className,nn.spotlight.innertext=Ie.innerHTML,nn.sidenav.home=Oe.getAttribute("data-selected"),nn.sidenav.timeline=_e.getAttribute("data-selected"),nn.sidenav.collection=Be.getAttribute("data-selected"),nn.sidenav.about=Pe.getAttribute("data-selected"),nn.search.searchPage=ue.className,window.history.pushState(nn,null,"")}function on(){ie.value="",ae.innerHTML="",re.append(de),re.insertBefore(oe,re.lastChild),re.insertBefore(ae,re.lastChild),re.append(se)}function an(){fe.value="",ge.innerHTML="",me.append(ve),me.insertBefore(he,me.lastChild),me.insertBefore(ge,me.lastChild)}function sn(){event.preventDefault(),k.classList.add("hide"),T.classList.add("hide"),D.classList.add("hide"),U.classList.add("hide"),g.classList.add("hide"),"home"===h?Oe.setAttribute("data-selected","true"):"timeline"===h?_e.setAttribute("data-selected","true"):"collections"===h&&Be.setAttribute("data-selected","true"),T.classList.contains("hide")?(nn.screenFade.class=g.className,nn.user.authDiv.class=T.className,nn.user.loginDiv.class=D.className,window.history.pushState(nn,null,"")):window.history.back()}function cn(){event.preventDefault();var e=localStorage.FBIdToken;k.classList.add("hide"),g.classList.remove("hide"),e?(T.style.width="300px",T.style.position="relative",T.style.height="100%",T.classList.remove("hide"),ee.classList.remove("hide"),We<600&&(T.style.position="",T.style.height="50vh")):(T.classList.remove("hide"),D.classList.remove("hide"),U.classList.add("hide"),ee.classList.add("hide"))}function ln(){localStorage.removeItem("FBIdToken"),localStorage.removeItem("currentUser"),window.location.href="/"}function dn(e){for(var n=0;n<e.length;n++){var t=function(e){return e.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",")},r=document.createElement("div");r.classList.add("tweet-result");var o=document.createElement("div");o.classList.add("tweet-user-image");var i=document.createElement("img");i.src=e[n].user.profile_image_url,i.alt="User Image",o.append(i);var a=document.createElement("div");a.classList.add("tweet-body");var s=document.createElement("div");s.classList.add("tweet-name-div");var c=document.createElement("p");c.classList.add("tweet-name","tw-name-item"),c.setAttribute("data-username","".concat(e[n].user.screen_name)),c.innerHTML=e[n].user.name;var l=document.createElement("span");l.classList.add("verified","material-icons","tw-name-item"),!(l.innerHTML="verified")===e[n].user.verified&&l.classList.add("hide");var d=document.createElement("p");d.classList.add("tweet-username","tw-name-item","mention"),d.innerHTML="".concat(e[n].user.screen_name);var p=document.createElement("p");p.classList.add("tweet-time","tw-name-item"),p.innerHTML=" &middot; ".concat(m(e[n].created_at).fromNow());var h=c.innerText+d.innerText,f=c.innerText,g=d.innerText;24<h.length&&(d.innerHTML=yn(f,10),24<(c.innerText+d.innerText).length&&(d.innerHTML=yn(g,5),25<(c.innerText+d.innerText).length&&(d.innerHTML=yn(f,0,""),24<(c.innerText+d.innerText).length&&(c.innerHTML=yn(f,24))))),s.append(c,l,d,p),"".concat(c.innerText," + ").concat(d.innerText).length;var v=document.createElement("p");v.classList.add("tweet-text"),"object"===u(e[n].retweeted_status)?v.innerHTML=e[n].retweeted_status.full_text:v.innerHTML=e[n].full_text,v.innerHTML=xn(v.innerHTML),v.innerHTML=bn(v.innerHTML);var x=document.createElement("div");x.classList.add("tweet-image");var b=void 0,y=void 0,w=void 0;if(void 0!==e[n].extended_entities&&void 0!==e[n].extended_entities.media)if("video"===e[n].extended_entities.media[0].type||"animated_gif"===e[n].extended_entities.media[0].type){(y=document.createElement("video")).controls="controls",w=document.createElement("source");for(var L=e[n].extended_entities.media[0].video_info.variants,S=0;S<L.length;S++)if("video/mp4"===L[S].content_type){w.type=L[S].content_type,w.src=L[S].url;break}y.append(w),document.createElement("p").innerHTML="Sorry, your browser doesn't support embedded videos.",y.append("videoError"),x.append(y)}else"photo"===e[n].extended_entities.media[0].type&&((b=document.createElement("img")).src=e[n].extended_entities.media[0].media_url_https,b.alt="Tweet Media",x.append(b));var T=document.createElement("div"),k=document.createElement("div");k.classList.add("tweet-footer");var M=document.createElement("div");M.classList.add("tweet-metrics");var E=document.createElementNS("http://www.w3.org/2000/svg","svg");E.classList.add("tweet-icon"),E.innerHTML='<path xmlns="http://www.w3.org/2000/svg" d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/>',E.setAttribute("viewBox","0 0 24 24");var H=document.createElement("p");H.innerHTML="".concat(e[n].retweet_count," "),H.innerHTML=t(H.innerHTML);var q=document.createElementNS("http://www.w3.org/2000/svg","svg");q.classList.add("tweet-icon"),q.innerHTML='<path d="M0 0h24v24H0z" fill="none"/><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>',q.setAttribute("viewBox","0 0 24 24");var A=document.createElement("p");A.innerHTML="".concat(e[n].retweet_count," "),A.innerHTML=t(A.innerHTML),M.append(E,H,q,A);var N=document.createElement("div");N.setAttribute("data-tweetId","".concat(e[n].id_str)),N.classList.add("save-to-collection");var C=document.createElementNS("http://www.w3.org/2000/svg","svg");C.classList.add("save-to-svg"),C.setAttribute("viewBox","0 0 24 24"),C.innerHTML='<path d="M0 0h24v24H0z" fill="none"></path><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"></path>';var D=document.createElement("p");D.classList.add("save-to-text"),D.innerHTML="Save to collection",N.append(C,D);var z=localStorage.currentUser;void 0!==z&&JSON.parse(z).favorites.includes(e[n].id_str)&&(C.style.fill="green",C.innerHTML='<path d="M0 0h24v24H0z" fill="none"/><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/>',D.style.color="green",D.innerHTML="Saved to your collections");var j=document.createElement("div");j.setAttribute("data-tweetId","".concat(e[n].id_str)),j.classList.add("remove-from-collection","hide");var $=document.createElementNS("http://www.w3.org/2000/svg","svg");$.setAttribute("viewBox","0 0 24 24"),$.innerHTML='<path d="M0 0h24v24H0V0z" fill="none"/><path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"/>';var O=document.createElement("p");O.innerHTML="remove from collection",j.append($,O),k.append(M,N,j),T.append(k),a.append(s,v,x,T),r.append(o,a),pe.append(r)}}function un(){Ne.innerHTML="",Ne.classList.add("hide"),pn(event.currentTarget.innerText.trim())}function pn(e){p.post("https://us-central1-explorer-one-44263.cloudfunctions.net/api/collection",{collectionName:e},Je).then((function(n){f.classList.add("hide"),n.data.results;var t=n.data.results;re.classList.add("hide"),ue.classList.remove("hide"),pe.innerHTML="",dn(t);var r=document.querySelectorAll(".save-to-collection"),o=document.querySelectorAll(".remove-from-collection");r.forEach((function(e){e.classList.add("hide")})),o.forEach((function(n){n.classList.remove("hide"),n.setAttribute("data-collection-name",e)})),ue.scrollIntoView(),""===pe.innerHTML&&(Ne.classList.remove("hide"),Ne.innerHTML='<span class="color-blue">'.concat(e,"</span> currently has no saved tweets"),Ne.scrollIntoView({behavior:"smooth",block:"start",inline:"nearest"})),mn()})).catch((function(e){f.classList.add("hide"),e.response.data}))}function mn(){document.querySelectorAll(".tweet-image img").forEach((function(e){e.addEventListener("click",(function(){x.classList.remove("hide"),g.classList.remove("hide"),e.src,x.style.backgroundImage="url(".concat(e.src,")"),nn.media.bg_img="url(".concat(e.src,")"),nn.screenFade.class=g.className,nn.media.class=x.className,window.history.pushState(nn,null,"")}),!1)}));var e=document.querySelectorAll("video");e.forEach((function(n){n.addEventListener("play",(function(){var n=event.currentTarget;e.forEach((function(e){!1===e.paused&&e!==n&&e.pause()}))}))}));var n=document.querySelectorAll(".save-to-collection-item");document.querySelectorAll(".save-to-collection").forEach((function(e){e.addEventListener("click",(function(){Ce.classList.remove("hide"),g.classList.remove("hide");var e=event.currentTarget;gn(e);var t=e.tweetId;Ke=t,n.forEach((function(e){e.setAttribute("data-tweetId",t)})),nn.savetocol.class=Ce.className,window.history.pushState(nn,null,"")}),!1)})),n.forEach((function(e){e.addEventListener("click",fn,!0)}));var t=document.querySelector(".remove-prompt-delete");document.querySelectorAll(".remove-from-collection").forEach((function(e){e.addEventListener("click",(function(){je.classList.remove("hide");var e=event.currentTarget;gn(e);var n=e.tweetId;vn(e);var r=e.collectionName;t.setAttribute("data-tweetId",n),t.setAttribute("data-collection-name",r),nn.savetocol.class=Ce.className,history.pushState(nn,null,"")}),!1)})),document.querySelectorAll(".remove-from-collection-close").forEach((function(e){e.addEventListener("click",(function(){je.classList.add("hide"),nn.savetocol.class=Ce.className,window.back()}),!1)})),t.addEventListener("click",hn,!1),document.querySelectorAll(".mention").forEach((function(e){e.addEventListener("click",(function(){me.classList.add("hide"),_e.click(),fe.value=e.innerHTML,ve.click(),e.innerHTML}))})),document.querySelectorAll(".tweet-name").forEach((function(e){var n=e.getAttribute("data-username");e.addEventListener("click",(function(){_e.click(),fe.value=n,ve.click()}),!1)})),document.querySelectorAll(".home-link").forEach((function(e){e.addEventListener("click",(function(){Oe.click()}),!1)}))}function hn(){var e=event.currentTarget;e.append(f),f.classList.remove("hide"),gn(e);var n=e.tweetId;vn(e);var t=e.collectionName;p.post("https://us-central1-explorer-one-44263.cloudfunctions.net/api/deletefavorite/".concat(n),{collectionName:t},Je).then((function(n){f.classList.add("hide"),je.classList.add("hide"),n.data,pn(t),mn(),e.removeAttribute("data-collection-name"),e.removeAttribute("data-tweetid")})).catch((function(e){f.classList.add("hide"),e.response.data}))}function fn(){var e=Ke,n=event.currentTarget.innerText.trim();event.currentTarget.append(f),f.classList.remove("hide"),p.post("https://us-central1-explorer-one-44263.cloudfunctions.net/api/addfavorite/".concat(e),{collectionName:n},Je).then((function(t){f.classList.add("hide"),Ce.classList.add("hide"),g.classList.add("hide"),t.data,document.querySelectorAll(".save-to-collection").forEach((function(t){t.getAttribute("data-tweetId")===e&&(t.style.color="green",t.childNodes[0].style.fill="green",t.childNodes[0].innerHTML='<path d="M0 0h24v24H0z" fill="none"/><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/>',t.childNodes[1].innerText="Saved to ".concat(n))})),Qe(t.data.userDetails),en(t.data.userDetails),mn(),nn.savetocol.class=Ce.className,nn.screenFade.class=g.className,window.history.pushState(nn,null,"")})).catch((function(e){f.classList.add("hide"),e.response.data}))}function gn(e){return e.tweetId=e.getAttribute("data-tweetId")}function vn(e){return e.collectionName=e.getAttribute("data-collection-name")}function xn(e){return e.replace(/(https?:\/\/[^\s]+)/g,'<a target="_blank" href="$1">$1</a>')}function bn(e){return e.replace(/(@[^\s]+)/g,'<span class="mention">$1</span>')}function yn(e,n,t){return null==n&&(n=100),null==t&&(t="..."),e.length>n?e.substring(0,n-t.length)+t:e}window.history.replaceState(nn,null,""),tn(),$e.forEach((function(e){e.addEventListener("click",rn,!1)})),w.addEventListener("click",cn,!1),te.forEach((function(e){e.addEventListener("click",sn,!1)})),Q.addEventListener("click",(function(){D.classList.add("hide"),U.classList.remove("hide"),nn.user.loginDiv.class=D.className,nn.user.signupDiv.class=U.className,window.history.pushState(nn,null,"")}),!1),P.addEventListener("click",(function(){cn(),nn.user.authDiv.class=T.className,nn.user.loginDiv.class=D.className,nn.user.signupDiv.class=U.className,nn.user.logoutDiv.class=ee.className,window.history.pushState(nn,null,"")}),!1),B.addEventListener("click",(function(){B.append(f),f.classList.remove("hide");var e,n,t={email:z.value,password:$.value},i=(n={},!r((e=t).email)&&o(e.email)||(n.email="Please enter a valid email address"),r(e.password)&&(n.password="Please enter a password"),{errors:n,valid:0===Object.keys(n).length}),a=i.valid,s=i.errors;a?a&&p.post("https://us-central1-explorer-one-44263.cloudfunctions.net/api/login",{email:t.email,password:t.password}).then((function(e){f.classList.add("hide"),g.classList.add("hide"),e.data,Ge(e.data.token),Qe(e.data.userDetails),en(e.data.userDetails),T.classList.add("hide"),D.classList.add("hide"),mn(),nn.screenFade.class=g.className,nn.user.authDiv.class=T.className,nn.user.loginDiv.class=D.className,window.history.pushState(nn,null,"")})).catch((function(e){f.classList.add("hide"),e.response.data,_.innerHTML=e.response.data.error})):(f.classList.add("hide"),s.email&&(j.innerHTML=s.email,j.classList.add("color-red"),z.placeholder=s.email,z.classList.add("auth-error")),s.password&&(O.innerHTML=s.password,O.classList.add("color-red"),$.placeholder=s.password,$.classList.add("auth-error")))}),!1),K.addEventListener("click",(function(){K.append(f),f.classList.remove("hide");var e,n,t={name:J.value,email:X.value,password:W.value,confirmPassword:Z.value},i=(n={},!r((e=t).email)&&o(e.email)||(n.email="Please enter a valid email address"),r(e.password)&&(n.password="Please enter a password"),r(e.name)&&(n.name="Please enter a name for your profile"),e.password!==e.confirmPassword&&(n.confirmPassword="Passwords do not match, please try again"),{errors:n,valid:0===Object.keys(n).length}),a=i.valid,s=i.errors;a?a&&p.post("https://us-central1-explorer-one-44263.cloudfunctions.net/api/signup",{name:t.name,email:t.email,password:t.password,confirmPassword:t.confirmPassword}).then((function(e){f.classList.add("hide"),g.classList.add("hide"),e.data,Ge(e.data.token),Qe(e.data.userDetails),en(e.data.userDetails),T.classList.add("hide"),U.classList.add("hide"),J.value="",X.value="",W.value="",Z.value="",mn(),nn.screenFade.class=g.className,nn.user.authDiv.class=T.className,nn.user.signupDiv.class=U.className,window.history.pushState(nn,null,"")})).catch((function(e){f.classList.add("hide"),e.response.data,e.response.data.password&&(G.innerHTML=e.response.data.password),e.response.data.email?G.innerHTML=e.response.data.email:G.innerHTML=e.response.data.general})):(f.classList.add("hide"),s.name&&(R.innerHTML=s.name,R.classList.add("color-red"),J.placeholder=s.name,J.classList.add("auth-error")),s.email&&(F.innerHTML=s.email,F.classList.add("color-red"),X.placeholder=s.email,X.classList.add("auth-error")),s.password&&(Y.innerHTML=s.password,Y.classList.add("color-red"),W.placeholder=s.password,W.classList.add("auth-error")),s.confirmPassword&&(V.innerHTML=s.confirmPassword,V.classList.add("color-red"),Z.placeholder=s.confirmPassword,Z.classList.add("auth-error")))}),!1),ne.addEventListener("click",ln,!1),de.addEventListener("click",(function(){var e,n;h="home",pe.innerHTML="",f.classList.remove("hide"),re.classList.contains("hide")?ue.append(f):de.append(f);for(var t=0;t<ce.length;t++)ce[t].checked&&(e=ce[t].value);for(var r=0;r<le.length;r++)le[r].checked&&(n=le[r].value);var o={query:ie.value,result_type:n,language:e};""===o.query.trim()?(f.classList.add("hide"),ae.innerHTML="Please give me something to search for",ae.classList.add("error")):""!==o.query.trim()&&p.post("https://us-central1-explorer-one-44263.cloudfunctions.net/api/search",{query:o.query,result_type:o.result_type,language:o.language}).then((function(e){f.classList.add("hide"),e.data.results;var n=e.data.results;re.classList.add("hide"),ue.classList.remove("hide"),ue.insertBefore(se,ue.firstChild),ue.insertBefore(oe,ue.firstChild),pe.innerHTML="",Array.isArray(n)&&n.length?dn(n):pe.innerHTML="There are no results for <span class= color-blue>".concat(o.query,"</span>. Maybe try another keyword or choose a different language or tweet type"),mn(),nn.search.keyword.home=ie.value,nn.search.tweetsDiv=pe.innerHTML,nn.home.class=re.className,nn.search.searchPage=ue.className,window.history.pushState(nn,null,"")})).catch((function(e){f.classList.add("hide"),e.response.data}))}),!1),ie.addEventListener("keydown",(function(){ae.innerHTML=""}),!1),ve.addEventListener("click",(function(){h="timeline",f.classList.remove("hide"),pe.innerHTML="",me.classList.contains("hide")?ue.append(f):ve.append(f);var e=fe.value;""===e.trim()?(f.classList.add("hide"),ge.innerHTML="Please enter a twitter user name",ge.classList.add("error")):""!==e.trim()&&p.post("https://us-central1-explorer-one-44263.cloudfunctions.net/api/timetravel",{screen_name:e}).then((function(n){f.classList.add("hide"),n.data.results;var t=n.data.results;me.classList.add("hide"),ue.classList.remove("hide"),ue.insertBefore(he,ue.firstChild),pe.innerHTML="",Array.isArray(t)&&t.length?dn(t):pe.innerHTML="There are no results for <span class= color-blue>".concat(e,'</span>. Maybe try the search on the <span class="home-link color-blue">homepage</span>'),mn(),nn.search.keyword.timeline=fe.value,nn.search.tweetsDiv=pe.innerHTML,nn.timeline.class=me.className,nn.search.searchPage=ue.className,window.history.pushState(nn,null,"")})).catch((function(n){ge.classList.add("error"),f.classList.add("hide"),n.response.data;var t=n.response.data;0===Object.keys(t.err).length&&t.err.constructor===Object&&(ge.innerHTML="<span class= color-blue>".concat(e,"'s</span> tweets are protected. The account cound be private or suspended."),pe.innerHTML="<span class= color-blue>".concat(e,"'s</span> tweets are protected. The account cound be private or suspended."),nn.search.keyword.timeline=fe.value,nn.search.tweetsDiv=pe.innerHTML,nn.timeline.class=me.className,nn.search.searchPage=ue.className,window.history.pushState(nn,null,"")),u(t.err[0].code),34===t.err[0].code&&(ge.innerHTML="Seems like there is no user with this user name, please check and try again.",pe.innerHTML="Seems like there is no user with this user name, please check and try again.",nn.search.keyword.timeline=fe.value,nn.search.tweetsDiv=pe.innerHTML,nn.timeline.class=me.className,nn.search.searchPage=ue.className,window.history.pushState(nn,null,""))}))}),!1),fe.addEventListener("keydown",(function(){ge.innerHTML=""}),!1),be.addEventListener("click",(function(){be.classList.add("hide"),ye.classList.remove("hide")}),!1),Se.addEventListener("click",(function(){we.value="",Te.innerHTML="",He.innerHTML="",be.classList.remove("hide"),ye.classList.add("hide")}),!1),Le.addEventListener("click",(function(){return f.classList.remove("hide"),Ze(),xe.classList.contains("hide")?ke.append(f):Le.append(f),null==Xe?(f.classList.add("hide"),void(Te.innerHTML="You need to be logged in to use this feature. Please login or create an account to continue.")):""===we.value.trim()?(Te.classList.remove("hide"),Te.innerHTML="Please enter a name for your new collection",He.innerHTML="Please enter a name for your new collection",void f.classList.add("hide")):void p.post("https://us-central1-explorer-one-44263.cloudfunctions.net/api/collection/create",{collectionName:we.value},Je).then((function(e){we.value="",Me.value="",f.classList.add("hide"),be.classList.remove("hide"),ye.classList.add("hide"),Qe(e.data.userDetails),en(e.data.userDetails),mn()})).catch((function(e){f.classList.add("hide"),e.response.data,Te.classList.remove("hide"),He.classList.remove("hide"),Te.innerHTML=e.response.data.error,He.innerHTML=e.response.data.error,"Unauthorized"===e.response.data.error&&(Te.innerHTML="You need to be logged in to use this feature. Please login or create an account to continue.")}))}),!1),we.addEventListener("keyup",(function(){13!==event.keyCode&&(Te.innerHTML="")}),!1),Me.addEventListener("keyup",(function(){13!==event.keyCode&&(He.innerHTML="")}),!1),C.addEventListener("click",ln,!1),g.addEventListener("click",(function(){N.classList.contains("hide")||ln(),Ce.classList.contains("hide")||(Ce.classList.add("hide"),g.classList.add("hide")),v.forEach((function(e){e.classList.contains("hide")||(e.classList.add("hide"),g.classList.add("hide"))})),"home"===h?Oe.setAttribute("data-selected",!0):"timeline"===h?_e.setAttribute("data-selected",!0):"collection"===h&&Be.setAttribute("data-selected",!0),nn.screenFade.class=g.className,window.history.back()}),!1),De.addEventListener("click",(function(){Ce.classList.add("hide"),g.classList.add("hide"),He.innerHTML="",Me.value="",Te.innerHTML="",nn.savetocol.class=Ce.className,window.history.back()}),!1),b.addEventListener("click",(function(){x.classList.add("hide"),g.classList.add("hide"),window.history.back()}),!1),M.addEventListener("click",(function(){event.stopPropagation(),k.classList.add("hide"),g.classList.add("hide"),Pe.setAttribute("data-selected","false"),"home"===h?Oe.setAttribute("data-selected","true"):"timeline"===h?_e.setAttribute("data-selected","true"):"collections"===h&&Be.setAttribute("data-selected","true"),nn.about.class=k.className}),!1),window.onpopstate=function(e){e.state&&(nn=e.state),tn()},document.addEventListener("touchstart",(function(e){var n=function(e){return e.touches||e.originalEvent.touches}(e)[0];wn=n.clientX,Ln=n.clientY}),!1),document.addEventListener("touchmove",(function(e){if(wn&&Ln){var n=e.touches[0].clientX,t=e.touches[0].clientY,r=wn-n,o=Ln-t;Math.abs(r)>Math.abs(o)||x.classList.contains("hide")||(history.back(),nn.screenFade.class=g.className,nn.media.class=x.className),Ln=wn=null}}),!1);var wn=null,Ln=null}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 35);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var bind = __webpack_require__(2);
+
+/*global toString:true*/
+
+// utils is a library of generic helper functions non-specific to axios
+
+var toString = Object.prototype.toString;
+
+/**
+ * Determine if a value is an Array
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an Array, otherwise false
+ */
+function isArray(val) {
+  return toString.call(val) === '[object Array]';
+}
+
+/**
+ * Determine if a value is undefined
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if the value is undefined, otherwise false
+ */
+function isUndefined(val) {
+  return typeof val === 'undefined';
+}
+
+/**
+ * Determine if a value is a Buffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Buffer, otherwise false
+ */
+function isBuffer(val) {
+  return val !== null && !isUndefined(val) && val.constructor !== null && !isUndefined(val.constructor)
+    && typeof val.constructor.isBuffer === 'function' && val.constructor.isBuffer(val);
+}
+
+/**
+ * Determine if a value is an ArrayBuffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an ArrayBuffer, otherwise false
+ */
+function isArrayBuffer(val) {
+  return toString.call(val) === '[object ArrayBuffer]';
+}
+
+/**
+ * Determine if a value is a FormData
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an FormData, otherwise false
+ */
+function isFormData(val) {
+  return (typeof FormData !== 'undefined') && (val instanceof FormData);
+}
+
+/**
+ * Determine if a value is a view on an ArrayBuffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a view on an ArrayBuffer, otherwise false
+ */
+function isArrayBufferView(val) {
+  var result;
+  if ((typeof ArrayBuffer !== 'undefined') && (ArrayBuffer.isView)) {
+    result = ArrayBuffer.isView(val);
+  } else {
+    result = (val) && (val.buffer) && (val.buffer instanceof ArrayBuffer);
+  }
+  return result;
+}
+
+/**
+ * Determine if a value is a String
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a String, otherwise false
+ */
+function isString(val) {
+  return typeof val === 'string';
+}
+
+/**
+ * Determine if a value is a Number
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Number, otherwise false
+ */
+function isNumber(val) {
+  return typeof val === 'number';
+}
+
+/**
+ * Determine if a value is an Object
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an Object, otherwise false
+ */
+function isObject(val) {
+  return val !== null && typeof val === 'object';
+}
+
+/**
+ * Determine if a value is a plain Object
+ *
+ * @param {Object} val The value to test
+ * @return {boolean} True if value is a plain Object, otherwise false
+ */
+function isPlainObject(val) {
+  if (toString.call(val) !== '[object Object]') {
+    return false;
+  }
+
+  var prototype = Object.getPrototypeOf(val);
+  return prototype === null || prototype === Object.prototype;
+}
+
+/**
+ * Determine if a value is a Date
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Date, otherwise false
+ */
+function isDate(val) {
+  return toString.call(val) === '[object Date]';
+}
+
+/**
+ * Determine if a value is a File
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a File, otherwise false
+ */
+function isFile(val) {
+  return toString.call(val) === '[object File]';
+}
+
+/**
+ * Determine if a value is a Blob
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Blob, otherwise false
+ */
+function isBlob(val) {
+  return toString.call(val) === '[object Blob]';
+}
+
+/**
+ * Determine if a value is a Function
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Function, otherwise false
+ */
+function isFunction(val) {
+  return toString.call(val) === '[object Function]';
+}
+
+/**
+ * Determine if a value is a Stream
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Stream, otherwise false
+ */
+function isStream(val) {
+  return isObject(val) && isFunction(val.pipe);
+}
+
+/**
+ * Determine if a value is a URLSearchParams object
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a URLSearchParams object, otherwise false
+ */
+function isURLSearchParams(val) {
+  return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams;
+}
+
+/**
+ * Trim excess whitespace off the beginning and end of a string
+ *
+ * @param {String} str The String to trim
+ * @returns {String} The String freed of excess whitespace
+ */
+function trim(str) {
+  return str.replace(/^\s*/, '').replace(/\s*$/, '');
+}
+
+/**
+ * Determine if we're running in a standard browser environment
+ *
+ * This allows axios to run in a web worker, and react-native.
+ * Both environments support XMLHttpRequest, but not fully standard globals.
+ *
+ * web workers:
+ *  typeof window -> undefined
+ *  typeof document -> undefined
+ *
+ * react-native:
+ *  navigator.product -> 'ReactNative'
+ * nativescript
+ *  navigator.product -> 'NativeScript' or 'NS'
+ */
+function isStandardBrowserEnv() {
+  if (typeof navigator !== 'undefined' && (navigator.product === 'ReactNative' ||
+                                           navigator.product === 'NativeScript' ||
+                                           navigator.product === 'NS')) {
+    return false;
+  }
+  return (
+    typeof window !== 'undefined' &&
+    typeof document !== 'undefined'
+  );
+}
+
+/**
+ * Iterate over an Array or an Object invoking a function for each item.
+ *
+ * If `obj` is an Array callback will be called passing
+ * the value, index, and complete array for each item.
+ *
+ * If 'obj' is an Object callback will be called passing
+ * the value, key, and complete object for each property.
+ *
+ * @param {Object|Array} obj The object to iterate
+ * @param {Function} fn The callback to invoke for each item
+ */
+function forEach(obj, fn) {
+  // Don't bother if no value provided
+  if (obj === null || typeof obj === 'undefined') {
+    return;
+  }
+
+  // Force an array if not already something iterable
+  if (typeof obj !== 'object') {
+    /*eslint no-param-reassign:0*/
+    obj = [obj];
+  }
+
+  if (isArray(obj)) {
+    // Iterate over array values
+    for (var i = 0, l = obj.length; i < l; i++) {
+      fn.call(null, obj[i], i, obj);
+    }
+  } else {
+    // Iterate over object keys
+    for (var key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        fn.call(null, obj[key], key, obj);
+      }
+    }
+  }
+}
+
+/**
+ * Accepts varargs expecting each argument to be an object, then
+ * immutably merges the properties of each object and returns result.
+ *
+ * When multiple objects contain the same key the later object in
+ * the arguments list will take precedence.
+ *
+ * Example:
+ *
+ * ```js
+ * var result = merge({foo: 123}, {foo: 456});
+ * console.log(result.foo); // outputs 456
+ * ```
+ *
+ * @param {Object} obj1 Object to merge
+ * @returns {Object} Result of all merge properties
+ */
+function merge(/* obj1, obj2, obj3, ... */) {
+  var result = {};
+  function assignValue(val, key) {
+    if (isPlainObject(result[key]) && isPlainObject(val)) {
+      result[key] = merge(result[key], val);
+    } else if (isPlainObject(val)) {
+      result[key] = merge({}, val);
+    } else if (isArray(val)) {
+      result[key] = val.slice();
+    } else {
+      result[key] = val;
+    }
+  }
+
+  for (var i = 0, l = arguments.length; i < l; i++) {
+    forEach(arguments[i], assignValue);
+  }
+  return result;
+}
+
+/**
+ * Extends object a by mutably adding to it the properties of object b.
+ *
+ * @param {Object} a The object to be extended
+ * @param {Object} b The object to copy properties from
+ * @param {Object} thisArg The object to bind function to
+ * @return {Object} The resulting value of object a
+ */
+function extend(a, b, thisArg) {
+  forEach(b, function assignValue(val, key) {
+    if (thisArg && typeof val === 'function') {
+      a[key] = bind(val, thisArg);
+    } else {
+      a[key] = val;
+    }
+  });
+  return a;
+}
+
+/**
+ * Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
+ *
+ * @param {string} content with BOM
+ * @return {string} content value without BOM
+ */
+function stripBOM(content) {
+  if (content.charCodeAt(0) === 0xFEFF) {
+    content = content.slice(1);
+  }
+  return content;
+}
+
+module.exports = {
+  isArray: isArray,
+  isArrayBuffer: isArrayBuffer,
+  isBuffer: isBuffer,
+  isFormData: isFormData,
+  isArrayBufferView: isArrayBufferView,
+  isString: isString,
+  isNumber: isNumber,
+  isObject: isObject,
+  isPlainObject: isPlainObject,
+  isUndefined: isUndefined,
+  isDate: isDate,
+  isFile: isFile,
+  isBlob: isBlob,
+  isFunction: isFunction,
+  isStream: isStream,
+  isURLSearchParams: isURLSearchParams,
+  isStandardBrowserEnv: isStandardBrowserEnv,
+  forEach: forEach,
+  merge: merge,
+  extend: extend,
+  trim: trim,
+  stripBOM: stripBOM
+};
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+// eslint-disable-next-line func-names
+module.exports = function (useSourceMap) {
+  var list = []; // return the list of modules as css string
+
+  list.toString = function toString() {
+    return this.map(function (item) {
+      var content = cssWithMappingToString(item, useSourceMap);
+
+      if (item[2]) {
+        return "@media ".concat(item[2], " {").concat(content, "}");
+      }
+
+      return content;
+    }).join('');
+  }; // import a list of modules into the list
+  // eslint-disable-next-line func-names
+
+
+  list.i = function (modules, mediaQuery, dedupe) {
+    if (typeof modules === 'string') {
+      // eslint-disable-next-line no-param-reassign
+      modules = [[null, modules, '']];
+    }
+
+    var alreadyImportedModules = {};
+
+    if (dedupe) {
+      for (var i = 0; i < this.length; i++) {
+        // eslint-disable-next-line prefer-destructuring
+        var id = this[i][0];
+
+        if (id != null) {
+          alreadyImportedModules[id] = true;
+        }
+      }
+    }
+
+    for (var _i = 0; _i < modules.length; _i++) {
+      var item = [].concat(modules[_i]);
+
+      if (dedupe && alreadyImportedModules[item[0]]) {
+        // eslint-disable-next-line no-continue
+        continue;
+      }
+
+      if (mediaQuery) {
+        if (!item[2]) {
+          item[2] = mediaQuery;
+        } else {
+          item[2] = "".concat(mediaQuery, " and ").concat(item[2]);
+        }
+      }
+
+      list.push(item);
+    }
+  };
+
+  return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+  var content = item[1] || ''; // eslint-disable-next-line prefer-destructuring
+
+  var cssMapping = item[3];
+
+  if (!cssMapping) {
+    return content;
+  }
+
+  if (useSourceMap && typeof btoa === 'function') {
+    var sourceMapping = toComment(cssMapping);
+    var sourceURLs = cssMapping.sources.map(function (source) {
+      return "/*# sourceURL=".concat(cssMapping.sourceRoot || '').concat(source, " */");
+    });
+    return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+  }
+
+  return [content].join('\n');
+} // Adapted from convert-source-map (MIT)
+
+
+function toComment(sourceMap) {
+  // eslint-disable-next-line no-undef
+  var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+  var data = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(base64);
+  return "/*# ".concat(data, " */");
+}
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function bind(fn, thisArg) {
+  return function wrap() {
+    var args = new Array(arguments.length);
+    for (var i = 0; i < args.length; i++) {
+      args[i] = arguments[i];
+    }
+    return fn.apply(thisArg, args);
+  };
+};
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+
+function encode(val) {
+  return encodeURIComponent(val).
+    replace(/%3A/gi, ':').
+    replace(/%24/g, '$').
+    replace(/%2C/gi, ',').
+    replace(/%20/g, '+').
+    replace(/%5B/gi, '[').
+    replace(/%5D/gi, ']');
+}
+
+/**
+ * Build a URL by appending params to the end
+ *
+ * @param {string} url The base of the url (e.g., http://www.google.com)
+ * @param {object} [params] The params to be appended
+ * @returns {string} The formatted url
+ */
+module.exports = function buildURL(url, params, paramsSerializer) {
+  /*eslint no-param-reassign:0*/
+  if (!params) {
+    return url;
+  }
+
+  var serializedParams;
+  if (paramsSerializer) {
+    serializedParams = paramsSerializer(params);
+  } else if (utils.isURLSearchParams(params)) {
+    serializedParams = params.toString();
+  } else {
+    var parts = [];
+
+    utils.forEach(params, function serialize(val, key) {
+      if (val === null || typeof val === 'undefined') {
+        return;
+      }
+
+      if (utils.isArray(val)) {
+        key = key + '[]';
+      } else {
+        val = [val];
+      }
+
+      utils.forEach(val, function parseValue(v) {
+        if (utils.isDate(v)) {
+          v = v.toISOString();
+        } else if (utils.isObject(v)) {
+          v = JSON.stringify(v);
+        }
+        parts.push(encode(key) + '=' + encode(v));
+      });
+    });
+
+    serializedParams = parts.join('&');
+  }
+
+  if (serializedParams) {
+    var hashmarkIndex = url.indexOf('#');
+    if (hashmarkIndex !== -1) {
+      url = url.slice(0, hashmarkIndex);
+    }
+
+    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams;
+  }
+
+  return url;
+};
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function isCancel(value) {
+  return !!(value && value.__CANCEL__);
+};
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+var utils = __webpack_require__(0);
+var normalizeHeaderName = __webpack_require__(19);
+
+var DEFAULT_CONTENT_TYPE = {
+  'Content-Type': 'application/x-www-form-urlencoded'
+};
+
+function setContentTypeIfUnset(headers, value) {
+  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
+    headers['Content-Type'] = value;
+  }
+}
+
+function getDefaultAdapter() {
+  var adapter;
+  if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = __webpack_require__(6);
+  } else if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(6);
+  }
+  return adapter;
+}
+
+var defaults = {
+  adapter: getDefaultAdapter(),
+
+  transformRequest: [function transformRequest(data, headers) {
+    normalizeHeaderName(headers, 'Accept');
+    normalizeHeaderName(headers, 'Content-Type');
+    if (utils.isFormData(data) ||
+      utils.isArrayBuffer(data) ||
+      utils.isBuffer(data) ||
+      utils.isStream(data) ||
+      utils.isFile(data) ||
+      utils.isBlob(data)
+    ) {
+      return data;
+    }
+    if (utils.isArrayBufferView(data)) {
+      return data.buffer;
+    }
+    if (utils.isURLSearchParams(data)) {
+      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+      return data.toString();
+    }
+    if (utils.isObject(data)) {
+      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+      return JSON.stringify(data);
+    }
+    return data;
+  }],
+
+  transformResponse: [function transformResponse(data) {
+    /*eslint no-param-reassign:0*/
+    if (typeof data === 'string') {
+      try {
+        data = JSON.parse(data);
+      } catch (e) { /* Ignore */ }
+    }
+    return data;
+  }],
+
+  /**
+   * A timeout in milliseconds to abort a request. If set to 0 (default) a
+   * timeout is not created.
+   */
+  timeout: 0,
+
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+
+  maxContentLength: -1,
+  maxBodyLength: -1,
+
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  }
+};
+
+defaults.headers = {
+  common: {
+    'Accept': 'application/json, text/plain, */*'
+  }
+};
+
+utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
+  defaults.headers[method] = {};
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
+});
+
+module.exports = defaults;
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(18)))
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+var settle = __webpack_require__(20);
+var cookies = __webpack_require__(22);
+var buildURL = __webpack_require__(3);
+var buildFullPath = __webpack_require__(23);
+var parseHeaders = __webpack_require__(26);
+var isURLSameOrigin = __webpack_require__(27);
+var createError = __webpack_require__(7);
+
+module.exports = function xhrAdapter(config) {
+  return new Promise(function dispatchXhrRequest(resolve, reject) {
+    var requestData = config.data;
+    var requestHeaders = config.headers;
+
+    if (utils.isFormData(requestData)) {
+      delete requestHeaders['Content-Type']; // Let the browser set it
+    }
+
+    if (
+      (utils.isBlob(requestData) || utils.isFile(requestData)) &&
+      requestData.type
+    ) {
+      delete requestHeaders['Content-Type']; // Let the browser set it
+    }
+
+    var request = new XMLHttpRequest();
+
+    // HTTP basic authentication
+    if (config.auth) {
+      var username = config.auth.username || '';
+      var password = unescape(encodeURIComponent(config.auth.password)) || '';
+      requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
+    }
+
+    var fullPath = buildFullPath(config.baseURL, config.url);
+    request.open(config.method.toUpperCase(), buildURL(fullPath, config.params, config.paramsSerializer), true);
+
+    // Set the request timeout in MS
+    request.timeout = config.timeout;
+
+    // Listen for ready state
+    request.onreadystatechange = function handleLoad() {
+      if (!request || request.readyState !== 4) {
+        return;
+      }
+
+      // The request errored out and we didn't get a response, this will be
+      // handled by onerror instead
+      // With one exception: request that using file: protocol, most browsers
+      // will return status as 0 even though it's a successful request
+      if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
+        return;
+      }
+
+      // Prepare the response
+      var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
+      var responseData = !config.responseType || config.responseType === 'text' ? request.responseText : request.response;
+      var response = {
+        data: responseData,
+        status: request.status,
+        statusText: request.statusText,
+        headers: responseHeaders,
+        config: config,
+        request: request
+      };
+
+      settle(resolve, reject, response);
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle browser request cancellation (as opposed to a manual cancellation)
+    request.onabort = function handleAbort() {
+      if (!request) {
+        return;
+      }
+
+      reject(createError('Request aborted', config, 'ECONNABORTED', request));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle low level network errors
+    request.onerror = function handleError() {
+      // Real errors are hidden from us by the browser
+      // onerror should only fire if it's a network error
+      reject(createError('Network Error', config, null, request));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle timeout
+    request.ontimeout = function handleTimeout() {
+      var timeoutErrorMessage = 'timeout of ' + config.timeout + 'ms exceeded';
+      if (config.timeoutErrorMessage) {
+        timeoutErrorMessage = config.timeoutErrorMessage;
+      }
+      reject(createError(timeoutErrorMessage, config, 'ECONNABORTED',
+        request));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Add xsrf header
+    // This is only done if running in a standard browser environment.
+    // Specifically not if we're in a web worker, or react-native.
+    if (utils.isStandardBrowserEnv()) {
+      // Add xsrf header
+      var xsrfValue = (config.withCredentials || isURLSameOrigin(fullPath)) && config.xsrfCookieName ?
+        cookies.read(config.xsrfCookieName) :
+        undefined;
+
+      if (xsrfValue) {
+        requestHeaders[config.xsrfHeaderName] = xsrfValue;
+      }
+    }
+
+    // Add headers to the request
+    if ('setRequestHeader' in request) {
+      utils.forEach(requestHeaders, function setRequestHeader(val, key) {
+        if (typeof requestData === 'undefined' && key.toLowerCase() === 'content-type') {
+          // Remove Content-Type if data is undefined
+          delete requestHeaders[key];
+        } else {
+          // Otherwise add header to the request
+          request.setRequestHeader(key, val);
+        }
+      });
+    }
+
+    // Add withCredentials to request if needed
+    if (!utils.isUndefined(config.withCredentials)) {
+      request.withCredentials = !!config.withCredentials;
+    }
+
+    // Add responseType to request if needed
+    if (config.responseType) {
+      try {
+        request.responseType = config.responseType;
+      } catch (e) {
+        // Expected DOMException thrown by browsers not compatible XMLHttpRequest Level 2.
+        // But, this can be suppressed for 'json' type as it can be parsed by default 'transformResponse' function.
+        if (config.responseType !== 'json') {
+          throw e;
+        }
+      }
+    }
+
+    // Handle progress if needed
+    if (typeof config.onDownloadProgress === 'function') {
+      request.addEventListener('progress', config.onDownloadProgress);
+    }
+
+    // Not all browsers support upload events
+    if (typeof config.onUploadProgress === 'function' && request.upload) {
+      request.upload.addEventListener('progress', config.onUploadProgress);
+    }
+
+    if (config.cancelToken) {
+      // Handle cancellation
+      config.cancelToken.promise.then(function onCanceled(cancel) {
+        if (!request) {
+          return;
+        }
+
+        request.abort();
+        reject(cancel);
+        // Clean up request
+        request = null;
+      });
+    }
+
+    if (!requestData) {
+      requestData = null;
+    }
+
+    // Send the request
+    request.send(requestData);
+  });
+};
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var enhanceError = __webpack_require__(21);
+
+/**
+ * Create an Error with the specified message, config, error code, request and response.
+ *
+ * @param {string} message The error message.
+ * @param {Object} config The config.
+ * @param {string} [code] The error code (for example, 'ECONNABORTED').
+ * @param {Object} [request] The request.
+ * @param {Object} [response] The response.
+ * @returns {Error} The created error.
+ */
+module.exports = function createError(message, config, code, request, response) {
+  var error = new Error(message);
+  return enhanceError(error, config, code, request, response);
+};
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+
+/**
+ * Config-specific merge-function which creates a new config-object
+ * by merging two configuration objects together.
+ *
+ * @param {Object} config1
+ * @param {Object} config2
+ * @returns {Object} New object resulting from merging config2 to config1
+ */
+module.exports = function mergeConfig(config1, config2) {
+  // eslint-disable-next-line no-param-reassign
+  config2 = config2 || {};
+  var config = {};
+
+  var valueFromConfig2Keys = ['url', 'method', 'data'];
+  var mergeDeepPropertiesKeys = ['headers', 'auth', 'proxy', 'params'];
+  var defaultToConfig2Keys = [
+    'baseURL', 'transformRequest', 'transformResponse', 'paramsSerializer',
+    'timeout', 'timeoutMessage', 'withCredentials', 'adapter', 'responseType', 'xsrfCookieName',
+    'xsrfHeaderName', 'onUploadProgress', 'onDownloadProgress', 'decompress',
+    'maxContentLength', 'maxBodyLength', 'maxRedirects', 'transport', 'httpAgent',
+    'httpsAgent', 'cancelToken', 'socketPath', 'responseEncoding'
+  ];
+  var directMergeKeys = ['validateStatus'];
+
+  function getMergedValue(target, source) {
+    if (utils.isPlainObject(target) && utils.isPlainObject(source)) {
+      return utils.merge(target, source);
+    } else if (utils.isPlainObject(source)) {
+      return utils.merge({}, source);
+    } else if (utils.isArray(source)) {
+      return source.slice();
+    }
+    return source;
+  }
+
+  function mergeDeepProperties(prop) {
+    if (!utils.isUndefined(config2[prop])) {
+      config[prop] = getMergedValue(config1[prop], config2[prop]);
+    } else if (!utils.isUndefined(config1[prop])) {
+      config[prop] = getMergedValue(undefined, config1[prop]);
+    }
+  }
+
+  utils.forEach(valueFromConfig2Keys, function valueFromConfig2(prop) {
+    if (!utils.isUndefined(config2[prop])) {
+      config[prop] = getMergedValue(undefined, config2[prop]);
+    }
+  });
+
+  utils.forEach(mergeDeepPropertiesKeys, mergeDeepProperties);
+
+  utils.forEach(defaultToConfig2Keys, function defaultToConfig2(prop) {
+    if (!utils.isUndefined(config2[prop])) {
+      config[prop] = getMergedValue(undefined, config2[prop]);
+    } else if (!utils.isUndefined(config1[prop])) {
+      config[prop] = getMergedValue(undefined, config1[prop]);
+    }
+  });
+
+  utils.forEach(directMergeKeys, function merge(prop) {
+    if (prop in config2) {
+      config[prop] = getMergedValue(config1[prop], config2[prop]);
+    } else if (prop in config1) {
+      config[prop] = getMergedValue(undefined, config1[prop]);
+    }
+  });
+
+  var axiosKeys = valueFromConfig2Keys
+    .concat(mergeDeepPropertiesKeys)
+    .concat(defaultToConfig2Keys)
+    .concat(directMergeKeys);
+
+  var otherKeys = Object
+    .keys(config1)
+    .concat(Object.keys(config2))
+    .filter(function filterAxiosKeys(key) {
+      return axiosKeys.indexOf(key) === -1;
+    });
+
+  utils.forEach(otherKeys, mergeDeepProperties);
+
+  return config;
+};
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * A `Cancel` is an object that is thrown when an operation is canceled.
+ *
+ * @class
+ * @param {string=} message The message.
+ */
+function Cancel(message) {
+  this.message = message;
+}
+
+Cancel.prototype.toString = function toString() {
+  return 'Cancel' + (this.message ? ': ' + this.message : '');
+};
+
+Cancel.prototype.__CANCEL__ = true;
+
+module.exports = Cancel;
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var isOldIE = function isOldIE() {
+  var memo;
+  return function memorize() {
+    if (typeof memo === 'undefined') {
+      // Test for IE <= 9 as proposed by Browserhacks
+      // @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
+      // Tests for existence of standard globals is to allow style-loader
+      // to operate correctly into non-standard environments
+      // @see https://github.com/webpack-contrib/style-loader/issues/177
+      memo = Boolean(window && document && document.all && !window.atob);
+    }
+
+    return memo;
+  };
+}();
+
+var getTarget = function getTarget() {
+  var memo = {};
+  return function memorize(target) {
+    if (typeof memo[target] === 'undefined') {
+      var styleTarget = document.querySelector(target); // Special case to return head of iframe instead of iframe itself
+
+      if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
+        try {
+          // This will throw an exception if access to iframe is blocked
+          // due to cross-origin restrictions
+          styleTarget = styleTarget.contentDocument.head;
+        } catch (e) {
+          // istanbul ignore next
+          styleTarget = null;
+        }
+      }
+
+      memo[target] = styleTarget;
+    }
+
+    return memo[target];
+  };
+}();
+
+var stylesInDom = [];
+
+function getIndexByIdentifier(identifier) {
+  var result = -1;
+
+  for (var i = 0; i < stylesInDom.length; i++) {
+    if (stylesInDom[i].identifier === identifier) {
+      result = i;
+      break;
+    }
+  }
+
+  return result;
+}
+
+function modulesToDom(list, options) {
+  var idCountMap = {};
+  var identifiers = [];
+
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i];
+    var id = options.base ? item[0] + options.base : item[0];
+    var count = idCountMap[id] || 0;
+    var identifier = "".concat(id, " ").concat(count);
+    idCountMap[id] = count + 1;
+    var index = getIndexByIdentifier(identifier);
+    var obj = {
+      css: item[1],
+      media: item[2],
+      sourceMap: item[3]
+    };
+
+    if (index !== -1) {
+      stylesInDom[index].references++;
+      stylesInDom[index].updater(obj);
+    } else {
+      stylesInDom.push({
+        identifier: identifier,
+        updater: addStyle(obj, options),
+        references: 1
+      });
+    }
+
+    identifiers.push(identifier);
+  }
+
+  return identifiers;
+}
+
+function insertStyleElement(options) {
+  var style = document.createElement('style');
+  var attributes = options.attributes || {};
+
+  if (typeof attributes.nonce === 'undefined') {
+    var nonce =  true ? __webpack_require__.nc : undefined;
+
+    if (nonce) {
+      attributes.nonce = nonce;
+    }
+  }
+
+  Object.keys(attributes).forEach(function (key) {
+    style.setAttribute(key, attributes[key]);
+  });
+
+  if (typeof options.insert === 'function') {
+    options.insert(style);
+  } else {
+    var target = getTarget(options.insert || 'head');
+
+    if (!target) {
+      throw new Error("Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid.");
+    }
+
+    target.appendChild(style);
+  }
+
+  return style;
+}
+
+function removeStyleElement(style) {
+  // istanbul ignore if
+  if (style.parentNode === null) {
+    return false;
+  }
+
+  style.parentNode.removeChild(style);
+}
+/* istanbul ignore next  */
+
+
+var replaceText = function replaceText() {
+  var textStore = [];
+  return function replace(index, replacement) {
+    textStore[index] = replacement;
+    return textStore.filter(Boolean).join('\n');
+  };
+}();
+
+function applyToSingletonTag(style, index, remove, obj) {
+  var css = remove ? '' : obj.media ? "@media ".concat(obj.media, " {").concat(obj.css, "}") : obj.css; // For old IE
+
+  /* istanbul ignore if  */
+
+  if (style.styleSheet) {
+    style.styleSheet.cssText = replaceText(index, css);
+  } else {
+    var cssNode = document.createTextNode(css);
+    var childNodes = style.childNodes;
+
+    if (childNodes[index]) {
+      style.removeChild(childNodes[index]);
+    }
+
+    if (childNodes.length) {
+      style.insertBefore(cssNode, childNodes[index]);
+    } else {
+      style.appendChild(cssNode);
+    }
+  }
+}
+
+function applyToTag(style, options, obj) {
+  var css = obj.css;
+  var media = obj.media;
+  var sourceMap = obj.sourceMap;
+
+  if (media) {
+    style.setAttribute('media', media);
+  } else {
+    style.removeAttribute('media');
+  }
+
+  if (sourceMap && btoa) {
+    css += "\n/*# sourceMappingURL=data:application/json;base64,".concat(btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))), " */");
+  } // For old IE
+
+  /* istanbul ignore if  */
+
+
+  if (style.styleSheet) {
+    style.styleSheet.cssText = css;
+  } else {
+    while (style.firstChild) {
+      style.removeChild(style.firstChild);
+    }
+
+    style.appendChild(document.createTextNode(css));
+  }
+}
+
+var singleton = null;
+var singletonCounter = 0;
+
+function addStyle(obj, options) {
+  var style;
+  var update;
+  var remove;
+
+  if (options.singleton) {
+    var styleIndex = singletonCounter++;
+    style = singleton || (singleton = insertStyleElement(options));
+    update = applyToSingletonTag.bind(null, style, styleIndex, false);
+    remove = applyToSingletonTag.bind(null, style, styleIndex, true);
+  } else {
+    style = insertStyleElement(options);
+    update = applyToTag.bind(null, style, options);
+
+    remove = function remove() {
+      removeStyleElement(style);
+    };
+  }
+
+  update(obj);
+  return function updateStyle(newObj) {
+    if (newObj) {
+      if (newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap) {
+        return;
+      }
+
+      update(obj = newObj);
+    } else {
+      remove();
+    }
+  };
+}
+
+module.exports = function (list, options) {
+  options = options || {}; // Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+  // tags it will allow on a page
+
+  if (!options.singleton && typeof options.singleton !== 'boolean') {
+    options.singleton = isOldIE();
+  }
+
+  list = list || [];
+  var lastIdentifiers = modulesToDom(list, options);
+  return function update(newList) {
+    newList = newList || [];
+
+    if (Object.prototype.toString.call(newList) !== '[object Array]') {
+      return;
+    }
+
+    for (var i = 0; i < lastIdentifiers.length; i++) {
+      var identifier = lastIdentifiers[i];
+      var index = getIndexByIdentifier(identifier);
+      stylesInDom[index].references--;
+    }
+
+    var newLastIdentifiers = modulesToDom(newList, options);
+
+    for (var _i = 0; _i < lastIdentifiers.length; _i++) {
+      var _identifier = lastIdentifiers[_i];
+
+      var _index = getIndexByIdentifier(_identifier);
+
+      if (stylesInDom[_index].references === 0) {
+        stylesInDom[_index].updater();
+
+        stylesInDom.splice(_index, 1);
+      }
+    }
+
+    lastIdentifiers = newLastIdentifiers;
+  };
+};
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function(r,t){ true?module.exports=t():undefined}(this,function(){"use strict";return function(r,t,e){r=r||{};var n=t.prototype,o={future:"in %s",past:"%s ago",s:"a few seconds",m:"a minute",mm:"%d minutes",h:"an hour",hh:"%d hours",d:"a day",dd:"%d days",M:"a month",MM:"%d months",y:"a year",yy:"%d years"};e.en.relativeTime=o;var d=function(t,n,d,i){for(var u,a,s,f=d.$locale().relativeTime||o,l=r.thresholds||[{l:"s",r:44,d:"second"},{l:"m",r:89},{l:"mm",r:44,d:"minute"},{l:"h",r:89},{l:"hh",r:21,d:"hour"},{l:"d",r:35},{l:"dd",r:25,d:"day"},{l:"M",r:45},{l:"MM",r:10,d:"month"},{l:"y",r:17},{l:"yy",d:"year"}],h=l.length,m=0;m<h;m+=1){var c=l[m];c.d&&(u=i?e(t).diff(d,c.d,!0):d.diff(t,c.d,!0));var y=(r.rounding||Math.round)(Math.abs(u));if(s=u>0,y<=c.r||!c.r){y<=1&&m>0&&(c=l[m-1]);var p=f[c.l];a="string"==typeof p?p.replace("%d",y):p(y,n,c.l,s);break}}return n?a:(s?f.future:f.past).replace("%s",a)};n.to=function(r,t){return d(r,t,this,!0)},n.from=function(r,t){return d(r,t,this)};var i=function(r){return r.$u?e.utc():e()};n.toNow=function(r){return this.to(i(this),r)},n.fromNow=function(r){return this.from(i(this),r)}}});
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(13);
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+var bind = __webpack_require__(2);
+var Axios = __webpack_require__(14);
+var mergeConfig = __webpack_require__(8);
+var defaults = __webpack_require__(5);
+
+/**
+ * Create an instance of Axios
+ *
+ * @param {Object} defaultConfig The default config for the instance
+ * @return {Axios} A new instance of Axios
+ */
+function createInstance(defaultConfig) {
+  var context = new Axios(defaultConfig);
+  var instance = bind(Axios.prototype.request, context);
+
+  // Copy axios.prototype to instance
+  utils.extend(instance, Axios.prototype, context);
+
+  // Copy context to instance
+  utils.extend(instance, context);
+
+  return instance;
+}
+
+// Create the default instance to be exported
+var axios = createInstance(defaults);
+
+// Expose Axios class to allow class inheritance
+axios.Axios = Axios;
+
+// Factory for creating new instances
+axios.create = function create(instanceConfig) {
+  return createInstance(mergeConfig(axios.defaults, instanceConfig));
+};
+
+// Expose Cancel & CancelToken
+axios.Cancel = __webpack_require__(9);
+axios.CancelToken = __webpack_require__(28);
+axios.isCancel = __webpack_require__(4);
+
+// Expose all/spread
+axios.all = function all(promises) {
+  return Promise.all(promises);
+};
+axios.spread = __webpack_require__(29);
+
+module.exports = axios;
+
+// Allow use of default import syntax in TypeScript
+module.exports.default = axios;
+
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+var buildURL = __webpack_require__(3);
+var InterceptorManager = __webpack_require__(15);
+var dispatchRequest = __webpack_require__(16);
+var mergeConfig = __webpack_require__(8);
+
+/**
+ * Create a new instance of Axios
+ *
+ * @param {Object} instanceConfig The default config for the instance
+ */
+function Axios(instanceConfig) {
+  this.defaults = instanceConfig;
+  this.interceptors = {
+    request: new InterceptorManager(),
+    response: new InterceptorManager()
+  };
+}
+
+/**
+ * Dispatch a request
+ *
+ * @param {Object} config The config specific for this request (merged with this.defaults)
+ */
+Axios.prototype.request = function request(config) {
+  /*eslint no-param-reassign:0*/
+  // Allow for axios('example/url'[, config]) a la fetch API
+  if (typeof config === 'string') {
+    config = arguments[1] || {};
+    config.url = arguments[0];
+  } else {
+    config = config || {};
+  }
+
+  config = mergeConfig(this.defaults, config);
+
+  // Set config.method
+  if (config.method) {
+    config.method = config.method.toLowerCase();
+  } else if (this.defaults.method) {
+    config.method = this.defaults.method.toLowerCase();
+  } else {
+    config.method = 'get';
+  }
+
+  // Hook up interceptors middleware
+  var chain = [dispatchRequest, undefined];
+  var promise = Promise.resolve(config);
+
+  this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
+    chain.unshift(interceptor.fulfilled, interceptor.rejected);
+  });
+
+  this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
+    chain.push(interceptor.fulfilled, interceptor.rejected);
+  });
+
+  while (chain.length) {
+    promise = promise.then(chain.shift(), chain.shift());
+  }
+
+  return promise;
+};
+
+Axios.prototype.getUri = function getUri(config) {
+  config = mergeConfig(this.defaults, config);
+  return buildURL(config.url, config.params, config.paramsSerializer).replace(/^\?/, '');
+};
+
+// Provide aliases for supported request methods
+utils.forEach(['delete', 'get', 'head', 'options'], function forEachMethodNoData(method) {
+  /*eslint func-names:0*/
+  Axios.prototype[method] = function(url, config) {
+    return this.request(mergeConfig(config || {}, {
+      method: method,
+      url: url
+    }));
+  };
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  /*eslint func-names:0*/
+  Axios.prototype[method] = function(url, data, config) {
+    return this.request(mergeConfig(config || {}, {
+      method: method,
+      url: url,
+      data: data
+    }));
+  };
+});
+
+module.exports = Axios;
+
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+
+function InterceptorManager() {
+  this.handlers = [];
+}
+
+/**
+ * Add a new interceptor to the stack
+ *
+ * @param {Function} fulfilled The function to handle `then` for a `Promise`
+ * @param {Function} rejected The function to handle `reject` for a `Promise`
+ *
+ * @return {Number} An ID used to remove interceptor later
+ */
+InterceptorManager.prototype.use = function use(fulfilled, rejected) {
+  this.handlers.push({
+    fulfilled: fulfilled,
+    rejected: rejected
+  });
+  return this.handlers.length - 1;
+};
+
+/**
+ * Remove an interceptor from the stack
+ *
+ * @param {Number} id The ID that was returned by `use`
+ */
+InterceptorManager.prototype.eject = function eject(id) {
+  if (this.handlers[id]) {
+    this.handlers[id] = null;
+  }
+};
+
+/**
+ * Iterate over all the registered interceptors
+ *
+ * This method is particularly useful for skipping over any
+ * interceptors that may have become `null` calling `eject`.
+ *
+ * @param {Function} fn The function to call for each interceptor
+ */
+InterceptorManager.prototype.forEach = function forEach(fn) {
+  utils.forEach(this.handlers, function forEachHandler(h) {
+    if (h !== null) {
+      fn(h);
+    }
+  });
+};
+
+module.exports = InterceptorManager;
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+var transformData = __webpack_require__(17);
+var isCancel = __webpack_require__(4);
+var defaults = __webpack_require__(5);
+
+/**
+ * Throws a `Cancel` if cancellation has been requested.
+ */
+function throwIfCancellationRequested(config) {
+  if (config.cancelToken) {
+    config.cancelToken.throwIfRequested();
+  }
+}
+
+/**
+ * Dispatch a request to the server using the configured adapter.
+ *
+ * @param {object} config The config that is to be used for the request
+ * @returns {Promise} The Promise to be fulfilled
+ */
+module.exports = function dispatchRequest(config) {
+  throwIfCancellationRequested(config);
+
+  // Ensure headers exist
+  config.headers = config.headers || {};
+
+  // Transform request data
+  config.data = transformData(
+    config.data,
+    config.headers,
+    config.transformRequest
+  );
+
+  // Flatten headers
+  config.headers = utils.merge(
+    config.headers.common || {},
+    config.headers[config.method] || {},
+    config.headers
+  );
+
+  utils.forEach(
+    ['delete', 'get', 'head', 'post', 'put', 'patch', 'common'],
+    function cleanHeaderConfig(method) {
+      delete config.headers[method];
+    }
+  );
+
+  var adapter = config.adapter || defaults.adapter;
+
+  return adapter(config).then(function onAdapterResolution(response) {
+    throwIfCancellationRequested(config);
+
+    // Transform response data
+    response.data = transformData(
+      response.data,
+      response.headers,
+      config.transformResponse
+    );
+
+    return response;
+  }, function onAdapterRejection(reason) {
+    if (!isCancel(reason)) {
+      throwIfCancellationRequested(config);
+
+      // Transform response data
+      if (reason && reason.response) {
+        reason.response.data = transformData(
+          reason.response.data,
+          reason.response.headers,
+          config.transformResponse
+        );
+      }
+    }
+
+    return Promise.reject(reason);
+  });
+};
+
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+
+/**
+ * Transform the data for a request or a response
+ *
+ * @param {Object|String} data The data to be transformed
+ * @param {Array} headers The headers for the request or response
+ * @param {Array|Function} fns A single function or Array of functions
+ * @returns {*} The resulting transformed data
+ */
+module.exports = function transformData(data, headers, fns) {
+  /*eslint no-param-reassign:0*/
+  utils.forEach(fns, function transform(fn) {
+    data = fn(data, headers);
+  });
+
+  return data;
+};
+
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports) {
+
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+
+module.exports = function normalizeHeaderName(headers, normalizedName) {
+  utils.forEach(headers, function processHeader(value, name) {
+    if (name !== normalizedName && name.toUpperCase() === normalizedName.toUpperCase()) {
+      headers[normalizedName] = value;
+      delete headers[name];
+    }
+  });
+};
+
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var createError = __webpack_require__(7);
+
+/**
+ * Resolve or reject a Promise based on response status.
+ *
+ * @param {Function} resolve A function that resolves the promise.
+ * @param {Function} reject A function that rejects the promise.
+ * @param {object} response The response.
+ */
+module.exports = function settle(resolve, reject, response) {
+  var validateStatus = response.config.validateStatus;
+  if (!response.status || !validateStatus || validateStatus(response.status)) {
+    resolve(response);
+  } else {
+    reject(createError(
+      'Request failed with status code ' + response.status,
+      response.config,
+      null,
+      response.request,
+      response
+    ));
+  }
+};
+
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Update an Error with the specified config, error code, and response.
+ *
+ * @param {Error} error The error to update.
+ * @param {Object} config The config.
+ * @param {string} [code] The error code (for example, 'ECONNABORTED').
+ * @param {Object} [request] The request.
+ * @param {Object} [response] The response.
+ * @returns {Error} The error.
+ */
+module.exports = function enhanceError(error, config, code, request, response) {
+  error.config = config;
+  if (code) {
+    error.code = code;
+  }
+
+  error.request = request;
+  error.response = response;
+  error.isAxiosError = true;
+
+  error.toJSON = function toJSON() {
+    return {
+      // Standard
+      message: this.message,
+      name: this.name,
+      // Microsoft
+      description: this.description,
+      number: this.number,
+      // Mozilla
+      fileName: this.fileName,
+      lineNumber: this.lineNumber,
+      columnNumber: this.columnNumber,
+      stack: this.stack,
+      // Axios
+      config: this.config,
+      code: this.code
+    };
+  };
+  return error;
+};
+
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+
+module.exports = (
+  utils.isStandardBrowserEnv() ?
+
+  // Standard browser envs support document.cookie
+    (function standardBrowserEnv() {
+      return {
+        write: function write(name, value, expires, path, domain, secure) {
+          var cookie = [];
+          cookie.push(name + '=' + encodeURIComponent(value));
+
+          if (utils.isNumber(expires)) {
+            cookie.push('expires=' + new Date(expires).toGMTString());
+          }
+
+          if (utils.isString(path)) {
+            cookie.push('path=' + path);
+          }
+
+          if (utils.isString(domain)) {
+            cookie.push('domain=' + domain);
+          }
+
+          if (secure === true) {
+            cookie.push('secure');
+          }
+
+          document.cookie = cookie.join('; ');
+        },
+
+        read: function read(name) {
+          var match = document.cookie.match(new RegExp('(^|;\\s*)(' + name + ')=([^;]*)'));
+          return (match ? decodeURIComponent(match[3]) : null);
+        },
+
+        remove: function remove(name) {
+          this.write(name, '', Date.now() - 86400000);
+        }
+      };
+    })() :
+
+  // Non standard browser env (web workers, react-native) lack needed support.
+    (function nonStandardBrowserEnv() {
+      return {
+        write: function write() {},
+        read: function read() { return null; },
+        remove: function remove() {}
+      };
+    })()
+);
+
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var isAbsoluteURL = __webpack_require__(24);
+var combineURLs = __webpack_require__(25);
+
+/**
+ * Creates a new URL by combining the baseURL with the requestedURL,
+ * only when the requestedURL is not already an absolute URL.
+ * If the requestURL is absolute, this function returns the requestedURL untouched.
+ *
+ * @param {string} baseURL The base URL
+ * @param {string} requestedURL Absolute or relative URL to combine
+ * @returns {string} The combined full path
+ */
+module.exports = function buildFullPath(baseURL, requestedURL) {
+  if (baseURL && !isAbsoluteURL(requestedURL)) {
+    return combineURLs(baseURL, requestedURL);
+  }
+  return requestedURL;
+};
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Determines whether the specified URL is absolute
+ *
+ * @param {string} url The URL to test
+ * @returns {boolean} True if the specified URL is absolute, otherwise false
+ */
+module.exports = function isAbsoluteURL(url) {
+  // A URL is considered absolute if it begins with "<scheme>://" or "//" (protocol-relative URL).
+  // RFC 3986 defines scheme name as a sequence of characters beginning with a letter and followed
+  // by any combination of letters, digits, plus, period, or hyphen.
+  return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
+};
+
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Creates a new URL by combining the specified URLs
+ *
+ * @param {string} baseURL The base URL
+ * @param {string} relativeURL The relative URL
+ * @returns {string} The combined URL
+ */
+module.exports = function combineURLs(baseURL, relativeURL) {
+  return relativeURL
+    ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '')
+    : baseURL;
+};
+
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+
+// Headers whose duplicates are ignored by node
+// c.f. https://nodejs.org/api/http.html#http_message_headers
+var ignoreDuplicateOf = [
+  'age', 'authorization', 'content-length', 'content-type', 'etag',
+  'expires', 'from', 'host', 'if-modified-since', 'if-unmodified-since',
+  'last-modified', 'location', 'max-forwards', 'proxy-authorization',
+  'referer', 'retry-after', 'user-agent'
+];
+
+/**
+ * Parse headers into an object
+ *
+ * ```
+ * Date: Wed, 27 Aug 2014 08:58:49 GMT
+ * Content-Type: application/json
+ * Connection: keep-alive
+ * Transfer-Encoding: chunked
+ * ```
+ *
+ * @param {String} headers Headers needing to be parsed
+ * @returns {Object} Headers parsed into an object
+ */
+module.exports = function parseHeaders(headers) {
+  var parsed = {};
+  var key;
+  var val;
+  var i;
+
+  if (!headers) { return parsed; }
+
+  utils.forEach(headers.split('\n'), function parser(line) {
+    i = line.indexOf(':');
+    key = utils.trim(line.substr(0, i)).toLowerCase();
+    val = utils.trim(line.substr(i + 1));
+
+    if (key) {
+      if (parsed[key] && ignoreDuplicateOf.indexOf(key) >= 0) {
+        return;
+      }
+      if (key === 'set-cookie') {
+        parsed[key] = (parsed[key] ? parsed[key] : []).concat([val]);
+      } else {
+        parsed[key] = parsed[key] ? parsed[key] + ', ' + val : val;
+      }
+    }
+  });
+
+  return parsed;
+};
+
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(0);
+
+module.exports = (
+  utils.isStandardBrowserEnv() ?
+
+  // Standard browser envs have full support of the APIs needed to test
+  // whether the request URL is of the same origin as current location.
+    (function standardBrowserEnv() {
+      var msie = /(msie|trident)/i.test(navigator.userAgent);
+      var urlParsingNode = document.createElement('a');
+      var originURL;
+
+      /**
+    * Parse a URL to discover it's components
+    *
+    * @param {String} url The URL to be parsed
+    * @returns {Object}
+    */
+      function resolveURL(url) {
+        var href = url;
+
+        if (msie) {
+        // IE needs attribute set twice to normalize properties
+          urlParsingNode.setAttribute('href', href);
+          href = urlParsingNode.href;
+        }
+
+        urlParsingNode.setAttribute('href', href);
+
+        // urlParsingNode provides the UrlUtils interface - http://url.spec.whatwg.org/#urlutils
+        return {
+          href: urlParsingNode.href,
+          protocol: urlParsingNode.protocol ? urlParsingNode.protocol.replace(/:$/, '') : '',
+          host: urlParsingNode.host,
+          search: urlParsingNode.search ? urlParsingNode.search.replace(/^\?/, '') : '',
+          hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, '') : '',
+          hostname: urlParsingNode.hostname,
+          port: urlParsingNode.port,
+          pathname: (urlParsingNode.pathname.charAt(0) === '/') ?
+            urlParsingNode.pathname :
+            '/' + urlParsingNode.pathname
+        };
+      }
+
+      originURL = resolveURL(window.location.href);
+
+      /**
+    * Determine if a URL shares the same origin as the current location
+    *
+    * @param {String} requestURL The URL to test
+    * @returns {boolean} True if URL shares the same origin, otherwise false
+    */
+      return function isURLSameOrigin(requestURL) {
+        var parsed = (utils.isString(requestURL)) ? resolveURL(requestURL) : requestURL;
+        return (parsed.protocol === originURL.protocol &&
+            parsed.host === originURL.host);
+      };
+    })() :
+
+  // Non standard browser envs (web workers, react-native) lack needed support.
+    (function nonStandardBrowserEnv() {
+      return function isURLSameOrigin() {
+        return true;
+      };
+    })()
+);
+
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Cancel = __webpack_require__(9);
+
+/**
+ * A `CancelToken` is an object that can be used to request cancellation of an operation.
+ *
+ * @class
+ * @param {Function} executor The executor function.
+ */
+function CancelToken(executor) {
+  if (typeof executor !== 'function') {
+    throw new TypeError('executor must be a function.');
+  }
+
+  var resolvePromise;
+  this.promise = new Promise(function promiseExecutor(resolve) {
+    resolvePromise = resolve;
+  });
+
+  var token = this;
+  executor(function cancel(message) {
+    if (token.reason) {
+      // Cancellation has already been requested
+      return;
+    }
+
+    token.reason = new Cancel(message);
+    resolvePromise(token.reason);
+  });
+}
+
+/**
+ * Throws a `Cancel` if cancellation has been requested.
+ */
+CancelToken.prototype.throwIfRequested = function throwIfRequested() {
+  if (this.reason) {
+    throw this.reason;
+  }
+};
+
+/**
+ * Returns an object that contains a new `CancelToken` and a function that, when called,
+ * cancels the `CancelToken`.
+ */
+CancelToken.source = function source() {
+  var cancel;
+  var token = new CancelToken(function executor(c) {
+    cancel = c;
+  });
+  return {
+    token: token,
+    cancel: cancel
+  };
+};
+
+module.exports = CancelToken;
+
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Syntactic sugar for invoking a function and expanding an array for arguments.
+ *
+ * Common use case would be to use `Function.prototype.apply`.
+ *
+ *  ```js
+ *  function f(x, y, z) {}
+ *  var args = [1, 2, 3];
+ *  f.apply(null, args);
+ *  ```
+ *
+ * With `spread` this example can be re-written.
+ *
+ *  ```js
+ *  spread(function(x, y, z) {})([1, 2, 3]);
+ *  ```
+ *
+ * @param {Function} callback
+ * @returns {Function}
+ */
+module.exports = function spread(callback) {
+  return function wrap(arr) {
+    return callback.apply(null, arr);
+  };
+};
+
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function(t,e){ true?module.exports=e():undefined}(this,function(){"use strict";var t="millisecond",e="second",n="minute",r="hour",i="day",s="week",u="month",a="quarter",o="year",f="date",h=/^(\d{4})[-/]?(\d{1,2})?[-/]?(\d{0,2})[^0-9]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?.?(\d+)?$/,c=/\[([^\]]+)]|Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g,d=function(t,e,n){var r=String(t);return!r||r.length>=e?t:""+Array(e+1-r.length).join(n)+t},$={s:d,z:function(t){var e=-t.utcOffset(),n=Math.abs(e),r=Math.floor(n/60),i=n%60;return(e<=0?"+":"-")+d(r,2,"0")+":"+d(i,2,"0")},m:function t(e,n){if(e.date()<n.date())return-t(n,e);var r=12*(n.year()-e.year())+(n.month()-e.month()),i=e.clone().add(r,u),s=n-i<0,a=e.clone().add(r+(s?-1:1),u);return+(-(r+(n-i)/(s?i-a:a-i))||0)},a:function(t){return t<0?Math.ceil(t)||0:Math.floor(t)},p:function(h){return{M:u,y:o,w:s,d:i,D:f,h:r,m:n,s:e,ms:t,Q:a}[h]||String(h||"").toLowerCase().replace(/s$/,"")},u:function(t){return void 0===t}},l={name:"en",weekdays:"Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"),months:"January_February_March_April_May_June_July_August_September_October_November_December".split("_")},y="en",M={};M[y]=l;var m=function(t){return t instanceof S},D=function(t,e,n){var r;if(!t)return y;if("string"==typeof t)M[t]&&(r=t),e&&(M[t]=e,r=t);else{var i=t.name;M[i]=t,r=i}return!n&&r&&(y=r),r||!n&&y},v=function(t,e){if(m(t))return t.clone();var n="object"==typeof e?e:{};return n.date=t,n.args=arguments,new S(n)},g=$;g.l=D,g.i=m,g.w=function(t,e){return v(t,{locale:e.$L,utc:e.$u,$offset:e.$offset})};var S=function(){function d(t){this.$L=this.$L||D(t.locale,null,!0),this.parse(t)}var $=d.prototype;return $.parse=function(t){this.$d=function(t){var e=t.date,n=t.utc;if(null===e)return new Date(NaN);if(g.u(e))return new Date;if(e instanceof Date)return new Date(e);if("string"==typeof e&&!/Z$/i.test(e)){var r=e.match(h);if(r){var i=r[2]-1||0,s=(r[7]||"0").substring(0,3);return n?new Date(Date.UTC(r[1],i,r[3]||1,r[4]||0,r[5]||0,r[6]||0,s)):new Date(r[1],i,r[3]||1,r[4]||0,r[5]||0,r[6]||0,s)}}return new Date(e)}(t),this.init()},$.init=function(){var t=this.$d;this.$y=t.getFullYear(),this.$M=t.getMonth(),this.$D=t.getDate(),this.$W=t.getDay(),this.$H=t.getHours(),this.$m=t.getMinutes(),this.$s=t.getSeconds(),this.$ms=t.getMilliseconds()},$.$utils=function(){return g},$.isValid=function(){return!("Invalid Date"===this.$d.toString())},$.isSame=function(t,e){var n=v(t);return this.startOf(e)<=n&&n<=this.endOf(e)},$.isAfter=function(t,e){return v(t)<this.startOf(e)},$.isBefore=function(t,e){return this.endOf(e)<v(t)},$.$g=function(t,e,n){return g.u(t)?this[e]:this.set(n,t)},$.unix=function(){return Math.floor(this.valueOf()/1e3)},$.valueOf=function(){return this.$d.getTime()},$.startOf=function(t,a){var h=this,c=!!g.u(a)||a,d=g.p(t),$=function(t,e){var n=g.w(h.$u?Date.UTC(h.$y,e,t):new Date(h.$y,e,t),h);return c?n:n.endOf(i)},l=function(t,e){return g.w(h.toDate()[t].apply(h.toDate("s"),(c?[0,0,0,0]:[23,59,59,999]).slice(e)),h)},y=this.$W,M=this.$M,m=this.$D,D="set"+(this.$u?"UTC":"");switch(d){case o:return c?$(1,0):$(31,11);case u:return c?$(1,M):$(0,M+1);case s:var v=this.$locale().weekStart||0,S=(y<v?y+7:y)-v;return $(c?m-S:m+(6-S),M);case i:case f:return l(D+"Hours",0);case r:return l(D+"Minutes",1);case n:return l(D+"Seconds",2);case e:return l(D+"Milliseconds",3);default:return this.clone()}},$.endOf=function(t){return this.startOf(t,!1)},$.$set=function(s,a){var h,c=g.p(s),d="set"+(this.$u?"UTC":""),$=(h={},h[i]=d+"Date",h[f]=d+"Date",h[u]=d+"Month",h[o]=d+"FullYear",h[r]=d+"Hours",h[n]=d+"Minutes",h[e]=d+"Seconds",h[t]=d+"Milliseconds",h)[c],l=c===i?this.$D+(a-this.$W):a;if(c===u||c===o){var y=this.clone().set(f,1);y.$d[$](l),y.init(),this.$d=y.set(f,Math.min(this.$D,y.daysInMonth())).$d}else $&&this.$d[$](l);return this.init(),this},$.set=function(t,e){return this.clone().$set(t,e)},$.get=function(t){return this[g.p(t)]()},$.add=function(t,a){var f,h=this;t=Number(t);var c=g.p(a),d=function(e){var n=v(h);return g.w(n.date(n.date()+Math.round(e*t)),h)};if(c===u)return this.set(u,this.$M+t);if(c===o)return this.set(o,this.$y+t);if(c===i)return d(1);if(c===s)return d(7);var $=(f={},f[n]=6e4,f[r]=36e5,f[e]=1e3,f)[c]||1,l=this.$d.getTime()+t*$;return g.w(l,this)},$.subtract=function(t,e){return this.add(-1*t,e)},$.format=function(t){var e=this;if(!this.isValid())return"Invalid Date";var n=t||"YYYY-MM-DDTHH:mm:ssZ",r=g.z(this),i=this.$locale(),s=this.$H,u=this.$m,a=this.$M,o=i.weekdays,f=i.months,h=function(t,r,i,s){return t&&(t[r]||t(e,n))||i[r].substr(0,s)},d=function(t){return g.s(s%12||12,t,"0")},$=i.meridiem||function(t,e,n){var r=t<12?"AM":"PM";return n?r.toLowerCase():r},l={YY:String(this.$y).slice(-2),YYYY:this.$y,M:a+1,MM:g.s(a+1,2,"0"),MMM:h(i.monthsShort,a,f,3),MMMM:h(f,a),D:this.$D,DD:g.s(this.$D,2,"0"),d:String(this.$W),dd:h(i.weekdaysMin,this.$W,o,2),ddd:h(i.weekdaysShort,this.$W,o,3),dddd:o[this.$W],H:String(s),HH:g.s(s,2,"0"),h:d(1),hh:d(2),a:$(s,u,!0),A:$(s,u,!1),m:String(u),mm:g.s(u,2,"0"),s:String(this.$s),ss:g.s(this.$s,2,"0"),SSS:g.s(this.$ms,3,"0"),Z:r};return n.replace(c,function(t,e){return e||l[t]||r.replace(":","")})},$.utcOffset=function(){return 15*-Math.round(this.$d.getTimezoneOffset()/15)},$.diff=function(t,f,h){var c,d=g.p(f),$=v(t),l=6e4*($.utcOffset()-this.utcOffset()),y=this-$,M=g.m(this,$);return M=(c={},c[o]=M/12,c[u]=M,c[a]=M/3,c[s]=(y-l)/6048e5,c[i]=(y-l)/864e5,c[r]=y/36e5,c[n]=y/6e4,c[e]=y/1e3,c)[d]||y,h?M:g.a(M)},$.daysInMonth=function(){return this.endOf(u).$D},$.$locale=function(){return M[this.$L]},$.locale=function(t,e){if(!t)return this.$L;var n=this.clone(),r=D(t,e,!0);return r&&(n.$L=r),n},$.clone=function(){return g.w(this.$d,this)},$.toDate=function(){return new Date(this.valueOf())},$.toJSON=function(){return this.isValid()?this.toISOString():null},$.toISOString=function(){return this.$d.toISOString()},$.toString=function(){return this.$d.toUTCString()},d}(),p=S.prototype;return v.prototype=p,[["$ms",t],["$s",e],["$m",n],["$H",r],["$W",i],["$M",u],["$y",o],["$D",f]].forEach(function(t){p[t[1]]=function(e){return this.$g(e,t[0],t[1])}}),v.extend=function(t,e){return t(e,S,v),v},v.locale=D,v.isDayjs=m,v.unix=function(t){return v(1e3*t)},v.en=M[y],v.Ls=M,v});
+
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(10);
+            var content = __webpack_require__(32);
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+
+
+module.exports = content.locals || {};
+
+/***/ }),
+/* 32 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(false);
+// Module
+___CSS_LOADER_EXPORT___.push([module.i, "html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed, \nfigure, figcaption, footer, header, hgroup, \nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\tfont-size: 100%;\n\tfont: inherit;\n\tvertical-align: baseline;\n}\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure, \nfooter, header, hgroup, menu, nav, section {\n\tdisplay: block;\n}\nbody {\n\tline-height: 1;\n}\nol, ul {\n\tlist-style: none;\n}\nblockquote, q {\n\tquotes: none;\n}\nblockquote:before, blockquote:after,\nq:before, q:after {\n\tcontent: '';\n\tcontent: none;\n}\ntable {\n\tborder-collapse: collapse;\n\tborder-spacing: 0;\n}", ""]);
+// Exports
+/* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(10);
+            var content = __webpack_require__(34);
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+
+
+module.exports = content.locals || {};
+
+/***/ }),
+/* 34 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(false);
+// Module
+___CSS_LOADER_EXPORT___.push([module.i, "html {\n    font-family: 'Noto Sans', sans-serif;\n    box-sizing: border-box;\n    scroll-behavior: smooth;\n}\n    \n*, *:before, *:after {\n    box-sizing: inherit;\n    transition: .2s;\n}\n\n:root {\n    --blue: #1DA1F2;\n    --bg: #15202B;\n    --blue-label: #1A91DA;\n    --blue-hover: #1B95E0;\n    --grey-font: #8899A6;\n    --grey-inputbg: #253341;\n    --grey-floating-panel: #192734;\n    --grey-floating-panel-hover: #202E3A;\n    --red: #D6235B;\n    --search-input-width: 700px;\n}\n\nbody {\n    -ms-touch-action: manipulation;\n        touch-action: manipulation;\n    color: white;\n    margin: 0px;\n    padding: 0px;\n    font-size: 16px;\n    line-height: 1.5;\n    background-color: var(--bg);\n    scroll-behavior: smooth;\n}\n\na, a:visited {\n    cursor: pointer;\n    color: var(--blue-label);\n    text-decoration: none;\n    transition: 0.2s;\n    border-bottom: 1px solid transparent;\n}\n\na:hover, a:active {\n    color: var(--blue-hover);\n    border-bottom: 1px solid var(--blue-hover);\n}\n\n.mention {\n    cursor: pointer;\n    color: var(--blue-label);\n    border-bottom: 1px solid transparent;\n}\n\n.mention:hover, .mention:active {\n    border-bottom: 1px solid var(--blue-hover);\n}\n\n*[data-selected=\"true\"] {\n    color: var(--blue);\n    border-bottom: 1px solid var(--blue);\n}\n\ninput[type=\"search\"], input[type=\"text\"], input[type=\"password\"] {\n    font-family: inherit;\n    -webkit-appearance: none;\n    -moz-appearance: none;\n    appearance: none;\n    outline: 0px;\n    border: 1px solid transparent;\n}\n\ninput[type=\"search\"] {\n    transition: 0.2s;\n    font-size: inherit;\n    width: 700px;\n    width: var(--search-input-width);\n    max-width: 700px;\n    height: 55px;\n    color: white;\n    background-color: var(--grey-inputbg);\n    border: 1px solid var(--bg);\n    border-radius: 50px;\n    padding: 20px 20px 20px 60px;\n    margin-bottom: 30px;\n}\n\ninput[type=\"search\"]:not(:-ms-input-placeholder) {\n    padding-right: 60px;\n    padding-left: 25px;\n}\n\ninput[type=\"search\"]:not(:placeholder-shown) {\n    padding-right: 60px;\n    padding-left: 25px;\n}\n\ninput[type=\"search\"]:focus,  input[type=\"search\"]:active, input[type=\"search\"]:hover {\n    border: 1px solid var(--blue);\n    background-color: var(--bg);\n    box-shadow: rgba(4, 74, 111, 1) 0px 0px 30px -10px;\n}\n\ninput[type=\"search\"]:-ms-input-placeholder {\n    color: var(--grey-font);\n}\n\ninput[type=\"search\"]::placeholder {\n    color: var(--grey-font);\n}\n\n.search-icon {\n    position: absolute;\n    pointer-events: none;\n    fill: var(--grey-font);\n    width: 60px;\n    left: 0px;\n\n    bottom: 52%;\n    padding: 0px 10px 0px 0px;\n    transform: translateX(0px);\n    -webkit-transform: translateX(0px);\n    transition: all 0.3s ease;\n    margin-left: 15px;\n}\n\ninput[type=\"search\"]:not(:-ms-input-placeholder) + .search-icon {\n    cursor: pointer;\n    pointer-events: all;\n    fill: var(--blue);\n    margin-left: Calc(var(--search-input-width) - 55px);\n}\n\ninput[type=\"search\"]:not(:placeholder-shown) + .search-icon {\n    cursor: pointer;\n    pointer-events: all;\n    fill: var(--blue);\n    margin-left: Calc(var(--search-input-width) - 55px);\n}\n\nbutton {\n    font-family: inherit;\n    font-size: 1rem;\n    color: white;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-align: center;\n        align-items: center;\n\t-ms-flex-pack: distribute;\n\t    justify-content: space-around;\n    cursor: pointer;\n\twidth: 150px;\n\theight: 38px;\n\tpadding: 5px 10px;\n    border: 0;\n    border-radius: 100px;\n\tbackground-color: var(--blue);\n\ttransition: 0.2s;\n\ttransition-timing-function: ease;\n\ttransition-delay: 0.05s;\n\topacity: 1;\n}\n\nbutton:hover, button:active {\n    opacity: 0.8;\n}\n\n\n.modal {\n    z-index: 20;\n    position: absolute;\n    left: 0; \n    right: 0; \n    /* width: 500px;\n    height: 500px; */\n    top: 0px;\n    bottom: 0px;\n    margin: auto;\n    box-shadow: rgba(4, 74, 111, 0.8) 0px 0px 20px -5px;\n}\n\n.media-modal {\n    /* position: relative; */\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: center;\n        justify-content: center;\n    -ms-flex-item-align: center;\n        align-self: center;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    padding-top: 100px;\n    overflow: auto;\n    margin: auto;\n    display: block;\n    /* width: 80%; */\n    max-width: 700px;\n    /* max-width: 70vw; */\n    max-height: 80vh;\n    object-fit: contain;\n    box-shadow: rgba(4, 74, 111, 0) 0px 0px 20px -5px;\n\n    /* background-image: url(\"https://pbs.twimg.com/media/EhYqtxMXsAEIwLz?format=jpg&name=large\"); */\n\n    background-size: contain;\n    background-repeat:no-repeat;\n    background-position: center;\n}\n\n.media-modal-close {\n    cursor: pointer;\n    position: absolute;\n    width: 40px;\n    height: 40px;\n    right: 0px;\n    top: 0px;\n    fill: var(--red);\n    margin: 10px;\n    background-color: var(--bg);\n    border-radius: 100px;\n}\n\n.screen-fade {\n    position: absolute;\n    z-index: 18;\n    width: 100%;\n    height: 100vh;\n    background-color: var(--bg);\n    opacity: 0.9;\n}\n\n.session-over-modal {\n    z-index: 50;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    -ms-flex-align: center;\n        align-items: center;\n    -ms-flex-pack: center;\n        justify-content: center;\n    height: 150px;\n    width: 500px;\n    padding: 15px;\n    border-radius: 15px;\n    background-color: var(--grey-floating-panel-hover);\n\n}\n\nheader {\n    height: 50px;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    -ms-flex-align: center;\n        align-items: center;\n    -ms-flex-pack: center;\n        justify-content: center;\n    border-bottom: 1px solid var(--grey-inputbg);\n}\n\n.header-text {\n    font-weight: 700;\n    transform: translateX(-140px);\n}\n\n.main-container {\n    display: -ms-flexbox;\n    display: flex;\n    min-height: 0px;\n    -ms-flex-pack: center;\n        justify-content: center;\n    -ms-flex-pack: distribute;\n        justify-content: space-around;\n    width: 100vw;\n    /* max-width: 1500px; */\n}\n\n.side-nav-container {\n    border-radius: 15px;\n    background-color: var(--grey-floating-panel);\n    height: 100%;\n    width: 350px;\n    min-width: 300px;\n    margin: 50px 20px 0px 50px;\n    font-weight: 700;\n}\n\n.side-nav-item {\n    display: -ms-flexbox;\n    display: flex;\n    cursor: pointer;\n    padding: 20px;\n    border-bottom: 1px solid var(--grey-inputbg);\n    transition: 0.3s;\n}\n\n.side-nav-item[data-selected =\"true\"]{\n    color: var(--blue);\n    border-bottom: 1px solid var(--blue);\n}\n\n.side-nav-item:last-child {\n    border-bottom: 0px;\n}\n\n.side-nav-item:hover {\n    background-color: var(--grey-floating-panel-hover);\n}\n\n.side-nav-item:first-child:hover {\n    border-top-left-radius: 15px;\n    border-top-right-radius: 15px;\n    background-color: var(--grey-floating-panel-hover);\n}\n\n.side-nav-item:last-child:hover {\n    border-bottom-left-radius: 15px;\n    border-bottom-right-radius: 15px;\n    background-color: var(--grey-floating-panel-hover);\n}\n\n.side-nav-item > svg {\n    margin-right: 15px;\n    fill: white;\n}\n\n.side-nav-item[data-selected=\"true\"] > svg {\n    fill: var(--blue);\n}\n\n.about {\n    position: relative;\n}\n\n.about-modal {\n    /* text-align: center; */\n    position: relative;\n    width: 300px;\n    height: 300px;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    -ms-flex-align: center;\n        align-items: center;\n    -ms-flex-pack: center;\n        justify-content: center;\n    background-color: var(--grey-inputbg);\n    background-color: var(--bg);\n    padding: 50px 20px;\n    cursor: default;\n    box-shadow: rgba(4, 74, 111, 0.8) 0px 0px 20px -5px;\n    border: 1px solid var(--blue);\n}\n\n.about-header {\n    font-weight: 700;\n    font-size: 1.5rem;\n    margin-bottom: 30px;\n}\n\n.about-text {\n    font-weight: 400;\n    font-size: 0.9rem;\n}\n\n.user-profile {\n    position: relative;\n    background-color: var(--grey-inputbg);\n    border-bottom-left-radius: 15px;\n    border-bottom-right-radius: 15px;\n}\n\n.user-auth-div {\n    z-index: 20;\n    position: absolute;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    -ms-flex-align: center;\n        align-items: center;\n    -ms-flex-pack: center;\n        justify-content: center;\n    border-radius: 15px;\n    background-color: var(--grey-inputbg);\n    background-color: var(--bg);\n    width:650px;\n    height: 700px;\n    /* transform: translate(-20px, -100px); */\n    padding: 50px 15px;\n    cursor: default;\n    box-shadow: rgba(4, 74, 111, 0.4) 0px 0px 20px -5px;\n    /* margin-left: 20px; */\n    top: 0px;\n    right: 0px;\n    bottom: 0px;\n    left: 0px;\n    margin: auto;\n}\n\n.user-auth-div input:-ms-input-placeholder {\n    font-size: 0.9rem;\n}\n\n.user-auth-div input::placeholder {\n    font-size: 0.9rem;\n}\n\n.user-auth-div input.auth-error:-ms-input-placeholder {\n    color: var(--red);\n    opacity: 1;\n}\n\n.user-auth-div input.auth-error::placeholder {\n    color: var(--red);\n    opacity: 1;\n}\n\n\n.user-auth-div-modal {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: center;\n        justify-content: center;\n    left: 0;\n    right: 0px;\n    bottom: 0px;\n    top: 0px;\n    width: 600px;\n    height: 550px;\n    height: 700px;\n\n    margin: auto;\n    box-shadow: rgba(4, 74, 111, 0.8) 0px 0px 20px -5px;\n\n}\n\n.login-div, .signup-div, .forgot-password-div {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    -ms-flex-align: center;\n        align-items: center;\n}\n\n.forgot-password-div {\n    position: absolute;\n    top: 0px;\n    bottom: 0px;\n    width: 320px;\n    height: 350px;\n    left: 0px;\n    right: 0px;\n    margin: auto;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: center;\n        justify-content: center;\n    -ms-flex-align: center;\n        align-items: center;\n    background-color: var(--bg);\n    border: 1px solid white;\n    border-radius: 15px;\n}\n\n.forgot-password-message {\n    font-weight: 400;\n    font-size: 0.8rem;\n    margin-top: 15px;\n}\n\n.login-from-modal {\n    cursor: pointer;\n}\n\n.auth-header {\n    font-size: 1rem;\n    margin-bottom: 50px;\n}\n\n.user-auth-div label {\n    pointer-events: none;\n    color: var(--grey-font);\n    font-size: 0.8rem;\n    font-weight: 400;\n    -ms-flex-item-align: start;\n        align-self: flex-start;\n    transform: translate(77px, -85px);\n    transition: .3s cubic-bezier(0, 1.8, 1, 1.8);\n    opacity: 0;\n}\n\n\n.user-auth-div input:not(:-ms-input-placeholder) + label {\n    color: var(--blue-label);\n    transform: translate(76px, -65px);\n    opacity: 1;\n}\n\n\n.user-auth-div input:not(:placeholder-shown) + label {\n    color: var(--blue-label);\n    transform: translate(76px, -65px);\n    opacity: 1;\n}\n\n.user-auth-div input {\n    padding: 10px 15px;\n    color: white;\n    font-size: 1rem;\n    height: 48px;\n    width: 80%;\n    background-color: var(--grey-floating-panel);\n    margin-top: 5px;\n    margin-bottom: 15px;\n    transition: .4s cubic-bezier(0, 1.8, 1, 1.8);\n    border-bottom: 1.5px solid transparent;\n}\n\n.user-auth-div input:hover, .user-auth-div input:focus {\n    background-color: var(--bg);\n    box-shadow: rgba(4, 74, 111, 1) 0px 0px 20px -5px;\n    border-bottom: 1.5px solid var(--blue);\n}\n\n.user-auth-div input:not(:-ms-input-placeholder) {\n    padding-bottom: 15px;\n    padding-top: 40px;\n    border-bottom: 1.5px solid var(--blue);\n    background-color: var(--bg);\n}\n\n.user-auth-div input:not(:placeholder-shown) {\n    padding-bottom: 15px;\n    padding-top: 40px;\n    border-bottom: 1.5px solid var(--blue);\n    background-color: var(--bg);\n}\n\n.user-auth-div button {\n    color: white;\n    font-size: 1rem;\n    margin-top: 15px;\n}\n\n.user-auth-div button:hover {\n    background-color: var(--blue-hover);\n}\n\n.action-here {\n    margin-top: 25px;\n    font-weight: 400;\n    font-size: 0.8rem;\n}\n\n.auth-link {\n    cursor: pointer;\n    color: var(--blue-label);\n}\n\n.auth-link:hover {\n    border-bottom: 1px solid var(--blue-hover);\n}\n\n.account-warning {\n    color: var(--red);\n    margin-top: 30px;\n    margin-bottom: -15px;\n    text-align: center;\n    font-size: 0.7rem;\n    font-weight: 400;\n}\n\n.logout-btn {\n    background-color: var(--red);\n}\n\n.user-auth-div .logout-btn:hover {\n    background-color: var(--red);\n    opacity: 0.8;\n}\n\n.close {\n    cursor: pointer;\n    position: absolute;\n    width: 30px;\n    height: 30px;\n    right: 0px;\n    top: 0px;\n    fill: var(--red);\n    margin: 10px;\n    background-color: var(--bg);\n    border-radius: 100px;\n}\n\n.close:hover {\n    opacity: 0.7;\n}\n\n/* edit */\n.center-container {\n    width: 740px;\n    margin: 0px 20px;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-positive: 1;\n        flex-grow: 1;\n    -ms-flex-negative: 0;\n        flex-shrink: 0;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    -ms-flex-align: center;\n        align-items: center;\n\n    height: Calc(100vh - 50px);\n    overflow-y: scroll;\n    overflow-x: hidden;\n    transition: 0.25s;\n    margin-right: 50px;\n    margin-left: 20px;\n    min-height: 0px;\n}\n\n.home-search-page {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    -ms-flex-align: center;\n        align-items: center;\n    /* justify-content: center; */\n    /* height: Calc(100vh - 300px); */\n    padding-top: 200px;\n    height: Calc(100vh - 50px);\n}\n\n.home-logo {\n    font-size: 5rem;\n    font-weight: 700;\n    margin-bottom: 30px;\n}\n\n.main-search-input-div{\n    position: relative;\n    color: var(--grey-font);\n}\n\n.main-search-button {\n    color: white;\n    font-size: 1rem;\n    margin-bottom: 50px;\n}\n\n.main-search-button:hover {\n    background-color: var(--blue-hover);\n}\n\n.search-choices {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-negative: 0;\n        flex-shrink: 0;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    -ms-flex-align: center;\n        align-items: center;\n    margin-bottom: 65px;\n}\n\n.language-choices, .tweet-type-choices {\n    display: -ms-flexbox;\n    display: flex;\n}\n\n.search-choices input[type=\"radio\"] {\n    opacity: 0;\n    position: fixed;\n    width: 0;\n}\n\n.search-choices label {\n    cursor: pointer;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: center;\n        justify-content: center;\n    -ms-flex-align: center;\n        align-items: center;\n    color: var(--grey-font);\n    background-color: var(--bg);\n    width: 80px;\n    height: 30px;\n    font-size: 0.7rem;\n    border-bottom: 1px solid var(--bg);\n    transition: 0.2s;\n}\n\n.search-choices input[type=\"radio\"]:checked + label {\n    color: white;\n    background-color: var(--grey-floating-panel-hover);\n    border-bottom: 1px solid var(--blue);\n}\n\n.search-choices input[type=\"radio\"]:hover + label {\n    border-bottom: 1px solid var(--blue);\n}\n\n.search-choices input[type=\"radio\"]:focus + label {\n    border-bottom: 1px solid var(--blue);\n}\n\n.tweet-type-choices label {\n    width: 100px;\n    margin-top: 30px;\n}\n\n.timeline-search-page, .collections-page {\n    padding-top: 50px;\n    /* display: flex; */\n    -ms-flex-direction: column;\n        flex-direction: column;\n    -ms-flex-align: center;\n        align-items: center;\n    -ms-flex-pack: center;\n        justify-content: center;\n    /* height: Calc(100vh - 50px); */\n}\n\n.timeline-search-page {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    -ms-flex-align: center;\n        align-items: center;\n    -ms-flex-pack: start;\n        justify-content: flex-start;\n    /* height: 100vh; */\n    padding-top: 200px;\n}\n\n.collections-page {\n    -ms-flex-direction: column;\n        flex-direction: column;\n    height: auto;\n    width: 740px;\n    -ms-flex-pack: start;\n        justify-content: flex-start;\n}\n\n.timeline-header {\n    font-size: 5rem;\n    font-weight: 700;\n    margin-bottom: 30px;\n}\n\n.timeline-header-slash {\n    color: var(--grey-font);\n}\n\n.timeline-subheader {\n    color: var(--blue);\n    font-size: 1.5rem;\n    font-weight: 400;\n}\n\n.timeline-search-input-div {\n    position: relative;\n    color: var(--grey-font);\n}\n\n.timeline-search-button {\n    color: white;\n    font-size: 1rem;\n    margin-bottom: 50px;\n}\n\n.timeline-search-button:hover {\n    background-color: var(--blue-hover);\n}\n\n\n.search-results, .collection-results {\n    padding-top: 50px;\n    width: 740px;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    -ms-flex-align: center;\n        align-items: center;\n    border-left: 1px solid var(--grey-inputbg);\n    border-right: 1px solid var(--grey-inputbg);\n}\n\n.search-header {\n    font-weight: 700;\n    font-size: 2rem;\n    margin-bottom: 50px;\n}\n\n.tweet-results-div {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    -ms-flex-wrap: nowrap;\n        flex-wrap: nowrap;\n    -ms-flex-align: center;\n        align-items: center;\n    width: 100%;\n}\n\n.tweet-result, .collection-result-item {\n    -ms-flex-negative: 0;\n        flex-shrink: 0;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-align: start;\n        align-items: flex-start;\n    padding: 15px 15px;\n    border-top: 1px solid var(--grey-inputbg);\n    border-bottom: 1px solid var(--grey-inputbg);\n}\n\n.tweet-user-image img, .collection-tweet-user-image img {\n    object-fit: cover;\n    width: 50px;\n    height: 50px;\n    border-radius: 200px;\n    margin-right: 10px;\n}\n\n.tweet-name-div, .collection-tweet-name-div{\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-align: center;\n        align-items: center;\n}\n\n.tweet-body {\n    /* width: 70%; */\n}\n\n.tw-name-item, .collection-tw-name-item {\n    margin-right: 5px;\n}\n\n.verified, .collection-verified {\n    font-size: 15px;\n}\n\n.tweet-name, .collection-tweet-name {\n    font-weight: 700;\n}\n\n.tweet-name {\n    cursor: pointer;\n    border-bottom: 1px solid transparent;\n}\n\n.tweet-name:hover, .tweet-name:active {\n    border-bottom: 1px solid var(--blue-hover);\n}\n\n.tweet-username, .tweet-time, .collection-tweet-username, .collection-tweet-time {\n    color: var(--grey-font);\n}\n\n.tweet-time {\n    /* display: none; */\n    text-align: right;\n}\n\n.tweet-text, .collection-tweet-text {\n    margin-bottom: 10px;\n}\n\n.tweet-image img, .collection-tweet-image img {\n    width: 100%;\n    width: 648px;\n    height: 400px;\n    object-fit: cover;\n    border-radius: 20px;\n    border: 1px solid var(--grey-floating-panel);\n}\n\n.tweet-image video, .collection-tweet-image video {\n    width: 100%;\n    width: 648px;\n    height: 400px;\n    object-fit: cover;\n    border-radius: 20px;\n    border: 1px solid var(--grey-floating-panel);\n}\n\n.tweet-footer {\n    width: 648px;\n    -ms-flex-align: center;\n        align-items: center;\n}\n\n.tweet-footer, .collection-tweet-footer {\n    font-size: 0.9rem;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: justify;\n        justify-content: space-between;\n    margin-top: 10px;\n}\n\n.tweet-metrics, .collection-tweet-metrics {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: justify;\n        justify-content: space-between;\n    -ms-flex-align: center;\n        align-items: center;\n    color: var(--grey-font);\n}\n\n.tweet-metrics p {\n    margin-right: 15px;\n}\n\n.tweet-icon {\n    fill: var(--blue-label);\n    margin-right: 3px;\n    width: 18px;\n    height: 18px;\n}\n\n.save-to-collection, .remove-from-collection {\n    position: relative;\n    cursor: pointer;\n    color: var(--blue-label);\n    padding: 5px 10px;\n    background-color: var(--grey-floating-panel);\n    border-radius: 5px;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-align: center;\n        align-items: center;\n}\n\n.save-to-collection:hover, .remove-from-collection:hover {\n    background-color: var(--grey-floating-panel-hover);\n}\n\n.save-to-collection svg, .remove-from-collection svg {\n    fill: var(--blue-label);\n    margin-right: 10px;\n    width: 18px;\n    height: 18px;\n}\n\n\n.save-to-collection-prompt {\n    position: absolute;\n    z-index: 20;\n    width: 350px;\n    height: 400px;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    overflow: auto;\n    background-color: var(--grey-inputbg);\n    border-radius: 15px;\n    box-shadow: rgba(4, 74, 111, 0.7) 0px 0px 20px -5px;\n    border: 1px solid var(--grey-font);\n}\n\n.save-to-collection-header {\n    background-color: var(--grey-floating-panel);\n    width: 350px;\n    width: 100%;\n    color: white;\n    font-weight: 700;\n    font-size: 1.5rem;\n    padding: 30px 0px 30px 40px;\n}\n\n.collection-login-prompt {\n    text-align: center;\n    margin-top: 20px;\n}\n\n.save-to-collection-item {\n    cursor: pointer;\n    display: -ms-flexbox;\n    display: flex;\n    width: 100%;\n    /* height: 100px; */\n    padding: 20px 0px 20px 40px;\n    border-bottom: 1px solid var(--grey-floating-panel);\n}\n\n.save-to-collection-item:last-child {\n    border-bottom: 1px solid var(--grey-floating-panel);\n}\n\n.save-to-collection-item:hover, .save-to-collection-item:active {\n    color: var(--blue-label);\n    background-color: var(--grey-floating-panel-hover);\n}\n\n.save-to-collection-prompt svg {\n    fill: var(--red);\n}\n\n.replying-to {\n    cursor: pointer;\n    color: var(--blue);\n}\n\n.replying-to:hover {\n    color: var(--blue-hover);\n}\n\n.collections-page-header {\n    font-weight: 700;\n    font-size: 2.5rem;\n    -ms-flex-item-align: center;\n        align-self: center;\n    margin-bottom: 50px;\n}\n\n.collection-count {\n    -ms-flex-item-align: start;\n        align-self: flex-start;\n    margin-bottom: 10px;\n}\n\n.create-collection-from-modal {\n    position: relative;\n    font-size: 0.9rem;\n    margin-top: 10px;\n    /* display: flex; */\n    -ms-flex-direction: column;\n        flex-direction: column;\n    -ms-flex-align: center;\n        align-items: center;\n}\n\n.create-collection-from-modal input{\n    display: -ms-flexbox;\n    display: flex;\n    font-size: 1rem;\n    color: white;\n    background-color: var(--bg);\n    width: 85%;\n    height: 40px;\n    margin-left: 25px;\n    padding: 0px 10px !important;\n    border: 1px solid transparent;\n    border-radius: 4px;\n    padding: 5px;\n}\n\n.create-col-from-modal-btn{\n    cursor: pointer;\n    position: absolute;\n    fill: var(--blue) !important;\n    width: 39.9px;\n    height: 39.9px;\n    transform: translate(Calc(85% + 250px), -40px);\n}\n\n.create-col-from-modal-error {\n    text-align: center;\n    margin-top: 10px !important;\n    font-size: 0.3rem;\n}\n\n.create-collection-cta {\n    color: var(--blue);\n    border-radius: 0;\n    background-color: var(--grey-floating-panel-hover);\n    fill: var(--blue);\n    width: 250px;\n    /* flex: 160px; */\n    margin-top: 20px;\n    margin-bottom: 20px;\n    -ms-flex-item-align: start;\n        align-self: flex-start;\n}\n\n.create-collection-input-div {\n    -ms-flex-item-align: start;\n        align-self: flex-start;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-align: center;\n        align-items: center;\n    margin-bottom: 20px;\n}\n\n.create-collection-input {\n    padding: 7px 20px;\n    font-size: 1rem;\n    color: white;\n    width: 400px;\n    border-radius: 30px;\n    margin-right: 20px;\n    background-color: var(--grey-inputbg);\n}\n\n.create-collection-input:focus,  .create-collection-input:active, .create-collection-input:hover {\n    border: 1px solid var(--blue);\n    background-color: var(--bg);\n    box-shadow: rgba(4, 74, 111, 1) 0px 0px 30px -10px;\n}\n\n.create-collection-input:-ms-input-placeholder {\n    color: var(--grey-font);\n}\n\n.create-collection-input::placeholder {\n    color: var(--grey-font);\n}\n\n.create-col-btn-and-cancel {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-align: center;\n        align-items: center;\n}\n\n.create-collection-close {\n    position: relative;\n    margin-left: 15px;\n    border-radius: 100px;\n}\n\n.create-collection-error {\n    -ms-flex-item-align: start;\n        align-self: flex-start;\n}\n\n\n.collections-list {\n    -ms-flex-item-align: start;\n        align-self: flex-start;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    margin: 30px 0px 50px 0px;\n}\n\n.collection-item {\n    min-width: 150px;\n    height: 40px;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-align: center;\n        align-items: center;\n    cursor: pointer;\n    padding: 10px 20px;\n    background-color: var(--grey-floating-panel);\n    border-bottom: 1px solid transparent;\n    transition: 0.15s;\n    margin: 5px 5px 5px 0px;\n}\n\n.collection-item:hover {\n    background-color: var(--grey-floating-panel-hover);\n    border-bottom: 1px solid var(--blue);\n}\n\n.collection-item[data-selected=\"true\"] {\n    color: var(--blue);\n    border-bottom: 1px solid var(--blue);\n}\n\n.remove-from-collection {\n    color: var(--red);\n}\n\n.remove-from-collection svg {\n    fill: var(--red);\n}\n\n.remove-from-collection-prompt {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    -ms-flex-pack: space-evenly;\n        justify-content: space-evenly;\n    -ms-flex-align: center;\n        align-items: center;\n    position: absolute;\n    color: white;\n    width: 350px;\n    height: 180px;\n    background-color: var(--grey-floating-panel);\n    transform: translate(-105px, -80px);\n    border-radius: 10px;\n    padding: 0px 20px;;\n}\n\n.remove-prompt-buttons {\n    margin-top: 10px;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-align: center;\n        align-items: center;\n    -ms-flex-pack: center;\n        justify-content: center;\n}\n\n.remove-prompt-buttons button {\n    font-size: 0.9rem;\n    margin: 0px 8px;\n}\n\n.remove-prompt-buttons button:hover {\n    opacity: 0.85;\n}\n\n.remove-prompt-delete {\n    background-color: var(--red);\n}\n\n\n\n.spotlight-container {\n    font-size: 0.9rem;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-pack: center;\n        justify-content: center;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    margin: 50px 50px 0px 20px;\n    border-radius: 15px;\n    background-color: var(--grey-floating-panel);\n    height: 100%;\n    height: 350px;\n    width: 350px;\n    min-width: 300px;\n\n    padding: 20px;\n}\n\n.spotlight-header {\n    font-weight: 700;\n    display: -ms-flexbox;\n    display: flex;\n}\n\n.light-bulb {\n    fill: var(--blue);\n}\n\n.spotlight-body {\n    margin-top: 30px;\n    font-size: 0.8rem;\n}\n\n\nfooter {\n    padding-top: 10px;\n    color: #969696;\n    text-align: center;\n    /* text-align: right; */\n    position: fixed;\n    font-size: 0.7rem;\n    bottom: 0px;\n    padding-bottom: 0px;\n    /* padding-right: 10px; */\n    width: 100vw;\n    background-color: var(--bg);\n}\n\nfooter .big-footer {\n   margin: 0;\n   padding: 0;\n   white-space: pre;\n}\n\n.made-by-mobile {\n    display: none;\n}\n\n\n@media (max-width: 1440px) {\n\t.spotlight-container {\n        display: none;\n    }\n}\n\n@media (max-width: 1250px) {\n    .side-nav-container {\n        min-width: 250px;\n    }\n\n    input[type=\"search\"] {\n        width: 600px;\n    }\n\n    input[type=\"search\"]:not(:-ms-input-placeholder) + .search-icon {\n        margin-left: Calc(600px - 55px);\n    }\n\n    input[type=\"search\"]:not(:placeholder-shown) + .search-icon {\n        margin-left: Calc(600px - 55px);\n    }\n\n    .home-logo, .timeline-header {\n        font-size: 4rem;\n    }\n\n    .center-container,\n    .search-results,\n    .collections-page {\n        width: 650px;\n    }\n    \n    .tweet-image video, .collection-tweet-image video,\n    .tweet-image img, .collection-tweet-image img,\n    .tweet-footer {\n        width: 100%;\n        width: 550px;\n    }\n}\n\n@media (max-width: 950px) {\n    .side-nav-container {\n        min-width: 100px;\n    }\n    .side-nav-para {\n        display: none;\n    }\n\n    .center-container,\n    .search-results,\n    .collections-page {\n        width: 650px;\n    }\n    \n    .tweet-image video, .collection-tweet-image video,\n    .tweet-image img, .collection-tweet-image img,\n    .tweet-footer {\n        width: 100%;\n        width: 550px;\n    }\n}\n\n@media (max-width: 800px) {\n    .side-nav-container {\n        width: 100px;\n        min-width: 100px;\n        max-width: 100px;\n    }\n\n    input[type=\"search\"] {\n        width: 450px;\n    }\n\n    input[type=\"search\"]:not(:-ms-input-placeholder) + .search-icon {\n        margin-left: Calc(450px - 55px);\n    }\n\n    input[type=\"search\"]:not(:placeholder-shown) + .search-icon {\n        margin-left: Calc(450px - 55px);\n    }\n\n    .home-logo, .timeline-header {\n        font-size: 3rem;\n    }\n\n    .center-container,\n    .search-results,\n    .collections-page {\n        width: 550px;\n    }\n    \n    .tweet-image video, .collection-tweet-image video,\n    .tweet-image img, .collection-tweet-image img,\n    .tweet-footer {\n        width: 450px;\n    }\n\n    .tweet-name, .tweet-username {\n        -ms-flex-negative: 0;\n            flex-shrink: 0;\n    }\n\n    .tweet-time {\n        -ms-flex-negative: 0;\n            flex-shrink: 0;\n    }\n\n}\n\n\n@media (max-width: 700px) {\n    .side-nav-container {\n        width: 100px;\n        min-width: 100px;\n        max-width: 100px;\n    }\n\n    .user-auth-div {\n        position: fixed;\n        width: 90vw;\n        height: 80vh;\n        height: 83vh;\n        top: 0px;\n        overflow-y: scroll;\n    }\n\n    .center-container,\n    .search-results,\n    .collections-page {\n        width: 450px;\n    }\n    \n    .tweet-image video, .collection-tweet-image video,\n    .tweet-image img, .collection-tweet-image img,\n    .tweet-footer {\n        width: 350px;\n    }\n\n    .tweet-name-div, .tweet-text {\n        font-size: 0.9rem;\n        -ms-flex-wrap: nowrap;\n            flex-wrap: nowrap;\n    }\n    .tweet-footer {\n        font-size: 0.8rem;\n    }\n}\n\n\n@media (max-width: 600px) {\n\n    .header-text {\n        -ms-flex-item-align: start;\n            align-self: flex-start;\n        transform: translateX(0);\n        margin-left: 15px;\n    }\n\n    .side-nav-container {\n        z-index: 50;\n        position: fixed;\n        display: -ms-flexbox;\n        display: flex;\n        -ms-flex-align: center;\n            align-items: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n        margin: auto;\n        bottom: 0px;\n\n        width: 100vw;\n        min-width: 100vw;   \n        height: 70px;\n\n        border-radius: 0px;\n        font-weight: 700;\n\n        background-color: var(--bg);\n        background-color: blue;\n\n        border-radius: 15px;\n        border-bottom-left-radius: 0px;\n        border-bottom-right-radius: 0px;\n        background-color: var(--grey-floating-panel);\n    }\n\n    .side-nav-item {\n        border-radius: 0px !important;\n        height: 100%;\n        /* padding: 0px; */\n    }\n\n    .side-nav-item[data-selected =\"true\"]{\n        color: var(--blue);\n        border-bottom: 2px solid var(--blue);\n    }\n\n    .side-nav-item > svg {\n        margin-right: 0px;\n        fill: white;\n    }\n\n    .user-profile {\n        background-color: unset;\n    }\n\n    .about-modal {\n        position: fixed;\n        /* position: absolute; */\n        padding: 20px;\n    }\n\n    /* TODO: STYLE .about-modal-bg BG */\n\n    .user-auth-div {\n        position: fixed;\n        width: 90vw;\n        height: 80vh;\n        height: 83vh;\n        top: 0px;\n        overflow-y: scroll;\n    }\n\n    .auth-header {\n        margin-bottom: 30px;\n        margin-top: -85px;\n    }\n\n    .user-auth-div input {\n        border-radius: 0px;\n        margin-bottom: 0px;\n        margin-top: 0px;\n        width: 90%;\n    }\n\n    .user-auth-div label {\n        transform: translate(33px, -70px);\n    }\n    \n    \n    .user-auth-div input:not(:-ms-input-placeholder) + label {\n        transform: translate(33px, -50px);\n    }\n    \n    \n    .user-auth-div input:not(:placeholder-shown) + label {\n        transform: translate(33px, -50px);\n    }\n\n    .account-warning {\n        margin-top: 20px;\n        margin-bottom: -85px;\n        font-size: 0.6rem;\n    }\n\n    .home-logo, .timeline-header {\n        font-size: 2rem;\n    }\n\n    .timeline-subheader {\n        font-size: 1rem;\n    }\n\n    input[type=\"search\"] {\n        width: 90vw;\n        height: 48px;\n    }\n\n    input[type=\"search\"]:not(:-ms-input-placeholder) + .search-icon {\n        cursor: pointer;\n        pointer-events: all;\n        fill: var(--blue);\n        margin-left: Calc(90vw - 55px);\n    }\n\n    input[type=\"search\"]:not(:placeholder-shown) + .search-icon {\n        cursor: pointer;\n        pointer-events: all;\n        fill: var(--blue);\n        margin-left: Calc(90vw - 55px);\n    }\n\n    .language-choices label {\n        width: 70px;\n        font-size: 0.8rem;\n    }\n\n    .portuguese-div {\n        display: none !important;\n    }\n\n\n    .center-container {\n        margin: 0px;\n        height: Calc(100vh - 50px);\n    }\n\n    .home-search-page, .timeline-search-page {\n        padding-top: 50px;   \n    }\n\n    .center-container,\n    .search-results,\n    .collections-page {\n        width: 350px;\n        width: 100vw;\n        /* height: Calc(100vh - 200px); */\n    }\n\n    .tweet-result:last-child {\n        margin-bottom: 100px;\n    }\n\n    .collections-page {\n        /* display: flex; */\n        -ms-flex-direction: column;\n            flex-direction: column;\n        width: 95vw;\n        height: auto;\n    }\n\n    .create-collection-cta {\n        margin-bottom: 50px;\n    }\n\n    .create-collection-input-div {\n        width: 100vw;\n        -ms-flex-direction: column;\n            flex-direction: column;\n        -ms-flex-align: center;\n            align-items: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n        margin-bottom: 50px;\n    }\n\n    .create-collection-input {\n        margin-bottom: 20px;\n        width: 95vw;\n    }\n\n    .create-collection-close {\n        margin-left: 40px;\n    }\n\n    .create-collection-error {\n        text-align: center;\n    }\n\n    .collections-list {\n        margin: 0px;\n    }\n\n    .empty-collection {\n        margin-top: 30px;\n        padding-bottom: 200px;\n    }\n\n    .remove-from-collection-prompt {\n        width: 350px;\n        height: 180px;\n        background-color: var(--grey-floating-panel);\n        transform: translate(0px, 0px);\n    }\n\n\n    .session-over-modal {\n        width: 350px;\n        width: 90vw;\n    }\n    \n    .tweet-image video, .collection-tweet-image video,\n    .tweet-image img, .collection-tweet-image img {\n        width: 290px;\n        width: 80vw;\n        height: 260px;\n        border-radius: 12px;\n    }\n\n\n\n    .tweet-name-div, .tweet-text {\n        font-size: 0.9rem;\n        -ms-flex-wrap: nowrap;\n            flex-wrap: nowrap;\n    }\n    .tweet-footer {\n        font-size: 0.7rem;\n        width: 290px;\n        width: 80vw;\n    }\n\n\n    .about-modal {\n        text-align: center;\n        height: 400px;\n    }\n\n\n    .made-by-mobile {\n        font-weight: 400;\n        margin-top: 50px;\n        margin-bottom: 0px;\n        display: block;\n        font-size: 0.8rem;\n    }\n\n    .made-by-mobile p {\n        text-align: center;\n        margin: 0px;\n        /* margin-bottom: 10px; */\n    }\n\n    .made-by-mobile .made-by {\n        margin-bottom: 5px;\n    }\n\n    .big-footer {\n        display: none;\n    }\n}\n\n\n@media (max-width: 400px) {\n    .tweet-image video, .collection-tweet-image video,\n    .tweet-image img, .collection-tweet-image img {\n        height: 160px;\n    }\n\n    .save-to-collection-prompt {\n        width: 80vw;\n        width: 300px;\n    }\n\n    .create-col-from-modal-btn {\n        transform: translate(Calc(300px - 192px), 10px);\n        transform: translate(Calc(300px - 62px), -40px);\n    }\n\n    .about-modal {\n        text-align: center;\n    }\n}\n\n\n\n\n.loader {\n    margin-left: 5px;\n    display: inline-block;\n    border: 3px solid white;\n    border-top: 2px solid transparent;\n    border-radius: 100px;\n    width: 25px;\n    height: 25px;\n animation: spin 2s linear infinite;\n}\n  \n@keyframes spin {\n\t0% { transform: rotate(0deg); }\n\t100% { transform: rotate(360deg); }\n}\n\n\n.small {\n    font-size: 0.6rem;\n}\n\n.error {\n    color: var(--red) !important;\n    font-weight: 400;\n    font-size: 0.9rem;\n    margin-top: -15px;\n    margin-bottom: 20px;\n}\n\n.auth-error {\n    font-weight: 400;\n    font-size: 0.9rem;\n    color: var(--red);\n    margin-top: -15px;\n    margin-bottom: 20px;\n}\n\n.color-blue {\n    color: var(--blue);\n}\n\n.color-red {\n    color: var(--red) !important;\n}\n\n.hide {\n    display: none;\n}", ""]);
+// Exports
+/* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+/* 35 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./src/scripts/validators.js
+// declare empty field; to later disallow white spaces in entries
+function isEmpty(string) {
+  if (string.trim() === '') return true;else return false;
+} // Compare and conform email entry to regular format
+
+
+function isEmail(email) {
+  var regEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (email.match(regEx)) return true;else return false;
+}
+
+function validateSignupData(data) {
+  var errors = {};
+
+  if (isEmpty(data.email)) {
+    errors.email = 'Please enter a valid email address';
+  } else if (!isEmail(data.email)) {
+    errors.email = 'Please enter a valid email address';
+  }
+
+  if (isEmpty(data.password)) errors.password = 'Please enter a password';
+  if (isEmpty(data.name)) errors.name = 'Please enter a name for your profile';
+  if (data.password !== data.confirmPassword) errors.confirmPassword = 'Passwords do not match, please try again';
+  return {
+    errors: errors,
+    valid: Object.keys(errors).length === 0 ? true : false
+  };
+}
+
+function validateLoginData(data) {
+  var errors = {};
+
+  if (isEmpty(data.email)) {
+    errors.email = 'Please enter a valid email address';
+  } else if (!isEmail(data.email)) {
+    errors.email = 'Please enter a valid email address';
+  }
+
+  if (isEmpty(data.password)) errors.password = 'Please enter a password';
+  return {
+    errors: errors,
+    valid: Object.keys(errors).length === 0 ? true : false
+  };
+}
+
+
+// CONCATENATED MODULE: ./node_modules/jwt-decode/build/jwt-decode.esm.js
+/**
+ * The code was extracted from:
+ * https://github.com/davidchambers/Base64.js
+ */
+
+var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+
+function InvalidCharacterError(message) {
+    this.message = message;
+}
+
+InvalidCharacterError.prototype = new Error();
+InvalidCharacterError.prototype.name = "InvalidCharacterError";
+
+function polyfill(input) {
+    var str = String(input).replace(/=+$/, "");
+    if (str.length % 4 == 1) {
+        throw new InvalidCharacterError(
+            "'atob' failed: The string to be decoded is not correctly encoded."
+        );
+    }
+    for (
+        // initialize result and counters
+        var bc = 0, bs, buffer, idx = 0, output = "";
+        // get next character
+        (buffer = str.charAt(idx++));
+        // character found in table? initialize bit storage and add its ascii value;
+        ~buffer &&
+        ((bs = bc % 4 ? bs * 64 + buffer : buffer),
+            // and if not first of each 4 characters,
+            // convert the first 8 bits to one ascii character
+            bc++ % 4) ?
+        (output += String.fromCharCode(255 & (bs >> ((-2 * bc) & 6)))) :
+        0
+    ) {
+        // try to find character in table (0-63, not found => -1)
+        buffer = chars.indexOf(buffer);
+    }
+    return output;
+}
+
+var atob = (typeof window !== "undefined" &&
+    window.atob &&
+    window.atob.bind(window)) ||
+polyfill;
+
+function b64DecodeUnicode(str) {
+    return decodeURIComponent(
+        atob(str).replace(/(.)/g, function(m, p) {
+            var code = p.charCodeAt(0).toString(16).toUpperCase();
+            if (code.length < 2) {
+                code = "0" + code;
+            }
+            return "%" + code;
+        })
+    );
+}
+
+function base64_url_decode(str) {
+    var output = str.replace(/-/g, "+").replace(/_/g, "/");
+    switch (output.length % 4) {
+        case 0:
+            break;
+        case 2:
+            output += "==";
+            break;
+        case 3:
+            output += "=";
+            break;
+        default:
+            throw "Illegal base64url string!";
+    }
+
+    try {
+        return b64DecodeUnicode(output);
+    } catch (err) {
+        return atob(output);
+    }
+}
+
+function InvalidTokenError(message) {
+    this.message = message;
+}
+
+InvalidTokenError.prototype = new Error();
+InvalidTokenError.prototype.name = "InvalidTokenError";
+
+function index(token, options) {
+    if (typeof token !== "string") {
+        throw new InvalidTokenError("Invalid token specified");
+    }
+
+    options = options || {};
+    var pos = options.header === true ? 0 : 1;
+    try {
+        return JSON.parse(base64_url_decode(token.split(".")[pos]));
+    } catch (e) {
+        throw new InvalidTokenError("Invalid token specified: " + e.message);
+    }
+}
+
+/* harmony default export */ var jwt_decode_esm = (index);
+
+//# sourceMappingURL=jwt-decode.esm.js.map
+
+// EXTERNAL MODULE: ./node_modules/dayjs/plugin/relativeTime.js
+var relativeTime = __webpack_require__(11);
+var relativeTime_default = /*#__PURE__*/__webpack_require__.n(relativeTime);
+
+// EXTERNAL MODULE: ./src/css/reset.css
+var css_reset = __webpack_require__(31);
+
+// EXTERNAL MODULE: ./src/css/main.css
+var main = __webpack_require__(33);
+
+// CONCATENATED MODULE: ./src/scripts/script.js
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+
+
+
+var axios = __webpack_require__(12);
+
+var dayjs = __webpack_require__(30);
+
+
+
+
+dayjs.extend(relativeTime_default.a); // dayjs().format();
+
+var blue = "#1DA1F2";
+var bg = "#15202B";
+var blueLabel = "#1A91DA";
+var blueHover = "#1B95E0";
+var greyFont = "#8899A6";
+var greyInputBg = "#253341";
+var greyFloatingPanel = "#192734";
+var greyFloatingPanelHover = "#202E3A";
+var red = "#D6235B";
+var current_page;
+var body = document.querySelector("body");
+var root = document.querySelector(".root");
+var loader = document.querySelector(".loader");
+var screenFade = document.querySelector(".screen-fade");
+var modals = document.querySelectorAll(".modal");
+var mediaModal = document.querySelector(".media-modal");
+var media = document.querySelector(".media");
+var closeMediaModal = document.querySelector(".media-modal-close");
+var headerText = document.querySelector(".header-text"); //Auth containers
+
+var userProfilePanel = document.querySelector(".user-profile");
+var userProfileLabel = document.querySelector(".user-profile-label");
+var userIcon = document.querySelector(".user-icon");
+var userAuthDiv = document.querySelector(".user-auth-div");
+var aboutModal = document.querySelector(".about-modal");
+var aboutModalClose = document.querySelector(".about-modal-close");
+var authInputs = document.querySelectorAll(".auth-input");
+var authInputLabels = document.querySelectorAll(".auth-input-label");
+var nextInputs = document.querySelectorAll(".next-input");
+var goInputs = document.querySelectorAll(".go-input");
+var sessionExpiredModal = document.querySelector(".session-over-modal");
+var closeSessionExpiredModal = document.querySelector(".session-over-modal-close");
+var loginDiv = document.querySelector(".login-div");
+var loginEmail = document.querySelector(".login-email");
+var loginEmailLabel = document.querySelector(".login-email-label");
+var loginPassword = document.querySelector(".login-password");
+var loginPasswordLabel = document.querySelector(".login-password-label");
+var loginErrors = document.querySelector(".login-errors");
+var loginBtn = document.querySelector(".login-btn");
+var loginHere = document.querySelector(".login-here");
+var loginFromModal = document.querySelectorAll(".login-from-modal");
+var signupDiv = document.querySelector(".signup-div");
+var signupNameLabel = document.querySelector(".signup-name-label");
+var signupEmailLabel = document.querySelector(".signup-email-label");
+var signupPasswordLabel = document.querySelector(".signup-password-label");
+var signupConfirmPasswordLabel = document.querySelector(".signup-confirm-password-label");
+var signupName = document.querySelector(".signup-name");
+var signupEmail = document.querySelector(".signup-email");
+var signupPassword = document.querySelector(".signup-password");
+var signupConfirmPassword = document.querySelector(".signup-confirm-password");
+var signupErrors = document.querySelector(".signup-errors");
+var signupBtn = document.querySelector(".signup-btn");
+var signupHere = document.querySelector(".signup-here");
+var logoutDiv = document.querySelector(".logout-div");
+var logoutBtn = document.querySelector(".logout-btn");
+var closeBtn = document.querySelectorAll(".auth-close");
+var homeSearchPage = document.querySelector(".home-search-page");
+var mainSearchInputDiv = document.querySelector(".main-search-input-div");
+var mainSearchInput = document.querySelector(".main-search-input");
+var mainSearchError = document.querySelector(".main-search-error");
+var searchChoicesDiv = document.querySelector(".search-choices");
+var languageChoice = document.querySelectorAll(".language-choice");
+var tweetTypeChoice = document.querySelectorAll(".tweet-type-choice");
+var mainSearchButton = document.querySelector(".main-search-button");
+var searchResults = document.querySelector(".search-results");
+var tweetResultsDiv = document.querySelector(".tweet-results-div");
+var timelineSearchPage = document.querySelector(".timeline-search-page");
+var timelineSearchInputDiv = document.querySelector(".timeline-search-input-div");
+var timelineSearchInput = document.querySelector(".timeline-search-input");
+var timelineSearchError = document.querySelector(".timeline-search-error");
+var timelineSearchButton = document.querySelector(".timeline-search-button");
+var collectionPage = document.querySelector(".collections-page");
+var collectionPageHeader = document.querySelector(".collections-page-header");
+var createCollectionCta = document.querySelector(".create-collection-cta");
+var createCollectionInputDiv = document.querySelector(".create-collection-input-div");
+var createCollectionInput = document.querySelector(".create-collection-input");
+var createCollectionBtn = document.querySelector("#create-collection-btn");
+var createCollectionInputClose = document.querySelector(".create-collection-close");
+var createCollectionError = document.querySelector(".create-collection-error");
+var createCollectionFromModal = document.querySelector(".create-collection-from-modal");
+var createCollectionFromModalInput = document.querySelector(".create-col-from-modal-input");
+var createCollectionFromModalBtn = document.querySelectorAll(".create-col-from-modal-btn");
+var createCollectionFromModalError = document.querySelector(".create-col-from-modal-error");
+var collectionCounter = document.querySelector(".collection-count");
+var collectionList = document.querySelector(".collections-list");
+var emptyCollection = document.querySelector(".empty-collection"); //Save to collection
+
+var saveToCollectionModal = document.querySelector(".save-to-collection-prompt");
+var closeSaveToCollectionModal = document.querySelector(".save-to-collection-close");
+var saveToCollectionItemDiv = document.querySelector(".save-to-collection-item-div"); //remove from collection
+
+var removeFromCollectionModal = document.querySelector(".remove-from-collection-prompt"); // Side Nav Items
+
+var sideNavItems = document.querySelectorAll(".side-nav-item");
+var homeItem = document.querySelector(".home");
+var timelineItem = document.querySelector(".time-travel");
+var collectionItem = document.querySelector(".collections");
+var aboutItem = document.querySelector(".about");
+var spotlightNav = document.querySelector(".spotlight-container");
+var homeSpotlight = document.querySelector(".home-page-spotlight");
+var timelineSpotlight = document.querySelector(".timeline-page-spotlight");
+var collectionSpotlight = document.querySelector(".collections-page-spotlight");
+var aboutSpotlight = document.querySelector(".about-page-spotlight");
+nextInputs.forEach(function (input) {
+  input.addEventListener("keydown", function (event) {
+    if (event.keyCode === 13 && event.target.nodeName === 'INPUT') {
+      var form = event.target.form;
+      var index = Array.prototype.indexOf.call(form, event.target);
+      form.elements[index + 1].focus();
+      event.preventDefault();
+    }
+  }, false);
+});
+goInputs.forEach(function (input) {
+  input.addEventListener("keydown", function (event) {
+    if (event.keyCode === 13 && event.target.nodeName === 'INPUT') {
+      var form = event.target.form;
+      var index = Array.prototype.indexOf.call(form, event.target);
+      form.elements[index + 1].click(); // event.preventDefault();
+    }
+  }, false);
+});
+loginFromModal.forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    window.history.back(); // userProfilePanel.click()
+
+    setTimeout(function () {
+      userProfilePanel.click();
+    }, 300);
+  }, false);
+});
+createCollectionFromModalBtn.forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    createCollectionInput.value = createCollectionFromModalInput.value;
+    createCollectionBtn.click(); // loader.classList.remove("hide");
+    // createCollectionFromModal.append(loader);
+    // setTimeout(function(){createCollectionFromModalBtn.append(loader)}, 4)
+  }, addEventListener);
+});
+var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+authInputs.forEach(function (input) {
+  input.addEventListener("keydown", function () {
+    input.classList.remove("error");
+    authInputLabels.forEach(function (label) {
+      label.classList.remove("color-red");
+
+      if (label === loginEmailLabel) {
+        label.innerHTML = "Email:";
+      } else if (label === loginPasswordLabel) {
+        label.innerHTML = "Password:";
+      } else if (label === signupNameLabel) {
+        label.innerHTML = "Name:";
+      } else if (label === signupEmailLabel) {
+        label.innerHTML = "Email:";
+      } else if (label === signupPasswordLabel) {
+        label.innerHTML = "Password:";
+      } else if (label === signupConfirmPasswordLabel) {
+        label.innerHTML = "Confirm password:";
+      }
+    });
+  }, false);
+});
+var tokenStatus;
+var config;
+var script_token;
+
+function checkTokenStatus() {
+  script_token = localStorage.FBIdToken;
+
+  if (script_token) {
+    var decodedToken = jwt_decode_esm(script_token);
+    console.log(decodedToken.exp * 1000);
+    console.log(Date.now());
+
+    if (decodedToken.exp * 1000 < Date.now()) {
+      //if TOKEN is expired
+      console.log("token has expired");
+      tokenStatus = "expired"; // TODO: Session expired modal to initiate logout
+
+      sessionExpiredModal.classList.remove("hide");
+      screenFade.classList.remove("hide");
+    } else {
+      tokenStatus = "active";
+      config = {
+        headers: {
+          Authorization: "".concat(script_token)
+        }
+      };
+    }
+  }
+}
+
+var setAuthorizationHeader = function setAuthorizationHeader(token) {
+  var FBIdToken = "Bearer ".concat(token);
+  localStorage.setItem('FBIdToken', FBIdToken);
+  axios.defaults.headers.common['Authorization'] = FBIdToken;
+};
+
+var updateCurrentUser = function updateCurrentUser(userDetails) {
+  var currentUser = userDetails;
+  return localStorage.setItem('currentUser', JSON.stringify(currentUser));
+};
+
+var appendUserDetails = function appendUserDetails(user) {
+  var name = user.name;
+  var firstName = name.replace(/ .*/, '');
+  userIcon.style.fill = blue;
+  userProfileLabel.innerHTML = "Hello, <span class=\"color-blue\">".concat(firstName, "</span>");
+  var userCollections = user.collections.reverse();
+  var userCollectionCount = user.collectionCount;
+  collectionList.innerHTML = "";
+  saveToCollectionItemDiv.innerHTML = "";
+  createCollectionFromModal.classList.remove("hide");
+
+  if (!(!Array.isArray(userCollections) || !userCollections.length)) {
+    for (var i = 0; i < userCollections.length; i++) {
+      var collectionItemParagraph = document.createElement("p");
+      collectionItemParagraph.innerHTML = userCollections[i];
+
+      var _collectionItem = document.createElement("div");
+
+      _collectionItem.classList.add("collection-item");
+
+      _collectionItem.append(collectionItemParagraph);
+
+      collectionList.append(_collectionItem);
+      var saveToCollectionItem = document.createElement("p");
+      saveToCollectionItem.classList.add("save-to-collection-item");
+      saveToCollectionItem.innerHTML = userCollections[i];
+      saveToCollectionItemDiv.append(saveToCollectionItem);
+      saveToCollectionModal.append(saveToCollectionItemDiv);
+    }
+
+    var allCollectionItems = document.querySelectorAll(".collection-item");
+    allCollectionItems[0].setAttribute("data-selected", "true");
+    console.log(allCollectionItems[0]);
+
+    if (userCollectionCount === 1) {
+      collectionCounter.innerHTML = "You currently have ".concat(userCollectionCount, " collection");
+    } else if (userCollectionCount > 1) {
+      collectionCounter.innerHTML = "You currently have ".concat(userCollectionCount, " collections");
+    }
+  } else {
+    collectionCounter.innerHTML = "You haven't created any collections, click the create a new collection button to get started"; // createCollectionFromModal.classList.remove("hide");
+  }
+
+  appendCollections();
+}; // Initial State
+
+
+var state = {
+  page: "home",
+  header: "twtr  &middot; spotlight",
+  home: {
+    class: homeSearchPage.className
+  },
+  timeline: {
+    class: timelineSearchPage.className
+  },
+  collection: {
+    class: collectionPage.className
+  },
+  about: {
+    class: aboutModal.className
+  },
+  user: {
+    authDiv: {
+      class: userAuthDiv.className,
+      width: userAuthDiv.style.width
+    },
+    loginDiv: {
+      class: loginDiv.className
+    },
+    signupDiv: {
+      class: signupDiv.className
+    },
+    logoutDiv: {
+      class: logoutDiv.className
+    }
+  },
+  sidenav: {
+    home: homeItem.getAttribute("data-selected"),
+    timeline: timelineItem.getAttribute("data-selected"),
+    collection: collectionItem.getAttribute("data-selected"),
+    about: aboutItem.getAttribute("data-selected")
+  },
+  spotlight: {
+    innertext: homeSpotlight.innerHTML
+  },
+  search: {
+    searchPage: searchResults.className,
+    tweetsDiv: "",
+    keyword: {
+      home: "",
+      timeline: ""
+    }
+  },
+  savetocol: {
+    class: saveToCollectionModal.className
+  },
+  removefromcol: {
+    class: removeFromCollectionModal.className
+  },
+  screenFade: {
+    class: screenFade.className
+  },
+  media: {
+    class: mediaModal.className,
+    bg_img: ""
+  }
+}; // Render state function whenever popstate is fired
+
+function render() {
+  var token = localStorage.FBIdToken;
+  var currentUser = JSON.parse(localStorage.getItem('currentUser')); // set app data
+
+  if (token) {
+    var decodedToken = jwt_decode_esm(token);
+    console.log(decodedToken.exp * 1000);
+    console.log(Date.now());
+
+    if (decodedToken.exp * 1000 < Date.now()) {
+      //if TOKEN is expired
+      console.log("token has expired"); // TODO: Session expired modal to initiate logout
+
+      sessionExpiredModal.classList.remove("hide");
+      screenFade.classList.remove("hide");
+    } else {
+      config = {
+        headers: {
+          Authorization: "".concat(token)
+        }
+      };
+    }
+  }
+
+  if (currentUser) {
+    appendUserDetails(currentUser);
+  }
+
+  current_page = state.page; // set states
+
+  if (token) {
+    console.log("I got here");
+    userAuthDiv.style.width = "300px";
+    userAuthDiv.style.position = "relative";
+    userAuthDiv.style.height = "100%";
+    loginDiv.classList.add("hide");
+    signupDiv.classList.add("hide");
+    logoutDiv.classList.remove("hide");
+
+    if (vw < 600) {
+      userAuthDiv.style.position = "";
+      userAuthDiv.style.height = "50vh";
+    }
+  } else {
+    userAuthDiv.style.width = state.user.authDiv.width;
+    loginDiv.className = state.user.loginDiv.class;
+    signupDiv.className = state.user.signupDiv.class;
+    logoutDiv.className = state.user.logoutDiv.class;
+  }
+
+  checkTokenStatus();
+
+  if (tokenStatus === "active" && current_page === "collections") {
+    var activeCollection = document.querySelector('.collection-item[data-selected="true"]');
+    console.log(activeCollection);
+    if (activeCollection) axiosRetrieveTweets(activeCollection.innerText.trim());
+  }
+
+  screenFade.className = state.screenFade.class;
+  userAuthDiv.className = state.user.authDiv.class;
+  homeSearchPage.className = state.home.class;
+  timelineSearchPage.className = state.timeline.class;
+  collectionPage.className = state.collection.class;
+  aboutModal.className = state.about.class;
+  spotlightNav.innerHTML = state.spotlight.innertext;
+  headerText.innerHTML = state.header;
+  homeItem.setAttribute("data-selected", "".concat(state.sidenav.home));
+  timelineItem.setAttribute("data-selected", "".concat(state.sidenav.timeline));
+  collectionItem.setAttribute("data-selected", "".concat(state.sidenav.collection));
+  aboutItem.setAttribute("data-selected", "".concat(state.sidenav.about));
+  searchResults.className = state.search.searchPage;
+  tweetResultsDiv.innerHTML = state.search.tweetsDiv;
+  mainSearchInput.value = state.search.keyword.home;
+  timelineSearchInput.value = state.search.keyword.timeline;
+  mediaModal.className = state.media.class;
+  mediaModal.style.backgroundImage = state.media.bg_img;
+  saveToCollectionModal.className = state.savetocol.class;
+  removeFromCollectionModal.className = state.removefromcol.class;
+
+  if (!homeSearchPage.classList.contains("hide")) {
+    homeSearchPage.append(mainSearchButton);
+    homeSearchPage.insertBefore(mainSearchInputDiv, homeSearchPage.lastChild);
+    homeSearchPage.insertBefore(mainSearchError, homeSearchPage.lastChild);
+    homeSearchPage.append(searchChoicesDiv);
+  }
+
+  if (!timelineSearchPage.classList.contains("hide")) {
+    timelineSearchPage.append(timelineSearchButton);
+    timelineSearchPage.insertBefore(timelineSearchInputDiv, timelineSearchPage.lastChild);
+    timelineSearchPage.insertBefore(timelineSearchError, timelineSearchPage.lastChild);
+  }
+
+  if (!searchResults.classList.contains("hide")) {
+    if (current_page === "home") {
+      searchResults.insertBefore(searchChoicesDiv, searchResults.firstChild);
+      searchResults.insertBefore(mainSearchInputDiv, searchResults.firstChild);
+      timelineSearchPage.append(timelineSearchButton);
+      timelineSearchPage.insertBefore(timelineSearchInputDiv, timelineSearchPage.lastChild);
+      timelineSearchPage.insertBefore(timelineSearchError, timelineSearchPage.lastChild);
+    } else if (current_page === "timeline") {
+      searchResults.insertBefore(timelineSearchInputDiv, searchResults.firstChild);
+      homeSearchPage.append(mainSearchButton);
+      homeSearchPage.insertBefore(mainSearchInputDiv, homeSearchPage.lastChild);
+      homeSearchPage.insertBefore(mainSearchError, homeSearchPage.lastChild);
+      homeSearchPage.append(searchChoicesDiv);
+    }
+  }
+
+  console.log(current_page);
+  interactWithSearchResults();
+} // Initialize initial state on load
+
+
+(function initialize() {
+  window.history.replaceState(state, null, "");
+  render(state);
+})();
+
+sideNavItems.forEach(function (item) {
+  item.addEventListener("click", handleSideNav, false);
+});
+
+function handleSideNav() {
+  var currentTab = event.currentTarget;
+  sideNavItems.forEach(function (others) {
+    // userAuthDiv.classList.add("hide");
+    others.setAttribute("data-selected", "false");
+  });
+
+  if (!currentTab.classList.contains("user-profile")) {
+    currentTab.setAttribute("data-selected", "true");
+
+    if (!currentTab.classList.contains("about")) {
+      headerText.innerHTML = currentTab.innerText;
+    }
+  }
+
+  if (currentTab === homeItem) {
+    goHome();
+    spotlightNav.innerHTML = homeSpotlight.innerHTML;
+    headerText.innerHTML = homeItem.innerText;
+    headerText.innerHTML = "Home";
+    homeItem.setAttribute("data-selected", "true");
+  } else if (currentTab === timelineItem) {
+    timeTravel();
+    spotlightNav.innerHTML = timelineSpotlight.innerHTML;
+    headerText.innerHTML = timelineItem.innerText;
+    headerText.innerHTML = "Search Timeline";
+    timelineItem.setAttribute("data-selected", "true");
+  } else if (currentTab === collectionItem) {
+    goToCollections();
+    spotlightNav.innerHTML = collectionSpotlight.innerHTML;
+    headerText.innerHTML = collectionItem.innerText;
+    headerText.innerHTML = "Your collections";
+    collectionItem.setAttribute("data-selected", "true");
+  } else if (currentTab === aboutItem) {
+    spotlightNav.innerHTML = aboutSpotlight.innerHTML;
+    getAbout(); // headerText.innerHTML =aboutItem.innerText;
+
+    aboutItem.setAttribute("data-selected", "true");
+  } else if (currentTab === userProfilePanel) {
+    openUserPanel();
+  }
+
+  if (vw < 950) {
+    console.log("heyyyy");
+
+    if (currentTab === homeItem) {
+      headerText.innerHTML = "Home <span class=\"small color-blue\"> / search for anything on twitter<span>";
+    } else if (currentTab === timelineItem) {
+      headerText.innerHTML = "Search Timeline <span class=\"small color-blue\"> / get tweets from a user's timeline<span>";
+    } else if (currentTab === collectionItem) {
+      headerText.innerHTML = "Your collections  <span class=\"small color-blue\"> / view all your saved tweets.<span>";
+    }
+  }
+
+  state.header = headerText.innerHTML;
+  state.page = current_page;
+  state.screenFade.class = screenFade.className;
+  state.user.authDiv.class = userAuthDiv.className;
+  state.user.loginDiv.class = loginDiv.className;
+  state.user.signupDiv.class = signupDiv.className;
+  state.user.logoutDiv.class = logoutDiv.className;
+  state.home.class = homeSearchPage.className;
+  state.timeline.class = timelineSearchPage.className;
+  state.collection.class = collectionPage.className;
+  state.about.class = aboutModal.className;
+  state.spotlight.innertext = spotlightNav.innerHTML;
+  state.sidenav.home = homeItem.getAttribute("data-selected");
+  state.sidenav.timeline = timelineItem.getAttribute("data-selected");
+  state.sidenav.collection = collectionItem.getAttribute("data-selected");
+  state.sidenav.about = aboutItem.getAttribute("data-selected");
+  state.search.searchPage = searchResults.className;
+  window.history.pushState(state, null, "");
+}
+
+function goHome() {
+  current_page = "home"; // window.location.href = "/";
+
+  homeSearchPage.classList.remove("hide");
+  appendElementsToHome();
+  mainSearchError.innerHTML = "";
+  timelineSearchPage.classList.add("hide");
+  appendElementsToTimeline();
+  collectionPage.classList.add("hide");
+  aboutModal.classList.add("hide");
+  searchResults.classList.add("hide");
+}
+
+function timeTravel() {
+  current_page = "timeline";
+  timelineSearchPage.classList.remove("hide");
+  appendElementsToTimeline();
+  timelineSearchError.innerHTML = "";
+  homeSearchPage.classList.add("hide");
+  appendElementsToHome();
+  collectionPage.classList.add("hide");
+  aboutModal.classList.add("hide");
+  searchResults.classList.add("hide");
+}
+
+function goToCollections() {
+  current_page = "collections";
+  emptyCollection.classList.add("hide");
+  emptyCollection.innerHTML = "";
+  collectionPage.classList.remove("hide");
+  homeSearchPage.classList.add("hide");
+  appendElementsToHome();
+  timelineSearchPage.classList.add("hide");
+  appendElementsToTimeline();
+  aboutModal.classList.add("hide");
+  searchResults.classList.add("hide");
+  checkTokenStatus();
+
+  if (tokenStatus === "active") {
+    var activeCollection = document.querySelector('.collection-item[data-selected="true"]');
+    console.log(activeCollection);
+    if (activeCollection) axiosRetrieveTweets(activeCollection.innerText.trim());
+    console.log("");
+  }
+}
+
+function getAbout() {
+  aboutModal.classList.remove("hide");
+}
+
+function appendElementsToHome() {
+  mainSearchInput.value = "";
+  mainSearchError.innerHTML = "";
+  homeSearchPage.append(mainSearchButton);
+  homeSearchPage.insertBefore(mainSearchInputDiv, homeSearchPage.lastChild);
+  homeSearchPage.insertBefore(mainSearchError, homeSearchPage.lastChild);
+  homeSearchPage.append(searchChoicesDiv);
+}
+
+function appendElementsToTimeline() {
+  timelineSearchInput.value = "";
+  timelineSearchError.innerHTML = "";
+  timelineSearchPage.append(timelineSearchButton);
+  timelineSearchPage.insertBefore(timelineSearchInputDiv, timelineSearchPage.lastChild);
+  timelineSearchPage.insertBefore(timelineSearchError, timelineSearchPage.lastChild);
+} // homeItem.addEventListener("click", goHome, false);
+// timelineItem.addEventListener("click", timeTravel, false);
+// collectionItem.addEventListener("click", goToCollections, false);
+// aboutItem.addEventListener("click", getAbout, false);
+
+
+console.log(config);
+
+function closeUserPanel() {
+  event.preventDefault();
+  aboutModal.classList.add("hide");
+  userAuthDiv.classList.add("hide");
+  loginDiv.classList.add("hide");
+  signupDiv.classList.add("hide");
+  screenFade.classList.add("hide");
+
+  if (current_page === "home") {
+    console.log("home");
+    homeItem.setAttribute("data-selected", "true");
+  } else if (current_page === "timeline") {
+    console.log("timeline");
+    timelineItem.setAttribute("data-selected", "true");
+  } else if (current_page === "collections") {
+    console.log("collection");
+    collectionItem.setAttribute("data-selected", "true");
+  }
+
+  if (userAuthDiv.classList.contains("hide")) {
+    state.screenFade.class = screenFade.className;
+    state.user.authDiv.class = userAuthDiv.className;
+    state.user.loginDiv.class = loginDiv.className;
+    window.history.pushState(state, null, "");
+  } else {
+    window.history.back();
+  }
+}
+
+function openUserPanel() {
+  event.preventDefault();
+  var token = localStorage.FBIdToken;
+  aboutModal.classList.add("hide");
+  screenFade.classList.remove("hide");
+
+  if (token) {
+    userAuthDiv.style.width = "300px";
+    userAuthDiv.style.position = "relative";
+    userAuthDiv.style.height = "100%";
+    userAuthDiv.classList.remove("hide");
+    logoutDiv.classList.remove("hide");
+
+    if (vw < 600) {
+      userAuthDiv.style.position = "";
+      userAuthDiv.style.height = "50vh";
+    }
+  } else {
+    userAuthDiv.classList.remove("hide");
+    loginDiv.classList.remove("hide");
+    signupDiv.classList.add("hide");
+    logoutDiv.classList.add("hide");
+  } // history state defined in nav handler
+
+}
+
+function loginHereFunc() {
+  openUserPanel();
+  state.user.authDiv.class = userAuthDiv.className;
+  state.user.loginDiv.class = loginDiv.className;
+  state.user.signupDiv.class = signupDiv.className;
+  state.user.logoutDiv.class = logoutDiv.className;
+  window.history.pushState(state, null, "");
+}
+
+function openSignupPanel() {
+  loginDiv.classList.add("hide");
+  signupDiv.classList.remove("hide");
+  state.user.loginDiv.class = loginDiv.className;
+  state.user.signupDiv.class = signupDiv.className;
+  window.history.pushState(state, null, "");
+}
+
+function logout() {
+  localStorage.removeItem("FBIdToken");
+  localStorage.removeItem("currentUser");
+  window.location.href = "/";
+}
+
+function login() {
+  loginBtn.append(loader);
+  loader.classList.remove("hide");
+  var loginData = {
+    email: loginEmail.value,
+    password: loginPassword.value
+  };
+
+  var _validateLoginData = validateLoginData(loginData),
+      valid = _validateLoginData.valid,
+      errors = _validateLoginData.errors;
+
+  if (!valid) {
+    loader.classList.add("hide");
+
+    if (errors.email) {
+      loginEmailLabel.innerHTML = errors.email;
+      loginEmailLabel.classList.add("color-red");
+      loginEmail.placeholder = errors.email;
+      loginEmail.classList.add("auth-error");
+    }
+
+    if (errors.password) {
+      loginPasswordLabel.innerHTML = errors.password;
+      loginPasswordLabel.classList.add("color-red");
+      loginPassword.placeholder = errors.password;
+      loginPassword.classList.add("auth-error");
+    }
+  } else if (valid) axios.post('https://us-central1-explorer-one-44263.cloudfunctions.net/api/login', {
+    "email": loginData.email,
+    "password": loginData.password
+  }).then(function (response) {
+    loader.classList.add("hide");
+    screenFade.classList.add("hide");
+    console.log(response.data);
+    setAuthorizationHeader(response.data.token);
+    updateCurrentUser(response.data.userDetails);
+    appendUserDetails(response.data.userDetails);
+    userAuthDiv.classList.add("hide");
+    loginDiv.classList.add("hide");
+    interactWithSearchResults();
+    state.screenFade.class = screenFade.className;
+    state.user.authDiv.class = userAuthDiv.className;
+    state.user.loginDiv.class = loginDiv.className;
+    window.history.pushState(state, null, "");
+  }).catch(function (error) {
+    loader.classList.add("hide");
+    console.log(error.response.data);
+    loginErrors.innerHTML = error.response.data.error;
+  });
+}
+
+function signup() {
+  signupBtn.append(loader);
+  loader.classList.remove("hide");
+  var signupData = {
+    name: signupName.value,
+    email: signupEmail.value,
+    password: signupPassword.value,
+    confirmPassword: signupConfirmPassword.value
+  };
+
+  var _validateSignupData = validateSignupData(signupData),
+      valid = _validateSignupData.valid,
+      errors = _validateSignupData.errors;
+
+  if (!valid) {
+    loader.classList.add("hide");
+
+    if (errors.name) {
+      signupNameLabel.innerHTML = errors.name;
+      signupNameLabel.classList.add("color-red");
+      signupName.placeholder = errors.name;
+      signupName.classList.add("auth-error");
+    }
+
+    if (errors.email) {
+      signupEmailLabel.innerHTML = errors.email;
+      signupEmailLabel.classList.add("color-red");
+      signupEmail.placeholder = errors.email;
+      signupEmail.classList.add("auth-error");
+    }
+
+    if (errors.password) {
+      signupPasswordLabel.innerHTML = errors.password;
+      signupPasswordLabel.classList.add("color-red");
+      signupPassword.placeholder = errors.password;
+      signupPassword.classList.add("auth-error");
+    }
+
+    if (errors.confirmPassword) {
+      signupConfirmPasswordLabel.innerHTML = errors.confirmPassword;
+      signupConfirmPasswordLabel.classList.add("color-red");
+      signupConfirmPassword.placeholder = errors.confirmPassword;
+      signupConfirmPassword.classList.add("auth-error");
+    }
+  } else if (valid) axios.post('https://us-central1-explorer-one-44263.cloudfunctions.net/api/signup', {
+    name: signupData.name,
+    email: signupData.email,
+    password: signupData.password,
+    confirmPassword: signupData.confirmPassword
+  }).then(function (response) {
+    loader.classList.add("hide");
+    screenFade.classList.add("hide");
+    console.log(response.data);
+    setAuthorizationHeader(response.data.token);
+    updateCurrentUser(response.data.userDetails);
+    appendUserDetails(response.data.userDetails);
+    userAuthDiv.classList.add("hide");
+    signupDiv.classList.add("hide");
+    signupName.value = "";
+    signupEmail.value = "";
+    signupPassword.value = "";
+    signupConfirmPassword.value = "";
+    interactWithSearchResults();
+    state.screenFade.class = screenFade.className;
+    state.user.authDiv.class = userAuthDiv.className;
+    state.user.signupDiv.class = signupDiv.className;
+    window.history.pushState(state, null, "");
+  }).catch(function (error) {
+    loader.classList.add("hide");
+    console.log(error.response.data);
+
+    if (error.response.data.password) {
+      signupErrors.innerHTML = error.response.data.password;
+    }
+
+    if (error.response.data.email) {
+      signupErrors.innerHTML = error.response.data.email;
+    } else {
+      signupErrors.innerHTML = error.response.data.general;
+    }
+  });
+}
+
+function appendTweets(results) {
+  for (var i = 0; i < results.length; i++) {
+    var appendCommas = function appendCommas(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    };
+
+    var tweetResult = document.createElement("div");
+    tweetResult.classList.add("tweet-result");
+    var tweetUserImageDiv = document.createElement("div");
+    tweetUserImageDiv.classList.add("tweet-user-image");
+    var tweetUserImage = document.createElement("img");
+    tweetUserImage.src = results[i].user.profile_image_url;
+    tweetUserImage.alt = "User Image";
+    tweetUserImageDiv.append(tweetUserImage);
+    var tweetBody = document.createElement("div");
+    tweetBody.classList.add("tweet-body");
+    var tweetNameDiv = document.createElement("div");
+    tweetNameDiv.classList.add("tweet-name-div");
+    var tweetName = document.createElement("p");
+    tweetName.classList.add("tweet-name", "tw-name-item");
+    tweetName.setAttribute("data-username", "".concat(results[i].user.screen_name));
+    tweetName.innerHTML = results[i].user.name;
+    var tweetVerified = document.createElement("span");
+    tweetVerified.classList.add("verified", "material-icons", "tw-name-item");
+    tweetVerified.innerHTML = "verified";
+
+    if (results[i].user.verified === false) {
+      tweetVerified.classList.add("hide");
+    }
+
+    var tweetUserName = document.createElement("p");
+    tweetUserName.classList.add("tweet-username", "tw-name-item", "mention");
+    tweetUserName.innerHTML = "".concat(results[i].user.screen_name);
+    var tweetTime = document.createElement("p");
+    tweetTime.classList.add("tweet-time", "tw-name-item");
+    tweetTime.innerHTML = " &middot; ".concat(dayjs(results[i].created_at).fromNow());
+    var nameCombo = tweetName.innerText + tweetUserName.innerText;
+    var name = tweetName.innerText;
+    var username = tweetUserName.innerText;
+
+    if (nameCombo.length > 24) {
+      tweetUserName.innerHTML = text_truncate(name, 10);
+
+      if ((tweetName.innerText + tweetUserName.innerText).length > 24) {
+        tweetUserName.innerHTML = text_truncate(username, 5);
+
+        if ((tweetName.innerText + tweetUserName.innerText).length > 25) {
+          tweetUserName.innerHTML = text_truncate(name, 0, "");
+
+          if ((tweetName.innerText + tweetUserName.innerText).length > 24) {
+            tweetName.innerHTML = text_truncate(name, 24);
+          }
+        }
+      }
+    }
+
+    tweetNameDiv.append(tweetName, tweetVerified, tweetUserName, tweetTime);
+    console.log("length:", "".concat(tweetName.innerText, " + ").concat(tweetUserName.innerText).length);
+    var tweetText = document.createElement("p");
+    tweetText.classList.add("tweet-text");
+
+    if (_typeof(results[i].retweeted_status) === "object") {
+      tweetText.innerHTML = results[i].retweeted_status.full_text;
+      tweetText.innerHTML = urlify(tweetText.innerHTML);
+      tweetText.innerHTML = atlify(tweetText.innerHTML);
+    } else {
+      tweetText.innerHTML = results[i].full_text;
+      tweetText.innerHTML = urlify(tweetText.innerHTML);
+      tweetText.innerHTML = atlify(tweetText.innerHTML);
+    }
+
+    var tweetImageDiv = document.createElement("div");
+    tweetImageDiv.classList.add("tweet-image");
+    var tweetImage = void 0,
+        tweetVideo = void 0,
+        videoSource = void 0,
+        videoError = void 0;
+
+    if (results[i].extended_entities !== undefined) {
+      if (results[i].extended_entities.media !== undefined) {
+        if (results[i].extended_entities.media[0].type === "video" || results[i].extended_entities.media[0].type === "animated_gif") {
+          tweetVideo = document.createElement("video");
+          tweetVideo.controls = "controls";
+          videoSource = document.createElement("source"); // if (results[i].extended_entities.media[0].type === "animated_gif") {
+          //     tweetVideo.setAttribute("playsinline", true);
+          //     tweetVideo.setAttribute("autoplay", true);
+          //     tweetVideo.setAttribute("loop", true)
+          // }
+
+          var variants = results[i].extended_entities.media[0].video_info.variants;
+
+          for (var _i = 0; _i < variants.length; _i++) {
+            if (variants[_i].content_type === "video/mp4") {
+              videoSource.type = variants[_i].content_type;
+              videoSource.src = variants[_i].url;
+              break;
+            }
+          }
+
+          tweetVideo.append(videoSource);
+          videoError = document.createElement("p");
+          videoError.innerHTML = "Sorry, your browser doesn't support embedded videos.";
+          tweetVideo.append("videoError");
+          tweetImageDiv.append(tweetVideo);
+        } else if (results[i].extended_entities.media[0].type === "photo") {
+          tweetImage = document.createElement("img");
+          tweetImage.src = results[i].extended_entities.media[0].media_url_https;
+          tweetImage.alt = "Tweet Media";
+          tweetImageDiv.append(tweetImage);
+        }
+      }
+    }
+
+    var tweetFooterDiv = document.createElement("div");
+    var tweetFooter = document.createElement("div");
+    tweetFooter.classList.add("tweet-footer");
+    var tweetMetrics = document.createElement("div");
+    tweetMetrics.classList.add("tweet-metrics");
+    var tweetRetweetIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    tweetRetweetIcon.classList.add("tweet-icon");
+    tweetRetweetIcon.innerHTML = "<path xmlns=\"http://www.w3.org/2000/svg\" d=\"M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z\"/>";
+    tweetRetweetIcon.setAttribute("viewBox", "0 0 24 24");
+    var tweetRetweets = document.createElement("p");
+    tweetRetweets.innerHTML = "".concat(results[i].retweet_count, " ");
+    tweetRetweets.innerHTML = appendCommas(tweetRetweets.innerHTML);
+    var tweetLikesIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    tweetLikesIcon.classList.add("tweet-icon");
+    tweetLikesIcon.innerHTML = "<path d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z\"/>";
+    tweetLikesIcon.setAttribute("viewBox", "0 0 24 24");
+    var tweetLikes = document.createElement("p");
+    tweetLikes.innerHTML = "".concat(results[i].retweet_count, " ");
+    tweetLikes.innerHTML = appendCommas(tweetLikes.innerHTML);
+    tweetMetrics.append(tweetRetweetIcon, tweetRetweets, tweetLikesIcon, tweetLikes);
+    var saveToCollection = document.createElement("div");
+    saveToCollection.setAttribute("data-tweetId", "".concat(results[i].id_str));
+    saveToCollection.classList.add("save-to-collection");
+    var saveSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    saveSvg.classList.add("save-to-svg");
+    saveSvg.setAttribute("viewBox", "0 0 24 24");
+    saveSvg.innerHTML = "<path d=\"M0 0h24v24H0z\" fill=\"none\"></path><path d=\"M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z\"></path>";
+    var saveSvgText = document.createElement("p");
+    saveSvgText.classList.add("save-to-text");
+    saveSvgText.innerHTML = "Save to collection";
+    saveToCollection.append(saveSvg, saveSvgText);
+    var currentUser = localStorage.currentUser;
+
+    if (currentUser !== undefined) {
+      var userFavorites = JSON.parse(currentUser).favorites;
+
+      if (userFavorites.includes(results[i].id_str)) {
+        saveSvg.style.fill = "green";
+        saveSvg.innerHTML = "<path d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z\"/>";
+        saveSvgText.style.color = "green";
+        saveSvgText.innerHTML = "Saved to your collections";
+      }
+    }
+
+    var removeFromCollection = document.createElement("div");
+    removeFromCollection.setAttribute("data-tweetId", "".concat(results[i].id_str));
+    removeFromCollection.classList.add("remove-from-collection", "hide");
+    var removeSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    removeSvg.setAttribute("viewBox", "0 0 24 24");
+    removeSvg.innerHTML = "<path d=\"M0 0h24v24H0V0z\" fill=\"none\"/><path d=\"M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z\"/>";
+    var removeSvgText = document.createElement("p");
+    removeSvgText.innerHTML = "remove from collection";
+    removeFromCollection.append(removeSvg, removeSvgText); // TODO: create modal for tweet being replied to
+    // let replyingTo = document.createElement("p");
+    // replyingTo.classList.add("replying-to");
+    // replyingTo.innerHTML = `Replying to ${results[i].in_reply_to_screen_name}`;
+    // replyingTo.setAttribute("data-tweetid", `${results[i].id_str}`);
+
+    tweetFooter.append(tweetMetrics, saveToCollection, removeFromCollection);
+    tweetFooterDiv.append(tweetFooter); // if (results[i].in_reply_to_status_id_str !== null) {
+    //     tweetFooterDiv.append(replyingTo);
+    // }
+
+    tweetBody.append(tweetNameDiv, tweetText, tweetImageDiv, tweetFooterDiv);
+    tweetResult.append(tweetUserImageDiv, tweetBody);
+    tweetResultsDiv.append(tweetResult);
+  }
+}
+
+function mainSearch() {
+  current_page = "home";
+  tweetResultsDiv.innerHTML = "";
+  loader.classList.remove("hide");
+
+  if (homeSearchPage.classList.contains("hide")) {
+    searchResults.append(loader);
+  } else {
+    mainSearchButton.append(loader);
+  }
+
+  var lang;
+  var tweetType;
+
+  for (var i = 0; i < languageChoice.length; i++) {
+    if (languageChoice[i].checked) {
+      lang = languageChoice[i].value;
+      console.log(lang);
+    }
+  }
+
+  for (var _i2 = 0; _i2 < tweetTypeChoice.length; _i2++) {
+    if (tweetTypeChoice[_i2].checked) {
+      tweetType = tweetTypeChoice[_i2].value;
+      console.log(tweetType);
+    }
+  }
+
+  var searchData = {
+    query: mainSearchInput.value,
+    result_type: tweetType,
+    language: lang
+  };
+
+  if (searchData.query.trim() === "") {
+    loader.classList.add("hide");
+    mainSearchError.innerHTML = "Please give me something to search for";
+    mainSearchError.classList.add("error");
+  } else if (searchData.query.trim() !== "") axios.post('https://us-central1-explorer-one-44263.cloudfunctions.net/api/search', {
+    query: searchData.query,
+    result_type: searchData.result_type,
+    language: searchData.language
+  }).then(function (response) {
+    loader.classList.add("hide");
+    console.log(response.data.results);
+    var results = response.data.results;
+    homeSearchPage.classList.add("hide");
+    searchResults.classList.remove("hide");
+    searchResults.insertBefore(searchChoicesDiv, searchResults.firstChild);
+    searchResults.insertBefore(mainSearchInputDiv, searchResults.firstChild);
+    tweetResultsDiv.innerHTML = "";
+
+    if (!Array.isArray(results) || !results.length) {
+      tweetResultsDiv.innerHTML = "There are no results for <span class= color-blue>".concat(searchData.query, "</span>. Maybe try another keyword or choose a different language or tweet type");
+    } else appendTweets(results);
+
+    interactWithSearchResults();
+    state.search.keyword.home = mainSearchInput.value;
+    state.search.tweetsDiv = tweetResultsDiv.innerHTML;
+    state.home.class = homeSearchPage.className;
+    state.search.searchPage = searchResults.className;
+    window.history.pushState(state, null, "");
+  }).catch(function (error) {
+    loader.classList.add("hide");
+    console.log(error.response.data);
+  });
+}
+
+function timelineSearch() {
+  current_page = "timeline";
+  loader.classList.remove("hide");
+  tweetResultsDiv.innerHTML = "";
+
+  if (timelineSearchPage.classList.contains("hide")) {
+    searchResults.append(loader);
+  } else {
+    timelineSearchButton.append(loader);
+  }
+
+  var userName = timelineSearchInput.value;
+
+  if (userName.trim() === "") {
+    loader.classList.add("hide");
+    timelineSearchError.innerHTML = "Please enter a twitter user name";
+    timelineSearchError.classList.add("error");
+  } else if (userName.trim() !== "") axios.post('https://us-central1-explorer-one-44263.cloudfunctions.net/api/timetravel', {
+    screen_name: userName
+  }).then(function (response) {
+    loader.classList.add("hide");
+    console.log(response.data.results);
+    var results = response.data.results;
+    timelineSearchPage.classList.add("hide");
+    searchResults.classList.remove("hide");
+    searchResults.insertBefore(timelineSearchInputDiv, searchResults.firstChild);
+    tweetResultsDiv.innerHTML = ""; // TODO: HANDLE PROTECTED USER ERROR AND 
+
+    console.log(results);
+
+    if (!Array.isArray(results) || !results.length) {
+      tweetResultsDiv.innerHTML = "There are no results for <span class= color-blue>".concat(userName, "</span>. Maybe try the search on the <span class=\"home-link color-blue\">homepage</span>");
+    } else appendTweets(results);
+
+    interactWithSearchResults();
+    state.search.keyword.timeline = timelineSearchInput.value;
+    state.search.tweetsDiv = tweetResultsDiv.innerHTML;
+    state.timeline.class = timelineSearchPage.className;
+    state.search.searchPage = searchResults.className;
+    window.history.pushState(state, null, "");
+  }).catch(function (error) {
+    timelineSearchError.classList.add("error");
+    loader.classList.add("hide");
+    console.log(error.response.data);
+    var errorCode = error.response.data;
+
+    if (Object.keys(errorCode.err).length === 0 && errorCode.err.constructor === Object) {
+      timelineSearchError.innerHTML = "<span class= color-blue>".concat(userName, "'s</span> tweets are protected. The account cound be private or suspended.");
+      tweetResultsDiv.innerHTML = "<span class= color-blue>".concat(userName, "'s</span> tweets are protected. The account cound be private or suspended.");
+      state.search.keyword.timeline = timelineSearchInput.value;
+      state.search.tweetsDiv = tweetResultsDiv.innerHTML;
+      state.timeline.class = timelineSearchPage.className;
+      state.search.searchPage = searchResults.className;
+      window.history.pushState(state, null, "");
+    }
+
+    console.log(_typeof(errorCode.err[0].code));
+
+    if (errorCode.err[0].code === 34) {
+      timelineSearchError.innerHTML = "Seems like there is no user with this user name, please check and try again.";
+      tweetResultsDiv.innerHTML = "Seems like there is no user with this user name, please check and try again.";
+      state.search.keyword.timeline = timelineSearchInput.value;
+      state.search.tweetsDiv = tweetResultsDiv.innerHTML;
+      state.timeline.class = timelineSearchPage.className;
+      state.search.searchPage = searchResults.className;
+      window.history.pushState(state, null, "");
+    }
+  });
+}
+
+function retrieveCollectionTweets() {
+  console.log("heyyyyy");
+  emptyCollection.innerHTML = "";
+  emptyCollection.classList.add("hide");
+  var collectionName = event.currentTarget.innerText.trim();
+  axiosRetrieveTweets(collectionName);
+}
+
+function axiosRetrieveTweets(collection) {
+  console.log(collection);
+  axios.post('https://us-central1-explorer-one-44263.cloudfunctions.net/api/collection', {
+    collectionName: collection
+  }, config).then(function (response) {
+    loader.classList.add("hide");
+    console.log(response.data.results);
+    var results = response.data.results;
+    homeSearchPage.classList.add("hide");
+    searchResults.classList.remove("hide");
+    tweetResultsDiv.innerHTML = "";
+    appendTweets(results);
+    var saveTweet = document.querySelectorAll(".save-to-collection");
+    var removeTweet = document.querySelectorAll(".remove-from-collection");
+    saveTweet.forEach(function (btn) {
+      btn.classList.add("hide");
+    });
+    removeTweet.forEach(function (btn) {
+      btn.classList.remove("hide");
+      btn.setAttribute("data-collection-name", collection);
+    });
+    searchResults.scrollIntoView();
+
+    if (tweetResultsDiv.innerHTML === "") {
+      emptyCollection.classList.remove("hide");
+      emptyCollection.innerHTML = "<span class=\"color-blue\">".concat(collection, "</span> currently has no saved tweets"); // emptyCollection.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+
+      emptyCollection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest"
+      });
+    }
+
+    interactWithSearchResults(); // window.history.pushState(state, null, "");
+    // state.home.class = homeSearchPage.className;
+    // state.search.searchPage = searchResults.className;
+    // window.history.pushState(state, null, "");
+  }).catch(function (error) {
+    loader.classList.add("hide");
+    console.log(error.response.data);
+  });
+}
+
+var currentTweetId;
+
+function interactWithSearchResults() {
+  // TODO: add modal popup for clicked images
+  var allImages = document.querySelectorAll(".tweet-image img");
+  allImages.forEach(function (img) {
+    img.addEventListener("click", function () {
+      console.log(img); // img.style.objectFit = "contain"
+
+      mediaModal.classList.remove("hide");
+      screenFade.classList.remove("hide"); // media.innerHTML = img.outerHTML;
+
+      console.log(img.src);
+      mediaModal.style.backgroundImage = "url(".concat(img.src, ")");
+      state.media.bg_img = "url(".concat(img.src, ")");
+      state.screenFade.class = screenFade.className;
+      state.media.class = mediaModal.className;
+      window.history.pushState(state, null, "");
+    }, false);
+  });
+  var allVideos = document.querySelectorAll("video");
+  allVideos.forEach(function (video) {
+    video.addEventListener("play", function () {
+      var nowPlaying = event.currentTarget;
+      allVideos.forEach(function (vid) {
+        if (vid.paused === false && vid !== nowPlaying) {
+          vid.pause();
+        }
+      });
+    });
+  }); // save tweet to colection
+
+  var collectionItemToBeSavedTo = document.querySelectorAll(".save-to-collection-item");
+  var tweetBtn = document.querySelectorAll(".save-to-collection");
+  tweetBtn.forEach(function (tweet) {
+    tweet.addEventListener("click", function () {
+      saveToCollectionModal.classList.remove("hide");
+      screenFade.classList.remove("hide");
+      var currentTweet = event.currentTarget;
+      getTweetId(currentTweet);
+      var tweetId = currentTweet.tweetId;
+      console.log(tweetId);
+      currentTweetId = tweetId;
+      console.log("currentTweetId", currentTweetId);
+      collectionItemToBeSavedTo.forEach(function (collection) {
+        collection.setAttribute("data-tweetId", tweetId);
+      });
+      state.savetocol.class = saveToCollectionModal.className;
+      window.history.pushState(state, null, "");
+    }, false);
+  });
+  collectionItemToBeSavedTo.forEach(function (collection) {
+    collection.addEventListener("click", saveTweetToCollection, true);
+  }); // delete tweet from collection
+
+  var deleteTweetBtn = document.querySelector(".remove-prompt-delete");
+  var removeFromCollectionBtn = document.querySelectorAll(".remove-from-collection");
+  removeFromCollectionBtn.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      removeFromCollectionModal.classList.remove("hide");
+      var currentTweet = event.currentTarget;
+      getTweetId(currentTweet);
+      var tweetId = currentTweet.tweetId;
+      getCollectionName(currentTweet);
+      var collectionName = currentTweet.collectionName;
+      console.log(tweetId);
+      console.log(collectionName);
+      deleteTweetBtn.setAttribute("data-tweetId", tweetId);
+      deleteTweetBtn.setAttribute("data-collection-name", collectionName);
+      state.savetocol.class = saveToCollectionModal.className;
+      history.pushState(state, null, "");
+    }, false);
+  });
+  var closeRemoveFromCollectionModal = document.querySelectorAll(".remove-from-collection-close");
+  closeRemoveFromCollectionModal.forEach(function (close) {
+    close.addEventListener("click", function () {
+      removeFromCollectionModal.classList.add("hide");
+      state.savetocol.class = saveToCollectionModal.className;
+      window.back();
+    }, false);
+  });
+  deleteTweetBtn.addEventListener("click", deleteTweetFromCollection, false);
+  var mentions = document.querySelectorAll(".mention");
+  mentions.forEach(function (mention) {
+    mention.addEventListener("click", function () {
+      // timelineSearchPage.innerHTML = searchResults.innerHTML; 
+      timelineSearchPage.classList.add("hide");
+      timelineItem.click();
+      timelineSearchInput.value = mention.innerHTML;
+      timelineSearchButton.click();
+      console.log(mention.innerHTML);
+    });
+  });
+  var userNames = document.querySelectorAll(".tweet-name");
+  userNames.forEach(function (name) {
+    var username = name.getAttribute("data-username");
+    name.addEventListener("click", function () {
+      timelineItem.click();
+      timelineSearchInput.value = username;
+      timelineSearchButton.click();
+    }, false);
+  });
+  var homeLink = document.querySelectorAll(".home-link");
+  homeLink.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      homeItem.click();
+    }, false);
+  });
+}
+
+function deleteTweetFromCollection() {
+  var currentTweet = event.currentTarget;
+  currentTweet.append(loader);
+  loader.classList.remove("hide");
+  getTweetId(currentTweet);
+  var tweetId = currentTweet.tweetId;
+  getCollectionName(currentTweet);
+  var collectionName = currentTweet.collectionName;
+  console.log(tweetId, collectionName);
+  axios.post("https://us-central1-explorer-one-44263.cloudfunctions.net/api/deletefavorite/".concat(tweetId), {
+    collectionName: collectionName
+  }, config).then(function (response) {
+    //TODO success function and error functions
+    loader.classList.add("hide");
+    removeFromCollectionModal.classList.add("hide");
+    console.log(response.data);
+    axiosRetrieveTweets(collectionName);
+    interactWithSearchResults();
+    currentTweet.removeAttribute("data-collection-name");
+    currentTweet.removeAttribute("data-tweetid");
+  }).catch(function (error) {
+    loader.classList.add("hide");
+    console.log(error.response.data);
+  });
+}
+
+function saveTweetToCollection() {
+  // interactWithSearchResults();
+  // console.log("currentTweetId", currentTweetId);
+  // let currentTweet = event.currentTarget;
+  // getTweetId(currentTweet);
+  // let tweetId = currentTweet.tweetId;
+  var tweetId = currentTweetId;
+  var collectionName = event.currentTarget.innerText.trim();
+  var collection = event.currentTarget;
+  collection.append(loader);
+  loader.classList.remove("hide");
+  console.log(collection);
+  axios.post("https://us-central1-explorer-one-44263.cloudfunctions.net/api/addfavorite/".concat(tweetId), {
+    collectionName: collectionName
+  }, config).then(function (response) {
+    //TODO success function
+    loader.classList.add("hide");
+    saveToCollectionModal.classList.add("hide");
+    screenFade.classList.add("hide");
+    console.log(response.data);
+    var SaveToColBtns = document.querySelectorAll(".save-to-collection");
+    SaveToColBtns.forEach(function (btn) {
+      if (btn.getAttribute("data-tweetId") === tweetId) {
+        btn.style.color = "green";
+        btn.childNodes[0].style.fill = "green";
+        btn.childNodes[0].innerHTML = "<path d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z\"/>";
+        btn.childNodes[1].innerText = "Saved to ".concat(collectionName);
+      }
+    });
+    updateCurrentUser(response.data.userDetails);
+    appendUserDetails(response.data.userDetails);
+    interactWithSearchResults();
+    state.savetocol.class = saveToCollectionModal.className;
+    state.screenFade.class = screenFade.className;
+    window.history.pushState(state, null, "");
+  }).catch(function (error) {
+    loader.classList.add("hide");
+    console.log(error.response.data);
+  });
+}
+
+function getTweetId(element) {
+  return element.tweetId = element.getAttribute("data-tweetId");
+}
+
+function getCollectionName(element) {
+  return element.collectionName = element.getAttribute("data-collection-name");
+}
+
+console.log(config);
+
+function appendCollections() {
+  var allCollectionItems = document.querySelectorAll(".collection-item"); // check to see if collection list is populated
+
+  if (!(!Array.isArray(allCollectionItems) || !allCollectionItems.length)) {
+    allCollectionItems[0].setAttribute("data-selected", "true");
+  }
+
+  allCollectionItems.forEach(function (collection) {
+    collection.addEventListener("click", function () {
+      loader.classList.remove("hide");
+      collection.append(loader);
+      allCollectionItems.forEach(function (otherCollections) {
+        otherCollections.setAttribute("data-selected", "false");
+      });
+      collection.setAttribute("data-selected", "true");
+    }, false);
+    collection.addEventListener("click", retrieveCollectionTweets, false);
+  });
+}
+
+function openCreateCollectionDiv() {
+  createCollectionCta.classList.add("hide");
+  createCollectionInputDiv.classList.remove("hide");
+}
+
+function closeCreateCollectionDiv() {
+  createCollectionInput.value = "";
+  createCollectionError.innerHTML = "";
+  createCollectionFromModalError.innerHTML = "";
+  createCollectionCta.classList.remove("hide");
+  createCollectionInputDiv.classList.add("hide");
+}
+
+function createNewCollection() {
+  // createCollectionBtn.append(loader);
+  loader.classList.remove("hide");
+  checkTokenStatus();
+
+  if (collectionPage.classList.contains("hide")) {
+    createCollectionFromModal.append(loader);
+  } else {
+    createCollectionBtn.append(loader);
+  }
+
+  if (script_token === null || script_token === undefined) {
+    loader.classList.add("hide");
+    createCollectionError.innerHTML = "You need to be logged in to use this feature. Please login or create an account to continue.";
+    return;
+  }
+
+  if (createCollectionInput.value.trim() === "") {
+    createCollectionError.classList.remove("hide");
+    createCollectionError.innerHTML = "Please enter a name for your new collection";
+    createCollectionFromModalError.innerHTML = "Please enter a name for your new collection";
+    loader.classList.add("hide");
+    return;
+  }
+
+  axios.post('https://us-central1-explorer-one-44263.cloudfunctions.net/api/collection/create', {
+    collectionName: createCollectionInput.value
+  }, config).then(function (response) {
+    createCollectionInput.value = "";
+    createCollectionFromModalInput.value = "";
+    loader.classList.add("hide");
+    createCollectionCta.classList.remove("hide");
+    createCollectionInputDiv.classList.add("hide"); // createCollectionFromModal.classList.add("hide");
+
+    updateCurrentUser(response.data.userDetails);
+    appendUserDetails(response.data.userDetails);
+    interactWithSearchResults(); // TODO: add modal popup for clicked images
+  }).catch(function (error) {
+    loader.classList.add("hide");
+    console.log(error.response.data);
+    createCollectionError.classList.remove("hide");
+    createCollectionFromModalError.classList.remove("hide");
+    createCollectionError.innerHTML = error.response.data.error;
+    createCollectionFromModalError.innerHTML = error.response.data.error;
+    if (error.response.data.error === "Unauthorized") createCollectionError.innerHTML = "You need to be logged in to use this feature. Please login or create an account to continue.";
+  });
+} // Nav Event Listeners
+
+
+userProfilePanel.addEventListener("click", openUserPanel, false);
+closeBtn.forEach(function (btn) {
+  btn.addEventListener("click", closeUserPanel, false);
+});
+signupHere.addEventListener("click", openSignupPanel, false);
+loginHere.addEventListener("click", loginHereFunc, false); // Auth Event Listeners
+
+loginBtn.addEventListener("click", login, false);
+signupBtn.addEventListener("click", signup, false);
+logoutBtn.addEventListener("click", logout, false); // Data event listeners
+
+mainSearchButton.addEventListener("click", mainSearch, false);
+mainSearchInput.addEventListener("keydown", function () {
+  mainSearchError.innerHTML = "";
+}, false);
+timelineSearchButton.addEventListener("click", timelineSearch, false);
+timelineSearchInput.addEventListener("keydown", function () {
+  timelineSearchError.innerHTML = "";
+}, false);
+createCollectionCta.addEventListener("click", openCreateCollectionDiv, false);
+createCollectionInputClose.addEventListener("click", closeCreateCollectionDiv, false);
+createCollectionBtn.addEventListener("click", createNewCollection, false);
+createCollectionInput.addEventListener("keyup", function () {
+  if (event.keyCode !== 13) {
+    createCollectionError.innerHTML = "";
+  }
+}, false);
+createCollectionFromModalInput.addEventListener("keyup", function () {
+  if (event.keyCode !== 13) {
+    createCollectionFromModalError.innerHTML = "";
+  }
+}, false); // Close modals
+
+closeSessionExpiredModal.addEventListener("click", logout, false);
+screenFade.addEventListener("click", function () {
+  if (!sessionExpiredModal.classList.contains("hide")) {
+    logout();
+  }
+
+  if (!saveToCollectionModal.classList.contains("hide")) {
+    saveToCollectionModal.classList.add("hide");
+    screenFade.classList.add("hide");
+  }
+
+  modals.forEach(function (modal) {
+    if (!modal.classList.contains("hide")) {
+      modal.classList.add("hide");
+      screenFade.classList.add("hide");
+    }
+  });
+
+  if (current_page === "home") {
+    console.log("home");
+    homeItem.setAttribute("data-selected", true);
+  } else if (current_page === "timeline") {
+    console.log("timeline");
+    timelineItem.setAttribute("data-selected", true);
+  } else if (current_page === "collection") {
+    console.log("collection");
+    collectionItem.setAttribute("data-selected", true);
+  } // state.media.bg_img = `url(${img.src})`;
+
+
+  state.screenFade.class = screenFade.className; // state.media.class = mediaModal.className;
+
+  window.history.back();
+}, false);
+closeSaveToCollectionModal.addEventListener("click", function () {
+  saveToCollectionModal.classList.add("hide");
+  screenFade.classList.add("hide");
+  createCollectionFromModalError.innerHTML = "";
+  createCollectionFromModalInput.value = "";
+  createCollectionError.innerHTML = "";
+  state.savetocol.class = saveToCollectionModal.className;
+  window.history.back(); // window.history.pushState(state, null, "");
+}, false);
+closeMediaModal.addEventListener("click", function () {
+  console.log("hey");
+  mediaModal.classList.add("hide");
+  screenFade.classList.add("hide");
+  window.history.back();
+}, false);
+aboutModalClose.addEventListener("click", function () {
+  event.stopPropagation();
+  console.log("yayayayayayay");
+  console.log(current_page);
+  aboutModal.classList.add("hide");
+  screenFade.classList.add("hide");
+  aboutItem.setAttribute("data-selected", "false");
+
+  if (current_page === "home") {
+    console.log("home");
+    homeItem.setAttribute("data-selected", "true");
+  } else if (current_page === "timeline") {
+    console.log("timeline");
+    timelineItem.setAttribute("data-selected", "true");
+  } else if (current_page === "collections") {
+    console.log("collection");
+    collectionItem.setAttribute("data-selected", "true");
+  }
+
+  state.about.class = aboutModal.className;
+}, false);
+
+window.onpopstate = function (event) {
+  if (event.state) {
+    state = event.state;
+  }
+
+  render(state);
+};
+
+function urlify(text) {
+  var urlRegex = /(https?:\/\/[^\s]+)/g; // return text.replace(urlRegex, function(url) {
+  //   return '<a href="' + url + '">' + url + '</a>';
+  // })
+  // or alternatively
+
+  return text.replace(urlRegex, '<a target="_blank" href="$1">$1</a>');
+}
+
+function atlify(text) {
+  var atRegex = /(@[^\s]+)/g;
+  return text.replace(atRegex, '<span class="mention">$1</span>');
+}
+
+function text_truncate(str, length, ending) {
+  if (length == null) {
+    length = 100;
+  }
+
+  if (ending == null) {
+    ending = '...';
+  }
+
+  if (str.length > length) {
+    return str.substring(0, length - ending.length) + ending;
+  } else {
+    return str;
+  }
+}
+
+; // searchResults.innerHTML = atlify(searchResults.innerHTML);
+// let mentions = document.querySelectorAll(".mention");
+// mentions.forEach((mention) => {
+//     mention.addEventListener("click", function(){
+//         // timelineSearchPage.innerHTML = searchResults.innerHTML; 
+//         timelineSearchPage.classList.add("hide")
+//         timelineItem.click();
+//         timelineSearchInput.value = mention.innerHTML;
+//         timelineSearchButton.click();
+//         setTimeout(timelineSearchPage.classList.remove("hide"), 50000)
+//         console.log(mention.innerHTML)
+//     })
+// })
+
+document.addEventListener('touchstart', handleTouchStart, false);
+document.addEventListener('touchmove', handleTouchMove, false);
+var xDown = null;
+var yDown = null;
+
+function getTouches(evt) {
+  return evt.touches || // browser API
+  evt.originalEvent.touches; // jQuery
+}
+
+function handleTouchStart(evt) {
+  var firstTouch = getTouches(evt)[0];
+  xDown = firstTouch.clientX;
+  yDown = firstTouch.clientY;
+}
+
+;
+
+function handleTouchMove(evt) {
+  if (!xDown || !yDown) {
+    return;
+  }
+
+  var xUp = evt.touches[0].clientX;
+  var yUp = evt.touches[0].clientY;
+  var xDiff = xDown - xUp;
+  var yDiff = yDown - yUp;
+
+  if (Math.abs(xDiff) > Math.abs(yDiff)) {
+    /*most significant*/
+    if (xDiff > 0) {
+      /* left swipe */
+    } else {
+        /* right swipe */
+      }
+  } else {
+    if (yDiff > 0) {
+      if (!mediaModal.classList.contains("hide")) {
+        history.back();
+        state.screenFade.class = screenFade.className;
+        state.media.class = mediaModal.className;
+      }
+      /* up swipe */
+
+    } else {
+      if (!mediaModal.classList.contains("hide")) {
+        history.back();
+        state.screenFade.class = screenFade.className;
+        state.media.class = mediaModal.className;
+      }
+      /* down swipe */
+
+    }
+  }
+  /* reset values */
+
+
+  xDown = null;
+  yDown = null;
+}
+
+;
+
+/***/ })
+/******/ ]);

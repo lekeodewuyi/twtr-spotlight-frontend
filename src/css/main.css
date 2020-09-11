@@ -194,6 +194,7 @@ button:hover, button:active {
     fill: var(--red);
     margin: 10px;
     background-color: var(--bg);
+    border-radius: 100px;
 }
 
 .screen-fade {
@@ -518,7 +519,7 @@ header {
     fill: var(--red);
     margin: 10px;
     background-color: var(--bg);
-    border-radius: 100%;
+    border-radius: 100px;
 }
 
 .close:hover {
@@ -577,6 +578,7 @@ header {
 
 .search-choices {
     display: flex;
+    flex-shrink: 0;
     flex-direction: column;
     align-items: center;
     margin-bottom: 65px;
@@ -698,7 +700,16 @@ header {
     margin-bottom: 50px;
 }
 
+.tweet-results-div {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
+}
+
 .tweet-result, .collection-result-item {
+    flex-shrink: 0;
     display: flex;
     align-items: flex-start;
     padding: 15px 15px;
@@ -985,6 +996,7 @@ header {
 .create-collection-close {
     position: relative;
     margin-left: 15px;
+    border-radius: 100px;
 }
 
 .create-collection-error {
