@@ -945,13 +945,9 @@ function appendTweets(results){
         tweetNameDiv.classList.add("tweet-name-div");
         let tweetName = document.createElement("p");
         tweetName.classList.add("tweet-name", "tw-name-item");
-        tweetName.setAttribute("data-username",`${results[i].user.screen_name}`)
+        tweetName.setAttribute("data-username",`${results[i].user.screen_name}`);
         tweetName.innerHTML = results[i].user.name;
 
-        console.log((`${tweetName.innerHTML}`).length)
-        if ((`${tweetName.innerHTML}`).length > 20) {
-            tweetName.innerHTML = text_truncate(`${tweetName.innerHTML}`, 20)
-        }
         let tweetVerified = document.createElement("span");
         tweetVerified.classList.add("verified", "material-icons", "tw-name-item");
         tweetVerified.innerHTML = "verified";
@@ -964,6 +960,25 @@ function appendTweets(results){
         let tweetTime = document.createElement("p");
         tweetTime.classList.add("tweet-time", "tw-name-item");
         tweetTime.innerHTML = ` &middot; ${dayjs(results[i].created_at).fromNow()}`;
+
+        let nameCombo = tweetName.innerText + tweetUserName.innerText;
+        let name = tweetName.innerText;
+        let username = tweetUserName.innerText;
+
+
+        if (nameCombo.length > 24) {
+            tweetUserName.innerHTML = text_truncate(name, 10)
+            if ((tweetName.innerText + tweetUserName.innerText).length > 24) {
+                tweetUserName.innerHTML = text_truncate(username, 5)
+                if ((tweetName.innerText + tweetUserName.innerText).length > 25) {
+                    tweetUserName.innerHTML = text_truncate(name, 0, "")
+                    if ((tweetName.innerText + tweetUserName.innerText).length > 24) {
+                        tweetName.innerHTML = text_truncate(name, 24)
+                    }
+                }
+            }
+        }
+
         tweetNameDiv.append(tweetName, tweetVerified, tweetUserName, tweetTime)
 
         console.log("length:", (`${tweetName.innerText} + ${tweetUserName.innerText}`).length)
@@ -981,7 +996,6 @@ function appendTweets(results){
             tweetText.innerHTML = urlify(tweetText.innerHTML)
             tweetText.innerHTML = atlify(tweetText.innerHTML)
         }
-
 
         let tweetImageDiv = document.createElement("div");
         tweetImageDiv.classList.add("tweet-image");
@@ -1480,6 +1494,17 @@ function interactWithSearchResults(){
             timelineSearchButton.click();
             console.log(mention.innerHTML)
         })
+    })
+
+    let userNames = document.querySelectorAll(".tweet-name");
+    userNames.forEach((name) => {
+        let username = name.getAttribute("data-username");
+        name.addEventListener("click", function(){
+            timelineItem.click();
+            timelineSearchInput.value = username;
+            timelineSearchButton.click();
+        }, false)
+
     })
 
     let homeLink = document.querySelectorAll(".home-link");
