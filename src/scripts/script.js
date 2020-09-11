@@ -11,7 +11,6 @@ const greyFloatingPanel = "#192734";
 const greyFloatingPanelHover = "#202E3A";
 const red = "#D6235B";
 
-
 let current_page;
 const body = document.querySelector("body");
 const root = document.querySelector(".root");
@@ -201,7 +200,7 @@ authInputs.forEach((input) => {
             } else if(label === signupPasswordLabel) {
                 label.innerHTML = "Password:"
             } else if(label === signupConfirmPasswordLabel) {
-                label.innerHTML = "Confirm assword:"
+                label.innerHTML = "Confirm password:"
             }
         });
 
@@ -1602,6 +1601,8 @@ function appendCollections(){
     allCollectionItems.forEach((collection) => {
 
         collection.addEventListener("click", function(){
+            loader.classList.remove("hide");
+            collection.append(loader)
             allCollectionItems.forEach((otherCollections) => {
                 otherCollections.setAttribute("data-selected", "false")
             })
