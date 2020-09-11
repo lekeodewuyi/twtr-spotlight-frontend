@@ -1042,16 +1042,8 @@ function appendTweets(results){
                     tweetImage = document.createElement("img");
                     tweetImage.src = results[i].extended_entities.media[0].media_url_https;
                     tweetImage.alt = "Tweet Media"
-
-                    if(tweetImage.complete) {
-                        tweetImageDiv.append(tweetImage)
-                        console.info("yaaaaaay")
-                    } else {
-                        console.error("whathappen na")
-                        setTimeout(function(){tweetImageDiv.append(tweetImage)}, 5000)
-                        console.info("yaaaaaay")
-                    }
-                    // tweetImageDiv.append(tweetImage);
+                    
+                    tweetImageDiv.append(tweetImage);
                 }
             } 
         }
