@@ -3,6 +3,8 @@ import  jwt_decode  from 'jwt-decode';
 const axios = require('axios');
 const dayjs = require('dayjs');
 import relativeTime from 'dayjs/plugin/relativeTime';
+import "../css/reset.css"
+import "../css/main.css"
 
 dayjs.extend(relativeTime)
 // dayjs().format();

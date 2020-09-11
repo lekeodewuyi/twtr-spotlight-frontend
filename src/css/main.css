@@ -187,8 +187,8 @@ button:hover, button:active {
 .media-modal-close {
     cursor: pointer;
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     right: 0px;
     top: 0px;
     fill: var(--red);
@@ -299,6 +299,7 @@ header {
 }
 
 .about-modal {
+    /* text-align: center; */
     position: relative;
     width: 300px;
     height: 300px;
@@ -1482,6 +1483,35 @@ footer .big-footer {
         width: 290px;
         width: 80vw;
     }
+
+
+    .about-modal {
+        text-align: center;
+        height: 400px;
+    }
+
+
+    .made-by-mobile {
+        font-weight: 400;
+        margin-top: 50px;
+        margin-bottom: 0px;
+        display: block;
+        font-size: 0.8rem;
+    }
+
+    .made-by-mobile p {
+        text-align: center;
+        margin: 0px;
+        /* margin-bottom: 10px; */
+    }
+
+    .made-by-mobile .made-by {
+        margin-bottom: 5px;
+    }
+
+    .big-footer {
+        display: none;
+    }
 }
 
 
@@ -1499,6 +1529,10 @@ footer .big-footer {
     .create-col-from-modal-btn {
         transform: translate(Calc(300px - 192px), 10px);
         transform: translate(Calc(300px - 62px), -40px);
+    }
+
+    .about-modal {
+        text-align: center;
     }
 }
 
