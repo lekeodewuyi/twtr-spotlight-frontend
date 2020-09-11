@@ -935,10 +935,15 @@ function appendTweets(results){
         let tweetUserImageDiv = document.createElement("div");
         tweetUserImageDiv.classList.add("tweet-user-image");
 
-        let tweetUserImage = document.createElement("img");
+        // let tweetUserImage = document.createElement("img");
+        // tweetUserImage.src = results[i].user.profile_image_url
+        // tweetUserImage.alt = "User Image"
+        // tweetUserImageDiv.append(tweetUserImage);
+
+        let tweetUserImage = new Image();
         tweetUserImage.src = results[i].user.profile_image_url
         tweetUserImage.alt = "User Image"
-        tweetUserImageDiv.append(tweetUserImage);
+        tweetUserImageDiv.appendChild(tweetUserImage);
 
         let tweetBody = document.createElement("div");
         tweetBody.classList.add("tweet-body");

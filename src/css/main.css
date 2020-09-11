@@ -61,7 +61,7 @@ a:hover, a:active {
     border-bottom: 1px solid var(--blue);
 }
 
-input[type="search"], input[type="text"], input[type="password"] {
+input[type="search"], input[type="email"], input[type="text"], input[type="password"] {
     font-family: inherit;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -98,6 +98,15 @@ input[type="search"]:focus,  input[type="search"]:active, input[type="search"]:h
 
 input[type="search"]::placeholder {
     color: var(--grey-font);
+}
+
+input {
+    font-family: inherit;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: 0px;
+    border: 1px solid transparent;
 }
 
 .search-icon {
