@@ -979,18 +979,23 @@ function appendTweets(results){
         let username = tweetUserName.innerText;
 
 
-        if (nameCombo.length > 24) {
+        if (nameCombo.length > 20) {
             tweetUserName.innerHTML = text_truncate(name, 10)
-            if ((tweetName.innerText + tweetUserName.innerText).length > 24) {
+            if ((tweetName.innerText + tweetUserName.innerText).length > 20) {
                 tweetUserName.innerHTML = text_truncate(username, 5)
-                if ((tweetName.innerText + tweetUserName.innerText).length > 25) {
+                if ((tweetName.innerText + tweetUserName.innerText).length > 20) {
                     tweetUserName.innerHTML = text_truncate(name, 0, "")
-                    if ((tweetName.innerText + tweetUserName.innerText).length > 24) {
-                        tweetName.innerHTML = text_truncate(name, 24)
+                    if ((tweetName.innerText + tweetUserName.innerText).length > 20) {
+                        tweetName.innerHTML = text_truncate(name, 20)
                     }
                 }
             }
         }
+
+        // console.log(tweetName.innerText, (tweetName.innerText + tweetUserName.innerText + tweetTime.innerText).length)
+        // if ((tweetName.innerText + tweetUserName.innerText + tweetTime.innerText).length > 30) {
+        //     tweetName.innerHTML = text_truncate(name, 15)
+        // }
 
         tweetNameDiv.append(tweetName, tweetVerified, tweetUserName, tweetTime)
 
@@ -1413,7 +1418,7 @@ function interactWithSearchResults(){
 
     let allVideos = document.querySelectorAll("video");
     allVideos.forEach((video) => {
-        video.addEventListener("play", function(){
+        video.addEventListener("play", function(event){
             let nowPlaying = event.currentTarget;
             allVideos.forEach((vid) => {
                 if (vid.paused === false && vid !== nowPlaying) {
@@ -1971,14 +1976,18 @@ function handleTouchMove(evt) {
     } else {
         if ( yDiff > 0 ) {
             if (!(mediaModal.classList.contains("hide"))) {
-                history.back();
+
+                screenFade.classList.add("hide");
+                mediaModal.classList.add("hide");
                 state.screenFade.class = screenFade.className;
                 state.media.class = mediaModal.className;
             }
             /* up swipe */ 
         } else { 
             if (!(mediaModal.classList.contains("hide"))) {
-                history.back();
+
+                screenFade.classList.add("hide");
+                mediaModal.classList.add("hide");
                 state.screenFade.class = screenFade.className;
                 state.media.class = mediaModal.className;
             }
