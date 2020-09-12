@@ -1215,7 +1215,6 @@ function mainSearch(){
 
             tweetResultsDiv.innerHTML = "";
 
-
             if (!Array.isArray(results) || !results.length) {
                 tweetResultsDiv.innerHTML = `<p class="tweet-results-div-error">There are no results for <span class= color-blue>${searchData.query}</span>. Maybe try another keyword or choose a different language or tweet type</p>`
             } else
@@ -1349,12 +1348,14 @@ function axiosRetrieveTweets(collection){
             loader.classList.add("hide");
             console.log(response.data.results);
             let results = response.data.results;
-            homeSearchPage.classList.add("hide");
-
-            searchResults.classList.remove("hide")
+            // homeSearchPage.classList.add("hide");
 
             tweetResultsDiv.innerHTML = "";
 
+
+            if (homeSearchPage.classList.contains("hide") && timelineSearchPage.classList.contains("hide"))
+            
+            searchResults.classList.remove("hide")
             appendTweets(results);
             let saveTweet = document.querySelectorAll(".save-to-collection");
             let removeTweet = document.querySelectorAll(".remove-from-collection");
@@ -1377,14 +1378,6 @@ function axiosRetrieveTweets(collection){
             }
 
             interactWithSearchResults();
-
-
-            // window.history.pushState(state, null, "");
-            // state.home.class = homeSearchPage.className;
-            // state.search.searchPage = searchResults.className;
-            // window.history.pushState(state, null, "");
-
-
         })
         .catch(function (error) {
             loader.classList.add("hide");
