@@ -442,7 +442,7 @@ function render(){
     homeSearchPage.className = state.home.class;
     timelineSearchPage.className = state.timeline.class;
     collectionPage.className = state.collection.class;
-    aboutModal.className = state.about.class;
+    // aboutModal.className = state.about.class;
 
     spotlightNav.innerHTML = state.spotlight.innertext;
     headerText.innerHTML = state.header
@@ -450,7 +450,7 @@ function render(){
     homeItem.setAttribute("data-selected", `${state.sidenav.home}`);
     timelineItem.setAttribute("data-selected", `${state.sidenav.timeline}`);
     collectionItem.setAttribute("data-selected", `${state.sidenav.collection}`);
-    aboutItem.setAttribute("data-selected", `${state.sidenav.about}`);
+    // aboutItem.setAttribute("data-selected", `${state.sidenav.about}`);
 
 
     searchResults.className = state.search.searchPage;
@@ -511,7 +511,7 @@ function render(){
     const scrollRestoration = history.scrollRestoration
     if (scrollRestoration === 'manual') {
         console.log('The location on the page is not restored, user will need to scroll manually.');
-        history.scrollRestoration = "auto"
+        // history.scrollRestoration = "auto"
     }
 }
 
@@ -528,7 +528,7 @@ sideNavItems.forEach((item) => {
     item.addEventListener("click", handleSideNav, false);
 })
 
-function handleSideNav(){
+function handleSideNav(event){
     let currentTab = event.currentTarget;
 
     sideNavItems.forEach((others) => {
@@ -595,18 +595,20 @@ function handleSideNav(){
     state.home.class = homeSearchPage.className;
     state.timeline.class = timelineSearchPage.className;
     state.collection.class = collectionPage.className;
-    state.about.class = aboutModal.className;
+    // state.about.class = aboutModal.className;
 
     state.spotlight.innertext = spotlightNav.innerHTML;
 
     state.sidenav.home = homeItem.getAttribute("data-selected");
     state.sidenav.timeline = timelineItem.getAttribute("data-selected");
     state.sidenav.collection = collectionItem.getAttribute("data-selected");
-    state.sidenav.about = aboutItem.getAttribute("data-selected");
+    // state.sidenav.about = aboutItem.getAttribute("data-selected");
 
     state.search.searchPage = searchResults.className;
 
-    window.history.pushState(state, null, "");
+    if (currentTab !== aboutItem) {
+        window.history.pushState(state, null, "");
+    }
 }
 
 function goHome(){
@@ -1842,7 +1844,7 @@ closeMediaModal.addEventListener("click", function(){
     // window.history.back();
 }, false)
 
-aboutModalClose.addEventListener("click", function(){
+aboutModalClose.addEventListener("click", function(event){
     event.stopPropagation();
     console.log("yayayayayayay");
     console.log(current_page)
@@ -1862,7 +1864,7 @@ aboutModalClose.addEventListener("click", function(){
         collectionItem.setAttribute("data-selected", "true")
     }
 
-    state.about.class = aboutModal.className;
+    // state.about.class = aboutModal.className;
 }, false)
 
 
