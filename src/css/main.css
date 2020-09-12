@@ -6,7 +6,7 @@ html {
     
 *, *:before, *:after {
     box-sizing: inherit;
-    transition: .2s;
+    transition: .25s;
 }
 
 :root {

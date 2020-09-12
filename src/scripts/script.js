@@ -1404,7 +1404,7 @@ function interactWithSearchResults(){
             state.media.bg_img = `url(${img.src})`;
             state.screenFade.class = screenFade.className;
             state.media.class = mediaModal.className;
-            window.history.pushState(state, null, "");
+            // window.history.pushState(state, null, "");
         }, false)
     })
 
@@ -1813,8 +1813,8 @@ screenFade.addEventListener("click", function(){
     
     // state.media.bg_img = `url(${img.src})`;
     state.screenFade.class = screenFade.className;
-    // state.media.class = mediaModal.className;
-    window.history.back();
+    state.media.class = mediaModal.className;
+    // window.history.back();
 }, false)
 closeSaveToCollectionModal.addEventListener("click", function(){
     saveToCollectionModal.classList.add("hide")
@@ -1835,7 +1835,10 @@ closeMediaModal.addEventListener("click", function(){
     mediaModal.classList.add("hide")
     screenFade.classList.add("hide");
 
-    window.history.back();
+    state.media.class = mediaModal.className;
+    state.screenFade.class = mediaModal.className;
+
+    // window.history.back();
 }, false)
 
 aboutModalClose.addEventListener("click", function(){
