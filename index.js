@@ -804,7 +804,7 @@ function appendTweets(results){
         saveToCollection.setAttribute("data-tweetId", `${results[i].id_str}`);
         saveToCollection.classList.add("save-to-collection");
 
-        let saveSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        let saveSvg = document.createElementNS("https://www.w3.org/2000/svg", "svg");
         saveSvg.classList.add("save-to-svg");
         saveSvg.setAttribute("viewBox", "0 0 24 24");
         saveSvg.innerHTML = `<path d="M0 0h24v24H0z" fill="none"></path><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"></path>`
@@ -832,7 +832,7 @@ function appendTweets(results){
         removeFromCollection.setAttribute("data-tweetId", `${results[i].id_str}`);
         removeFromCollection.classList.add("remove-from-collection", "hide");
 
-        let removeSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        let removeSvg = document.createElementNS("https://www.w3.org/2000/svg", "svg");
         removeSvg.setAttribute("viewBox", "0 0 24 24");
         removeSvg.innerHTML = `<path d="M0 0h24v24H0V0z" fill="none"/><path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"/>`
 
