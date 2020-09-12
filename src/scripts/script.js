@@ -938,6 +938,7 @@ function appendTweets(results){
         let tweetUserImage = new Image();
         tweetUserImage.src = results[i].user.profile_image_url_https
         tweetUserImage.alt = "User Image"
+        tweetUserImage.decoding = "sync"
         tweetUserImage.loading = "lazy"
         tweetUserImageDiv.appendChild(tweetUserImage);
 
