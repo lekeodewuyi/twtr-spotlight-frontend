@@ -717,6 +717,10 @@ header {
     width: 100%;
 }
 
+.tweet-results-div-error {
+    padding: 0px 25px;
+}
+
 .tweet-result, .collection-result-item {
     flex-shrink: 0;
     display: flex;

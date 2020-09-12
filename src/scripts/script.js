@@ -5,7 +5,10 @@ const dayjs = require('dayjs');
 import relativeTime from 'dayjs/plugin/relativeTime';
 import "../css/reset.css"
 import "../css/main.css"
+import smoothscroll from 'smoothscroll-polyfill';
 
+
+smoothscroll.polyfill();
 dayjs.extend(relativeTime)
 // dayjs().format();
 const blue = "#1DA1F2";
@@ -508,7 +511,7 @@ function render(){
     const scrollRestoration = history.scrollRestoration
     if (scrollRestoration === 'manual') {
         console.log('The location on the page is not restored, user will need to scroll manually.');
-        // history.scrollRestoration = "auto"
+        history.scrollRestoration = "auto"
     }
 }
 
@@ -1209,7 +1212,7 @@ function mainSearch(){
 
 
             if (!Array.isArray(results) || !results.length) {
-                tweetResultsDiv.innerHTML = `There are no results for <span class= color-blue>${searchData.query}</span>. Maybe try another keyword or choose a different language or tweet type`
+                tweetResultsDiv.innerHTML = `<p class="tweet-results-div-error">There are no results for <span class= color-blue>${searchData.query}</span>. Maybe try another keyword or choose a different language or tweet type</p>`
             } else
             appendTweets(results);
             interactWithSearchResults();
@@ -1270,7 +1273,7 @@ function timelineSearch(){
            // TODO: HANDLE PROTECTED USER ERROR AND 
             console.log(results)
             if (!Array.isArray(results) || !results.length) {
-                tweetResultsDiv.innerHTML = `There are no results for <span class= color-blue>${userName}</span>. Maybe try the search on the <span class="home-link color-blue">homepage</span>`
+                tweetResultsDiv.innerHTML = `<p class="tweet-results-div-error">There are no results for <span class= color-blue>${userName}</span>. Maybe try the search on the <span class="home-link color-blue">homepage</span><p>`
             } else
             appendTweets(results);
             interactWithSearchResults();
@@ -1316,7 +1319,7 @@ function timelineSearch(){
 }
 
 
-function retrieveCollectionTweets(){
+function retrieveCollectionTweets(event){
     console.log("heyyyyy")
 
     emptyCollection.innerHTML = "";
@@ -1324,6 +1327,7 @@ function retrieveCollectionTweets(){
     let collectionName = event.currentTarget.innerText.trim();
 
     axiosRetrieveTweets(collectionName)
+    event.target.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
 }
 
 
@@ -1358,14 +1362,13 @@ function axiosRetrieveTweets(collection){
                 btn.classList.remove("hide");
                 btn.setAttribute("data-collection-name", collection);
             })
-            searchResults.scrollIntoView();
-
         
             if (tweetResultsDiv.innerHTML === "") {
                 emptyCollection.classList.remove("hide");
                 emptyCollection.innerHTML = `<span class="color-blue">${collection}</span> currently has no saved tweets`;
-                // emptyCollection.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
                 emptyCollection.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+            } else {
+                searchResults.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
             }
 
             interactWithSearchResults();
