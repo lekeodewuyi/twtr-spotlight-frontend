@@ -504,6 +504,12 @@ function render(){
 
 
     interactWithSearchResults();
+
+    const scrollRestoration = history.scrollRestoration
+    if (scrollRestoration === 'manual') {
+        console.log('The location on the page is not restored, user will need to scroll manually.');
+        // history.scrollRestoration = "auto"
+    }
 }
 
 // Initialize initial state on load
@@ -1436,7 +1442,7 @@ function interactWithSearchResults(){
             })
 
             state.savetocol.class = saveToCollectionModal.className;
-            window.history.pushState(state, null, "");
+            // window.history.pushState(state, null, "");
         }, false)
     })
 
@@ -1819,7 +1825,7 @@ closeSaveToCollectionModal.addEventListener("click", function(){
         createCollectionError.innerHTML = "";
 
         state.savetocol.class = saveToCollectionModal.className;
-        window.history.back();
+        // window.history.back();
         // window.history.pushState(state, null, "");
 
 }, false)
