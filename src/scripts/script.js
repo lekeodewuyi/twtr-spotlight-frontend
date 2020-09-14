@@ -59,6 +59,8 @@ const mediaModal = document.querySelector(".media-modal");
 const media = document.querySelector(".media");
 const closeMediaModal = document.querySelector(".media-modal-close");
 
+const inAppModals = document.querySelectorAll(".in-app-modal")
+
 const headerText = document.querySelector(".header-text");
 
 //Auth containers
@@ -408,6 +410,7 @@ let state = {
 
 // Render state function whenever popstate is fired
 function render(){
+    centerContainer.style.overflow = "auto";
     let token = localStorage.FBIdToken;
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
@@ -562,6 +565,7 @@ sideNavItems.forEach((item) => {
 })
 
 function handleSideNav(event){
+    centerContainer.style.overflow = "auto";
     let currentTab = event.currentTarget;
 
     sideNavItems.forEach((others) => {
@@ -618,7 +622,7 @@ function handleSideNav(event){
         openUserPanel();
     }
 
-
+    console.log("scroll", centerContainer.scrollTop)
     if (vw < 950) {
         console.log("heyyyy")
         if (currentTab === homeItem) {
@@ -659,7 +663,7 @@ function handleSideNav(event){
 
     state.search.searchPage = searchResults.className;
 
-    // state.center.scrollPosition = centerContainer.scrollTop;
+    state.center.scrollPosition = centerContainer.scrollTop;
 
     if (currentTab !== aboutItem) {
         window.history.pushState(state, null, "");
@@ -759,6 +763,7 @@ function timeTravel(){
 }
 
 function goToCollections(){
+    centerContainer.style.overflow = "auto";
     current_page = "collections"
 
     if (collectionsPush !== true) {
@@ -1306,6 +1311,7 @@ function appendTweets(results){
 
 
 function mainSearch(){
+    centerContainer.style.overflow = "auto";
     current_page = "home"
     tweetResultsDiv.innerHTML = "";
     loader.classList.remove("hide");
@@ -1391,6 +1397,7 @@ function mainSearch(){
 
 
 function timelineSearch(userName){
+    centerContainer.style.overflow = "auto";
     current_page = "timeline";
     loader.classList.remove("hide");
     tweetResultsDiv.innerHTML = "";
@@ -1552,6 +1559,7 @@ function interactWithSearchResults(){
             screenFade.classList.remove("hide");
             mediaModal.style.transform = "translateY(0px)"
             mediaModal.style.visibility = "visible";
+            centerContainer.style.overflow = "hidden";
             // media.innerHTML = img.outerHTML;
             console.log(img.src);
             mediaModal.style.backgroundImage = `url(${img.src})`;
@@ -1983,6 +1991,8 @@ screenFade.addEventListener("click", function(){
     }
     
     // state.media.bg_img = `url(${img.src})`;
+
+    centerContainer.style.overflow = "auto";
     state.screenFade.class = screenFade.className;
     state.media.class = mediaModal.className;
     // window.history.back();
@@ -2005,6 +2015,7 @@ closeMediaModal.addEventListener("click", function(){
     console.log("hey")
     mediaModal.classList.add("hide")
     screenFade.classList.add("hide");
+    centerContainer.style.overflow = "auto";
 
     state.media.class = mediaModal.className;
     state.screenFade.class = mediaModal.className;
@@ -2145,6 +2156,7 @@ function handleTouchMove(evt) {
                 mediaModal.style.transform = "translateY(-300px)"
                 mediaModal.style.visibility = "hidden";
                 screenFade.classList.add("hide");
+                centerContainer.style.overflow = "auto";
 
                 state.screenFade.class = screenFade.className;
                 state.media.class = mediaModal.className;
@@ -2159,6 +2171,7 @@ function handleTouchMove(evt) {
                 mediaModal.style.transform = "translateY(300px)"
                 mediaModal.style.visibility = "hidden";
                 screenFade.classList.add("hide");
+                centerContainer.style.overflow = "auto";
                 state.screenFade.class = screenFade.className;
                 state.media.class = mediaModal.className;
             }

@@ -1304,6 +1304,7 @@ footer .big-footer {
 
     .side-nav-container {
         z-index: 50;
+        /* z-index: 18; */
         position: fixed;
         display: flex;
         align-items: center;
