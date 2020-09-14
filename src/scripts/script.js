@@ -1089,12 +1089,10 @@ function appendTweets(results){
         tweetUserImage.loading = "lazy"
         // tweetUserImageDiv.appendChild(tweetUserImage)
 
-        tweetUserImage.onload = function(){
-            tweetUserImageDiv.appendChild(tweetUserImage)
-        }
-
-        tweetUserImage.onerror = function() {
+        if (elementExists(corsDenied) && !elementExists(corsAllowed)) {
             tweetUserImage.src = profileImage;
+            tweetUserImageDiv.appendChild(tweetUserImage)
+        } else if (!elementExists(corsDenied) && elementExists(corsAllowed)) {
             tweetUserImageDiv.appendChild(tweetUserImage)
         }
 
@@ -1194,9 +1192,10 @@ function appendTweets(results){
                     videoError.innerHTML = "Sorry, your browser doesn't support embedded videos."
                     tweetVideo.append("videoError");
 
-                    tweetVideo.onloadeddata = function(){
+                    if (elementExists(corsDenied) && !elementExists(corsAllowed)) {
+                        console.log("do nothing");
+                    } else if (!elementExists(corsDenied) && elementExists(corsAllowed)) {
                         tweetImageDiv.append(tweetVideo);
-                        interactWithSearchResults();
                     }
                     // tweetImageDiv.append(tweetVideo);
                 } else if (results[i].extended_entities.media[0].type === "photo") {
@@ -1204,9 +1203,10 @@ function appendTweets(results){
                     tweetImage.src = results[i].extended_entities.media[0].media_url_https;
                     tweetImage.alt = "Tweet Media"
 
-                    tweetImage.onload = function(){
+                    if (elementExists(corsDenied) && !elementExists(corsAllowed)) {
+                        console.log("do nothing");
+                    } else if (!elementExists(corsDenied) && elementExists(corsAllowed)) {
                         tweetImageDiv.append(tweetImage);
-                        interactWithSearchResults()
                     }
 
                     // tweetImageDiv.append(tweetImage);
@@ -1394,7 +1394,7 @@ function mainSearch(){
 
 
 
-function timelineSearch(){
+function timelineSearch(userName){
     current_page = "timeline";
     loader.classList.remove("hide");
     tweetResultsDiv.innerHTML = "";
@@ -1405,7 +1405,7 @@ function timelineSearch(){
         timelineSearchButton.append(loader);
     }
 
-    let userName = timelineSearchInput.value;
+    userName = timelineSearchInput.value;
 
     if (userName.trim() === "") {
         loader.classList.add("hide");
