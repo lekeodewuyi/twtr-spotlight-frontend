@@ -1605,8 +1605,15 @@ footer .big-footer {
     color: var(--red) !important;
     font-weight: 400;
     font-size: 0.9rem;
-    margin-top: -15px;
-    margin-bottom: 20px;
+    margin: -15px 0px 10px 0px;
+}
+
+.media-error {
+    font-size: 0.7rem;
+    text-align: center;
+    margin-top: -20px;
+    margin-bottom: 10px;
+    width: 90%;
 }
 
 .auth-error {

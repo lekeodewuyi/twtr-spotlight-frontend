@@ -6,23 +6,48 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import "../css/reset.css"
 import "../css/main.css"
 import smoothscroll from 'smoothscroll-polyfill';
+import profileImage from '../../assets/profile.jpg';
 
 
 smoothscroll.polyfill();
 dayjs.extend(relativeTime)
-// dayjs().format();
+
 const blue = "#1DA1F2";
-const bg = "#15202B";
-const blueLabel = "#1A91DA";
-const blueHover = "#1B95E0";
-const greyFont = "#8899A6";
-const greyInputBg = "#253341";
-const greyFloatingPanel = "#192734";
-const greyFloatingPanelHover = "#202E3A";
+
+const body = document.querySelector("body");
+const imageError = document.querySelector(".media-error");
+
+
+(function checkCors(){
+    axios.get('https://pbs.twimg.com/media/Eh4xLaMXsAEr1p4?format=jpg&name=900x900')
+        .then((response) => {
+            if (response.data) {
+                let corsAllowed = document.createElement("p");
+                corsAllowed.classList.add("cors-allowed");
+                body.append(corsAllowed)
+            }
+        })
+        .catch((error) => {
+            let corsDenied = document.createElement("p");
+            corsDenied.classList.add("cors-denied");
+            body.append(corsDenied)
+            console.log("bla bla bla bla")
+            console.log(error.status);
+        })
+}())
+
+
+
+
+document.addEventListener("click", function(){
+    const corsAllowed = document.querySelector(".cors-allowed");
+    const corsDenied = document.querySelector(".cors-denied");
+    console.log(corsAllowed, corsDenied);
+})
+
 const red = "#D6235B";
 
 let current_page;
-const body = document.querySelector("body");
 const root = document.querySelector(".root");
 const centerContainer = document.querySelector(".center-container");
 
@@ -668,17 +693,6 @@ function topInView(element) {
     return topIsVisible;
 }
 
-
-centerContainer.addEventListener("scroll", function(){
-    console.log("meeee")
-    console.log("bla bla bla bla")
-    console.log(centerContainer.scrollTop)
-    // centerContainer.scrollTop = state.center.scrollPosition;
-    // history.pushState(state, null, "")
-
-
-}, false);
-
 let homePush = false;
 let homeReadyToPush;
 
@@ -1040,8 +1054,27 @@ function signup(){
         })
 }
 
+function elementExists(element) {
+    if (element){
+        return true;
+    }
+    return false;
+}
+
 
 function appendTweets(results){
+
+    const corsAllowed = document.querySelector(".cors-allowed");
+    const corsDenied = document.querySelector(".cors-denied");
+
+    if (elementExists(corsDenied) && !elementExists(corsAllowed)) {
+        console.log("nay")
+        imageError.classList.remove("hide");
+    } else if (!elementExists(corsDenied) && elementExists(corsAllowed)) {
+        imageError.classList.add("hide");
+        console.log("yay")
+    }
+
     for ( let i = 0; i < results.length ; i++ ) {
         let tweetResult = document.createElement("div");
         tweetResult.classList.add("tweet-result");
@@ -1054,7 +1087,16 @@ function appendTweets(results){
         tweetUserImage.alt = "User Image"
         tweetUserImage.decoding = "sync"
         tweetUserImage.loading = "lazy"
-        tweetUserImageDiv.appendChild(tweetUserImage);
+        // tweetUserImageDiv.appendChild(tweetUserImage)
+
+        tweetUserImage.onload = function(){
+            tweetUserImageDiv.appendChild(tweetUserImage)
+        }
+
+        tweetUserImage.onerror = function() {
+            tweetUserImage.src = profileImage;
+            tweetUserImageDiv.appendChild(tweetUserImage)
+        }
 
         let tweetBody = document.createElement("div");
         tweetBody.classList.add("tweet-body");
@@ -1146,18 +1188,28 @@ function appendTweets(results){
                             break;
                         }
                     }
-                    
+                
                     tweetVideo.append(videoSource);
                     videoError = document.createElement("p");
                     videoError.innerHTML = "Sorry, your browser doesn't support embedded videos."
                     tweetVideo.append("videoError");
-                    tweetImageDiv.append(tweetVideo);
+
+                    tweetVideo.onloadeddata = function(){
+                        tweetImageDiv.append(tweetVideo);
+                        interactWithSearchResults();
+                    }
+                    // tweetImageDiv.append(tweetVideo);
                 } else if (results[i].extended_entities.media[0].type === "photo") {
                     tweetImage = document.createElement("img");
                     tweetImage.src = results[i].extended_entities.media[0].media_url_https;
                     tweetImage.alt = "Tweet Media"
 
-                    tweetImageDiv.append(tweetImage);
+                    tweetImage.onload = function(){
+                        tweetImageDiv.append(tweetImage);
+                        interactWithSearchResults()
+                    }
+
+                    // tweetImageDiv.append(tweetImage);
                 }
             } 
         }
