@@ -1550,6 +1550,8 @@ function interactWithSearchResults(){
             // img.style.objectFit = "contain"
             mediaModal.classList.remove("hide");
             screenFade.classList.remove("hide");
+            mediaModal.style.transform = "translateY(0px)"
+            mediaModal.style.visibility = "visible";
             // media.innerHTML = img.outerHTML;
             console.log(img.src);
             mediaModal.style.backgroundImage = `url(${img.src})`;
@@ -2138,8 +2140,12 @@ function handleTouchMove(evt) {
         if ( yDiff > 0 ) {
             if (!(mediaModal.classList.contains("hide"))) {
 
+                // screenFade.classList.add("hide");
+                // mediaModal.classList.add("hide");
+                mediaModal.style.transform = "translateY(-300px)"
+                mediaModal.style.visibility = "hidden";
                 screenFade.classList.add("hide");
-                mediaModal.classList.add("hide");
+
                 state.screenFade.class = screenFade.className;
                 state.media.class = mediaModal.className;
             }
@@ -2147,8 +2153,12 @@ function handleTouchMove(evt) {
         } else { 
             if (!(mediaModal.classList.contains("hide"))) {
 
+                // screenFade.classList.add("hide");
+                // mediaModal.classList.add("hide");
+
+                mediaModal.style.transform = "translateY(300px)"
+                mediaModal.style.visibility = "hidden";
                 screenFade.classList.add("hide");
-                mediaModal.classList.add("hide");
                 state.screenFade.class = screenFade.className;
                 state.media.class = mediaModal.className;
             }

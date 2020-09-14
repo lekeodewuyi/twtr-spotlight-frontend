@@ -170,6 +170,7 @@ button:hover, button:active {
 }
 
 .media-modal {
+    transition: .25s;
     /* position: relative; */
     display: flex;
     justify-content: center;
