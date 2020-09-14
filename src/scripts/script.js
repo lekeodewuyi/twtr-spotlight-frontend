@@ -200,9 +200,9 @@ goInputs.forEach((input) => {
 
 loginFromModal.forEach((btn) => {
     btn.addEventListener("click", function(){
-        window.history.back();
-        // userProfilePanel.click()
-        setTimeout(function(){userProfilePanel.click()}, 300)
+        // window.history.back();
+        userProfilePanel.click()
+        // setTimeout(function(){userProfilePanel.click()}, 300)
     }, false)
 })
 
