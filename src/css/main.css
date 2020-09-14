@@ -730,6 +730,10 @@ header {
     border-bottom: 1px solid var(--grey-inputbg);
 }
 
+.tweet-result:last-child {
+    padding-bottom: 150px;
+}
+
 .tweet-user-image img, .collection-tweet-user-image img {
     object-fit: cover;
     width: 50px;

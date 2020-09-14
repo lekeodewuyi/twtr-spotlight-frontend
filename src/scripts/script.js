@@ -24,6 +24,8 @@ const red = "#D6235B";
 let current_page;
 const body = document.querySelector("body");
 const root = document.querySelector(".root");
+const centerContainer = document.querySelector(".center-container");
+
 const loader = document.querySelector(".loader");
 const screenFade = document.querySelector(".screen-fade");
 const modals = document.querySelectorAll(".modal");
@@ -309,13 +311,15 @@ const appendUserDetails = (user) => {
 }
 
 
-
 // Initial State
 let state = {
     page: "home",
     header: `twtr  &middot; spotlight`,
     home: {
         class: homeSearchPage.className
+    },
+    center: {
+        scrollPosition: centerContainer.scrollTop
     },
     timeline: {
         class: timelineSearchPage.className
@@ -454,6 +458,8 @@ function render(){
 
 
     searchResults.className = state.search.searchPage;
+    centerContainer.scrollTop = state.center.scrollPosition;
+
     tweetResultsDiv.innerHTML = state.search.tweetsDiv;
     mainSearchInput.value = state.search.keyword.home;
     timelineSearchInput.value = state.search.keyword.timeline;
@@ -508,11 +514,10 @@ function render(){
 
     interactWithSearchResults();
 
-    const scrollRestoration = history.scrollRestoration
-    if (scrollRestoration === 'manual') {
-        console.log('The location on the page is not restored, user will need to scroll manually.');
-        // history.scrollRestoration = "auto"
-    }
+    if ('scrollRestoration' in history) {
+        // Back off, browser, I got this...
+        history.scrollRestoration = 'manual';
+      }
 }
 
 // Initialize initial state on load
@@ -549,18 +554,27 @@ function handleSideNav(event){
         headerText.innerHTML = homeItem.innerText;
         headerText.innerHTML = "Home";
         homeItem.setAttribute("data-selected", `true`);
+        if (homePush === true) {
+            return
+        }
     } else if (currentTab === timelineItem) {
         timeTravel();
         spotlightNav.innerHTML = timelineSpotlight.innerHTML;
         headerText.innerHTML = timelineItem.innerText;
         headerText.innerHTML = `Search Timeline`;
         timelineItem.setAttribute("data-selected", `true`);
+        if (timelinePush === true) {
+            return
+        }
     } else if (currentTab === collectionItem) {
         goToCollections();
         spotlightNav.innerHTML = collectionSpotlight.innerHTML;
         headerText.innerHTML = collectionItem.innerText;
         headerText.innerHTML = `Your collections`;
         collectionItem.setAttribute("data-selected", `true`);
+        if (collectionsPush === true) {
+            return
+        }
     } else if (currentTab === aboutItem) {
         spotlightNav.innerHTML = aboutSpotlight.innerHTML;
         getAbout();
@@ -585,9 +599,11 @@ function handleSideNav(event){
 
     state.header = headerText.innerHTML;
     state.page = current_page;
-    state.screenFade.class = screenFade.className;
 
     state.user.authDiv.class = userAuthDiv.className;
+    state.screenFade.class = screenFade.className;
+
+
     state.user.loginDiv.class = loginDiv.className;
     state.user.signupDiv.class = signupDiv.className;
     state.user.logoutDiv.class = logoutDiv.className;
@@ -609,7 +625,49 @@ function handleSideNav(event){
     if (currentTab !== aboutItem) {
         window.history.pushState(state, null, "");
     }
+
+    if (currentTab === homeItem) {
+        homePush = true;
+        timelinePush = false;
+        collectionsPush = false;
+    }
+
+    if (currentTab === timelineItem) {
+        homePush = false;
+        timelinePush = true;
+        collectionsPush = false;
+    }
+
+    if (currentTab === collectionItem) {
+        homePush = false;
+        timelinePush = false;
+        collectionsPush = true;
+    }
+
 }
+
+function topInView(element) {
+    var rect = element.getBoundingClientRect();
+    var elemTop = rect.top;
+
+    var topIsVisible = (elemTop >= 0);
+    return topIsVisible;
+}
+
+
+centerContainer.addEventListener("scroll", function(){
+    console.log("meeee")
+    console.log("bla bla bla bla")
+    console.log(centerContainer.scrollTop)
+    // centerContainer.scrollTop = state.center.scrollPosition;
+    // history.pushState(state, null, "")
+
+
+}, false);
+
+let homePush = true;
+let timelinePush = false;
+let collectionsPush = false;
 
 function goHome(){
     current_page = "home"
@@ -626,7 +684,6 @@ function goHome(){
     aboutModal.classList.add("hide");
 
     searchResults.classList.add("hide");
-
 }
 
 function timeTravel(){
@@ -1527,8 +1584,7 @@ function interactWithSearchResults(){
             homeItem.click();
         }, false)
     })
-
-
+    
 }
 
 
