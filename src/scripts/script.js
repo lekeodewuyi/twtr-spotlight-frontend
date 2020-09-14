@@ -410,7 +410,7 @@ let state = {
 
 // Render state function whenever popstate is fired
 function render(){
-    centerContainer.style.overflow = "auto";
+    centerContainer.style.overflowY = "auto";
     let token = localStorage.FBIdToken;
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
@@ -565,7 +565,7 @@ sideNavItems.forEach((item) => {
 })
 
 function handleSideNav(event){
-    centerContainer.style.overflow = "auto";
+    centerContainer.style.overflowY = "auto";
     let currentTab = event.currentTarget;
 
     sideNavItems.forEach((others) => {
@@ -763,7 +763,7 @@ function timeTravel(){
 }
 
 function goToCollections(){
-    centerContainer.style.overflow = "auto";
+    centerContainer.style.overflowY = "auto";
     current_page = "collections"
 
     if (collectionsPush !== true) {
@@ -1311,7 +1311,7 @@ function appendTweets(results){
 
 
 function mainSearch(){
-    centerContainer.style.overflow = "auto";
+    centerContainer.style.overflowY = "auto";
     current_page = "home"
     tweetResultsDiv.innerHTML = "";
     loader.classList.remove("hide");
@@ -1397,7 +1397,7 @@ function mainSearch(){
 
 
 function timelineSearch(userName){
-    centerContainer.style.overflow = "auto";
+    centerContainer.style.overflowY = "auto";
     current_page = "timeline";
     loader.classList.remove("hide");
     tweetResultsDiv.innerHTML = "";
@@ -1559,7 +1559,7 @@ function interactWithSearchResults(){
             screenFade.classList.remove("hide");
             mediaModal.style.transform = "translateY(0px)"
             mediaModal.style.visibility = "visible";
-            centerContainer.style.overflow = "hidden";
+            centerContainer.style.overflowY = "hidden";
             // media.innerHTML = img.outerHTML;
             console.log(img.src);
             mediaModal.style.backgroundImage = `url(${img.src})`;
@@ -1992,7 +1992,7 @@ screenFade.addEventListener("click", function(){
     
     // state.media.bg_img = `url(${img.src})`;
 
-    centerContainer.style.overflow = "auto";
+    centerContainer.style.overflowY = "auto";
     state.screenFade.class = screenFade.className;
     state.media.class = mediaModal.className;
     // window.history.back();
@@ -2015,7 +2015,7 @@ closeMediaModal.addEventListener("click", function(){
     console.log("hey")
     mediaModal.classList.add("hide")
     screenFade.classList.add("hide");
-    centerContainer.style.overflow = "auto";
+    centerContainer.style.overflowY = "auto";
 
     state.media.class = mediaModal.className;
     state.screenFade.class = mediaModal.className;
@@ -2153,13 +2153,15 @@ function handleTouchMove(evt) {
 
                 // screenFade.classList.add("hide");
                 // mediaModal.classList.add("hide");
-                mediaModal.style.transform = "translateY(-300px)"
-                mediaModal.style.visibility = "hidden";
-                screenFade.classList.add("hide");
-                centerContainer.style.overflow = "auto";
 
-                state.screenFade.class = screenFade.className;
-                state.media.class = mediaModal.className;
+
+                // mediaModal.style.transform = "translateY(-300px)"
+                // mediaModal.style.visibility = "hidden";
+                // screenFade.classList.add("hide");
+                // centerContainer.style.overflowY = "auto";
+
+                // state.screenFade.class = screenFade.className;
+                // state.media.class = mediaModal.className;
             }
             /* up swipe */ 
         } else { 
@@ -2171,7 +2173,7 @@ function handleTouchMove(evt) {
                 mediaModal.style.transform = "translateY(300px)"
                 mediaModal.style.visibility = "hidden";
                 screenFade.classList.add("hide");
-                centerContainer.style.overflow = "auto";
+                centerContainer.style.overflowY = "auto";
                 state.screenFade.class = screenFade.className;
                 state.media.class = mediaModal.className;
             }
