@@ -325,7 +325,8 @@ let state = {
         class: timelineSearchPage.className
     },
     collection: {
-        class: collectionPage.className
+        class: collectionPage.className,
+        emptyText: ""
     },
     about: {
         class: aboutModal.className
@@ -446,6 +447,8 @@ function render(){
     homeSearchPage.className = state.home.class;
     timelineSearchPage.className = state.timeline.class;
     collectionPage.className = state.collection.class;
+
+    emptyCollection.innerHTML = state.collection.emptyText;
     // aboutModal.className = state.about.class;
 
     spotlightNav.innerHTML = state.spotlight.innertext;
@@ -557,6 +560,9 @@ function handleSideNav(event){
         if (homePush === true) {
             return
         }
+        if (homeReadyToPush === false) {
+            return
+        }
     } else if (currentTab === timelineItem) {
         timeTravel();
         spotlightNav.innerHTML = timelineSpotlight.innerHTML;
@@ -564,6 +570,9 @@ function handleSideNav(event){
         headerText.innerHTML = `Search Timeline`;
         timelineItem.setAttribute("data-selected", `true`);
         if (timelinePush === true) {
+            return
+        }
+        if (timelineReadyToPush === false) {
             return
         }
     } else if (currentTab === collectionItem) {
@@ -609,8 +618,11 @@ function handleSideNav(event){
     state.user.logoutDiv.class = logoutDiv.className;
 
     state.home.class = homeSearchPage.className;
+    state.search.keyword.home = mainSearchInput.value;
+
     state.timeline.class = timelineSearchPage.className;
     state.collection.class = collectionPage.className;
+    state.collection.emptyText = emptyCollection.innerHTML;
     // state.about.class = aboutModal.className;
 
     state.spotlight.innertext = spotlightNav.innerHTML;
@@ -665,67 +677,98 @@ centerContainer.addEventListener("scroll", function(){
 
 }, false);
 
-let homePush = true;
+let homePush = false;
+let homeReadyToPush;
+
 let timelinePush = false;
+let timelineReadyToPush;
+
 let collectionsPush = false;
 
 function goHome(){
     current_page = "home"
-    // window.location.href = "/";
-    homeSearchPage.classList.remove("hide");
-    appendElementsToHome();
-    mainSearchError.innerHTML = "";
-    
-    timelineSearchPage.classList.add("hide");
-    appendElementsToTimeline();
+    console.log(homePush)
 
-    collectionPage.classList.add("hide");
+    if (current_page === "home" && !topInView(searchResults)) {
+        console.log("not at the top")
+        searchResults.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
+        homeReadyToPush = false;
+    } else {
+        console.log("at the top")
+        // window.location.href = "/";
+        homeSearchPage.classList.remove("hide");
+        appendElementsToHome();
+        mainSearchError.innerHTML = "";
+        
+        timelineSearchPage.classList.add("hide");
+        appendElementsToTimeline();
 
-    aboutModal.classList.add("hide");
+        collectionPage.classList.add("hide");
 
-    searchResults.classList.add("hide");
+        aboutModal.classList.add("hide");
+
+        searchResults.classList.add("hide");
+        homeReadyToPush = true;
+    }
 }
 
 function timeTravel(){
     current_page = "timeline"
-    timelineSearchPage.classList.remove("hide");
-    appendElementsToTimeline();
-    timelineSearchError.innerHTML = "";
 
-    homeSearchPage.classList.add("hide");
-    appendElementsToHome();
+    console.log(timelinePush);
+    console.log(timelineReadyToPush)
 
-    collectionPage.classList.add("hide");
+    if (current_page === "timeline" && !topInView(searchResults)) {
+        console.log("not at the top")
+        searchResults.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
+        timelineReadyToPush = false;
+    } else {
 
-    aboutModal.classList.add("hide");
+        timelineSearchPage.classList.remove("hide");
+        appendElementsToTimeline();
+        timelineSearchError.innerHTML = "";
 
-    searchResults.classList.add("hide");
+        homeSearchPage.classList.add("hide");
+        appendElementsToHome();
+
+        collectionPage.classList.add("hide");
+
+        aboutModal.classList.add("hide");
+
+        searchResults.classList.add("hide");
+        timelineReadyToPush = true;
+    }
 
 }
 
 function goToCollections(){
     current_page = "collections"
-    emptyCollection.classList.add("hide");
-    emptyCollection.innerHTML = "";
-    collectionPage.classList.remove("hide");
 
-    homeSearchPage.classList.add("hide");
-    appendElementsToHome();
+    if (collectionsPush !== true) {
+        emptyCollection.classList.add("hide");
+        emptyCollection.innerHTML = "";
+        collectionPage.classList.remove("hide");
+    
+        homeSearchPage.classList.add("hide");
+        appendElementsToHome();
+    
+        timelineSearchPage.classList.add("hide");
+        appendElementsToTimeline();
+    
+        aboutModal.classList.add("hide");
+    
+        searchResults.classList.add("hide");
 
-    timelineSearchPage.classList.add("hide");
-    appendElementsToTimeline();
-
-    aboutModal.classList.add("hide");
-
-    searchResults.classList.add("hide");
-
-    checkTokenStatus();
-    if (tokenStatus === "active") {
-        let activeCollection = document.querySelector('.collection-item[data-selected="true"]')
-        console.log(activeCollection)
-        if (activeCollection)
-        axiosRetrieveTweets(activeCollection.innerText.trim())
-        console.log("");
+        checkTokenStatus();
+        if (tokenStatus === "active") {
+            let activeCollection = document.querySelector('.collection-item[data-selected="true"]')
+            console.log(activeCollection)
+            if (activeCollection)
+            axiosRetrieveTweets(activeCollection.innerText.trim())
+            console.log("");
+        }
+    } else {
+        collectionPage.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
     }
 }   
 
@@ -1058,8 +1101,6 @@ function appendTweets(results){
 
         tweetNameDiv.append(tweetName, tweetVerified, tweetUserName, tweetTime)
 
-        console.log("length:", (`${tweetName.innerText} + ${tweetUserName.innerText}`).length)
-
 
 
         let tweetText = document.createElement("p");
@@ -1262,6 +1303,7 @@ function mainSearch(){
         }
         )
         .then(function (response) {
+            homePush = false;
             loader.classList.add("hide");
             console.log(response.data.results);
             let results = response.data.results;
