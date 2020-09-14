@@ -1123,24 +1123,20 @@ function appendTweets(results){
         let name = tweetName.innerText;
         let username = tweetUserName.innerText;
 
-
-        if (nameCombo.length > 20) {
-            tweetUserName.innerHTML = text_truncate(name, 10)
-            if ((tweetName.innerText + tweetUserName.innerText).length > 20) {
-                tweetUserName.innerHTML = text_truncate(username, 5)
+        if (vw < 600) {
+            if (nameCombo.length > 20) {
+                tweetUserName.innerHTML = text_truncate(name, 10)
                 if ((tweetName.innerText + tweetUserName.innerText).length > 20) {
-                    tweetUserName.innerHTML = text_truncate(name, 0, "")
+                    tweetUserName.innerHTML = text_truncate(username, 5)
                     if ((tweetName.innerText + tweetUserName.innerText).length > 20) {
-                        tweetName.innerHTML = text_truncate(name, 20)
+                        tweetUserName.innerHTML = text_truncate(name, 0, "")
+                        if ((tweetName.innerText + tweetUserName.innerText).length > 20) {
+                            tweetName.innerHTML = text_truncate(name, 20)
+                        }
                     }
                 }
             }
         }
-
-        // console.log(tweetName.innerText, (tweetName.innerText + tweetUserName.innerText + tweetTime.innerText).length)
-        // if ((tweetName.innerText + tweetUserName.innerText + tweetTime.innerText).length > 30) {
-        //     tweetName.innerHTML = text_truncate(name, 15)
-        // }
 
         tweetNameDiv.append(tweetName, tweetVerified, tweetUserName, tweetTime)
 
@@ -1699,7 +1695,6 @@ function interactWithSearchResults(){
             homeItem.click();
         }, false)
     })
-    
 }
 
 
