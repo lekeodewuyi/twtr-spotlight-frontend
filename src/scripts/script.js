@@ -2170,12 +2170,12 @@ function handleTouchMove(evt) {
                 // screenFade.classList.add("hide");
                 // mediaModal.classList.add("hide");
 
-                mediaModal.style.transform = "translateY(300px)"
-                mediaModal.style.visibility = "hidden";
-                screenFade.classList.add("hide");
-                centerContainer.style.overflowY = "auto";
-                state.screenFade.class = screenFade.className;
-                state.media.class = mediaModal.className;
+                // mediaModal.style.transform = "translateY(300px)"
+                // mediaModal.style.visibility = "hidden";
+                // screenFade.classList.add("hide");
+                // centerContainer.style.overflowY = "auto";
+                // state.screenFade.class = screenFade.className;
+                // state.media.class = mediaModal.className;
             }
             /* down swipe */
         }                                                                 
