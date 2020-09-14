@@ -184,6 +184,7 @@ button:hover, button:active {
     max-width: 700px;
     /* max-width: 70vw; */
     max-height: 80vh;
+    height: 100vh;
     object-fit: contain;
     box-shadow: rgba(4, 74, 111, 0) 0px 0px 20px -5px;
 
