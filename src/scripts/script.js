@@ -634,6 +634,8 @@ function handleSideNav(event){
 
     state.search.searchPage = searchResults.className;
 
+    // state.center.scrollPosition = centerContainer.scrollTop;
+
     if (currentTab !== aboutItem) {
         window.history.pushState(state, null, "");
     }
@@ -688,8 +690,10 @@ let collectionsPush = false;
 function goHome(){
     current_page = "home"
     console.log(homePush)
+    console.log(mainSearchInputDiv.parentNode)
 
-    if (current_page === "home" && !topInView(searchResults)) {
+    // if (current_page === "home" && !topInView(searchResults)) {
+    if (mainSearchInputDiv.parentNode === searchResults && !topInView(searchResults)) {
         console.log("not at the top")
         searchResults.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
         homeReadyToPush = false;
@@ -715,10 +719,9 @@ function goHome(){
 function timeTravel(){
     current_page = "timeline"
 
-    console.log(timelinePush);
-    console.log(timelineReadyToPush)
+    console.log(timelineSearchInput.parentNode)
 
-    if (current_page === "timeline" && !topInView(searchResults)) {
+    if (timelineSearchInputDiv.parentNode === searchResults && !topInView(searchResults)) {
         console.log("not at the top")
         searchResults.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
         timelineReadyToPush = false;
