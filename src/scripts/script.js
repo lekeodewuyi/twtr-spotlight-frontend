@@ -118,6 +118,16 @@ const mainSearchInput = document.querySelector(".main-search-input");
 const mainSearchError = document.querySelector(".main-search-error");
 const searchChoicesDiv = document.querySelector(".search-choices");
 const languageChoice = document.querySelectorAll(".language-choice");
+const en = document.querySelector(".en-lang");
+const fr = document.querySelector(".fr-lang");
+const de = document.querySelector(".de-lang");
+const es = document.querySelector(".es-lang");
+const pt = document.querySelector(".pt-lang");
+const zh = document.querySelector(".zh-lang");
+const recent = document.querySelector(".recent-type");
+const popular = document.querySelector(".popular-type");
+const mixed = document.querySelector(".mixed-type");
+
 const tweetTypeChoice = document.querySelectorAll(".tweet-type-choice");
 const mainSearchButton = document.querySelector(".main-search-button");
 
@@ -174,6 +184,36 @@ const homeSpotlight = document.querySelector(".home-page-spotlight");
 const timelineSpotlight = document.querySelector(".timeline-page-spotlight");
 const collectionSpotlight = document.querySelector(".collections-page-spotlight");
 const aboutSpotlight = document.querySelector(".about-page-spotlight");
+
+
+languageChoice.forEach((lang) => {
+        lang.addEventListener("click", function(){
+            if (!(searchResults.classList.contains("hide")) && mainSearchInput.value.trim() !== "" && lang.getAttribute("data-selected") !== "true") {
+
+                languageChoice.forEach((others) => {
+                    others.setAttribute("data-selected", "false");
+                })
+                lang.setAttribute("data-selected", "true");
+                mainSearch();
+            }
+        }, false)
+
+})
+
+tweetTypeChoice.forEach((type) => {
+    type.addEventListener("click", function(){
+
+        if (!(searchResults.classList.contains("hide")) && mainSearchInput.value.trim() !== "" && type.getAttribute("data-selected") !== "true") {
+            tweetTypeChoice.forEach((others) => {
+                others.setAttribute("data-selected", "false");
+            })
+            type.setAttribute("data-selected", "true");
+            console.log("hey")
+            mainSearch();
+            console.log("hi")
+        }
+    }, false)
+})
 
 
 nextInputs.forEach((input) => {
@@ -388,6 +428,21 @@ let state = {
         keyword: {
             home: "",
             timeline: ""
+        },
+        choice: {
+            lang: {
+                en: en.checked,
+                fr: fr.checked,
+                de: de.checked,
+                es: es.checked,
+                pt: pt.checked,
+                zh: fr.checked,
+            },
+            type:{
+                recent: recent.checked,
+                popular: popular.checked,
+                mixed: mixed.checked
+            }
         }
 
     },
@@ -473,6 +528,18 @@ function render(){
     userAuthDiv.className = state.user.authDiv.class;
 
     homeSearchPage.className = state.home.class;
+    en.checked = state.search.choice.lang.en;
+    fr.checked = state.search.choice.lang.fr;
+    de.checked = state.search.choice.lang.de;
+    es.checked = state.search.choice.lang.es;
+    pt.checked = state.search.choice.lang.pt;
+    zh.checked = state.search.choice.lang.zh;
+    recent.checked = state.search.choice.type.recent;
+    popular.checked = state.search.choice.type.popular;
+    mixed.checked = state.search.choice.type.mixed;
+
+
+
     timelineSearchPage.className = state.timeline.class;
     collectionPage.className = state.collection.class;
 
@@ -1384,6 +1451,17 @@ function mainSearch(){
             state.search.tweetsDiv = tweetResultsDiv.innerHTML;
             state.home.class = homeSearchPage.className;
             state.search.searchPage = searchResults.className;
+
+            state.search.choice.lang.en = en.checked;
+            state.search.choice.lang.fr = fr.checked;
+            state.search.choice.lang.de = de.checked;
+            state.search.choice.lang.es = es.checked;
+            state.search.choice.lang.pt = pt.checked;
+            state.search.choice.lang.zh = zh.checked;
+            state.search.choice.type.recent = recent.checked;
+            state.search.choice.type.popular = popular.checked;
+            state.search.choice.type.mixed = mixed.checked;
+
             window.history.pushState(state, null, "");
 
 
