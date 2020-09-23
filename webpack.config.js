@@ -48,6 +48,7 @@ module.exports = {
         new MiniCssExtractPlugin({
           filename: '[name].css',
           chunkFilename: '[id].css',
+          // sourceMap: true
         }),
         new HtmlWebpackPlugin({
             template: path.resolve('./index.html'),
