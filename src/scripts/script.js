@@ -269,17 +269,17 @@ authInputs.forEach((input) => {
         authInputLabels.forEach((label) => {
             label.classList.remove("color-red");
             if (label === loginEmailLabel) {
-                label.innerHTML = "Email:"
+                label.innerText = "Email:"
             } else if(label === loginPasswordLabel) {
-                label.innerHTML = "Password:"
+                label.innerText = "Password:"
             } else if(label === signupNameLabel) {
-                label.innerHTML = "Name:"
+                label.innerText = "Name:"
             } else if(label === signupEmailLabel) {
-                label.innerHTML = "Email:"
+                label.innerText = "Email:"
             } else if(label === signupPasswordLabel) {
-                label.innerHTML = "Password:"
+                label.innerText = "Password:"
             } else if(label === signupConfirmPasswordLabel) {
-                label.innerHTML = "Confirm password:"
+                label.innerText = "Confirm password:"
             }
         });
 
