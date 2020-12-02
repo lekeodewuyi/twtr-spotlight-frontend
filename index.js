@@ -139,21 +139,21 @@ function handleSideNav(){
     if (!(currentTab.classList.contains("user-profile"))) {
         currentTab.setAttribute("data-selected", "true")
         if (!(currentTab.classList.contains("about"))) {
-            headerText.innerHTML = currentTab.innerText;
+            headerText.innerText = currentTab.innerText;
         }
     }
 
     if (currentTab === homeItem) {
-        spotlightNav.innerHTML = homeSpotlight.innerHTML;
+        spotlightNav.innerText = homeSpotlight.innerText;
     } else if (currentTab === timelineItem) {
-        spotlightNav.innerHTML = timelineSpotlight.innerHTML;
+        spotlightNav.innerText = timelineSpotlight.innerText;
     } else if (currentTab === collectionItem) {
-        spotlightNav.innerHTML = collectionSpotlight.innerHTML;
+        spotlightNav.innerText = collectionSpotlight.innerText;
     } else {
-        spotlightNav.innerHTML = aboutSpotlight.innerHTML;
+        spotlightNav.innerText = aboutSpotlight.innerText;
     } 
 
-    state.spotlight.text = spotlightNav.innerHTML;
+    state.spotlight.text = spotlightNav.innerText;
 
     if (currentTab === homeItem) {
         goHome();
@@ -166,7 +166,7 @@ function handleSideNav(){
     }
 
 
-    state.header.headerText = headerText.innerHTML;
+    state.header.headerText = headerText.innerText;
     state.sidenav.home = homeItem.getAttribute("data-selected");
     state.sidenav.timeline = timelineItem.getAttribute("data-selected");
     state.sidenav.about = aboutItem.getAttribute("data-selected");
@@ -178,7 +178,7 @@ function goHome(){
     // window.location.href = "/";
     homeSearchPage.classList.remove("hide");
     appendElementsToHome();
-    mainSearchError.innerHTML = "";
+    mainSearchError.innerText = "";
     
     timelineSearchPage.classList.add("hide");
     appendElementsToTimeline();
@@ -198,7 +198,7 @@ function goHome(){
 function timeTravel(){
     timelineSearchPage.classList.remove("hide");
     appendElementsToTimeline();
-    timelineSearchError.innerHTML = "";
+    timelineSearchError.innerText = "";
 
     homeSearchPage.classList.add("hide");
     appendElementsToHome();
@@ -216,7 +216,7 @@ function timeTravel(){
 }
 
 function goToCollections(){
-    emptyCollection.innerHTML = "";
+    emptyCollection.innerText = "";
     collectionPage.classList.remove("hide");
 
     homeSearchPage.classList.add("hide");
@@ -287,18 +287,18 @@ const updateCurrentUser = (userDetails) => {
 const appendUserDetails = (user) => {
     let name = user.name;
     let firstName = name.replace(/ .*/,'');
-    userProfileLabel.innerHTML = `Hello, <span class="color-blue">${firstName}</span>`;
+    userProfileLabel.innerText = `Hello, <span class="color-blue">${firstName}</span>`;
 
     let userCollections = user.collections;
     let userCollectionCount = user.collectionCount;
 
-    collectionList.innerHTML = "";
-    saveToCollectionItemDiv.innerHTML = "";
+    collectionList.innerText = "";
+    saveToCollectionItemDiv.innerText = "";
     if (!(!Array.isArray(userCollections) || !userCollections.length)) {
         for (let i = 0; i < userCollections.length; i++) {
 
             let collectionItemParagraph = document.createElement("p");
-            collectionItemParagraph.innerHTML = userCollections[i];
+            collectionItemParagraph.innerText = userCollections[i];
 
             let collectionItem = document.createElement("div");
             collectionItem.classList.add("collection-item");
@@ -309,7 +309,7 @@ const appendUserDetails = (user) => {
 
             let saveToCollectionItem = document.createElement("p");
             saveToCollectionItem.classList.add("save-to-collection-item");
-            saveToCollectionItem.innerHTML = userCollections[i];
+            saveToCollectionItem.innerText = userCollections[i];
             saveToCollectionItemDiv.append(saveToCollectionItem)
             saveToCollectionModal.append(saveToCollectionItemDiv);
         }
@@ -321,12 +321,12 @@ const appendUserDetails = (user) => {
 
 
         if (userCollectionCount === 1) {
-            collectionCounter.innerHTML = `You currently have ${userCollectionCount} collection`
+            collectionCounter.innerText = `You currently have ${userCollectionCount} collection`
         } else if (userCollectionCount > 1) {
-            collectionCounter.innerHTML = `You currently have ${userCollectionCount} collections`
+            collectionCounter.innerText = `You currently have ${userCollectionCount} collections`
         }
     } else {
-        collectionCounter.innerHTML = `You haven't created any collections, click the create a new collection button to get started`
+        collectionCounter.innerText = `You haven't created any collections, click the create a new collection button to get started`
     }
 
     appendCollections()
@@ -367,10 +367,10 @@ let state = {
         about: aboutItem.getAttribute("data-selected")
     },
     header: {
-        headerText: headerText.innerHTML
+        headerText: headerText.innerText
     },
     spotlight: {
-        text: homeSpotlight.innerHTML
+        text: homeSpotlight.innerText
     }, 
     all: {
     }
@@ -451,7 +451,7 @@ function render(){
     collectionPage.className = state.collection.class;
 
     searchResults.className = state.result.searchResults;
-    tweetResultsDiv.innerHTML = state.result.tweets;
+    tweetResultsDiv.innerText = state.result.tweets;
     mainSearchInput.value = state.result.search;
     timelineSearchInput.value = state.timeline.keyword;
 
@@ -462,8 +462,8 @@ function render(){
     aboutItem.setAttribute("data-selected", `${state.sidenav.about}`);
     console.log("home", homeItem['data-selected'])
     console.log("timeline", timelineItem['data-selected'])
-    headerText.innerHTML = state.header.headerText;
-    spotlightNav.innerHTML = state.spotlight.text;
+    headerText.innerText = state.header.headerText;
+    spotlightNav.innerText = state.spotlight.text;
 
     current_page = state.page;
     console.log(current_page)
@@ -576,11 +576,11 @@ function login(){
     if (!valid) {
         loader.classList.add("hide");
         if (errors.email) {
-            loginEmailLabel.innerHTML = errors.email
+            loginEmailLabel.innerText = errors.email
             loginEmailLabel.style.color = red;
         }
         if (errors.password) {
-            loginPasswordLabel.innerHTML = errors.password
+            loginPasswordLabel.innerText = errors.password
             loginPasswordLabel.style.color = red;
         }
     }
@@ -608,7 +608,7 @@ function login(){
         .catch(function (error) {
             loader.classList.add("hide");
             console.log(error.response.data);
-            loginErrors.innerHTML = error.response.data.error;
+            loginErrors.innerText = error.response.data.error;
         })
 }
 
@@ -630,19 +630,19 @@ function signup(){
     if (!valid) {
         loader.classList.add("hide");
         if (errors.name) {
-            signupNameLabel.innerHTML = errors.name
+            signupNameLabel.innerText = errors.name
             signupNameLabel.classList.add("error");
         }
         if (errors.email) {
-            signupEmailLabel.innerHTML = errors.email
+            signupEmailLabel.innerText = errors.email
             signupEmailLabel.classList.add("error");
         }
         if (errors.password) {
-            signupPasswordLabel.innerHTML = errors.password;
+            signupPasswordLabel.innerText = errors.password;
             signupPasswordLabel.classList.add("error");
         }
         if  (errors.confirmPassword) {
-            signupConfirmPasswordLabel.innerHTML = errors.confirmPassword;
+            signupConfirmPasswordLabel.innerText = errors.confirmPassword;
             signupConfirmPasswordLabel.classList.add("error");
         }
     }
@@ -678,14 +678,14 @@ function signup(){
             loader.classList.add("hide");
             console.log(error.response.data);
             if (error.response.data.password) {
-                signupErrors.innerHTML = error.response.data.password;
+                signupErrors.innerText = error.response.data.password;
             }
 
             if (error.response.data.email) {
-                signupErrors.innerHTML = error.response.data.email;
+                signupErrors.innerText = error.response.data.email;
             }
             else {
-                signupErrors.innerHTML = error.response.data.general;
+                signupErrors.innerText = error.response.data.general;
             }
         })
 }
@@ -711,19 +711,19 @@ function appendTweets(results){
         tweetNameDiv.classList.add("tweet-name-div");
         let tweetName = document.createElement("p");
         tweetName.classList.add("tweet-name", "tw-name-item");
-        tweetName.innerHTML = results[i].user.name;
+        tweetName.innerText = results[i].user.name;
         let tweetVerified = document.createElement("span");
         tweetVerified.classList.add("verified", "material-icons", "tw-name-item");
-        tweetVerified.innerHTML = "verified";
+        tweetVerified.innerText = "verified";
         if (results[i].user.verified === false) {
             tweetVerified.classList.add("hide");
         }
         let tweetUserName = document.createElement("p");
         tweetUserName.classList.add("tweet-username", "tw-name-item", "mention")
-        tweetUserName.innerHTML = `${results[i].user.screen_name}`;
+        tweetUserName.innerText = `${results[i].user.screen_name}`;
         let tweetTime = document.createElement("p");
         tweetTime.classList.add("tweet-time", "tw-name-item");
-        tweetTime.innerHTML = ` &middot; ${dayjs(results[i].created_at).format('MMM DD YYYY - (h:mm a)')}`;
+        tweetTime.innerText = ` &middot; ${dayjs(results[i].created_at).format('MMM DD YYYY - (h:mm a)')}`;
 
         tweetNameDiv.append(tweetName, tweetVerified, tweetUserName, tweetTime)
 
@@ -731,13 +731,13 @@ function appendTweets(results){
         let tweetText = document.createElement("p");
         tweetText.classList.add("tweet-text");
         if (typeof results[i].retweeted_status === "object") {
-            tweetText.innerHTML = results[i].retweeted_status.full_text;
-            tweetText.innerHTML = urlify(tweetText.innerHTML)
-            tweetText.innerHTML = atlify(tweetText.innerHTML)
+            tweetText.innerText = results[i].retweeted_status.full_text;
+            tweetText.innerText = urlify(tweetText.innerText)
+            tweetText.innerText = atlify(tweetText.innerText)
         } else {
-            tweetText.innerHTML = results[i].full_text;
-            tweetText.innerHTML = urlify(tweetText.innerHTML)
-            tweetText.innerHTML = atlify(tweetText.innerHTML)
+            tweetText.innerText = results[i].full_text;
+            tweetText.innerText = urlify(tweetText.innerText)
+            tweetText.innerText = atlify(tweetText.innerText)
         }
 
 
@@ -766,7 +766,7 @@ function appendTweets(results){
                     
                     tweetVideo.append(videoSource);
                     videoError = document.createElement("p");
-                    videoError.innerHTML = "Sorry, your browser doesn't support embedded videos."
+                    videoError.innerText = "Sorry, your browser doesn't support embedded videos."
                     tweetVideo.append("videoError");
                     tweetImageDiv.append(tweetVideo);
                 } else if (results[i].extended_entities.media[0].type === "photo") {
@@ -790,12 +790,12 @@ function appendTweets(results){
         let tweetMetrics = document.createElement("div");
         tweetMetrics.classList.add("tweet-metrics");
         let tweetRetweets = document.createElement("p");
-        tweetRetweets.innerHTML = `${results[i].retweet_count} retweets `;
-        tweetRetweets.innerHTML = appendCommas(tweetRetweets.innerHTML);
+        tweetRetweets.innerText = `${results[i].retweet_count} retweets `;
+        tweetRetweets.innerText = appendCommas(tweetRetweets.innerText);
 
         let tweetLikes = document.createElement("p");
-        tweetLikes.innerHTML = `${results[i].retweet_count} likes `;
-        tweetLikes.innerHTML = appendCommas(tweetLikes.innerHTML);
+        tweetLikes.innerText = `${results[i].retweet_count} likes `;
+        tweetLikes.innerText = appendCommas(tweetLikes.innerText);
         tweetMetrics.append(tweetRetweets, tweetLikes);
 
 
@@ -807,11 +807,11 @@ function appendTweets(results){
         let saveSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         saveSvg.classList.add("save-to-svg");
         saveSvg.setAttribute("viewBox", "0 0 24 24");
-        saveSvg.innerHTML = `<path d="M0 0h24v24H0z" fill="none"></path><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"></path>`
+        saveSvg.innerText = `<path d="M0 0h24v24H0z" fill="none"></path><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"></path>`
 
         let saveSvgText = document.createElement("p");
         saveSvgText.classList.add("save-to-text");
-        saveSvgText.innerHTML = "Save to collection"
+        saveSvgText.innerText = "Save to collection"
 
         saveToCollection.append(saveSvg, saveSvgText);
 
@@ -820,9 +820,9 @@ function appendTweets(results){
             let userFavorites = (JSON.parse(currentUser)).favorites
             if (userFavorites.includes(results[i].id_str)) {
                 saveSvg.style.fill = "green";
-                saveSvg.innerHTML = `<path d="M0 0h24v24H0z" fill="none"/><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/>`
+                saveSvg.innerText = `<path d="M0 0h24v24H0z" fill="none"/><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/>`
                 saveSvgText.style.color = "green";
-                saveSvgText.innerHTML = "Saved to your collections";
+                saveSvgText.innerText = "Saved to your collections";
             }
         }
 
@@ -834,10 +834,10 @@ function appendTweets(results){
 
         let removeSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         removeSvg.setAttribute("viewBox", "0 0 24 24");
-        removeSvg.innerHTML = `<path d="M0 0h24v24H0V0z" fill="none"/><path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"/>`
+        removeSvg.innerText = `<path d="M0 0h24v24H0V0z" fill="none"/><path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"/>`
 
         let removeSvgText = document.createElement("p");
-        removeSvgText.innerHTML = "remove from collection"
+        removeSvgText.innerText = "remove from collection"
 
         removeFromCollection.append(removeSvg, removeSvgText);
 
@@ -846,7 +846,7 @@ function appendTweets(results){
         // TODO: create modal for tweet being replied to
         // let replyingTo = document.createElement("p");
         // replyingTo.classList.add("replying-to");
-        // replyingTo.innerHTML = `Replying to ${results[i].in_reply_to_screen_name}`;
+        // replyingTo.innerText = `Replying to ${results[i].in_reply_to_screen_name}`;
         // replyingTo.setAttribute("data-tweetid", `${results[i].id_str}`);
 
 
@@ -893,7 +893,7 @@ function mainSearch(){
 
     if (searchData.query.trim() === "") {
         loader.classList.add("hide");
-        mainSearchError.innerHTML = "Please give me something to search for"
+        mainSearchError.innerText = "Please give me something to search for"
         mainSearchError.classList.add("error");
     }
     else if (searchData.query.trim() !== "")
@@ -916,7 +916,7 @@ function mainSearch(){
             searchResults.insertBefore(searchChoicesDiv, searchResults.firstChild);
             searchResults.insertBefore(mainSearchInputDiv, searchResults.firstChild);
 
-            tweetResultsDiv.innerHTML = "";
+            tweetResultsDiv.innerText = "";
 
 
             appendTweets(results);
@@ -924,7 +924,7 @@ function mainSearch(){
 
             state.page = current_page;
             state.result.searchResults = searchResults.className;
-            state.result.tweets = tweetResultsDiv.innerHTML;
+            state.result.tweets = tweetResultsDiv.innerText;
             state.result.search = mainSearchInput.value;
             state.home.homeSearchPage = homeSearchPage.className;
             window.history.pushState(state, null, "");
@@ -948,7 +948,7 @@ function timelineSearch(){
 
     if (userName.trim() === "") {
         loader.classList.add("hide");
-        timelineSearchError.innerHTML = "Please enter a twitter user name"
+        timelineSearchError.innerText = "Please enter a twitter user name"
         timelineSearchError.classList.add("error");
     }
     else if (userName.trim() !== "")
@@ -967,19 +967,19 @@ function timelineSearch(){
             searchResults.classList.remove("hide")
             searchResults.insertBefore(timelineSearchInputDiv, searchResults.firstChild);
 
-            tweetResultsDiv.innerHTML = "";
+            tweetResultsDiv.innerText = "";
 
            // TODO: HANDLE PROTECTED USER ERROR AND 
             console.log(results)
             if (!Array.isArray(results) || !results.length) {
-                tweetResultsDiv.innerHTML = `There are no results for <span class= color-blue>${userName}</span>. Maybe try the search on the <span class="home-link color-blue">homepage</span>`
+                tweetResultsDiv.innerText = `There are no results for <span class= color-blue>${userName}</span>. Maybe try the search on the <span class="home-link color-blue">homepage</span>`
             } else
             appendTweets(results);
             interactWithSearchResults();
 
             state.page = current_page;
             state.result.searchResults = searchResults.className;
-            state.result.tweets = tweetResultsDiv.innerHTML;
+            state.result.tweets = tweetResultsDiv.innerText;
             state.timeline.keyword = timelineSearchInput.value;
             state.timeline.timelineSearchPage = timelineSearchPage.className;
             window.history.pushState(state, null, "");
@@ -992,20 +992,20 @@ function timelineSearch(){
             let errorCode = error.response.data;
 
             if (Object.keys(errorCode.err).length === 0 && errorCode.err.constructor === Object) {
-                timelineSearchError.innerHTML = `<span class= color-blue>${userName}'s</span> tweets are protected. The account cound be private or suspended.`
-                tweetResultsDiv.innerHTML = `<span class= color-blue>${userName}'s</span> tweets are protected. The account cound be private or suspended.`
+                timelineSearchError.innerText = `<span class= color-blue>${userName}'s</span> tweets are protected. The account cound be private or suspended.`
+                tweetResultsDiv.innerText = `<span class= color-blue>${userName}'s</span> tweets are protected. The account cound be private or suspended.`
             }
             console.log(typeof (errorCode.err[0].code))
             if(errorCode.err[0].code === 34) {
-                timelineSearchError.innerHTML = `Seems like there is no user with this user name, please check and try again.`
-                tweetResultsDiv.innerHTML = `Seems like there is no user with this user name, please check and try again.`
+                timelineSearchError.innerText = `Seems like there is no user with this user name, please check and try again.`
+                tweetResultsDiv.innerText = `Seems like there is no user with this user name, please check and try again.`
             }
 
 
 
             state.page = current_page;
             state.result.searchResults = searchResults.className;
-            state.result.tweets = tweetResultsDiv.innerHTML;
+            state.result.tweets = tweetResultsDiv.innerText;
             state.timeline.keyword = timelineSearchInput.value;
             state.timeline.timelineSearchPage = timelineSearchPage.className;
             window.history.pushState(state, null, "");
@@ -1014,7 +1014,7 @@ function timelineSearch(){
 
 
 function retrieveCollectionTweets(){
-    emptyCollection.innerHTML = "";
+    emptyCollection.innerText = "";
     let collectionName = event.currentTarget.innerText.trim();
 
     axiosRetrieveTweets(collectionName)
@@ -1038,7 +1038,7 @@ function axiosRetrieveTweets(collection){
 
             searchResults.classList.remove("hide")
 
-            tweetResultsDiv.innerHTML = "";
+            tweetResultsDiv.innerText = "";
 
             appendTweets(results);
             let saveTweet = document.querySelectorAll(".save-to-collection");
@@ -1054,8 +1054,8 @@ function axiosRetrieveTweets(collection){
             })
 
         
-            if (tweetResultsDiv.innerHTML === "") {
-                emptyCollection.innerHTML = `<span class="color-blue">${collection}</span> currently has no saved tweets`
+            if (tweetResultsDiv.innerText === "") {
+                emptyCollection.innerText = `<span class="color-blue">${collection}</span> currently has no saved tweets`
             }
 
             interactWithSearchResults();
@@ -1081,7 +1081,7 @@ function interactWithSearchResults(){
             // img.style.objectFit = "contain"
             mediaModal.classList.remove("hide");
             screenFade.classList.remove("hide");
-            media.innerHTML = img.outerHTML;
+            media.innerText = img.outerHTML;
         }, false)
     })
 
@@ -1165,13 +1165,13 @@ function interactWithSearchResults(){
 
     mentions.forEach((mention) => {
         mention.addEventListener("click", function(){
-            // timelineSearchPage.innerHTML = searchResults.innerHTML; 
+            // timelineSearchPage.innerText = searchResults.innerText; 
             timelineSearchPage.classList.add("hide")
             timelineItem.click();
-            timelineSearchInput.value = mention.innerHTML;
+            timelineSearchInput.value = mention.innerText;
             timelineSearchButton.click();
             setTimeout(timelineSearchPage.classList.remove("hide"), 50000)
-            console.log(mention.innerHTML)
+            console.log(mention.innerText)
         })
     })
 
@@ -1257,7 +1257,7 @@ function saveTweetToCollection(){
                 if(btn.getAttribute("data-tweetId") === tweetId) {
                     btn.style.color = "green";
                     btn.childNodes[0].style.fill = "green";
-                    btn.childNodes[0].innerHTML = `<path d="M0 0h24v24H0z" fill="none"/><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/>`;
+                    btn.childNodes[0].innerText = `<path d="M0 0h24v24H0z" fill="none"/><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/>`;
                     btn.childNodes[1].innerText = `Saved to ${collectionName}`
                 }
             })
@@ -1317,7 +1317,7 @@ function openCreateCollectionDiv(){
 
 function closeCreateCollectionDiv(){
     createCollectionInput.value = ""
-    createCollectionError.innerHTML = "";
+    createCollectionError.innerText = "";
     createCollectionCta.classList.remove("hide");
     createCollectionInputDiv.classList.add("hide");
 }
@@ -1331,7 +1331,7 @@ function createNewCollection(){
 
     if (token === null || token === undefined) {
         loader.classList.add("hide");
-        createCollectionError.innerHTML = "You need to be logged in to use this feature. Please login or create an account to continue."
+        createCollectionError.innerText = "You need to be logged in to use this feature. Please login or create an account to continue."
         return;
     }
 
@@ -1339,7 +1339,7 @@ function createNewCollection(){
     if (createCollectionInput.value.trim() === "") {
         loader.classList.add("hide");
         createCollectionError.classList.remove("hide");
-        createCollectionError.innerHTML = "Please enter a name for your new collection";
+        createCollectionError.innerText = "Please enter a name for your new collection";
         return;
     }
 
@@ -1367,7 +1367,7 @@ function createNewCollection(){
             console.log(error.response.data);
             createCollectionError.classList.remove("hide");
             if (error.response.data.error === "Unauthorized")
-            createCollectionError.innerHTML = "You need to be logged in to use this feature. Please login or create an account to continue."
+            createCollectionError.innerText = "You need to be logged in to use this feature. Please login or create an account to continue."
 
         })
 }
@@ -1389,11 +1389,11 @@ logoutBtn.addEventListener("click", logout, false);
 // Data event listeners
 mainSearchButton.addEventListener("click", mainSearch, false);
 mainSearchInput.addEventListener("keydown", function(){
-    mainSearchError.innerHTML = "";
+    mainSearchError.innerText = "";
 }, false)
 timelineSearchButton.addEventListener("click", timelineSearch, false);
 timelineSearchInput.addEventListener("keydown", function(){
-    timelineSearchError.innerHTML = "";
+    timelineSearchError.innerText = "";
 }, false)
 
 createCollectionCta.addEventListener("click", openCreateCollectionDiv, false);
@@ -1401,7 +1401,7 @@ createCollectionInputClose.addEventListener("click", closeCreateCollectionDiv, f
 createCollectionBtn.addEventListener("click", createNewCollection, false);
 createCollectionInput.addEventListener("keyup", function(){
     if (event.keyCode !== 13) {
-        createCollectionError.innerHTML = "";
+        createCollectionError.innerText = "";
     }
 }, false)
 
@@ -1465,7 +1465,7 @@ function atlify(text) {
     return text.replace(atRegex, '<span class="mention">$1</span>')
 }
 
-// searchResults.innerHTML = atlify(searchResults.innerHTML);
+// searchResults.innerText = atlify(searchResults.innerText);
 
 
 
@@ -1474,12 +1474,12 @@ function atlify(text) {
 
 // mentions.forEach((mention) => {
 //     mention.addEventListener("click", function(){
-//         // timelineSearchPage.innerHTML = searchResults.innerHTML; 
+//         // timelineSearchPage.innerText = searchResults.innerText; 
 //         timelineSearchPage.classList.add("hide")
 //         timelineItem.click();
-//         timelineSearchInput.value = mention.innerHTML;
+//         timelineSearchInput.value = mention.innerText;
 //         timelineSearchButton.click();
 //         setTimeout(timelineSearchPage.classList.remove("hide"), 50000)
-//         console.log(mention.innerHTML)
+//         console.log(mention.innerText)
 //     })
 // })
