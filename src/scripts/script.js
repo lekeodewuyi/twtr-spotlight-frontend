@@ -330,7 +330,7 @@ const appendUserDetails = (user) => {
     let name = user.name;
     let firstName = name.replace(/ .*/,'');
     userIcon.style.fill = blue;
-    userProfileLabel.innerHTML = encodeURI(`Hello, <span class="color-blue">${firstName}</span>`);
+    userProfileLabel.innerHTML = `Hello, <span class="color-blue">${firstName}</span>`;
 
     let userCollections = user.collections.reverse();
     let userCollectionCount = user.collectionCount;
@@ -1486,7 +1486,7 @@ function timelineSearch(userName){
         timelineSearchButton.append(loader);
     }
 
-    userName = encodeURI(timelineSearchInput.value);
+    userName = timelineSearchInput.value;
 
     if (userName.trim() === "") {
         loader.classList.add("hide");
