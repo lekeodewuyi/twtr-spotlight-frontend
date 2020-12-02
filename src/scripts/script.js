@@ -269,17 +269,17 @@ authInputs.forEach((input) => {
         authInputLabels.forEach((label) => {
             label.classList.remove("color-red");
             if (label === loginEmailLabel) {
-                label.innerText = "Email:"
+                label.innerHTML = "Email:"
             } else if(label === loginPasswordLabel) {
-                label.innerText = "Password:"
+                label.innerHTML = "Password:"
             } else if(label === signupNameLabel) {
-                label.innerText = "Name:"
+                label.innerHTML = "Name:"
             } else if(label === signupEmailLabel) {
-                label.innerText = "Email:"
+                label.innerHTML = "Email:"
             } else if(label === signupPasswordLabel) {
-                label.innerText = "Password:"
+                label.innerHTML = "Password:"
             } else if(label === signupConfirmPasswordLabel) {
-                label.innerText = "Confirm password:"
+                label.innerHTML = "Confirm password:"
             }
         });
 
@@ -1486,7 +1486,7 @@ function timelineSearch(userName){
         timelineSearchButton.append(loader);
     }
 
-    userName = timelineSearchInput.value;
+    userName = encodeURI(timelineSearchInput.value);
 
     if (userName.trim() === "") {
         loader.classList.add("hide");
