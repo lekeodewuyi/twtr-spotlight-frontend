@@ -330,7 +330,7 @@ const appendUserDetails = (user) => {
     let name = user.name;
     let firstName = name.replace(/ .*/,'');
     userIcon.style.fill = blue;
-    userProfileLabel.innerHTML = `Hello, <span class="color-blue">${firstName}</span>`;
+    userProfileLabel.innerHTML = encodeURI(`Hello, <span class="color-blue">${firstName}</span>`);
 
     let userCollections = user.collections.reverse();
     let userCollectionCount = user.collectionCount;
