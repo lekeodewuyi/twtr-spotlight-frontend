@@ -857,7 +857,6 @@ function goToCollections(){
             console.log(activeCollection)
             if (activeCollection)
             axiosRetrieveTweets(activeCollection.innerText.trim())
-            showingCollectionSearch = true;
             console.log("");
         }
     } else {
@@ -939,7 +938,7 @@ function closeUserPanel(event){
     }
 }
 
-function openUserPanel(){
+function openUserPanel(event){
     event.preventDefault();
     let token = localStorage.FBIdToken;
     aboutModal.classList.add("hide");
@@ -1599,6 +1598,7 @@ function axiosRetrieveTweets(collection){
         config
         )
         .then(function (response) {
+            showingCollectionSearch = true;
             loader.classList.add("hide");
             console.log(response.data.results);
             let results = response.data.results;
