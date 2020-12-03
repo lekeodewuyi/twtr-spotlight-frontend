@@ -522,6 +522,7 @@ function render(){
         console.log(activeCollection)
         if (activeCollection)
         axiosRetrieveTweets(activeCollection.innerText.trim())
+        showingCollectionSearch = true;
     }
 
     screenFade.className = state.screenFade.class;
@@ -872,7 +873,6 @@ function goToCollections(){
 
         if (!showingCollectionSearch) {
             searchResults.classList.add("hide");
-            showingCollectionSearch = false;
         }
 
         collectionPage.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
@@ -1445,6 +1445,7 @@ function mainSearch(){
         }
         )
         .then(function (response) {
+            showingCollectionSearch = false;
             homePush = false;
             loader.classList.add("hide");
             console.log(response.data.results);
@@ -1518,6 +1519,7 @@ function timelineSearch(userName){
         }
         )
         .then(function (response) {
+            showingCollectionSearch = false;
             loader.classList.add("hide");
             console.log(response.data.results);
             let results = response.data.results;
@@ -1600,6 +1602,7 @@ function axiosRetrieveTweets(collection){
         config
         )
         .then(function (response) {
+            showingCollectionSearch = true;
             loader.classList.add("hide");
             console.log(response.data.results);
             let results = response.data.results;
@@ -1830,7 +1833,7 @@ function deleteTweetFromCollection(){
             console.log(response.data)
             
             axiosRetrieveTweets(collectionName);
-
+            showingCollectionSearch = true;
             interactWithSearchResults();
 
             currentTweet.removeAttribute("data-collection-name");
