@@ -7,6 +7,7 @@ import "../css/reset.css"
 import "../css/main.css"
 import smoothscroll from 'smoothscroll-polyfill';
 import profileImage from '../../assets/profile.jpg';
+import DOMPurify from 'dompurify';
 
 
 smoothscroll.polyfill();
@@ -269,17 +270,17 @@ authInputs.forEach((input) => {
         authInputLabels.forEach((label) => {
             label.classList.remove("color-red");
             if (label === loginEmailLabel) {
-                label.innerHTML = "Email:"
+                label.innerText = "Email:"
             } else if(label === loginPasswordLabel) {
-                label.innerHTML = "Password:"
+                label.innerText = "Password:"
             } else if(label === signupNameLabel) {
-                label.innerHTML = "Name:"
+                label.innerText = "Name:"
             } else if(label === signupEmailLabel) {
-                label.innerHTML = "Email:"
+                label.innerText = "Email:"
             } else if(label === signupPasswordLabel) {
-                label.innerHTML = "Password:"
+                label.innerText = "Password:"
             } else if(label === signupConfirmPasswordLabel) {
-                label.innerHTML = "Confirm password:"
+                label.innerText = "Confirm password:"
             }
         });
 
@@ -330,19 +331,19 @@ const appendUserDetails = (user) => {
     let name = user.name;
     let firstName = name.replace(/ .*/,'');
     userIcon.style.fill = blue;
-    userProfileLabel.innerHTML = `Hello, <span class="color-blue">${firstName}</span>`;
+    userProfileLabel.innerHTML = DOMPurify.sanitize(`Hello, <span class="color-blue">${firstName}</span>`);
 
     let userCollections = user.collections.reverse();
     let userCollectionCount = user.collectionCount;
 
-    collectionList.innerHTML = "";
-    saveToCollectionItemDiv.innerHTML = "";
+    collectionList.innerHTML = DOMPurify.sanitize("");
+    saveToCollectionItemDiv.innerHTML = DOMPurify.sanitize("");
     createCollectionFromModal.classList.remove("hide");
     if (!(!Array.isArray(userCollections) || !userCollections.length)) {
         for (let i = 0; i < userCollections.length; i++) {
 
             let collectionItemParagraph = document.createElement("p");
-            collectionItemParagraph.innerHTML = userCollections[i];
+            collectionItemParagraph.innerText = userCollections[i];
 
             let collectionItem = document.createElement("div");
             collectionItem.classList.add("collection-item");
@@ -353,7 +354,7 @@ const appendUserDetails = (user) => {
 
             let saveToCollectionItem = document.createElement("p");
             saveToCollectionItem.classList.add("save-to-collection-item");
-            saveToCollectionItem.innerHTML = userCollections[i];
+            saveToCollectionItem.innerText = userCollections[i];
             saveToCollectionItemDiv.append(saveToCollectionItem)
             saveToCollectionModal.append(saveToCollectionItemDiv);
         }
@@ -365,12 +366,12 @@ const appendUserDetails = (user) => {
 
 
         if (userCollectionCount === 1) {
-            collectionCounter.innerHTML = `You currently have ${userCollectionCount} collection`
+            collectionCounter.innerText = `You currently have ${userCollectionCount} collection`
         } else if (userCollectionCount > 1) {
-            collectionCounter.innerHTML = `You currently have ${userCollectionCount} collections`
+            collectionCounter.innerText = `You currently have ${userCollectionCount} collections`
         }
     } else {
-        collectionCounter.innerHTML = `You haven't created any collections, click the create a new collection button to get started`
+        collectionCounter.innerText = `You haven't created any collections, click the create a new collection button to get started`
         // createCollectionFromModal.classList.remove("hide");
     }
 
@@ -420,7 +421,7 @@ let state = {
         about: aboutItem.getAttribute("data-selected")
     },
     spotlight: {
-        innertext: homeSpotlight.innerHTML
+        innertext: homeSpotlight.innerText
     },
     search: {
         searchPage: searchResults.className,
@@ -543,11 +544,11 @@ function render(){
     timelineSearchPage.className = state.timeline.class;
     collectionPage.className = state.collection.class;
 
-    emptyCollection.innerHTML = state.collection.emptyText;
+    emptyCollection.innerText = state.collection.emptyText;
     // aboutModal.className = state.about.class;
 
-    spotlightNav.innerHTML = state.spotlight.innertext;
-    headerText.innerHTML = state.header
+    spotlightNav.innerText = state.spotlight.innertext;
+    headerText.innerText = state.header
 
     homeItem.setAttribute("data-selected", `${state.sidenav.home}`);
     timelineItem.setAttribute("data-selected", `${state.sidenav.timeline}`);
@@ -558,7 +559,7 @@ function render(){
     searchResults.className = state.search.searchPage;
     centerContainer.scrollTop = state.center.scrollPosition;
 
-    tweetResultsDiv.innerHTML = state.search.tweetsDiv;
+    tweetResultsDiv.innerHTML = DOMPurify.sanitize(state.search.tweetsDiv);
     mainSearchInput.value = state.search.keyword.home;
     timelineSearchInput.value = state.search.keyword.timeline;
 
@@ -642,16 +643,16 @@ function handleSideNav(event){
     if (!(currentTab.classList.contains("user-profile"))) {
         currentTab.setAttribute("data-selected", "true")
         if (!(currentTab.classList.contains("about"))) {
-            headerText.innerHTML = currentTab.innerText;
+            headerText.innerText = currentTab.innerText;
         }
     }
 
 
     if (currentTab === homeItem) {
         goHome();
-        spotlightNav.innerHTML = homeSpotlight.innerHTML;
-        headerText.innerHTML = homeItem.innerText;
-        headerText.innerHTML = "Home";
+        spotlightNav.innerText = homeSpotlight.innerText;
+        headerText.innerText = homeItem.innerText;
+        headerText.innerText = "Home";
         homeItem.setAttribute("data-selected", `true`);
         if (homePush === true) {
             return
@@ -661,9 +662,9 @@ function handleSideNav(event){
         }
     } else if (currentTab === timelineItem) {
         timeTravel();
-        spotlightNav.innerHTML = timelineSpotlight.innerHTML;
-        headerText.innerHTML = timelineItem.innerText;
-        headerText.innerHTML = `Search Timeline`;
+        spotlightNav.innerText = timelineSpotlight.innerText;
+        headerText.innerText = timelineItem.innerText;
+        headerText.innerText = `Search Timeline`;
         timelineItem.setAttribute("data-selected", `true`);
         if (timelinePush === true) {
             return
@@ -673,17 +674,17 @@ function handleSideNav(event){
         }
     } else if (currentTab === collectionItem) {
         goToCollections();
-        spotlightNav.innerHTML = collectionSpotlight.innerHTML;
-        headerText.innerHTML = collectionItem.innerText;
-        headerText.innerHTML = `Your collections`;
+        spotlightNav.innerText = collectionSpotlight.innerText;
+        headerText.innerText = collectionItem.innerText;
+        headerText.innerText = `Your collections`;
         collectionItem.setAttribute("data-selected", `true`);
         if (collectionsPush === true) {
             return
         }
     } else if (currentTab === aboutItem) {
-        spotlightNav.innerHTML = aboutSpotlight.innerHTML;
+        spotlightNav.innerText = aboutSpotlight.innerText;
         getAbout();
-        // headerText.innerHTML =aboutItem.innerText;
+        // headerText.innerText =aboutItem.innerText;
         aboutItem.setAttribute("data-selected", `true`);
     } else if (currentTab === userProfilePanel) {
         openUserPanel();
@@ -693,16 +694,16 @@ function handleSideNav(event){
     if (vw < 950) {
         console.log("heyyyy")
         if (currentTab === homeItem) {
-            headerText.innerHTML = `Home <span class="small color-blue"> / search for anything on twitter<span>`;
+            headerText.innerHTML = DOMPurify.sanitize(`Home <span class="small color-blue"> / search for anything on twitter<span>`);
         } else if (currentTab === timelineItem) {
-            headerText.innerHTML = `Search Timeline <span class="small color-blue"> / get tweets from a user's timeline<span>`;
+            headerText.innerHTML = DOMPurify.sanitize(`Search Timeline <span class="small color-blue"> / get tweets from a user's timeline<span>`);
         } else if (currentTab === collectionItem) {
-            headerText.innerHTML = `Your collections  <span class="small color-blue"> / view all your saved tweets.<span>`;
+            headerText.innerHTML = DOMPurify.sanitize(`Your collections  <span class="small color-blue"> / view all your saved tweets.<span>`);
         } 
     }
 
 
-    state.header = headerText.innerHTML;
+    state.header = headerText.innerText;
     state.page = current_page;
 
     state.user.authDiv.class = userAuthDiv.className;
@@ -718,10 +719,10 @@ function handleSideNav(event){
 
     state.timeline.class = timelineSearchPage.className;
     state.collection.class = collectionPage.className;
-    state.collection.emptyText = emptyCollection.innerHTML;
+    state.collection.emptyText = emptyCollection.innerText;
     // state.about.class = aboutModal.className;
 
-    state.spotlight.innertext = spotlightNav.innerHTML;
+    state.spotlight.innertext = spotlightNav.innerText;
 
     state.sidenav.home = homeItem.getAttribute("data-selected");
     state.sidenav.timeline = timelineItem.getAttribute("data-selected");
@@ -787,7 +788,7 @@ function goHome(){
         // window.location.href = "/";
         homeSearchPage.classList.remove("hide");
         appendElementsToHome();
-        mainSearchError.innerHTML = "";
+        mainSearchError.innerText = "";
         
         timelineSearchPage.classList.add("hide");
         appendElementsToTimeline();
@@ -814,7 +815,7 @@ function timeTravel(){
 
         timelineSearchPage.classList.remove("hide");
         appendElementsToTimeline();
-        timelineSearchError.innerHTML = "";
+        timelineSearchError.innerText = "";
 
         homeSearchPage.classList.add("hide");
         appendElementsToHome();
@@ -835,7 +836,7 @@ function goToCollections(){
 
     if (collectionsPush !== true) {
         emptyCollection.classList.add("hide");
-        emptyCollection.innerHTML = "";
+        emptyCollection.innerText = "";
         collectionPage.classList.remove("hide");
     
         homeSearchPage.classList.add("hide");
@@ -867,7 +868,7 @@ function getAbout(){
 
 function appendElementsToHome(){
     mainSearchInput.value = "";
-    mainSearchError.innerHTML = "";
+    mainSearchError.innerText = "";
     homeSearchPage.append(mainSearchButton);
     homeSearchPage.insertBefore(mainSearchInputDiv, homeSearchPage.lastChild);
     homeSearchPage.insertBefore(mainSearchError, homeSearchPage.lastChild);
@@ -876,7 +877,7 @@ function appendElementsToHome(){
 
 function appendElementsToTimeline(){
     timelineSearchInput.value = "";
-    timelineSearchError.innerHTML = "";
+    timelineSearchError.innerText = "";
     timelineSearchPage.append(timelineSearchButton);
     timelineSearchPage.insertBefore(timelineSearchInputDiv, timelineSearchPage.lastChild);
     timelineSearchPage.insertBefore(timelineSearchError, timelineSearchPage.lastChild);
@@ -988,13 +989,13 @@ function login(){
     if (!valid) {
         loader.classList.add("hide");
         if (errors.email) {
-            loginEmailLabel.innerHTML = errors.email
+            loginEmailLabel.innerText = errors.email
             loginEmailLabel.classList.add("color-red");
             loginEmail.placeholder = errors.email;
             loginEmail.classList.add("auth-error");
         }
         if (errors.password) {
-            loginPasswordLabel.innerHTML = errors.password
+            loginPasswordLabel.innerText = errors.password
             loginPasswordLabel.classList.add("color-red");
             loginPassword.placeholder = errors.password;
             loginPassword.classList.add("auth-error");
@@ -1030,7 +1031,7 @@ function login(){
         .catch(function (error) {
             loader.classList.add("hide");
             console.log(error.response.data);
-            loginErrors.innerHTML = error.response.data.error;
+            loginErrors.innerText = error.response.data.error;
         })
 }
 
@@ -1052,25 +1053,25 @@ function signup(){
     if (!valid) {
         loader.classList.add("hide");
         if (errors.name) {
-            signupNameLabel.innerHTML = errors.name
+            signupNameLabel.innerText = errors.name
             signupNameLabel.classList.add("color-red");
             signupName.placeholder = errors.name;
             signupName.classList.add("auth-error");
         }
         if (errors.email) {
-            signupEmailLabel.innerHTML = errors.email
+            signupEmailLabel.innerText = errors.email
             signupEmailLabel.classList.add("color-red");
             signupEmail.placeholder = errors.email;
             signupEmail.classList.add("auth-error");
         }
         if (errors.password) {
-            signupPasswordLabel.innerHTML = errors.password;
+            signupPasswordLabel.innerText = errors.password;
             signupPasswordLabel.classList.add("color-red");
             signupPassword.placeholder = errors.password;
             signupPassword.classList.add("auth-error");
         }
         if  (errors.confirmPassword) {
-            signupConfirmPasswordLabel.innerHTML = errors.confirmPassword;
+            signupConfirmPasswordLabel.innerText = errors.confirmPassword;
             signupConfirmPasswordLabel.classList.add("color-red");
             signupConfirmPassword.placeholder = errors.confirmPassword;
             signupConfirmPassword.classList.add("auth-error");
@@ -1114,14 +1115,14 @@ function signup(){
             loader.classList.add("hide");
             console.log(error.response.data);
             if (error.response.data.password) {
-                signupErrors.innerHTML = error.response.data.password;
+                signupErrors.innerText = error.response.data.password;
             }
 
             if (error.response.data.email) {
-                signupErrors.innerHTML = error.response.data.email;
+                signupErrors.innerText = error.response.data.email;
             }
             else {
-                signupErrors.innerHTML = error.response.data.general;
+                signupErrors.innerText = error.response.data.general;
             }
         })
 }
@@ -1176,20 +1177,20 @@ function appendTweets(results){
         let tweetName = document.createElement("p");
         tweetName.classList.add("tweet-name", "tw-name-item");
         tweetName.setAttribute("data-username",`${results[i].user.screen_name}`);
-        tweetName.innerHTML = results[i].user.name;
+        tweetName.innerText = results[i].user.name;
 
         let tweetVerified = document.createElement("span");
         tweetVerified.classList.add("verified", "material-icons", "tw-name-item");
-        tweetVerified.innerHTML = "verified";
+        tweetVerified.innerText = "verified";
         if (results[i].user.verified === false) {
             tweetVerified.classList.add("hide");
         }
         let tweetUserName = document.createElement("p");
         tweetUserName.classList.add("tweet-username", "tw-name-item", "mention")
-        tweetUserName.innerHTML = `${results[i].user.screen_name}`;
+        tweetUserName.innerText = `${results[i].user.screen_name}`;
         let tweetTime = document.createElement("p");
         tweetTime.classList.add("tweet-time", "tw-name-item");
-        tweetTime.innerHTML = ` &middot; ${dayjs(results[i].created_at).fromNow()}`;
+        tweetTime.innerHTML = DOMPurify.sanitize(` &middot; ${dayjs(results[i].created_at).fromNow()}`);
 
         let nameCombo = tweetName.innerText + tweetUserName.innerText;
         let name = tweetName.innerText;
@@ -1197,13 +1198,13 @@ function appendTweets(results){
 
         if (vw < 600) {
             if (nameCombo.length > 20) {
-                tweetUserName.innerHTML = text_truncate(name, 10)
+                tweetUserName.innerText = text_truncate(name, 10)
                 if ((tweetName.innerText + tweetUserName.innerText).length > 20) {
-                    tweetUserName.innerHTML = text_truncate(username, 5)
+                    tweetUserName.innerText = text_truncate(username, 5)
                     if ((tweetName.innerText + tweetUserName.innerText).length > 20) {
-                        tweetUserName.innerHTML = text_truncate(name, 0, "")
+                        tweetUserName.innerText = text_truncate(name, 0, "")
                         if ((tweetName.innerText + tweetUserName.innerText).length > 20) {
-                            tweetName.innerHTML = text_truncate(name, 20)
+                            tweetName.innerText = text_truncate(name, 20)
                         }
                     }
                 }
@@ -1217,13 +1218,13 @@ function appendTweets(results){
         let tweetText = document.createElement("p");
         tweetText.classList.add("tweet-text");
         if (typeof results[i].retweeted_status === "object") {
-            tweetText.innerHTML = results[i].retweeted_status.full_text;
-            tweetText.innerHTML = urlify(tweetText.innerHTML)
-            tweetText.innerHTML = atlify(tweetText.innerHTML)
+            tweetText.innerText = results[i].retweeted_status.full_text;
+            tweetText.innerHTML = DOMPurify.sanitize(urlify(tweetText.innerText))
+            tweetText.innerHTML = DOMPurify.sanitize(atlify(tweetText.innerText))
         } else {
-            tweetText.innerHTML = results[i].full_text;
-            tweetText.innerHTML = urlify(tweetText.innerHTML)
-            tweetText.innerHTML = atlify(tweetText.innerHTML)
+            tweetText.innerText = results[i].full_text;
+            tweetText.innerHTML = DOMPurify.sanitize(urlify(tweetText.innerText))
+            tweetText.innerHTML = DOMPurify.sanitize(atlify(tweetText.innerText))
         }
 
         let tweetImageDiv = document.createElement("div");
@@ -1257,7 +1258,7 @@ function appendTweets(results){
                 
                     tweetVideo.append(videoSource);
                     videoError = document.createElement("p");
-                    videoError.innerHTML = "Sorry, your browser doesn't support embedded videos."
+                    videoError.innerText = "Sorry, your browser doesn't support embedded videos."
                     tweetVideo.append("videoError");
 
                     if (elementExists(corsDenied) && !elementExists(corsAllowed)) {
@@ -1296,20 +1297,20 @@ function appendTweets(results){
 
         let tweetRetweetIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         tweetRetweetIcon.classList.add("tweet-icon");
-        tweetRetweetIcon.innerHTML = `<path xmlns="http://www.w3.org/2000/svg" d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/>`;
+        tweetRetweetIcon.innerHTML = DOMPurify.sanitize(`<path xmlns="http://www.w3.org/2000/svg" d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/>`);
         tweetRetweetIcon.setAttribute("viewBox", "0 0 24 24");
         let tweetRetweets = document.createElement("p");
-        tweetRetweets.innerHTML = `${results[i].retweet_count} `;
-        tweetRetweets.innerHTML = appendCommas(tweetRetweets.innerHTML);
+        tweetRetweets.innerText = `${results[i].retweet_count} `;
+        tweetRetweets.innerText = appendCommas(tweetRetweets.innerText);
         
 
         let tweetLikesIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         tweetLikesIcon.classList.add("tweet-icon");
-        tweetLikesIcon.innerHTML = `<path d="M0 0h24v24H0z" fill="none"/><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>`;
+        tweetLikesIcon.innerHTML = DOMPurify.sanitize(`<path d="M0 0h24v24H0z" fill="none"/><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>`);
         tweetLikesIcon.setAttribute("viewBox", "0 0 24 24");
         let tweetLikes = document.createElement("p");
-        tweetLikes.innerHTML = `${results[i].retweet_count} `;
-        tweetLikes.innerHTML = appendCommas(tweetLikes.innerHTML);
+        tweetLikes.innerText = `${results[i].retweet_count} `;
+        tweetLikes.innerText = appendCommas(tweetLikes.innerText);
         tweetMetrics.append(tweetRetweetIcon, tweetRetweets, tweetLikesIcon, tweetLikes);
 
 
@@ -1321,11 +1322,11 @@ function appendTweets(results){
         let saveSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         saveSvg.classList.add("save-to-svg");
         saveSvg.setAttribute("viewBox", "0 0 24 24");
-        saveSvg.innerHTML = `<path d="M0 0h24v24H0z" fill="none"></path><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"></path>`
+        saveSvg.innerHTML = DOMPurify.sanitize(`<path d="M0 0h24v24H0z" fill="none"></path><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"></path>`);
 
         let saveSvgText = document.createElement("p");
         saveSvgText.classList.add("save-to-text");
-        saveSvgText.innerHTML = "Save to collection"
+        saveSvgText.innerText = "Save to collection"
 
         saveToCollection.append(saveSvg, saveSvgText);
 
@@ -1334,9 +1335,9 @@ function appendTweets(results){
             let userFavorites = (JSON.parse(currentUser)).favorites
             if (userFavorites.includes(results[i].id_str)) {
                 saveSvg.style.fill = "green";
-                saveSvg.innerHTML = `<path d="M0 0h24v24H0z" fill="none"/><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/>`
+                saveSvg.innerHTML = DOMPurify.sanitize(`<path d="M0 0h24v24H0z" fill="none"/><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/>`);
                 saveSvgText.style.color = "green";
-                saveSvgText.innerHTML = "Saved to your collections";
+                saveSvgText.innerText = "Saved to your collections";
             }
         }
 
@@ -1348,10 +1349,10 @@ function appendTweets(results){
 
         let removeSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         removeSvg.setAttribute("viewBox", "0 0 24 24");
-        removeSvg.innerHTML = `<path d="M0 0h24v24H0V0z" fill="none"/><path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"/>`
+        removeSvg.innerHTML = DOMPurify.sanitize(`<path d="M0 0h24v24H0V0z" fill="none"/><path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"/>`);
 
         let removeSvgText = document.createElement("p");
-        removeSvgText.innerHTML = "remove from collection"
+        removeSvgText.innerText = "remove from collection"
 
         removeFromCollection.append(removeSvg, removeSvgText);
 
@@ -1360,7 +1361,7 @@ function appendTweets(results){
         // TODO: create modal for tweet being replied to
         // let replyingTo = document.createElement("p");
         // replyingTo.classList.add("replying-to");
-        // replyingTo.innerHTML = `Replying to ${results[i].in_reply_to_screen_name}`;
+        // replyingTo.innerText = `Replying to ${results[i].in_reply_to_screen_name}`;
         // replyingTo.setAttribute("data-tweetid", `${results[i].id_str}`);
 
 
@@ -1380,7 +1381,7 @@ function appendTweets(results){
 function mainSearch(){
     centerContainer.style.overflowY = "auto";
     current_page = "home"
-    tweetResultsDiv.innerHTML = "";
+    tweetResultsDiv.innerHTML = DOMPurify.sanitize("");
     loader.classList.remove("hide");
 
     if (homeSearchPage.classList.contains("hide")) {
@@ -1414,7 +1415,7 @@ function mainSearch(){
 
     if (searchData.query.trim() === "") {
         loader.classList.add("hide");
-        mainSearchError.innerHTML = "Please give me something to search for"
+        mainSearchError.innerText = "Please give me something to search for"
         mainSearchError.classList.add("error");
     }
     else if (searchData.query.trim() !== "")
@@ -1438,17 +1439,17 @@ function mainSearch(){
             searchResults.insertBefore(searchChoicesDiv, searchResults.firstChild);
             searchResults.insertBefore(mainSearchInputDiv, searchResults.firstChild);
 
-            tweetResultsDiv.innerHTML = "";
+            tweetResultsDiv.innerHTML = DOMPurify.sanitize("");
 
             if (!Array.isArray(results) || !results.length) {
-                tweetResultsDiv.innerHTML = `<p class="tweet-results-div-error">There are no results for <span class= color-blue>${searchData.query}</span>. Maybe try another keyword or choose a different language or tweet type</p>`
+                tweetResultsDiv.innerHTML = DOMPurify.sanitize(`<p class="tweet-results-div-error">There are no results for <span class= color-blue>${searchData.query}</span>. Maybe try another keyword or choose a different language or tweet type</p>`)
             } else
             appendTweets(results);
             interactWithSearchResults();
 
 
             state.search.keyword.home = mainSearchInput.value;
-            state.search.tweetsDiv = tweetResultsDiv.innerHTML;
+            state.search.tweetsDiv = DOMPurify.sanitize(tweetResultsDiv.innerHTML);
             state.home.class = homeSearchPage.className;
             state.search.searchPage = searchResults.className;
 
@@ -1473,12 +1474,11 @@ function mainSearch(){
 }
 
 
-
 function timelineSearch(userName){
     centerContainer.style.overflowY = "auto";
     current_page = "timeline";
     loader.classList.remove("hide");
-    tweetResultsDiv.innerHTML = "";
+    tweetResultsDiv.innerHTML = DOMPurify.sanitize("");
 
     if (timelineSearchPage.classList.contains("hide")) {
         searchResults.append(loader);
@@ -1490,7 +1490,7 @@ function timelineSearch(userName){
 
     if (userName.trim() === "") {
         loader.classList.add("hide");
-        timelineSearchError.innerHTML = "Please enter a twitter user name"
+        timelineSearchError.innerText = "Please enter a twitter user name"
         timelineSearchError.classList.add("error");
     }
     else if (userName.trim() !== "")
@@ -1509,19 +1509,19 @@ function timelineSearch(userName){
             searchResults.classList.remove("hide")
             searchResults.insertBefore(timelineSearchInputDiv, searchResults.firstChild);
 
-            tweetResultsDiv.innerHTML = "";
+            tweetResultsDiv.innerHTML = DOMPurify.sanitize("");
 
            // TODO: HANDLE PROTECTED USER ERROR AND 
             console.log(results)
             if (!Array.isArray(results) || !results.length) {
-                tweetResultsDiv.innerHTML = `<p class="tweet-results-div-error">There are no results for <span class= color-blue>${userName}</span>. Maybe try the search on the <span class="home-link color-blue">homepage</span><p>`
+                tweetResultsDiv.innerHTML = DOMPurify.sanitize(`<p class="tweet-results-div-error">There are no results for <span class= color-blue>${userName}</span>. Maybe try the search on the <span class="home-link color-blue">homepage</span><p>`);
             } else
             appendTweets(results);
             interactWithSearchResults();
 
 
             state.search.keyword.timeline = timelineSearchInput.value;
-            state.search.tweetsDiv = tweetResultsDiv.innerHTML;
+            state.search.tweetsDiv = DOMPurify.sanitize(tweetResultsDiv.innerHTML);
             state.timeline.class = timelineSearchPage.className;
             state.search.searchPage = searchResults.className;
             window.history.pushState(state, null, "");
@@ -1534,12 +1534,12 @@ function timelineSearch(userName){
             let errorCode = error.response.data;
 
             if (Object.keys(errorCode.err).length === 0 && errorCode.err.constructor === Object) {
-                timelineSearchError.innerHTML = `<span class= color-blue>${userName}'s</span> tweets are protected. The account cound be private or suspended.`
-                tweetResultsDiv.innerHTML = `<span class= color-blue>${userName}'s</span> tweets are protected. The account cound be private or suspended.`
+                timelineSearchError.innerHTML = DOMPurify.sanitize(`<span class= color-blue>${userName}'s</span> tweets are protected. The account cound be private or suspended.`)
+                tweetResultsDiv.innerHTML = DOMPurify.sanitize(`<span class= color-blue>${userName}'s</span> tweets are protected. The account cound be private or suspended.`)
 
 
                 state.search.keyword.timeline = timelineSearchInput.value;
-                state.search.tweetsDiv = tweetResultsDiv.innerHTML;
+                state.search.tweetsDiv = DOMPurify.sanitize(tweetResultsDiv.innerHTML);
                 state.timeline.class = timelineSearchPage.className;
                 state.search.searchPage = searchResults.className;
                 window.history.pushState(state, null, "");
@@ -1551,7 +1551,7 @@ function timelineSearch(userName){
 
 
                 state.search.keyword.timeline = timelineSearchInput.value;
-                state.search.tweetsDiv = tweetResultsDiv.innerHTML;
+                state.search.tweetsDiv = DOMPurify.sanitize(tweetResultsDiv.innerHTML);
                 state.timeline.class = timelineSearchPage.className;
                 state.search.searchPage = searchResults.className;
                 window.history.pushState(state, null, "");
@@ -1563,7 +1563,7 @@ function timelineSearch(userName){
 function retrieveCollectionTweets(event){
     console.log("heyyyyy")
 
-    emptyCollection.innerHTML = "";
+    emptyCollection.innerHTML = DOMPurify.sanitize("");
     emptyCollection.classList.add("hide");
     let collectionName = event.currentTarget.innerText.trim();
 
@@ -1587,7 +1587,7 @@ function axiosRetrieveTweets(collection){
             let results = response.data.results;
             // homeSearchPage.classList.add("hide");
 
-            tweetResultsDiv.innerHTML = "";
+            tweetResultsDiv.innerHTML = DOMPurify.sanitize("");
 
 
             if (homeSearchPage.classList.contains("hide") && timelineSearchPage.classList.contains("hide"))
@@ -1606,9 +1606,9 @@ function axiosRetrieveTweets(collection){
                 btn.setAttribute("data-collection-name", collection);
             })
         
-            if (tweetResultsDiv.innerHTML === "") {
+            if (tweetResultsDiv.innerHTML === DOMPurify.sanitize("")) {
                 emptyCollection.classList.remove("hide");
-                emptyCollection.innerHTML = `<span class="color-blue">${collection}</span> currently has no saved tweets`;
+                emptyCollection.innerHTML = DOMPurify.sanitize(`<span class="color-blue">${collection}</span> currently has no saved tweets`);
                 emptyCollection.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
             } else {
                 searchResults.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
@@ -1638,7 +1638,6 @@ function interactWithSearchResults(){
             mediaModal.style.transform = "translateY(0px)"
             mediaModal.style.visibility = "visible";
             centerContainer.style.overflowY = "hidden";
-            // media.innerHTML = img.outerHTML;
             console.log(img.src);
             mediaModal.style.backgroundImage = `url(${img.src})`;
 
@@ -1757,12 +1756,11 @@ function interactWithSearchResults(){
 
     mentions.forEach((mention) => {
         mention.addEventListener("click", function(){
-            // timelineSearchPage.innerHTML = searchResults.innerHTML; 
+            // timelineSearchPage.innerText = searchResults.innerText; 
             timelineSearchPage.classList.add("hide")
             timelineItem.click();
-            timelineSearchInput.value = mention.innerHTML;
+            timelineSearchInput.value = DOMPurify.sanitize(mention.innerHTML);
             timelineSearchButton.click();
-            console.log(mention.innerHTML)
         })
     })
 
@@ -1861,7 +1859,7 @@ function saveTweetToCollection(){
                 if(btn.getAttribute("data-tweetId") === tweetId) {
                     btn.style.color = "green";
                     btn.childNodes[0].style.fill = "green";
-                    btn.childNodes[0].innerHTML = `<path d="M0 0h24v24H0z" fill="none"/><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/>`;
+                    btn.childNodes[0].innerHTML = DOMPurify.sanitize(`<path d="M0 0h24v24H0z" fill="none"/><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/>`);
                     btn.childNodes[1].innerText = `Saved to ${collectionName}`
                 }
             })
@@ -1928,8 +1926,8 @@ function openCreateCollectionDiv(){
 
 function closeCreateCollectionDiv(){
     createCollectionInput.value = ""
-    createCollectionError.innerHTML = "";
-    createCollectionFromModalError.innerHTML = "";
+    createCollectionError.innerText = "";
+    createCollectionFromModalError.innerText = "";
     createCollectionCta.classList.remove("hide");
     createCollectionInputDiv.classList.add("hide");
 }
@@ -1948,15 +1946,15 @@ function createNewCollection(){
 
     if (token === null || token === undefined) {
         loader.classList.add("hide");
-        createCollectionError.innerHTML = "You need to be logged in to use this feature. Please login or create an account to continue."
+        createCollectionError.innerText = "You need to be logged in to use this feature. Please login or create an account to continue."
         return;
     }
 
 
     if (createCollectionInput.value.trim() === "") {
         createCollectionError.classList.remove("hide");
-        createCollectionError.innerHTML = "Please enter a name for your new collection";
-        createCollectionFromModalError.innerHTML = "Please enter a name for your new collection";
+        createCollectionError.innerText = "Please enter a name for your new collection";
+        createCollectionFromModalError.innerText = "Please enter a name for your new collection";
         loader.classList.add("hide");
         return;
     }
@@ -1992,10 +1990,10 @@ function createNewCollection(){
             createCollectionError.classList.remove("hide");
             createCollectionFromModalError.classList.remove("hide");
 
-            createCollectionError.innerHTML = error.response.data.error;
-            createCollectionFromModalError.innerHTML = error.response.data.error;
+            createCollectionError.innerText = error.response.data.error;
+            createCollectionFromModalError.innerText = error.response.data.error;
             if (error.response.data.error === "Unauthorized")
-            createCollectionError.innerHTML = "You need to be logged in to use this feature. Please login or create an account to continue."
+            createCollectionError.innerText = "You need to be logged in to use this feature. Please login or create an account to continue."
         })
 }
 
@@ -2016,25 +2014,25 @@ logoutBtn.addEventListener("click", logout, false);
 // Data event listeners
 mainSearchButton.addEventListener("click", mainSearch, false);
 mainSearchInput.addEventListener("keydown", function(){
-    mainSearchError.innerHTML = "";
+    mainSearchError.innerText = "";
 }, false)
 timelineSearchButton.addEventListener("click", timelineSearch, false);
 timelineSearchInput.addEventListener("keydown", function(){
-    timelineSearchError.innerHTML = "";
+    timelineSearchError.innerText = "";
 }, false)
 
 createCollectionCta.addEventListener("click", openCreateCollectionDiv, false);
 createCollectionInputClose.addEventListener("click", closeCreateCollectionDiv, false);
 createCollectionBtn.addEventListener("click", createNewCollection, false);
-createCollectionInput.addEventListener("keyup", function(){
+createCollectionInput.addEventListener("keyup", function(event){
     if (event.keyCode !== 13) {
-        createCollectionError.innerHTML = "";
+        createCollectionError.innerText = "";
     }
 }, false)
 
-createCollectionFromModalInput.addEventListener("keyup", function(){
+createCollectionFromModalInput.addEventListener("keyup", function(event){
     if (event.keyCode !== 13) {
-        createCollectionFromModalError.innerHTML = "";
+        createCollectionFromModalError.innerText = "";
     }
 }, false)
 
@@ -2079,9 +2077,9 @@ closeSaveToCollectionModal.addEventListener("click", function(){
     saveToCollectionModal.classList.add("hide")
         screenFade.classList.add("hide");
 
-        createCollectionFromModalError.innerHTML = "";
+        createCollectionFromModalError.innerText = "";
         createCollectionFromModalInput.value = "";
-        createCollectionError.innerHTML = "";
+        createCollectionError.innerText = "";
 
         state.savetocol.class = saveToCollectionModal.className;
         // window.history.back();
@@ -2168,7 +2166,7 @@ function text_truncate (str, length, ending) {
 
 
 
-// searchResults.innerHTML = atlify(searchResults.innerHTML);
+// searchResults.innerHTML = DOMPurify.sanitize(atlify(searchResults.innerHTML));
 
 
 
