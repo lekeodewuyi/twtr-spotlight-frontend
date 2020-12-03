@@ -867,7 +867,7 @@ function goToCollections(){
         timelineSearchPage.classList.add("hide");
         appendElementsToTimeline();
         aboutModal.classList.add("hide");
-        searchResults.classList.add("hide");
+        // searchResults.classList.add("hide");
 
 
         collectionPage.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
