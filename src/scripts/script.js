@@ -21,12 +21,12 @@ const imageError = document.querySelector(".media-error");
 
 const pageLoaderDiv = document.querySelector(".page-loader-div");
 
-window.addEventListener("load", () => {
-    pageLoaderDiv.classList.add("hidden");
-    setTimeout(function(){
-        pageLoaderDiv.classList.add("hide");
-    }, 1000)
-})
+// window.addEventListener("load", () => {
+//     pageLoaderDiv.classList.add("hidden");
+//     setTimeout(function(){
+//         pageLoaderDiv.classList.add("hide");
+//     }, 1000)
+// })
 
 
 (function checkCors(){
