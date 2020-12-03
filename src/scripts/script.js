@@ -861,25 +861,13 @@ function goToCollections(){
         emptyCollection.classList.add("hide");
         emptyCollection.innerText = "";
         collectionPage.classList.remove("hide");
-    
         homeSearchPage.classList.add("hide");
         appendElementsToHome();
-    
         timelineSearchPage.classList.add("hide");
         appendElementsToTimeline();
-    
         aboutModal.classList.add("hide");
-    
         searchResults.classList.add("hide");
 
-        checkTokenStatus();
-        if (tokenStatus === "active") {
-            let activeCollection = document.querySelector('.collection-item[data-selected="true"]')
-            console.log(activeCollection)
-            if (activeCollection)
-            axiosRetrieveTweets(activeCollection.innerText.trim())
-            console.log("");
-        }
 
         collectionPage.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
     }
