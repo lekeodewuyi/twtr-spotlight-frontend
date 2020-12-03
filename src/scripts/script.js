@@ -19,6 +19,16 @@ const body = document.querySelector("body");
 const imageError = document.querySelector(".media-error");
 
 
+const pageLoaderDiv = document.querySelector(".page-loader-div");
+
+window.addEventListener("load", function() {
+    pageLoaderDiv.classList.add("hidden");
+    setTimeout(function(){
+        pageLoaderDiv.classList.add("hide");
+    }, 1000)
+})
+
+
 (function checkCors(){
     axios.get('https://pbs.twimg.com/media/Eh4xLaMXsAEr1p4?format=jpg&name=900x900')
         .then((response) => {

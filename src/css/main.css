@@ -1636,6 +1636,90 @@ footer .big-footer {
     color: var(--red) !important;
 }
 
+
+.page-loader-div {
+    z-index: 500;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    background-color: var(--bg);
+    transition: 1s;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-loader {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .page-loader div {
+    position: absolute;
+    top: 33px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #fff;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+  }
+  .page-loader div:nth-child(1) {
+    left: 8px;
+    animation: page-loader1 0.6s infinite;
+  }
+  .page-loader div:nth-child(2) {
+    left: 8px;
+    animation: page-loader2 0.6s infinite;
+  }
+  .page-loader div:nth-child(3) {
+    left: 32px;
+    animation: page-loader2 0.6s infinite;
+  }
+  .page-loader div:nth-child(4) {
+    left: 56px;
+    animation: page-loader3 0.6s infinite;
+  }
+  @keyframes page-loader1 {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes page-loader3 {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+    }
+  }
+  @keyframes page-loader2 {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(24px, 0);
+    }
+  }
+
+
 .hide {
     display: none;
+}
+
+
+.hidden {
+    animation: fadeOut 1s;
+    animation-fill-mode: forwards; /*  When animation finishes, the fadeOut properties stay */
+}
+
+@keyframes fadeOut {
+	100% {
+		opacity: 0;
+		visibility: hidden;
+	}
 }
