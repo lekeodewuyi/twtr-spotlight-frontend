@@ -421,7 +421,7 @@ let state = {
         about: aboutItem.getAttribute("data-selected")
     },
     spotlight: {
-        innertext: homeSpotlight.innerText
+        innerHTML: DOMPurify.sanitize(homeSpotlight.innerHTML)
     },
     search: {
         searchPage: searchResults.className,
@@ -547,8 +547,8 @@ function render(){
     emptyCollection.innerText = state.collection.emptyText;
     // aboutModal.className = state.about.class;
 
-    spotlightNav.innerText = state.spotlight.innertext;
-    headerText.innerText = state.header
+    spotlightNav.innerHTML = DOMPurify.sanitize(state.spotlight.innerHTML);
+    headerText.innerHTML = DOMPurify.sanitize(state.header)
 
     homeItem.setAttribute("data-selected", `${state.sidenav.home}`);
     timelineItem.setAttribute("data-selected", `${state.sidenav.timeline}`);
@@ -650,9 +650,9 @@ function handleSideNav(event){
 
     if (currentTab === homeItem) {
         goHome();
-        spotlightNav.innerText = homeSpotlight.innerText;
-        headerText.innerText = homeItem.innerText;
-        headerText.innerText = "Home";
+        spotlightNav.innerHTML = DOMPurify.sanitize(homeSpotlight.innerHTML);
+        headerText.innerHTML = homeItem.innerHTML;
+        headerText.innerHTML = DOMPurify.sanitize("Home");
         homeItem.setAttribute("data-selected", `true`);
         if (homePush === true) {
             return
@@ -662,9 +662,9 @@ function handleSideNav(event){
         }
     } else if (currentTab === timelineItem) {
         timeTravel();
-        spotlightNav.innerText = timelineSpotlight.innerText;
-        headerText.innerText = timelineItem.innerText;
-        headerText.innerText = `Search Timeline`;
+        spotlightNav.innerHTML = DOMPurify.sanitize(timelineSpotlight.innerHTML);
+        headerText.innerHTML = DOMPurify.sanitize(timelineItem.innerHTML);
+        headerText.innerHTML = DOMPurify.sanitize(`Search Timeline`);
         timelineItem.setAttribute("data-selected", `true`);
         if (timelinePush === true) {
             return
@@ -674,15 +674,15 @@ function handleSideNav(event){
         }
     } else if (currentTab === collectionItem) {
         goToCollections();
-        spotlightNav.innerText = collectionSpotlight.innerText;
-        headerText.innerText = collectionItem.innerText;
-        headerText.innerText = `Your collections`;
+        spotlightNav.innerHTML = DOMPurify.sanitize(collectionSpotlight.innerHTML);
+        headerText.innerHTML = DOMPurify.sanitize(collectionItem.innerHTML);
+        headerText.innerHTML = DOMPurify.sanitize(`Your collections`);
         collectionItem.setAttribute("data-selected", `true`);
         if (collectionsPush === true) {
             return
         }
     } else if (currentTab === aboutItem) {
-        spotlightNav.innerText = aboutSpotlight.innerText;
+        spotlightNav.innerHTML = DOMPurify.sanitize(aboutSpotlight.innerHTML);
         getAbout();
         // headerText.innerText =aboutItem.innerText;
         aboutItem.setAttribute("data-selected", `true`);
@@ -703,7 +703,7 @@ function handleSideNav(event){
     }
 
 
-    state.header = headerText.innerText;
+    state.header = DOMPurify.sanitize(headerText.innerHTML);
     state.page = current_page;
 
     state.user.authDiv.class = userAuthDiv.className;
@@ -722,7 +722,7 @@ function handleSideNav(event){
     state.collection.emptyText = emptyCollection.innerText;
     // state.about.class = aboutModal.className;
 
-    state.spotlight.innertext = spotlightNav.innerText;
+    state.spotlight.innerHTML = DOMPurify.sanitize(spotlightNav.innerHTML);
 
     state.sidenav.home = homeItem.getAttribute("data-selected");
     state.sidenav.timeline = timelineItem.getAttribute("data-selected");
