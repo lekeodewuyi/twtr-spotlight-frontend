@@ -857,16 +857,17 @@ function goToCollections(){
             axiosRetrieveTweets(activeCollection.innerText.trim())
             console.log("");
         }
+        collectionsPush = true;
     } else {
-        emptyCollection.classList.add("hide");
-        emptyCollection.innerText = "";
-        collectionPage.classList.remove("hide");
-        homeSearchPage.classList.add("hide");
-        appendElementsToHome();
-        timelineSearchPage.classList.add("hide");
-        appendElementsToTimeline();
-        aboutModal.classList.add("hide");
-        searchResults.classList.add("hide");
+        // emptyCollection.classList.add("hide");
+        // emptyCollection.innerText = "";
+        // collectionPage.classList.remove("hide");
+        // homeSearchPage.classList.add("hide");
+        // appendElementsToHome();
+        // timelineSearchPage.classList.add("hide");
+        // appendElementsToTimeline();
+        // aboutModal.classList.add("hide");
+        // searchResults.classList.add("hide");
 
 
         collectionPage.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
