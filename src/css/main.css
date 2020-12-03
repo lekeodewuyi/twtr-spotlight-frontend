@@ -1643,7 +1643,7 @@ footer .big-footer {
     width: 100vw;
     position: fixed;
     background-color: var(--bg);
-    transition: 1s;
+    /* transition: 1s; */
 
     display: flex;
     align-items: center;
