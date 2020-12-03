@@ -26,10 +26,11 @@ window.addEventListener("load", function() {
     setTimeout(function(){
         pageLoaderDiv.classList.add("hide");
     }, 1000)
+    checkCors();
 })
 
 
-(function checkCors(){
+function checkCors() {
     axios.get('https://pbs.twimg.com/media/Eh4xLaMXsAEr1p4?format=jpg&name=900x900')
         .then((response) => {
             if (response.data) {
@@ -45,7 +46,7 @@ window.addEventListener("load", function() {
             console.log("bla bla bla bla")
             console.log(error.status);
         })
-}())
+}
 
 
 
