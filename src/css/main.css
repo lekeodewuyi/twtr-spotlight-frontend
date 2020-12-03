@@ -1662,7 +1662,7 @@ footer .big-footer {
     width: 13px;
     height: 13px;
     border-radius: 50%;
-    background: #fff;
+    background: white;
     animation-timing-function: cubic-bezier(0, 1, 1, 0);
   }
   .page-loader div:nth-child(1) {
