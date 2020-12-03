@@ -1220,11 +1220,11 @@ function appendTweets(results){
         if (typeof results[i].retweeted_status === "object") {
             tweetText.innerHTML = results[i].retweeted_status.full_text;
             tweetText.innerHTML = urlify(tweetText.innerHTML)
-            tweetText.innerHTML = DOMPurify.sanitize(atlify(tweetText.innerText))
+            tweetText.innerHTML = DOMPurify.sanitize(atlify(tweetText.innerHTML))
         } else {
             tweetText.innerHTML = results[i].full_text;
             tweetText.innerHTML = urlify(tweetText.innerHTML)
-            tweetText.innerHTML = DOMPurify.sanitize(atlify(tweetText.innerText))
+            tweetText.innerHTML = DOMPurify.sanitize(atlify(tweetText.innerHTML))
         }
 
         let tweetImageDiv = document.createElement("div");
