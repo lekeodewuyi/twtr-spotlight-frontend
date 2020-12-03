@@ -857,6 +857,7 @@ function goToCollections(){
             console.log(activeCollection)
             if (activeCollection)
             axiosRetrieveTweets(activeCollection.innerText.trim())
+            showingCollectionSearch = true;
             console.log("");
         }
     } else {
@@ -869,7 +870,7 @@ function goToCollections(){
         appendElementsToTimeline();
         aboutModal.classList.add("hide");
 
-        if (showingCollectionSearch) {
+        if (!showingCollectionSearch) {
             searchResults.classList.add("hide");
             showingCollectionSearch = false;
         }
@@ -1584,6 +1585,7 @@ function retrieveCollectionTweets(event){
     let collectionName = event.currentTarget.innerText.trim();
 
     axiosRetrieveTweets(collectionName)
+    showingCollectionSearch = true;
     event.target.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
 }
 
@@ -1598,7 +1600,6 @@ function axiosRetrieveTweets(collection){
         config
         )
         .then(function (response) {
-            showingCollectionSearch = true;
             loader.classList.add("hide");
             console.log(response.data.results);
             let results = response.data.results;
