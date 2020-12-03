@@ -860,7 +860,6 @@ function goToCollections(){
             showingCollectionSearch = true;
             console.log("");
         }
-        collectionsPush = true;
     } else {
         emptyCollection.classList.add("hide");
         emptyCollection.innerText = "";
@@ -877,7 +876,6 @@ function goToCollections(){
         }
 
         collectionPage.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
-        collectionsPush = false;
     }
 }   
 
