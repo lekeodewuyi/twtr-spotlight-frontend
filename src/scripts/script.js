@@ -858,6 +858,10 @@ function goToCollections(){
             console.log("");
         }
     } else {
+        collectionPage.classList.remove("hide");
+
+
+
         collectionPage.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
     }
 }   
