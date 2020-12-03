@@ -830,6 +830,8 @@ function timeTravel(){
 
 }
 
+let showingCollectionSearch = false;
+
 function goToCollections(){
     centerContainer.style.overflowY = "auto";
     current_page = "collections"
@@ -855,6 +857,7 @@ function goToCollections(){
             console.log(activeCollection)
             if (activeCollection)
             axiosRetrieveTweets(activeCollection.innerText.trim())
+            showingCollectionSearch = true;
             console.log("");
         }
         collectionsPush = true;
@@ -867,8 +870,11 @@ function goToCollections(){
         timelineSearchPage.classList.add("hide");
         appendElementsToTimeline();
         aboutModal.classList.add("hide");
-        // searchResults.classList.add("hide");
 
+        if (showingCollectionSearch) {
+            searchResults.classList.add("hide");
+            showingCollectionSearch = false;
+        }
 
         collectionPage.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
         collectionsPush = false;
