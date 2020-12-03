@@ -1663,6 +1663,7 @@ footer .big-footer {
     height: 13px;
     border-radius: 50%;
     background: white;
+    background: #1EA1F2;
     animation-timing-function: cubic-bezier(0, 1, 1, 0);
   }
   .page-loader div:nth-child(1) {

@@ -21,7 +21,7 @@ const imageError = document.querySelector(".media-error");
 
 const pageLoaderDiv = document.querySelector(".page-loader-div");
 
-window.addEventListener("load", () => {
+window.addEventListener("load", function() {
     pageLoaderDiv.classList.add("hidden");
     setTimeout(function(){
         pageLoaderDiv.classList.add("hide");
