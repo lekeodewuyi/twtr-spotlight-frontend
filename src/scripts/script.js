@@ -872,7 +872,14 @@ function goToCollections(){
     
         searchResults.classList.add("hide");
 
-
+        checkTokenStatus();
+        if (tokenStatus === "active") {
+            let activeCollection = document.querySelector('.collection-item[data-selected="true"]')
+            console.log(activeCollection)
+            if (activeCollection)
+            axiosRetrieveTweets(activeCollection.innerText.trim())
+            console.log("");
+        }
 
         collectionPage.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
     }
@@ -909,7 +916,7 @@ function appendElementsToTimeline(){
 
 console.log(config)
 
-function closeUserPanel(){
+function closeUserPanel(event){
     event.preventDefault();
     aboutModal.classList.add("hide");
     userAuthDiv.classList.add("hide");
