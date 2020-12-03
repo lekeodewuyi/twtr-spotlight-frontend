@@ -858,7 +858,19 @@ function goToCollections(){
             console.log("");
         }
     } else {
+        emptyCollection.classList.add("hide");
+        emptyCollection.innerText = "";
         collectionPage.classList.remove("hide");
+    
+        homeSearchPage.classList.add("hide");
+        appendElementsToHome();
+    
+        timelineSearchPage.classList.add("hide");
+        appendElementsToTimeline();
+    
+        aboutModal.classList.add("hide");
+    
+        searchResults.classList.add("hide");
 
 
 
